@@ -14,7 +14,13 @@ class CreateCandidateInvitationsTable extends Migration
     public function up()
     {
         Schema::create('candidate_invitations', function (Blueprint $table) {
-            $table->increments('id');
+            $table->increments('id')->unsigned()->unique();
+            $table->integer('candidate_id')->unsigned();
+            $table->integer('employer_id')->unsigned();
+            $table->integer('job_id')->unsigned();
+            $table->foreign('candidate_id')->references('id')->on('candidates');
+            $table->foreign('employer_id')->references('id')->on('employers');
+            $table->foreign('job_id')->references('id')->on('jobs');
             $table->timestamps();
         });
     }

@@ -14,7 +14,10 @@ class CreateCandidateResumesTable extends Migration
     public function up()
     {
         Schema::create('candidate_resumes', function (Blueprint $table) {
-            $table->increments('id');
+            $table->increments('id')->unsigned()->unique();
+            $table->integer('candidate_id')->unsigned();
+            $table->string('resume');
+            $table->foreign('candidate_id')->references('id')->on('candidates');
             $table->timestamps();
         });
     }

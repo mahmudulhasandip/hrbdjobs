@@ -4,7 +4,7 @@ use Illuminate\Support\Facades\Schema;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Database\Migrations\Migration;
 
-class CreateFeaturedPackagesTable extends Migration
+class CreateSkillsTable extends Migration
 {
     /**
      * Run the migrations.
@@ -13,8 +13,9 @@ class CreateFeaturedPackagesTable extends Migration
      */
     public function up()
     {
-        Schema::create('featured_packages', function (Blueprint $table) {
-            $table->increments('id');
+        Schema::create('skills', function (Blueprint $table) {
+            $table->increments('id')->unsigned()->unique();
+            $table->string('name');
             $table->timestamps();
         });
     }
@@ -26,6 +27,6 @@ class CreateFeaturedPackagesTable extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('featured_packages');
+        Schema::dropIfExists('skills');
     }
 }

@@ -14,7 +14,12 @@ class CreateFavouriteJobsTable extends Migration
     public function up()
     {
         Schema::create('favourite_jobs', function (Blueprint $table) {
-            $table->increments('id');
+            $table->increments('id')->unsigned()->unique();
+            $table->integer('candidate_id')->unsigned();
+            $table->integer('job_id')->unsigned();
+            $table->integer('status')->default(0);
+            $table->foreign('candidate_id')->references('id')->on('candidates');
+            $table->foreign('job_id')->references('id')->on('jobs');
             $table->timestamps();
         });
     }

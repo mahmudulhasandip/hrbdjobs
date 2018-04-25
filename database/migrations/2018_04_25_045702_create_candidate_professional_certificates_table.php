@@ -14,7 +14,14 @@ class CreateCandidateProfessionalCertificatesTable extends Migration
     public function up()
     {
         Schema::create('candidate_professional_certificates', function (Blueprint $table) {
-            $table->increments('id');
+            $table->increments('id')->unsigned()->unique();
+            $table->integer('candidate_id')->unsigned();
+            $table->string('certification');
+            $table->string('institution_name');
+            $table->string('location');
+            $table->date('start_date');
+            $table->date('end_time');
+            $table->foreign('candidate_id')->references('id')->on('candidates');
             $table->timestamps();
         });
     }

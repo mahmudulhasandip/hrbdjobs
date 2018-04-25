@@ -14,7 +14,17 @@ class CreateCandidateEducationsTable extends Migration
     public function up()
     {
         Schema::create('candidate_educations', function (Blueprint $table) {
-            $table->increments('id');
+            $table->increments('id')->unsigned()->unique();
+            $table->integer('candidate_id')->unsigned();
+            $table->string('level_of_education');
+            $table->string('degree_title');
+            $table->decimal('gpa', 5, 2);
+            $table->decimal('out_of', 5, 2);
+            $table->string('group_majar')->nullable();
+            $table->string('institution_name')->nullable();
+            $table->integer('passing_year');
+            $table->string('achievement')->nullable(); 
+            $table->foreign('candidate_id')->references('id')->on('candidates');
             $table->timestamps();
         });
     }

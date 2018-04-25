@@ -14,7 +14,16 @@ class CreateCandidateTrainingsTable extends Migration
     public function up()
     {
         Schema::create('candidate_trainings', function (Blueprint $table) {
-            $table->increments('id');
+            $table->increments('id')->unsigned()->unique();
+            $table->integer('candidate_id')->unsigned();
+            $table->string('title')->nullable();
+            $table->string('country')->nullable();
+            $table->string('topic_cover')->nullable();
+            $table->integer('training_year')->nullable();
+            $table->string('institution_name')->nullable();
+            $table->integer('duration')->default(1); // month
+            $table->string('location')->nullable();
+            $table->foreign('candidate_id')->references('id')->on('candidates');
             $table->timestamps();
         });
     }

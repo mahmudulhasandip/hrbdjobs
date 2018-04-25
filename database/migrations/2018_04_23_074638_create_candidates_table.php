@@ -13,7 +13,7 @@ class CreateCandidatesTable extends Migration
     public function up()
     {
         Schema::create('candidates', function (Blueprint $table) {
-            $table->increments('id');
+            $table->increments('id')->unsigned()->unique();
             $table->string('fname');
             $table->string('lname');
             $table->string('email')->unique();

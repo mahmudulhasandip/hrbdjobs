@@ -14,7 +14,18 @@ class CreatePaymentHistoriesTable extends Migration
     public function up()
     {
         Schema::create('payment_histories', function (Blueprint $table) {
-            $table->increments('id');
+            $table->increments('id')->unsigned()->unique();
+            $table->integer('employer_id')->unsigned();
+            $table->integer('job_package_id')->unsigned(); 
+            $table->integer('featured_package_id')->unsigned();
+            $table->decimal('price', 10, 2);
+            $table->decimal('discount', 10, 2);
+            $table->string('transaction_type')->nullable();
+            $table->string('transaction_id')->nullable();
+            $table->date('transaction_date');
+            $table->foreign('employer_id')->references('id')->on('employers');
+            $table->foreign('job_package_id')->references('id')->on('job_packages');
+            $table->foreign('featured_package_id')->references('id')->on('featured_packages');
             $table->timestamps();
         });
     }
