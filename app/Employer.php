@@ -38,4 +38,6 @@ class Employer extends Authenticatable
     {
         $this->notify(new EmployerResetPassword($token));
     }
+
+    
 }
