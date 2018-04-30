@@ -70,5 +70,12 @@ class Candidate extends Authenticatable
     public function candidateInvitation(){
         return $this->hasMany('App\Candidate_invitation');
     }
-    
+
+    public function shortListedResume(){
+        return $this->hasMany('App\Short_listed_resume');
+    }
+
+    public function followEmployer(){
+        return $this->hasMany('App\Follow_employer');
+    }
 }

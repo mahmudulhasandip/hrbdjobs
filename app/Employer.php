@@ -39,5 +39,31 @@ class Employer extends Authenticatable
         $this->notify(new EmployerResetPassword($token));
     }
 
-    
+    public function employerPackages(){
+        return $this->hasMany('App\Employer_package');
+    }
+
+    public function employerCompanyInfo(){
+        return $this->hasOne('App\Employer_company_info');
+    }
+
+    public function shortListedResume(){
+        return $this->hasMany('App\Short_listed_resume');
+    }
+
+    public function followEmployer(){
+        return $this->hasMany('App\Follow_employer');
+    }
+
+    public function candidateInvitation(){
+        return $this->hasMany('App\Candidate_invitation');
+    }
+
+    public function job(){
+        return $this->hasMany('App\Job');
+    }
+
+    public function paymentHistory(){
+        return $this->hasMany('App\Payment_history');
+    }
 }
