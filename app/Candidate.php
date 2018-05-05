@@ -78,4 +78,8 @@ class Candidate extends Authenticatable
     public function followEmployer(){
         return $this->hasMany('App\Follow_employer');
     }
+
+    public function favouriteJob(){
+        return $this->hasMany('App\Favourite_job');
+    }
 }

@@ -13,4 +13,8 @@ class Candidate_invitation extends Model
     public function employer(){
         return $this->belongsTo('App\Employer');
     }
+
+    public function job(){
+        return $this->belongsTo('App\Job');
+    }
 }
