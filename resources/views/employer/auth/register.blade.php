@@ -1,82 +1,242 @@
-@extends('employer.layout.auth')
+@extends('employer.layout.app')
+
+@section('title', 'HRBD Jobs | Employer Register')
 
 @section('content')
-<div class="container">
-    <div class="row">
-        <div class="col-md-8 col-md-offset-2">
-            <div class="panel panel-default">
-                <div class="panel-heading">Register</div>
-                <div class="panel-body">
-                    <form class="form-horizontal" role="form" method="POST" action="{{ url('/employer/register') }}">
-                        {{ csrf_field() }}
-
-                        <div class="form-group{{ $errors->has('name') ? ' has-error' : '' }}">
-                            <label for="name" class="col-md-4 control-label">Name</label>
-
-                            <div class="col-md-6">
-                                <input id="name" type="text" class="form-control" name="name" value="{{ old('name') }}" autofocus>
-
-                                @if ($errors->has('name'))
-                                    <span class="help-block">
-                                        <strong>{{ $errors->first('name') }}</strong>
-                                    </span>
-                                @endif
-                            </div>
+<section>
+    <div class="block no-padding  gray">
+        <div class="container">
+            <div class="row">
+                <div class="col-lg-12">
+                    <div class="inner2">
+                        <div class="inner-title2">
+                            <h3>Employer Signup</h3>
+                            <!-- <span>Keep up to date with the latest news</span> -->
                         </div>
-
-                        <div class="form-group{{ $errors->has('email') ? ' has-error' : '' }}">
-                            <label for="email" class="col-md-4 control-label">E-Mail Address</label>
-
-                            <div class="col-md-6">
-                                <input id="email" type="email" class="form-control" name="email" value="{{ old('email') }}">
-
-                                @if ($errors->has('email'))
-                                    <span class="help-block">
-                                        <strong>{{ $errors->first('email') }}</strong>
-                                    </span>
-                                @endif
-                            </div>
-                        </div>
-
-                        <div class="form-group{{ $errors->has('password') ? ' has-error' : '' }}">
-                            <label for="password" class="col-md-4 control-label">Password</label>
-
-                            <div class="col-md-6">
-                                <input id="password" type="password" class="form-control" name="password">
-
-                                @if ($errors->has('password'))
-                                    <span class="help-block">
-                                        <strong>{{ $errors->first('password') }}</strong>
-                                    </span>
-                                @endif
-                            </div>
-                        </div>
-
-                        <div class="form-group{{ $errors->has('password_confirmation') ? ' has-error' : '' }}">
-                            <label for="password-confirm" class="col-md-4 control-label">Confirm Password</label>
-
-                            <div class="col-md-6">
-                                <input id="password-confirm" type="password" class="form-control" name="password_confirmation">
-
-                                @if ($errors->has('password_confirmation'))
-                                    <span class="help-block">
-                                        <strong>{{ $errors->first('password_confirmation') }}</strong>
-                                    </span>
-                                @endif
-                            </div>
-                        </div>
-
-                        <div class="form-group">
-                            <div class="col-md-6 col-md-offset-4">
-                                <button type="submit" class="btn btn-primary">
-                                    Register
-                                </button>
-                            </div>
-                        </div>
-                    </form>
+                        <!-- <div class="page-breacrumbs">
+                            <ul class="breadcrumbs">
+                                <li><a href="#" title="">Home</a></li>
+                                <li><a href="#" title="">Pages</a></li>
+                                <li><a href="#" title="">Login</a></li>
+                            </ul>
+                        </div> -->
+                    </div>
                 </div>
             </div>
         </div>
     </div>
-</div>
+</section>
+
+<section>
+    <div class="block remove-bottom">
+        <div class="container">
+            <div class="row">
+                <div class="col-lg-12">
+                    <div class="account-popup-area signin-popup-box static">
+                            <div class="profile-title">
+                                    <div class="steps-sec">
+                                        <div class="step active">
+                                            <p><i class="la la-info"></i></p>
+                                            <span>Information</span>
+                                        </div>
+                                        <div class="step">
+                                            <p><i class="la la-cc-mastercard"></i></p>
+                                            <span>Package & Payments</span>
+                                        </div>
+                                        <div class="step">
+                                            <p><i class="la  la-check-circle"></i></p>
+                                            <span>Done</span>
+                                        </div>
+                                    </div>
+                                </div>
+                        <div class="account-popup signup">
+                            <form role="form" method="POST" action="{{ url('/employer/register') }}">
+                                {{ csrf_field() }}
+
+                                <!-- account info -->
+                                <h1>Account Info</h1>
+                                <div class="cfield col-sm-12 {{ $errors->has('username') ? ' has-error' : '' }}">
+                                    <input type="text" placeholder="Username" name="username"/>
+                                    <i class="la la-user"></i>
+                                    @if ($errors->has('username'))
+                                        <span class="help-block">
+                                            <strong>{{ $errors->first('username') }}</strong>
+                                        </span>
+                                    @endif
+                                </div>
+                                
+                                <div class="cfield col-sm-6">
+                                    <input type="password" placeholder="Password" name="password" />
+                                    <i class="la la-key"></i>
+                                    @if ($errors->has('password'))
+                                        <span class="help-block">
+                                            <strong>{{ $errors->first('password') }}</strong>
+                                        </span>
+                                    @endif
+                                </div>
+
+                                <div class="cfield col-sm-6">
+                                    <input type="password" placeholder="Confirm Password" name="password_confirmation" />
+                                    <i class="la la-key"></i>
+                                </div>
+
+
+                                <!-- company details -->
+                                <h1>Company Details</h1>
+                                <div class="cfield col-sm-6">
+                                    <input type="text" placeholder="Company Name" name="name" />
+                                    <i class="la la-building"></i>
+                                    @if ($errors->has('name'))
+                                        <span class="help-block">
+                                            <strong>{{ $errors->first('name') }}</strong>
+                                        </span>
+                                    @endif
+                                </div>
+
+                                <div class="cfield col-sm-6">
+                                    <input type="text" placeholder="Company Designation" name="designation" />
+                                    <i class="la la-institution"></i>
+                                    @if ($errors->has('designation'))
+                                        <span class="help-block">
+                                            <strong>{{ $errors->first('designation') }}</strong>
+                                        </span>
+                                    @endif
+                                </div>
+
+                                <div class="cfield col-sm-6">
+                                    <input type="text" placeholder="Your First Name" name="fname" />
+                                    <i class="la la-user"></i>
+                                    @if ($errors->has('fname'))
+                                        <span class="help-block">
+                                            <strong>{{ $errors->first('fname') }}</strong>
+                                        </span>
+                                    @endif
+                                </div>
+
+                                <div class="cfield col-sm-6">
+                                    <input type="text" placeholder="Your Last Name" name="lname" />
+                                    <i class="la la-user"></i>
+                                    @if ($errors->has('lname'))
+                                        <span class="help-block">
+                                            <strong>{{ $errors->first('lname') }}</strong>
+                                        </span>
+                                    @endif
+                                </div>
+
+                                <div class="cfield col-sm-6">
+                                    <input type="text" placeholder="Person Designation" name="person_designation" />
+                                    <i class="la la-certificate"></i>
+                                    @if ($errors->has('person_designation'))
+                                        <span class="help-block">
+                                            <strong>{{ $errors->first('person_designation') }}</strong>
+                                        </span>
+                                    @endif
+                                </div>
+                                <div class="cfield col-sm-6">
+                                    <input type="text" placeholder="Person Contact No." name="person_contact" />
+                                    <i class="la la-phone"></i>
+                                    @if ($errors->has('person_contact'))
+                                        <span class="help-block">
+                                            <strong>{{ $errors->first('person_contact') }}</strong>
+                                        </span>
+                                    @endif
+                                </div>
+
+                                <div class="cfield col-sm-6">
+                                    <input type="email" placeholder="Person Email" name="person_email" />
+                                    <i class="la la-envelope"></i>
+                                    @if ($errors->has('person_email'))
+                                        <span class="help-block">
+                                            <strong>{{ $errors->first('person_email') }}</strong>
+                                        </span>
+                                    @endif
+                                </div>
+
+                                <div class="cfield col-sm-6">
+                                    <input type="text" placeholder="Industry Type" name="industry_type" />
+                                    <i class="la la-globe"></i>
+                                    @if ($errors->has('industry_type'))
+                                        <span class="help-block">
+                                            <strong>{{ $errors->first('industry_type') }}</strong>
+                                        </span>
+                                    @endif
+                                </div>
+                                <div class="pf-field col-sm-12">
+                                    <textarea name="description" placeholder="Brief About Company"></textarea>
+                                    @if ($errors->has('description'))
+                                        <span class="help-block">
+                                            <strong>{{ $errors->first('description') }}</strong>
+                                        </span>
+                                    @endif
+                                </div>
+
+
+                                <!-- primary Contact Details -->
+                                <h1>Primary Company Details</h1>
+                                <div class="pf-field col-sm-6">
+                                    <textarea name="address" placeholder="Company Address"></textarea>
+                                    @if ($errors->has('address'))
+                                        <span class="help-block">
+                                            <strong>{{ $errors->first('address') }}</strong>
+                                        </span>
+                                    @endif
+                                </div>
+                                
+                                <div class="pf-field col-sm-6">
+                                    <textarea name="billing_address" placeholder="Billing Address"></textarea>
+                                    @if ($errors->has('billing_address'))
+                                        <span class="help-block">
+                                            <strong>{{ $errors->first('billing_address') }}</strong>
+                                        </span>
+                                    @endif
+                                </div>
+                                
+                                <div class="cfield col-sm-6">
+                                    <div class="cfield col-sm-6" style="padding-left: 0;">
+                                        <input type="number" placeholder="Contact Phone" name="contact_phone" />
+                                        <i class="la la-phone"></i>
+                                        @if ($errors->has('contact_phone'))
+                                            <span class="help-block">
+                                                <strong>{{ $errors->first('contact_phone') }}</strong>
+                                            </span>
+                                        @endif
+                                    </div>
+                                    <div class="cfield col-sm-6" style="padding-right: 0;">
+                                        <input type="email" placeholder="Contact Email" name="contact_email"/>
+                                        <i class="la la-user"></i>
+                                        @if ($errors->has('contact_email'))
+                                            <span class="help-block">
+                                                <strong>{{ $errors->first('contact_email') }}</strong>
+                                            </span>
+                                        @endif
+                                    </div>
+                                </div>
+
+                                <div class="cfield col-sm-6">
+                                    <input type="text" placeholder="Website" name="website"/>
+                                    <i class="la la-globe"></i>
+                                    @if ($errors->has('website'))
+                                        <span class="help-block">
+                                            <strong>{{ $errors->first('website') }}</strong>
+                                        </span>
+                                    @endif
+                                </div>
+                                
+                                <button type="submit">Continue</button>
+                            </form>
+                            <div class="extra-login">
+                                <span>Or</span>
+                                <div class="login-social mb-50">
+                                    <a class="google-login" href="#" title=""><i class="fa fa-google"></i></a>
+                                    <!-- <a class="tw-login" href="#" title=""><i class="fa fa-twitter"></i></a> -->
+                                </div>
+                                
+                            </div>
+                        </div>
+                    </div><!-- LOGIN POPUP -->
+                </div>
+            </div>
+        </div>
+    </div>
+</section>{{--  --}}
 @endsection

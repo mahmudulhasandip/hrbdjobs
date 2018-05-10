@@ -19,9 +19,9 @@ class CreateEmployerCompanyInfosTable extends Migration
             $table->string('name');
             $table->string('phone');
             $table->string('email');
-            $table->string('company_type');
             $table->string('designation');
             $table->text('address');
+            $table->text('billing_address');
             $table->string('website');
             $table->text('description');
             $table->integer('is_featured');

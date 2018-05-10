@@ -51,6 +51,15 @@ class LoginController extends Controller
         return view('employer.auth.login');
     }
 
+    public function username()
+    {
+        $identity  = request()->get('username');
+        $fieldName = filter_var($identity, FILTER_VALIDATE_EMAIL) ? 'email' : 'username';
+        request()->merge([$fieldName => $identity]);
+        return $fieldName;
+        // return 'email';
+    }
+
     /**
      * Get the guard to be used during authentication.
      *

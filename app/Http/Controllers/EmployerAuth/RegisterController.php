@@ -49,9 +49,21 @@ class RegisterController extends Controller
     protected function validator(array $data)
     {
         return Validator::make($data, [
-            'name' => 'required|max:255',
-            'email' => 'required|email|max:255|unique:employers',
-            'password' => 'required|min:6|confirmed',
+            'username'              => 'required|max:255',
+            'name'                  => 'required|max:255',
+            'fname'                 => 'required|max:255',
+            'lname'                 => 'required|max:255',
+            'person_designation'    => 'required|max:255',
+            'person_contact'        => 'required|max:255',
+            'person_email'          => 'required|email|max:255|unique:employers',
+            'industry_type'          => 'required|max:255',
+            'description'           => 'required',
+            'address'               => 'required',
+            'billing_address'       => 'required',
+            'contact_phone'         => 'required',
+            'contact_email'         => 'required',
+            'website'               => 'required',
+            'password'              => 'required|min:6|confirmed'
         ]);
     }
 
@@ -63,11 +75,16 @@ class RegisterController extends Controller
      */
     protected function create(array $data)
     {
-        return Employer::create([
-            'name' => $data['name'],
-            'email' => $data['email'],
-            'password' => bcrypt($data['password']),
-        ]);
+        // Employer::create([
+        //     'fname' => $data['fname']
+        // ]);
+
+        dd($data);
+        // return Employer::create([
+        //     'name' => $data['name'],
+        //     'email' => $data['email'],
+        //     'password' => bcrypt($data['password']),
+        // ]);
     }
 
     /**
@@ -89,4 +106,5 @@ class RegisterController extends Controller
     {
         return Auth::guard('employer');
     }
+
 }
