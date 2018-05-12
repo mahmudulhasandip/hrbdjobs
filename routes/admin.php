@@ -5,7 +5,9 @@ Route::get('/home', function () {
     $users[] = Auth::guard()->user();
     $users[] = Auth::guard('admin')->user();
 
-    //dd($users);
+    // dd($users);
+
+    dd(Auth::user());
 
     return view('admin.dashboard');
 })->name('home');
