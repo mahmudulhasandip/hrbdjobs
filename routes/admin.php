@@ -7,6 +7,6 @@ Route::get('/home', function () {
 
     //dd($users);
 
-    return view('admin.home');
+    return view('admin.dashboard');
 })->name('home');
 
