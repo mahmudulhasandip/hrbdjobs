@@ -20,6 +20,19 @@
                 </a>
             </li>
 
+            <li class="m-menu__item " aria-haspopup="true">
+                <a href="/admin/industry" class="m-menu__link ">
+                    <i class="m-menu__link-icon la la-industry"></i>
+                    <span class="m-menu__link-title">
+                        <span class="m-menu__link-wrap">
+                            <span class="m-menu__link-text">
+                                Industry
+                            </span>
+                        </span>
+                    </span>
+                </a>
+            </li>
+
             {{-- menu headline --}}
             {{-- <li class="m-menu__section">
                 <h4 class="m-menu__section-text">

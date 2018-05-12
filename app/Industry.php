@@ -6,6 +6,10 @@ use Illuminate\Database\Eloquent\Model;
 
 class Industry extends Model
 {
+    //
+    protected $fillable = [
+        'name',
+    ];
     public function companyIndustry(){
         return $this->belongsTo('App\Company_industry');
     }

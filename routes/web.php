@@ -28,8 +28,25 @@ Route::group(['prefix' => 'admin'], function () {
   Route::post('/password/reset', 'AdminAuth\ResetPasswordController@reset')->name('password.email');
   Route::get('/password/reset', 'AdminAuth\ForgotPasswordController@showLinkRequestForm')->name('password.reset');
   Route::get('/password/reset/{token}', 'AdminAuth\ResetPasswordController@showResetForm');
+
+
+  // industry routes
+ 
+  
+
+});
+
+
+// industry routes
+Route::middleware(['admin'])->group(function () {
+  Route::group(['prefix' => 'admin'], function () {
+    Route::get('industry', 'AdminController\IndustryController@index')->name('industry.show');
+    Route::post('industry', 'AdminController\IndustryController@store')->name('industry.store');
+  });
 });
  
+
+
 Route::group(['prefix' => 'employer'], function () {
   
   Route::get('/login', 'EmployerAuth\LoginController@showLoginForm')->name('login');
