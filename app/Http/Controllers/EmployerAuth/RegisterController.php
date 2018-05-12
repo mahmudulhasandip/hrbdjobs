@@ -1,13 +1,11 @@
 <?php
-
 namespace App\Http\Controllers\EmployerAuth;
-
 use App\Employer;
+use App\Employer_company_info;
 use Validator;
 use App\Http\Controllers\Controller;
 use Illuminate\Foundation\Auth\RegistersUsers;
 use Illuminate\Support\Facades\Auth;
-
 class RegisterController extends Controller
 {
     /*
@@ -20,16 +18,13 @@ class RegisterController extends Controller
     | provide this functionality without requiring any additional code.
     |
     */
-
     use RegistersUsers;
-
     /**
      * Where to redirect users after login / registration.
      *
      * @var string
      */
     protected $redirectTo = '/employer/home';
-
     /**
      * Create a new controller instance.
      *
@@ -39,7 +34,6 @@ class RegisterController extends Controller
     {
         $this->middleware('employer.guest');
     }
-
     /**
      * Get a validator for an incoming registration request.
      *
@@ -56,7 +50,7 @@ class RegisterController extends Controller
             'person_designation'    => 'required|max:255',
             'person_contact'        => 'required|max:255',
             'person_email'          => 'required|email|max:255|unique:employers',
-            'industry_type'          => 'required|max:255',
+            'industry_type'         => 'required',
             'description'           => 'required',
             'address'               => 'required',
             'billing_address'       => 'required',
@@ -66,7 +60,6 @@ class RegisterController extends Controller
             'password'              => 'required|min:6|confirmed'
         ]);
     }
-
     /**
      * Create a new user instance after a valid registration.
      *
@@ -75,18 +68,31 @@ class RegisterController extends Controller
      */
     protected function create(array $data)
     {
-        // Employer::create([
-        //     'fname' => $data['fname']
-        // ]);
-
-        dd($data);
-        // return Employer::create([
-        //     'name' => $data['name'],
-        //     'email' => $data['email'],
-        //     'password' => bcrypt($data['password']),
-        // ]);
+        // create employer
+        $employer = Employer::create([
+            'fname'         => $data['fname'],
+            'lname'         => $data['lname'],
+            'username'      => $data['username'],
+            'designation'   => $data['person_designation'],
+            'email'         => $data['person_email'],
+            'phone'         => $data['person_contact'],
+            'password'      => bcrypt($data['password']),
+        ]);
+        
+        // create employer company info
+        $employerCompanyInfo = Employer_company_info::create([
+            'employer_id'       => $employer->id,
+            'name'              => $data['name'],
+            'phone'             => $data['contact_phone'],
+            'email'             => $data['contact_email'],
+            'address'           => $data['address'],
+            'billing_address'   => $data['billing_address'],
+            'website'           => $data['website'],
+            'description'       => $data['description']
+        ]);
+        // create company industry type
+        
     }
-
     /**
      * Show the application registration form.
      *
@@ -96,7 +102,6 @@ class RegisterController extends Controller
     {
         return view('employer.auth.register');
     }
-
     /**
      * Get the guard to be used during registration.
      *
@@ -106,5 +111,4 @@ class RegisterController extends Controller
     {
         return Auth::guard('employer');
     }
-
 }
