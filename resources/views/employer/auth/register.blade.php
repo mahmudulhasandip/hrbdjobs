@@ -33,22 +33,22 @@
             <div class="row">
                 <div class="col-lg-12">
                     <div class="account-popup-area signin-popup-box static">
-                            <div class="profile-title">
-                                    <div class="steps-sec">
-                                        <div class="step active">
-                                            <p><i class="la la-info"></i></p>
-                                            <span>Information</span>
-                                        </div>
-                                        <div class="step">
-                                            <p><i class="la la-cc-mastercard"></i></p>
-                                            <span>Package & Payments</span>
-                                        </div>
-                                        <div class="step">
-                                            <p><i class="la  la-check-circle"></i></p>
-                                            <span>Done</span>
-                                        </div>
+                            {{-- <div class="profile-title">
+                                <div class="steps-sec">
+                                    <div class="step active">
+                                        <p><i class="la la-info"></i></p>
+                                        <span>Information</span>
+                                    </div>
+                                    <div class="step">
+                                        <p><i class="la la-cc-mastercard"></i></p>
+                                        <span>Package & Payments</span>
+                                    </div>
+                                    <div class="step">
+                                        <p><i class="la  la-check-circle"></i></p>
+                                        <span>Done</span>
                                     </div>
                                 </div>
+                            </div> --}}
                         <div class="account-popup signup">
                             <form role="form" method="POST" action="{{ url('/employer/register') }}">
                                 {{ csrf_field() }}
@@ -132,15 +132,7 @@
                                         </span>
                                     @endif
                                 </div>
-                                <div class="cfield col-sm-6">
-                                    <input type="text" placeholder="Person Contact No." name="person_contact" />
-                                    <i class="la la-phone"></i>
-                                    @if ($errors->has('person_contact'))
-                                        <span class="help-block">
-                                            <strong>{{ $errors->first('person_contact') }}</strong>
-                                        </span>
-                                    @endif
-                                </div>
+                                
 
                                 <div class="cfield col-sm-6">
                                     <input type="email" placeholder="Person Email" name="person_email" />
@@ -152,9 +144,14 @@
                                     @endif
                                 </div>
 
-                                <div class="cfield col-sm-6">
-                                    <input type="text" placeholder="Industry Type" name="industry_type" />
-                                    <i class="la la-globe"></i>
+                                <div class="col-sm-12 dropdown-field">
+                                        
+                                    <select name="industry_type[]" id="industry_type" data-placeholder="Choose Industry ..." multiple class="chosen form-control">
+                                        @foreach($industries as $industry)
+                                            <option value="{{ $industry->id }}">{{ $industry->name }}</option>
+                                        @endforeach
+                                    </select>
+                                    
                                     @if ($errors->has('industry_type'))
                                         <span class="help-block">
                                             <strong>{{ $errors->first('industry_type') }}</strong>
@@ -222,7 +219,7 @@
                                     @endif
                                 </div>
                                 
-                                <button type="submit">Continue</button>
+                                <button type="submit">Sign Up</button>
                             </form>
                             <div class="extra-login">
                                 <span>Or</span>

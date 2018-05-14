@@ -16,15 +16,15 @@ class CreateEmployerCompanyInfosTable extends Migration
         Schema::create('employer_company_infos', function (Blueprint $table) {
             $table->increments('id')->unsigned()->unique();
             $table->integer('employer_id')->unsigned();
-            $table->string('name');
-            $table->string('phone');
-            $table->string('email');
-            $table->string('designation');
-            $table->text('address');
-            $table->text('billing_address');
-            $table->string('website');
-            $table->text('description');
-            $table->integer('is_featured');
+            $table->string('name')->nullable();
+            $table->string('phone')->nullable();
+            $table->string('email')->nullable();
+            $table->string('designation')->nullable();
+            $table->text('address')->nullable();
+            $table->text('billing_address')->nullable();
+            $table->string('website')->nullable();
+            $table->text('description')->nullable();
+            $table->integer('is_featured')->nullable();
             $table->foreign('employer_id')->references('id')->on('employers');
             $table->timestamps();
         });

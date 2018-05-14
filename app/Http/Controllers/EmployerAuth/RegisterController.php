@@ -2,6 +2,8 @@
 namespace App\Http\Controllers\EmployerAuth;
 use App\Employer;
 use App\Employer_company_info;
+use App\Industry;
+use App\Company_industry;
 use Validator;
 use App\Http\Controllers\Controller;
 use Illuminate\Foundation\Auth\RegistersUsers;
@@ -42,14 +44,15 @@ class RegisterController extends Controller
      */
     protected function validator(array $data)
     {
+        
         return Validator::make($data, [
             'username'              => 'required|max:255',
             'name'                  => 'required|max:255',
             'fname'                 => 'required|max:255',
             'lname'                 => 'required|max:255',
             'person_designation'    => 'required|max:255',
-            'person_contact'        => 'required|max:255',
-            'person_email'          => 'required|email|max:255|unique:employers',
+            // 'person_contact'        => 'required|max:255',
+            'person_email'          => 'required|email|max:255',
             'industry_type'         => 'required',
             'description'           => 'required',
             'address'               => 'required',
@@ -69,29 +72,36 @@ class RegisterController extends Controller
     protected function create(array $data)
     {
         // create employer
-        $employer = Employer::create([
-            'fname'         => $data['fname'],
-            'lname'         => $data['lname'],
-            'username'      => $data['username'],
-            'designation'   => $data['person_designation'],
-            'email'         => $data['person_email'],
-            'phone'         => $data['person_contact'],
-            'password'      => bcrypt($data['password']),
-        ]);
+        $employer = new Employer();
+        $employer->fname = $data['fname'];
+        $employer->lname = $data['lname'];
+        $employer->username = $data['username'];
+        $employer->designation = $data['person_designation'];
+        $employer->email = $data['person_email'];
+        $employer->password = bcrypt($data['password']);
+        $employer->save();
         
         // create employer company info
-        $employerCompanyInfo = Employer_company_info::create([
-            'employer_id'       => $employer->id,
-            'name'              => $data['name'],
-            'phone'             => $data['contact_phone'],
-            'email'             => $data['contact_email'],
-            'address'           => $data['address'],
-            'billing_address'   => $data['billing_address'],
-            'website'           => $data['website'],
-            'description'       => $data['description']
-        ]);
-        // create company industry type
+        $employerCompanyInfo = new Employer_company_info();
+        $employerCompanyInfo->employer_id = $employer->id;
+        $employerCompanyInfo->name = $data['name'];
+        $employerCompanyInfo->phone = $data['contact_phone'];
+        $employerCompanyInfo->email = $data['contact_email'];
+        $employerCompanyInfo->address = $data['address'];
+        $employerCompanyInfo->billing_address = $data['billing_address'];
+        $employerCompanyInfo->website = $data['website'];
+        $employerCompanyInfo->description = $data['description'];
+        $employerCompanyInfo->save();
+
+        // // create company industry type
+        for($i=0; $i < sizeof($data['industry_type']); $i++){
+            $companyIndustry = new Company_industry();
+            $companyIndustry->employer_company_info_id = $employerCompanyInfo->id;
+            $companyIndustry->industry_id = $data['industry_type'][$i];
+            $companyIndustry->save();
+        }
         
+        return $employer;
     }
     /**
      * Show the application registration form.
@@ -100,7 +110,8 @@ class RegisterController extends Controller
      */
     public function showRegistrationForm()
     {
-        return view('employer.auth.register');
+        $industries = Industry::all();
+        return view('employer.auth.register', ['industries'=>$industries]);
     }
     /**
      * Get the guard to be used during registration.

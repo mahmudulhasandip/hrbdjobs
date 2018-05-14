@@ -14,12 +14,12 @@ class CreateCandidatesTable extends Migration
     {
         Schema::create('candidates', function (Blueprint $table) {
             $table->increments('id')->unsigned()->unique();
-            $table->string('fname');
-            $table->string('lname');
+            $table->string('fname')->nullable();
+            $table->string('lname')->nullable();
             $table->string('email')->unique();
             $table->string('password');
             $table->string('gender')->default('Male');
-            $table->date('date_of_birth');
+            $table->date('date_of_birth')->nullable();
             $table->string('country')->nullable();
             $table->string('city')->nullable();
             $table->text('current_address')->nullable();

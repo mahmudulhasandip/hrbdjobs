@@ -29,17 +29,13 @@ Route::group(['prefix' => 'admin'], function () {
   Route::get('/password/reset', 'AdminAuth\ForgotPasswordController@showLinkRequestForm')->name('password.reset');
   Route::get('/password/reset/{token}', 'AdminAuth\ResetPasswordController@showResetForm');
 
-
-  // industry routes
- 
-  
-
 });
 
 
 // industry routes
 Route::middleware(['admin'])->group(function () {
   Route::group(['prefix' => 'admin'], function () {
+      // industry routes
     Route::get('industry', 'AdminController\IndustryController@index')->name('industry.show');
     Route::post('industry', 'AdminController\IndustryController@store')->name('industry.store');
   });
@@ -60,7 +56,16 @@ Route::group(['prefix' => 'employer'], function () {
   Route::post('/password/reset', 'EmployerAuth\ResetPasswordController@reset')->name('password.email');
   Route::get('/password/reset', 'EmployerAuth\ForgotPasswordController@showLinkRequestForm')->name('password.reset');
   Route::get('/password/reset/{token}', 'EmployerAuth\ResetPasswordController@showResetForm');
+
 });
+
+ // employer custom pages
+Route::middleware(['employer'])->group(function () {
+  Route::group(['prefix' => 'employer'], function () {
+    Route::get('/home', 'EmployerController/HomeController@dashboard')->name('employer.dashboard');
+  });
+});
+
 
 Route::group(['prefix' => 'candidate'], function () {
   Route::get('/login', 'CandidateAuth\LoginController@showLoginForm')->name('login');

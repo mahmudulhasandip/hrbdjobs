@@ -14,12 +14,12 @@ class CreateEmployersTable extends Migration
     {
         Schema::create('employers', function (Blueprint $table) {
             $table->increments('id')->unsigned()->unique();
-            $table->string('fname');
-            $table->string('lname');
+            $table->string('fname')->nullable();
+            $table->string('lname')->nullable();
             $table->string('username')->unique();
             $table->string('designation')->nullable();
             $table->string('email')->unique();
-            $table->string('password');
+            $table->string('password')->nullable();
             $table->string('country')->nullable();
             $table->string('city')->nullable();
             $table->text('address')->nullable();
