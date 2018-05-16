@@ -17,11 +17,11 @@ Route::get('/', [
 ]);
 
 Route::group(['prefix' => 'admin'], function () {
-  Route::get('/login', 'AdminAuth\LoginController@showLoginForm')->name('login');
+  Route::get('/login', 'AdminAuth\LoginController@showLoginForm')->name('admin.login');
   Route::post('/login', 'AdminAuth\LoginController@login');
-  Route::post('/logout', 'AdminAuth\LoginController@logout')->name('logout');
+  Route::post('/logout', 'AdminAuth\LoginController@logout')->name('admin.logout');
 
-  Route::get('/register', 'AdminAuth\RegisterController@showRegistrationForm')->name('register');
+  Route::get('/register', 'AdminAuth\RegisterController@showRegistrationForm')->name('admin.register');
   Route::post('/register', 'AdminAuth\RegisterController@register');
 
   Route::post('/password/email', 'AdminAuth\ForgotPasswordController@sendResetLinkEmail')->name('password.request');
@@ -45,11 +45,11 @@ Route::middleware(['admin'])->group(function () {
 
 Route::group(['prefix' => 'employer'], function () {
   
-  Route::get('/login', 'EmployerAuth\LoginController@showLoginForm')->name('login');
+  Route::get('/login', 'EmployerAuth\LoginController@showLoginForm')->name('employer.login');
   Route::post('/login', 'EmployerAuth\LoginController@login');
-  Route::post('/logout', 'EmployerAuth\LoginController@logout')->name('logout');
+  Route::post('/logout', 'EmployerAuth\LoginController@logout')->name('employer.logout');
 
-  Route::get('/register', 'EmployerAuth\RegisterController@showRegistrationForm')->name('register');
+  Route::get('/register', 'EmployerAuth\RegisterController@showRegistrationForm')->name('employer.register');
   Route::post('/register', 'EmployerAuth\RegisterController@register');
 
   Route::post('/password/email', 'EmployerAuth\ForgotPasswordController@sendResetLinkEmail')->name('password.request');
@@ -58,12 +58,9 @@ Route::group(['prefix' => 'employer'], function () {
   Route::get('/password/reset/{token}', 'EmployerAuth\ResetPasswordController@showResetForm');
 
 });
-
  // employer custom pages
 Route::middleware(['employer'])->group(function () {
-  Route::group(['prefix' => 'employer'], function () {
-    Route::get('/home', 'EmployerController/HomeController@dashboard')->name('employer.dashboard');
-  });
+  Route::get('/post/new/job', 'EmployerController\HomeController@getNewJob')->name('employer.new.job');
 });
 
 

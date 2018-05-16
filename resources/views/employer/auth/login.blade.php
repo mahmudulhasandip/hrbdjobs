@@ -1,6 +1,6 @@
-@extends('candidate.layout.app')
+@extends('employer.layout.app')
 
-@section('title', 'HRBD Jobs | Candidate Login')
+@section('title', 'HRBD Jobs | Employer Login')
 
 @section('content')
 <section>
@@ -35,7 +35,7 @@
                     <div class="account-popup-area signin-popup-box static">
                         <div class="account-popup">
                             <span>Lorem ipsum dolor sit amet consectetur adipiscing elit odio duis risus at lobortis ullamcorper</span>
-                            <form role="form" method="POST" action="{{ url('/candidate/login') }}">
+                            <form role="form" method="POST" action="{{ url('/employer/login') }}">
                                 {{ csrf_field() }}
                                 <div class="cfield {{ $errors->has('username') ? ' has-error' : '' }}" >
                                     <input id="username" type="text" class="form-control" placeholder="Email or Username" name="username" value="{{ old('username') }}" autofocus>
