@@ -9,43 +9,52 @@ class HomeController extends Controller
 {
     //
     public function dashboard(){
-        
-        return view('employer.dashboard');
+        $data['left_active'] = 'dashboard';
+        return view('employer.dashboard', $data);
     }
 
     public function getNewJob(){
-        return view('employer.post_new_job');
+        $data['left_active'] = 'job';
+        return view('employer.post_new_job', $data);
     }
 
     public function getDraftedJob(){
-        return view('employer.drafted_job');
+        $data['left_active'] = 'job';
+        return view('employer.drafted_job', $data);
     }
 
     public function getManageJob(){
-        return view('employer.manage_job');
+        $data['left_active'] = 'manage_job';
+        return view('employer.manage_job', $data);
     }
 
     public function getProfile(){
-        return view('employer.profile');
+        $data['left_active'] = 'profile';
+        return view('employer.profile', $data);
     }
 
     public function getEditProfile(){
-        return view('employer.edit_profile');
+        $data['left_active'] = 'profile';
+        return view('employer.edit_profile', $data);
     }
 
     public function getCompanyProfile(){
-        return view('employer.comapny_profile');
+        $data['left_active'] = 'company';
+        return view('employer.comapny_profile', $data);
     }
 
     public function getEditCompanyProfile(){
-        return view('employer.edit_company_profile');
+        $data['left_active'] = 'company';
+        return view('employer.edit_company_profile', $data);
     }
 
     public function getCandidateShortList(){
-        return view('employer.shortlisted_job');
+        $data['left_active'] = 'shortlisted';
+        return view('employer.shortlisted_job', $data);
     }
 
     public function getBrowseResume(){
-        return view('employer.browse_resume');                      
+        $data['left_active'] = 'browse_resume';
+        return view('employer.browse_resume', $data);                      
     }
 }
