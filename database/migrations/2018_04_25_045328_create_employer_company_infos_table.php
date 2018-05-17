@@ -19,11 +19,15 @@ class CreateEmployerCompanyInfosTable extends Migration
             $table->string('name')->nullable();
             $table->string('phone')->nullable();
             $table->string('email')->nullable();
-            $table->string('designation')->nullable();
+            $table->string('city')->nullable();
+            $table->string('country')->nullable();
             $table->text('address')->nullable();
             $table->text('billing_address')->nullable();
+            $table->integer('since')->nullable();
+            $table->string('team_size')->nullable();
             $table->string('website')->nullable();
             $table->text('description')->nullable();
+            $table->string('logo')->nullable();
             $table->integer('is_featured')->nullable();
             $table->foreign('employer_id')->references('id')->on('employers');
             $table->timestamps();

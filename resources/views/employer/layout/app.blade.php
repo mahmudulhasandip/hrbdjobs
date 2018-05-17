@@ -11,18 +11,18 @@
 
     <title>@yield('title')</title>
 
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.5.0/css/font-awesome.min.css" />
 	<!-- Styles -->
 	<link rel="stylesheet" type="text/css" href="/css/bootstrap-grid.css" />
 	<link rel="stylesheet" href="/css/icons.css">
-	<link rel="stylesheet" href="/css/animate.min.css">
+    <link rel="stylesheet" href="/css/animate.min.css">
+	<link rel="stylesheet" type="text/css" href="/css/chosen.css" />
 	<link rel="stylesheet" type="text/css" href="/css/style.css" />
 	<link rel="stylesheet" type="text/css" href="/css/responsive.css" />
-	<link rel="stylesheet" type="text/css" href="/css/chosen.css" />
-	<link rel="stylesheet" type="text/css" href="/css/colors/colors.css" />
-    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.5.0/css/font-awesome.min.css" />
+<link rel="stylesheet" type="text/css" href="/css/colors/colors.css" /> 
     @stack('css')
     
-    <!-- Scripts -->
+ <!-- Scripts -->
     <script>
         window.Laravel = <?php echo json_encode([
             'csrfToken' => csrf_token(),
@@ -31,10 +31,10 @@
 </head>
 <body>
 
-<div class="page-loading">
+{{--  <div class="page-loading">
 	<img src="/images/loader.gif" alt="" />
 	<span>Skip Loader</span>
-</div>
+</div> --}}
 
 <div class="theme-layout" id="scrollup">
     <!-- Header/Navbar -->

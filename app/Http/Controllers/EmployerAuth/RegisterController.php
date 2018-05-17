@@ -4,6 +4,7 @@ use App\Employer;
 use App\Employer_company_info;
 use App\Industry;
 use App\Company_industry;
+use App\Country;
 use Validator;
 use App\Http\Controllers\Controller;
 use Illuminate\Foundation\Auth\RegistersUsers;
@@ -51,9 +52,10 @@ class RegisterController extends Controller
             'fname'                 => 'required|max:255',
             'lname'                 => 'required|max:255',
             'person_designation'    => 'required|max:255',
-            // 'person_contact'        => 'required|max:255',
             'person_email'          => 'required|email|max:255',
             'industry_type'         => 'required',
+            'city'                  => 'required',
+            'country'               => 'required',
             'description'           => 'required',
             'address'               => 'required',
             'billing_address'       => 'required',
@@ -87,13 +89,15 @@ class RegisterController extends Controller
         $employerCompanyInfo->name = $data['name'];
         $employerCompanyInfo->phone = $data['contact_phone'];
         $employerCompanyInfo->email = $data['contact_email'];
+        $employerCompanyInfo->city = $data['city'];
+        $employerCompanyInfo->country = $data['country'];
         $employerCompanyInfo->address = $data['address'];
         $employerCompanyInfo->billing_address = $data['billing_address'];
         $employerCompanyInfo->website = $data['website'];
         $employerCompanyInfo->description = $data['description'];
         $employerCompanyInfo->save();
 
-        // // create company industry type
+        // create company industry type
         for($i=0; $i < sizeof($data['industry_type']); $i++){
             $companyIndustry = new Company_industry();
             $companyIndustry->employer_company_info_id = $employerCompanyInfo->id;
@@ -111,7 +115,8 @@ class RegisterController extends Controller
     public function showRegistrationForm()
     {
         $industries = Industry::all();
-        return view('employer.auth.register', ['industries'=>$industries]);
+        $countries = Country::all();
+        return view('employer.auth.register', ['industries'=>$industries, 'countries' => $countries]);
     }
     /**
      * Get the guard to be used during registration.

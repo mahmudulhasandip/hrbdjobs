@@ -10,7 +10,7 @@
 				<div class="row">
 					<div class="col-lg-12">
 						<div class="inner-header">
-							<h3>Company Profile</h3>
+						<h3>Company Profile </h3>
 						</div>
 					</div>
 				</div>
@@ -30,11 +30,10 @@
 				 						<div class="job-single-head3 emplye">
 							 				<div class="job-thumb"> <img src="http://placehold.it/120x95" alt="" /></div>
 							 				<div class="job-single-info3">
-							 					<h3>Tera Planner</h3>
-							 					<span><i class="la la-map-marker"></i>Sacramento, California</span><span class="job-is ft">Full time</span>
+							 					<h3>{{ $company_info->name }}</h3>
+							 					<span><i class="la la-map-marker"></i>{{ $company_info->address }}</span>
 							 					<ul class="tags-jobs">
-								 					<li><i class="la la-file-text"></i> Posted Jobs 1</li>
-								 					<li><i class="la la-calendar-o"></i> Post Date: July 29, 2017</li>
+								 					<li><i class="la la-file-text"></i> Posted Jobs 1 <span class="text-red">(todo)</span></li>
 								 				</ul>
 							 				</div>
 							 			</div><!-- Job Head -->

@@ -16,6 +16,7 @@ class CreateCandidatesTable extends Migration
             $table->increments('id')->unsigned()->unique();
             $table->string('fname')->nullable();
             $table->string('lname')->nullable();
+            $table->string('username')->unique();
             $table->string('email')->unique();
             $table->string('password');
             $table->string('gender')->default('Male');
