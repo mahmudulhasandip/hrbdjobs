@@ -16,6 +16,7 @@
 	<link rel="stylesheet" type="text/css" href="/css/bootstrap-grid.css" />
 	<link rel="stylesheet" href="/css/icons.css">
     <link rel="stylesheet" href="/css/animate.min.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/toastr.js/2.1.4/toastr.min.css" />
 	<link rel="stylesheet" type="text/css" href="/css/chosen.css" />
 	<link rel="stylesheet" type="text/css" href="/css/style.css" />
 	<link rel="stylesheet" type="text/css" href="/css/responsive.css" />
@@ -54,6 +55,7 @@
 <script src="/js/wow.min.js" type="text/javascript"></script>
 <script src="/js/slick.min.js" type="text/javascript"></script>
 <script src="/js/parallax.js" type="text/javascript"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/toastr.js/2.1.4/toastr.min.js"></script>
 <script src="/js/select-chosen.js" type="text/javascript"></script>
 @stack('js')
 

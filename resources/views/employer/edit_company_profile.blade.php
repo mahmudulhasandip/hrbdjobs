@@ -37,11 +37,19 @@
 							<form role="form" method="POST" action="{{ route('employer.update.profile') }}" enctype="multipart/form-data">
 								@csrf
 								<div class="row">
+										@if($errors->has('logo'))
+											<div class="alert alert-danger" role="alert">
+											<h4 class="alert-heading">Uh oh!</h4>
+											@foreach($errors->get('image') as $message)
+											<p>{{ $message }}</p>
+											@endforeach
+											</div>
+										@endif
 									<div id="file-upload-form" class="uploader">
 										<input id="file-upload" type="file" name="logo" accept="image/*" />
 		
 										<label for="file-upload" id="file-drag">
-											<img id="file-image" src="#" alt="Preview" class="hidden">
+										<img id="file-image" src="/storage/app/uploads/{{ $company_info->logo }}" alt="Preview" class="hidden">
 											<div id="start">
 											<i class="fa fa-download" aria-hidden="true"></i>
 											<div>Select a logo or drag here</div>
@@ -50,9 +58,9 @@
 											</div>
 											<div id="response" class="hidden">
 											<div id="messages"></div>
-											<progress class="progress" id="file-progress" value="0">
+											{{-- <progress class="progress" id="file-progress" value="0">
 												<span>0</span>%
-											</progress>
+											</progress> --}}
 											</div>
 										</label>
 									</div>
@@ -67,7 +75,7 @@
 										<div class="pf-field">
 											<select name="industry_type[]" id="industry_type" autocomplete="off" data-placeholder="Company Category" multiple class="chosen">
 												@foreach($industries as $industry)
-													<option value="{{ $industry->id }}">{{ $industry->name }}</option>
+													<option value="{{ $industry->id }}" {{ in_array($industry->id, $company_industry) ? "selected" : "" }}  >{{ $industry->name }}</option>
 												@endforeach
 											</select>
 
@@ -82,17 +90,17 @@
 									<div class="col-lg-6">
 										<span class="pf-title">Since</span>
 										<div class="pf-field">
-											<input type="text" placeholder="1991" name="since" />
+											<input type="text" placeholder="1991" name="since" value="{{ $company_info->since }}" />
 										</div>
 									</div>
 									<div class="col-lg-6">
 										<span class="pf-title">Team Size</span>
 										<div class="pf-field">
-											<select data-placeholder="Please Select Specialism" class="chosen" name="team_size" >
-												<option value="1-10">1-10</option>
-												<option value="10-50">10-50</option>
-												<option value="50-100">50-100</option>
-												<option value="100+">100+</option>
+											<select data-placeholder="Please Select Specialism" class="chosen" name="team_size" value="{{ $company_info->team_size }}">
+												<option value="1-10" {{ ($company_info->team_size == '1-10') ? "selected" : "" }}>1-10</option>
+												<option value="10-50" {{ ($company_info->team_size == '10-50') ? "selected" : "" }}>10-50</option>
+												<option value="50-100" {{ ($company_info->team_size == '50-100') ? "selected" : "" }}>50-100</option>
+												<option value="100+" {{ ($company_info->team_size == '100+') ? "selected" : "" }}>100+</option>
 											</select>
 										</div>
 									</div>
@@ -100,21 +108,21 @@
 									<div class="col-lg-12">
 										<span class="pf-title">Description</span>
 										<div class="pf-field">
-											<textarea placeholder="Description" name="description" ></textarea>
+											<textarea placeholder="Description" name="description" >{{ $company_info->description }}</textarea>
 										</div>
 									</div>
 
 									<div class="col-lg-6">
 										<span class="pf-title">Compnay Address</span>
 										<div class="pf-field">
-											<textarea placeholder="Compnay Address" name="address" ></textarea>
+											<textarea placeholder="Compnay Address" name="address" >{{ $company_info->address }}</textarea>
 										</div>
 									</div>
 
 									<div class="col-lg-6">
 										<span class="pf-title">Billing Address</span>
 										<div class="pf-field">
-											<textarea placeholder="Billing Address" name="billing_address" ></textarea>
+											<textarea placeholder="Billing Address" name="billing_address" >{{ $company_info->billing_address }}</textarea>
 										</div>
 									</div>
 
@@ -154,19 +162,19 @@
 									<div class="col-lg-4">
 										<span class="pf-title">Phone Number</span>
 										<div class="pf-field">
-											<input type="text" placeholder="+90 538 963 58 96" name="contact_phone" />
+											<input type="text" placeholder="+90 538 963 58 96" name="contact_phone" value="{{ $company_info->phone }}"/>
 										</div>
 									</div>
 									<div class="col-lg-4">
 										<span class="pf-title">Email</span>
 										<div class="pf-field">
-											<input type="text" placeholder="demo@jobhunt.com" name="contact_email" />
+											<input type="text" placeholder="demo@jobhunt.com" name="contact_email" value="{{ $company_info->email }}" />
 										</div>
 									</div>
 									<div class="col-lg-4">
 										<span class="pf-title">Website</span>
 										<div class="pf-field">
-											<input type="text" placeholder="www.jobhun.com" name="website" />
+											<input type="text" placeholder="www.jobhun.com" name="website" value="{{ $company_info->website }}" />
 										</div>
 									</div>
 									<div class="col-lg-6">
@@ -187,7 +195,7 @@
 									<div class="col-lg-6">
 										<span class="pf-title">City</span>
 										<div class="pf-field">
-											<input type="text" placeholder="City" name="city" />
+											<input type="text" placeholder="City" name="city" value="{{ $company_info->city }}" />
 										</div>
 									</div>
 								</div>

@@ -12254,13 +12254,26 @@ header.style4 .account-btns > li a,
     border: 2px solid #e8ecec;
     background-image: none;
     border-radius: 8px;
+    /* max-height: 50px; */
 }
+
+.chosen-container-multi .chosen-choices li.search-field{
+    width: 100%;
+}
+.chosen-container-multi .chosen-choices li.search-field input[type="text"]{
+    width: 0px !important;
+    /* padding: 0 !important; */
+}
+
 
 .text-red{
     color: #e54545 !important;
     font-weight: bold;
 }
 
+.pf-field > textarea{
+    color: #222;
+}
 
 
 /* file Upload */

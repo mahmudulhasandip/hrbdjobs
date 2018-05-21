@@ -5,11 +5,14 @@ namespace App\Http\Controllers\EmployerController;
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
 use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\Storage;
 
 use App\Employer_company_info;
 use App\Industry;
 use App\Country;
 use App\Company_industry;
+use App\Company_social_media;
+
 
 
 
@@ -59,49 +62,102 @@ class HomeController extends Controller
         $data['company_info'] = Employer_company_info::where('employer_id', Auth::guard('employer')->user()->id)->firstOrFail();
         $data['industries'] = Industry::all();
         $data['countries'] = Country::all();
+        $company_industries = Company_industry::where('employer_company_info_id', $data['company_info']->id)->get();
+        $industries = array();
+        foreach($company_industries as $industry){
+            array_push($industries, $industry->industry_id);
+        }
+        $data['company_industry'] = $industries;
+
         return view('employer.edit_company_profile', $data);
     }
 
-    protected function validator(array $data)
-    {
+    // protected function validator(array $data)
+    // {
         
-        return Validator::make($data, [
-            'name'                  => 'required|max:255',
-            'industry_type'         => 'required',
-            'city'                  => 'required',
-            'country'               => 'required',
-            'description'           => 'required',
-            'address'               => 'required',
-            'billing_address'       => 'required',
-            'contact_phone'         => 'required',
-            'contact_email'         => 'required',
-            'website'               => 'required',
-            'password'              => 'required|min:6|confirmed'
-        ]);
-    }
-// https://webdevelopmentsolutions.net/upload-images-laravel-5-6/
-    public function updateProfile(){
-        $employerCompanyInfo = new Employer_company_info();
-        $employerCompanyInfo->name = $data['name'];
-        $employerCompanyInfo->phone = $data['contact_phone'];
-        $employerCompanyInfo->email = $data['contact_email'];
-        $employerCompanyInfo->since = $data['since'];
-        $employerCompanyInfo->team_size = $data['team_size'];
-        $employerCompanyInfo->city = $data['city'];
-        $employerCompanyInfo->country = $data['country'];
-        $employerCompanyInfo->address = $data['address'];
-        $employerCompanyInfo->billing_address = $data['billing_address'];
-        $employerCompanyInfo->website = $data['website'];
-        $employerCompanyInfo->description = $data['description'];
+    //     return Validator::make($data, [
+    //         'name'                  => 'required|max:255',
+    //         'industry_type'         => 'required',
+    //         'since'                 => 'required',
+    //         'team_size'             => 'required',
+    //         'city'                  => 'required',
+    //         'country'               => 'required',
+    //         'description'           => 'required',
+    //         'address'               => 'required',
+    //         'billing_address'       => 'required',
+    //         'contact_phone'         => 'required',
+    //         'contact_email'         => 'required',
+    //         'website'               => 'required',
+    //         'logo'                  => 'required|image|mimes:jpeg,bmp,png,gif|max:1000',
+
+    //         'logo.required'        => 'Please upload an image',
+    //         'logo.image'           => 'Please upload a valid image',
+    //         'logo.max'             => 'Please upload an image within 1 MB'
+    //     ]);
+    // }
+
+
+
+    public function updateProfile(Request $request){
+        // $this->validator($request->all())->validate();
+        
+        $employerCompanyInfo = Employer_company_info::where('id', Auth::user()->id)->firstOrFail();
+        $employerCompanyInfo->name = $request->input('name');
+        $employerCompanyInfo->phone = $request->input('contact_phone');
+        $employerCompanyInfo->email = $request->input('contact_email');
+        $employerCompanyInfo->since = $request->input('since');
+        $employerCompanyInfo->team_size = $request->input('team_size');
+        $employerCompanyInfo->description = $request->input('description');
+        $employerCompanyInfo->address = $request->input('address');
+        $employerCompanyInfo->billing_address = $request->input('billing_address');
+        $employerCompanyInfo->city = $request->input('city');
+        $employerCompanyInfo->country = $request->input('country');
+        $employerCompanyInfo->website = $request->input('website');
+        
+        // delete & upload images
+        if($request->hasFile('logo')){
+            if($employerCompanyInfo->logo){
+                Storage::delete('uploads/'.$employerCompanyInfo->logo);
+            }
+            $ext = $request->file('logo')->getClientOriginalExtension();
+            $filename = time().'.'.$ext;
+
+            $upload = $request->file('logo')->storeAs(
+                'uploads', $filename
+            );
+            $employerCompanyInfo->logo = $filename;
+        }
+        
         $employerCompanyInfo->save();
 
+        $companyIndustry = Company_industry::where('employer_company_info_id', $employerCompanyInfo->id)->get()->each->delete();
+
         // create company industry type
-        for($i=0; $i < sizeof($data['industry_type']); $i++){
+        for($i=0; $i < sizeof($request->input('industry_type')); $i++){
             $companyIndustry = new Company_industry();
             $companyIndustry->employer_company_info_id = $employerCompanyInfo->id;
-            $companyIndustry->industry_id = $data['industry_type'][$i];
+            $companyIndustry->industry_id = $request->input('industry_type')[$i];
             $companyIndustry->save();
         }
+
+
+        // social links
+
+        $social_links = Company_social_media::where('employer_company_info_id', $employerCompanyInfo->id)->first();
+        if(!$social_links){
+            $social_links = new Company_social_media();
+        }
+
+        $social_links->employer_company_info_id = $employerCompanyInfo->id;
+        $social_links->fb_link = $request->input('fb_link');
+        $social_links->twitter_link = $request->input('twitter_link');
+        $social_links->gplus_link = $request->input('gplus_link');
+        $social_links->linkedin_link = $request->input('linkedin_link');
+        $social_links->save();
+
+        return redirect()->route('employer.company.profile')->with('status', 'Profile updated!');
+
+
     }
 
     public function getCandidateShortList(){

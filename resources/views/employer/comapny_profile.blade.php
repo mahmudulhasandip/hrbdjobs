@@ -27,11 +27,12 @@
 				 			<div class="job-head-wide">
 				 				<div class="row">
 				 					<div class="col-lg-10">
+										@include('employer.layout.alert')
 				 						<div class="job-single-head3 emplye">
 							 				<div class="job-thumb"> <img src="http://placehold.it/120x95" alt="" /></div>
 							 				<div class="job-single-info3">
 							 					<h3>{{ $company_info->name }}</h3>
-							 					<span><i class="la la-map-marker"></i>{{ $company_info->address }}</span>
+							 					<span><i class="la la-map-marker"></i>{{ $company_info->city }}, {{ $company_info->country }}</span>
 							 					<ul class="tags-jobs">
 								 					<li><i class="la la-file-text"></i> Posted Jobs 1 <span class="text-red">(todo)</span></li>
 								 				</ul>
