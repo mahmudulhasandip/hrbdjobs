@@ -26,7 +26,7 @@
 				 		<div class="job-single-sec style3">
 				 			<div class="job-head-wide">
 				 				<div class="row">
-				 					<div class="col-lg-10">
+				 					<div class="col-lg-9">
 										@include('employer.layout.alert')
 				 						<div class="job-single-head3 emplye">
 							 				<div class="job-thumb"> <img src="http://placehold.it/120x95" alt="" /></div>
@@ -39,12 +39,15 @@
 							 				</div>
 							 			</div><!-- Job Head -->
 				 					</div>
-				 					<div class="col-lg-2">
-				 						<div class="share-bar">
-							 				<a href="#" title="" class="share-google"><i class="la la-google"></i></a><a href="#" title="" class="share-fb"><i class="fa fa-facebook"></i></a><a href="#" title="" class="share-twitter"><i class="fa fa-twitter"></i></a>
+				 					<div class="col-lg-3">
+				 						<div class="share-bar text-center">
+											 <a href="{{ $social_links->gplus_link }}" title="" target="blank" class="share-google {{ !($social_links->gplus_link) ? 'd-none' : '' }}"><i class="la la-google"></i></a>
+											 <a href=" {{ $social_links->fb_link }} " title="" target="blank" class="share-fb {{ !($social_links->fb_link) ? 'd-none' : '' }}"><i class="fa fa-facebook"></i></a>
+											 <a href="{{ $social_links->twitter_link }}" title="" target="blank" class="share-twitter {{ !($social_links->twitter_link) ? 'd-none' : '' }}"><i class="fa fa-twitter"></i></a>
+											 <a href="{{ $social_links->linkedin_link }}" title="" target="blank" class="share-linkedin {{ !($social_links->linkedin_link) ? 'd-none' : '' }}"><i class="fa fa-linkedin"></i></a>
 							 			</div>
 								 		<div class="emply-btns">
-								 			<a class="seemap" href="#" title=""><i class="la la-map-marker"></i> See On Map</a>
+								 			{{-- <a class="seemap" href="#" title=""><i class="la la-map-marker"></i> See On Map</a> --}}
 								 			<a class="followus" href="#" title=""><i class="la la-paper-plane"></i> Follow us</a>
 								 		</div>
 				 					</div>
@@ -55,17 +58,7 @@
 							 		<div class="col-lg-8 column">		
 							 			<div class="job-details">
 							 				<h3>About Business Network</h3>
-							 				<p>Far much that one rank beheld bluebird after outside ignobly allegedly more when oh arrogantly vehement irresistibly fussy penguin insect additionally wow absolutely crud meretriciously hastily dalmatian a glowered inset one echidna cassowary some parrot and much as goodness some froze the sullen much connected bat wonderfully on instantaneously eel valiantly petted this along across highhandedly much. </p>
-							 				<p>Repeatedly dreamed alas opossum but dramatically despite expeditiously that jeepers loosely yikes that as or eel underneath kept and slept compactly far purred sure abidingly up above fitting to strident wiped set waywardly far the and pangolin horse approving paid chuckled cassowary oh above a much opposite far much hypnotically more therefore wasp less that hey apart well like while superbly orca and far hence one.Far much that one rank beheld bluebird after outside ignobly allegedly more when oh arrogantly vehement irresistibly fussy.</p>
-							 				<ul>
-							 					<li>Ability to write code – HTML & CSS (SCSS flavor of SASS preferred when writing CSS)</li>
-							 					<li>Proficient in Photoshop, Illustrator, bonus points for familiarity with Sketch (Sketch is our preferred concepting)</li>
-							 					<li>Cross-browser and platform testing as standard practice</li>
-							 					<li>Experience using Invision a plus</li>
-							 					<li>Experience in video production a plus or, at a minimum, a willingness to learn</li>
-							 				</ul>
-							 				<p>Far much that one rank beheld bluebird after outside ignobly allegedly more when oh arrogantly vehement irresistibly fussy penguin insect additionally wow absolutely crud meretriciously hastily dalmatian a glowered inset one echidna cassowary some parrot and much as goodness some froze the sullen much connected bat wonderfully on instantaneously eel valiantly petted this along across highhandedly much. </p>
-							 				<p>Repeatedly dreamed alas opossum but dramatically despite expeditiously that jeepers loosely yikes that as or eel underneath kept and slept compactly far purred sure abidingly up above fitting to strident wiped set waywardly far the and pangolin horse approving paid chuckled cassowary oh above a much opposite far much hypnotically more therefore wasp less that hey apart well like while superbly orca and far hence one.Far much that one rank beheld bluebird after outside ignobly allegedly more when oh arrogantly vehement irresistibly fussy.</p>
+							 				{!! $company_info->description !!}
 							 			</div>
 								 		<div class="recent-jobs">
 							 				<h3>Jobs from Business Network</h3>
@@ -127,13 +120,13 @@
 							 			<div class="job-overview">
 								 			<h3>Company Information</h3>
 								 			<ul>
-								 				<li><i class="la la-map"></i><h3>Address </h3><span>there will be the address of the company</span></li>
-								 				<li><i class="la la-phone"></i><h3>Contact No.</h3><span>+880 1737 125968</span></li>
-								 				<li><i class="la la-envelope"></i><h3>Email</h3><span>mhdip.pro@gmail.com</span></li>
+								 				<li><i class="la la-map"></i><h3>Address </h3><span> {{ $company_info->address }} </span></li>
+								 				<li><i class="la la-phone"></i><h3>Contact No.</h3><span>{{ $company_info->phone }}</span></li>
+								 				<li><i class="la la-envelope"></i><h3>Email</h3><span>{{ $company_info->email }}</span></li>
 								 				<li><i class="la la-bars"></i><h3>Categories</h3><span>Arts, Design, Media</span></li>
-								 				<li><i class="la la-globe"></i><h3>Website</h3><span><a href="http://www.mhdip.com">www.mhdip.com</a></span></li>
-								 				<li><i class="la la-clock-o"></i><h3>Since</h3><span>2002</span></li>
-								 				<li><i class="la la-users"></i><h3>Team Size</h3><span>15</span></li>
+								 				<li><i class="la la-globe"></i><h3>Website</h3><span><a href="http://{{ $company_info->website }}">{{ $company_info->website }}</a></span></li>
+								 				<li><i class="la la-clock-o"></i><h3>Since</h3><span>{{ $company_info->since }}</span></li>
+								 				<li><i class="la la-users"></i><h3>Team Size</h3><span>{{ $company_info->team_size }}</span></li>
 								 				<li><i class="la la-user"></i><h3>Followers</h3><span>15</span></li>
 								 			</ul>
 								 		</div><!-- Job Overview -->

@@ -1,5 +1,11 @@
+<?php header('Access-Control-Allow-Origin: *'); ?>
 @extends('employer.layout.app') 
 @section('title', 'HRBDJobs | Employer Company Profile') 
+
+@push('css')
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/Trumbowyg/2.10.0/ui/trumbowyg.min.css" />
+@endpush
+
 @section('content')
 <section class="overlape">
 	<div class="block no-padding">
@@ -104,13 +110,18 @@
 											</select>
 										</div>
 									</div>
-
+									
 									<div class="col-lg-12">
+											<span class="pf-title desc">Description</span>
+										<div id="description" >{!! $company_info->description !!}</div>
+									</div>
+
+									{{-- <div class="col-lg-12">
 										<span class="pf-title">Description</span>
 										<div class="pf-field">
 											<textarea placeholder="Description" name="description" >{{ $company_info->description }}</textarea>
 										</div>
-									</div>
+									</div> --}}
 
 									<div class="col-lg-6">
 										<span class="pf-title">Compnay Address</span>
@@ -132,28 +143,28 @@
 									<div class="col-lg-6">
 										<span class="pf-title">Facebook</span>
 										<div class="pf-field">
-											<input type="text" placeholder="www.facebook.com/TeraPlaner" name="fb_link" />
+											<input type="text" placeholder="www.facebook.com/TeraPlaner" name="fb_link" value="{{ $social_links->fb_link }}" />
 											<i class="fa fa-facebook"></i>
 										</div>
 									</div>
 									<div class="col-lg-6">
 										<span class="pf-title">Twitter</span>
 										<div class="pf-field">
-											<input type="text" placeholder="www.twitter.com/TeraPlaner" name="twitter_link" />
+											<input type="text" placeholder="www.twitter.com/TeraPlaner" name="twitter_link" value="{{ $social_links->twitter_link }}"  />
 											<i class="fa fa-twitter"></i>
 										</div>
 									</div>
 									<div class="col-lg-6">
 										<span class="pf-title">Google</span>
 										<div class="pf-field">
-											<input type="text" placeholder="www.google-plus.com/TeraPlaner" name="gplus_link" />
+											<input type="text" placeholder="www.google-plus.com/TeraPlaner" name="gplus_link" value="{{ $social_links->gplus_link }}"  />
 											<i class="la la-google"></i>
 										</div>
 									</div>
 									<div class="col-lg-6">
 										<span class="pf-title">Linkedin</span>
 										<div class="pf-field">
-											<input type="text" placeholder="www.Linkedin.com/TeraPlaner" name="linkedin_link" />
+											<input type="text" placeholder="www.Linkedin.com/TeraPlaner" name="linkedin_link" value="{{ $social_links->linkedin_link }}"  />
 											<i class="la la-linkedin"></i>
 										</div>
 									</div>
@@ -362,9 +373,29 @@ ekUpload();
 
 </script>
 
+<script src="https://cdnjs.cloudflare.com/ajax/libs/Trumbowyg/2.10.0/trumbowyg.min.js"></script>
 
 
-
-
+<script>
+	$('#description').trumbowyg({
+		autogrowOnEnter: true,
+		autogrow: true,
+		resetCss: true,
+		hideButtonTexts: true,
+		btns: [
+			['viewHTML'],
+			['undo', 'redo'], // Only supported in Blink browsers
+			['formatting'],
+			['strong', 'em', 'del'],
+			['superscript', 'subscript'],
+			['link'],
+			['insertImage'],
+			['justifyLeft', 'justifyCenter', 'justifyRight', 'justifyFull'],
+			['unorderedList', 'orderedList'],
+			['horizontalRule'],
+			['removeformat']
+		]
+	});
+</script>
 
 @endpush

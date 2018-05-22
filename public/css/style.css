@@ -12275,6 +12275,27 @@ header.style4 .account-btns > li a,
     color: #222;
 }
 
+.stick-top.forsticky.sticky .btns-profiles-sec > span{
+    color: #222;
+}
+
+.chosen-container-single .chosen-single span{
+    color: #222;
+}
+
+.d-none{
+    display: none !important;
+}
+
+.trumbowyg-button-pane button{
+    border: none !important;
+    margin-top: 0 !important;
+    background: transparent !important;
+}
+
+.pf-title.desc{
+    float: none;
+}
 
 /* file Upload */
 .uploader {

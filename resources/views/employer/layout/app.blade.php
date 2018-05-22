@@ -20,7 +20,7 @@
 	<link rel="stylesheet" type="text/css" href="/css/chosen.css" />
 	<link rel="stylesheet" type="text/css" href="/css/style.css" />
 	<link rel="stylesheet" type="text/css" href="/css/responsive.css" />
-<link rel="stylesheet" type="text/css" href="/css/colors/colors.css" /> 
+    <link rel="stylesheet" type="text/css" href="/css/colors/colors.css" /> 
     @stack('css')
     
  <!-- Scripts -->

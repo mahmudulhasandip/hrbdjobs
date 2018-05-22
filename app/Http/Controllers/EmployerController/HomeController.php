@@ -52,7 +52,15 @@ class HomeController extends Controller
 
     public function getCompanyProfile(){
         $data['company_info'] = Employer_company_info::where('employer_id', Auth::guard('employer')->user()->id)->firstOrFail();
-        // dd($data['company_info']);
+        $data['social_links'] = Company_social_media::findOrFail($data['company_info']->id);
+        $data['industries'] = Industry::all();
+        $company_industries = Company_industry::where('employer_company_info_id', $data['company_info']->id)->get();
+        $industries = array();
+        foreach($company_industries as $industry){
+            array_push($industries, $industry->industry_id);
+        }
+        $data['company_industry'] = $industries;
+        // dd($data['company_industry']);
         $data['left_active'] = 'company';
         return view('employer.comapny_profile', $data);
     }
@@ -68,6 +76,7 @@ class HomeController extends Controller
             array_push($industries, $industry->industry_id);
         }
         $data['company_industry'] = $industries;
+        $data['social_links'] = Company_social_media::findOrFail($data['company_info']->id);
 
         return view('employer.edit_company_profile', $data);
     }
