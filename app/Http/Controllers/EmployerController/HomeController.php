@@ -53,14 +53,8 @@ class HomeController extends Controller
     public function getCompanyProfile(){
         $data['company_info'] = Employer_company_info::where('employer_id', Auth::guard('employer')->user()->id)->firstOrFail();
         $data['social_links'] = Company_social_media::findOrFail($data['company_info']->id);
-        $data['industries'] = Industry::all();
-        $company_industries = Company_industry::where('employer_company_info_id', $data['company_info']->id)->get();
-        $industries = array();
-        foreach($company_industries as $industry){
-            array_push($industries, $industry->industry_id);
-        }
-        $data['company_industry'] = $industries;
-        // dd($data['company_industry']);
+        // $data['industries'] = Industry::all();
+        $data['company_industries'] = Company_industry::where('employer_company_info_id', $data['company_info']->id)->get();
         $data['left_active'] = 'company';
         return view('employer.comapny_profile', $data);
     }
@@ -126,13 +120,13 @@ class HomeController extends Controller
         // delete & upload images
         if($request->hasFile('logo')){
             if($employerCompanyInfo->logo){
-                Storage::delete('uploads/'.$employerCompanyInfo->logo);
+                Storage::delete('public/uploads/'.$employerCompanyInfo->logo);
             }
             $ext = $request->file('logo')->getClientOriginalExtension();
             $filename = time().'.'.$ext;
 
             $upload = $request->file('logo')->storeAs(
-                'uploads', $filename
+                'public/uploads', $filename
             );
             $employerCompanyInfo->logo = $filename;
         }

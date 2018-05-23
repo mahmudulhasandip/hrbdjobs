@@ -29,7 +29,7 @@
 				 					<div class="col-lg-9">
 										@include('employer.layout.alert')
 				 						<div class="job-single-head3 emplye">
-							 				<div class="job-thumb"> <img src="http://placehold.it/120x95" alt="" /></div>
+										 <div class="job-thumb"> <img src="{{ asset('storage/uploads/'.$company_info->logo)}}" alt="" /></div>
 							 				<div class="job-single-info3">
 							 					<h3>{{ $company_info->name }}</h3>
 							 					<span><i class="la la-map-marker"></i>{{ $company_info->city }}, {{ $company_info->country }}</span>
@@ -55,11 +55,15 @@
 				 			</div>
 				 			<div class="job-wide-devider">
 							 	<div class="row">
-							 		<div class="col-lg-8 column">		
+							 		<div class="col-lg-8 column">	
+										 	{{-- company about details  --}}
 							 			<div class="job-details">
-							 				<h3>About Business Network</h3>
+											 <h3>About Business Network</h3>
+											 {{-- company about details  --}}
 							 				{!! $company_info->description !!}
-							 			</div>
+										 </div>
+										 
+										 {{-- recent job posts --}}
 								 		<div class="recent-jobs">
 							 				<h3>Jobs from Business Network</h3>
 							 				<div class="job-list-modern">
@@ -115,19 +119,33 @@
 												</div>
 											 </div>
 							 			</div>
-							 		</div>
+									 </div>
+									 
+									 {{-- right information table --}}
 							 		<div class="col-lg-4 column">
 							 			<div class="job-overview">
 								 			<h3>Company Information</h3>
 								 			<ul>
-								 				<li><i class="la la-map"></i><h3>Address </h3><span> {{ $company_info->address }} </span></li>
-								 				<li><i class="la la-phone"></i><h3>Contact No.</h3><span>{{ $company_info->phone }}</span></li>
-								 				<li><i class="la la-envelope"></i><h3>Email</h3><span>{{ $company_info->email }}</span></li>
-								 				<li><i class="la la-bars"></i><h3>Categories</h3><span>Arts, Design, Media</span></li>
-								 				<li><i class="la la-globe"></i><h3>Website</h3><span><a href="http://{{ $company_info->website }}">{{ $company_info->website }}</a></span></li>
-								 				<li><i class="la la-clock-o"></i><h3>Since</h3><span>{{ $company_info->since }}</span></li>
-								 				<li><i class="la la-users"></i><h3>Team Size</h3><span>{{ $company_info->team_size }}</span></li>
-								 				<li><i class="la la-user"></i><h3>Followers</h3><span>15</span></li>
+								 				<li class="{{ (!$company_info->address) ? 'd-none' : '' }}"><i class="la la-map"></i><h3>Address </h3><span> {{ $company_info->address }} </span></li>
+								 				<li class="{{ (!$company_info->phone) ? 'd-none' : '' }}"><i class="la la-phone"></i><h3>Contact No.</h3><span>{{ $company_info->phone }}</span></li>
+								 				<li class="{{ (!$company_info->email) ? 'd-none' : '' }}"><i class="la la-envelope"></i><h3>Email</h3><span>{{ $company_info->email }}</span></li>
+												<li class=""><i class="la la-bars"></i><h3>Categories</h3>
+													<span>
+														@foreach($company_industries as $industry)
+														{{ $industry->industry->name }}
+														@endforeach
+													</span>
+												</li>
+												@php
+													$website = "#";
+													if($company_info->website):
+														$website = (substr( $company_info->website, 0, 4 ) === "http") ? $company_info->website: 'http://'.$company_info->website;
+											 		endif;
+												@endphp
+								 				<li class="{{ (!$company_info->website) ? 'd-none' : '' }}"><i class="la la-globe "></i><h3>Website</h3><span><a href="{{ $website }}">{{ $company_info->website }}</a></span></li>
+								 				<li class="{{ (!$company_info->since) ? 'd-none' : '' }}"><i class="la la-clock-o"></i><h3>Since</h3><span>{{ $company_info->since }}</span></li>
+								 				<li class="{{ (!$company_info->team_size) ? 'd-none' : '' }}"><i class="la la-users"></i><h3>Team Size</h3><span>{{ $company_info->team_size }}</span></li>
+								 				<li class=""><i class="la la-user"></i><h3>Followers</h3><span>15</span></li>
 								 			</ul>
 								 		</div><!-- Job Overview -->
 								 		<div class="job-overview">

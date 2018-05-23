@@ -11,6 +11,6 @@ class Company_industry extends Model
     }
 
     public function industry(){
-        return $this->hasOne('App\Industry');
+        return $this->hasOne('App\Industry', 'id', 'industry_id' );
     }
 }
