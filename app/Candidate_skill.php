@@ -11,14 +11,14 @@ class Candidate_skill extends Model
     }
 
     public function skill(){
-        return $this->hasMany('App\Skill');
+        return $this->hasMany('App\Skill', 'id', 'expertise_area');
     }
 
     public function jobCategory(){
-        return $this->hasMany('App\Job_category');
+        return $this->hasMany('App\Job_category', 'id', 'category_id');
     }
 
     public function jobDesignation(){
-        return $this->hasMany('App\Job_designation');
+        return $this->hasMany('App\Job_designation', 'id', 'designation_id');
     }
 }

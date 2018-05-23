@@ -40,46 +40,46 @@ class Candidate extends Authenticatable
     }
 
     public function candidateTraining(){
-        return $this->hasMany('App\Candidate_training');
+        return $this->hasMany('App\Candidate_training', 'candidate_id', 'id');
     }
 
     public function candidateSkill(){
-        return $this->hasMany('App\Candidate_skill');
+        return $this->hasMany('App\Candidate_skill', 'candidate_id', 'id');
     }
 
     public function candidateResume(){
-        return $this->hasOne('App\Candidate_resume');
+        return $this->hasOne('App\Candidate_resume', 'candidate_id', 'id');
     }
 
     public function candidateProfessionalCertificate(){
-        return $this->hasMany('App\Candidate_professional_certificate');
+        return $this->hasMany('App\Candidate_professional_certificate', 'candidate_id', 'id');
     }
 
     public function candidateExperience(){
-        return $this->hasMany('App\Candidate_experience');
+        return $this->hasMany('App\Candidate_experience', 'candidate_id', 'id');
     }
 
     public function candidateEducation(){
-        return $this->hasMany('App\Candidate_education');
+        return $this->hasMany('App\Candidate_education', 'candidate_id', 'id');
     }
 
     public function appliedJob(){
-        return $this->hasMany('App\Applied_job');
+        return $this->hasMany('App\Applied_job', 'candidate_id', 'id');
     }
 
     public function candidateInvitation(){
-        return $this->hasMany('App\Candidate_invitation');
+        return $this->hasMany('App\Candidate_invitation', 'candidate_id', 'id');
     }
 
     public function shortListedResume(){
-        return $this->hasMany('App\Short_listed_resume');
+        return $this->hasMany('App\Short_listed_resume', 'candidate_id', 'id');
     }
 
     public function followEmployer(){
-        return $this->hasMany('App\Follow_employer');
+        return $this->hasMany('App\Follow_employer', 'candidate_id', 'id');
     }
 
     public function favouriteJob(){
-        return $this->hasMany('App\Favourite_job');
+        return $this->hasMany('App\Favourite_job', 'candidate_id', 'id');
     }
 }

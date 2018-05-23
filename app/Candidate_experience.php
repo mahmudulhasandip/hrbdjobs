@@ -11,7 +11,7 @@ class Candidate_experience extends Model
     }
 
     public function jobDesignation(){
-        return $this->hasOne('App\Job_designation');
+        return $this->hasOne('App\Job_designation', 'id', 'candidate_designation');
     }
 
 }
