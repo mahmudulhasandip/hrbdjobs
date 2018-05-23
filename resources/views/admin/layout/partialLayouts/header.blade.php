@@ -8,7 +8,7 @@
                     <div class="m-stack__item m-stack__item--middle m-brand__logo">
                         <a href="/admin/home" class="m-brand__logo-wrapper">
                             {{-- <img alt="" src="/admin/demo/default/media/img/logo/logo_default_dark.png"/> --}}
-                            <span style="color: #fff; font-weight:600; font-size: 2.5rem; margin-top: 6px; display: inline-block;">Tukenin</span>
+                            <span style="color: #fff; font-weight:600; font-size: 2.2rem; margin-top: 6px; display: inline-block;">HrbdJobs</span>
                         </a>
                     </div>
                     <div class="m-stack__item m-stack__item--middle m-brand__tools">

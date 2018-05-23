@@ -26,7 +26,7 @@
             <div class="m-portlet__head-caption">
                 <div class="m-portlet__head-title">
                     <h3 class="m-portlet__head-text">
-                        Datatable initilized from HTML table
+                        Industry Category Table
                     </h3>
                 </div>
             </div>
@@ -230,7 +230,7 @@
                             ID
                         </th>
                         <th title="Field #2">
-                            Industry Name
+                            Industry Type
                         </th>
                         <th title="Field #3">
                             Actions

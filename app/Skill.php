@@ -6,6 +6,11 @@ use Illuminate\Database\Eloquent\Model;
 
 class Skill extends Model
 {
+
+    protected $fillable = [
+        'name',
+    ];
+    
     public function jobSkill(){
         return $this->hasOne('App\Job_skill', 'skill', 'id');
     }

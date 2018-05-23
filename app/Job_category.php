@@ -6,6 +6,10 @@ use Illuminate\Database\Eloquent\Model;
 
 class Job_category extends Model
 {
+    protected $fillable = [
+        'name',
+    ];
+
     public function employer(){
         return $this->belongsTo('App\Employer');
     }

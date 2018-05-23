@@ -33,6 +33,71 @@
                 </a>
             </li>
 
+            <li class="m-menu__item " aria-haspopup="true">
+                <a href="/admin/job_designation" class="m-menu__link ">
+                    <i class="m-menu__link-icon la la-street-view"></i>
+                    <span class="m-menu__link-title">
+                        <span class="m-menu__link-wrap">
+                            <span class="m-menu__link-text">
+                                Job Designation
+                            </span>
+                        </span>
+                    </span>
+                </a>
+            </li>
+
+            <li class="m-menu__item " aria-haspopup="true">
+                <a href="/admin/job_category" class="m-menu__link ">
+                    <i class="m-menu__link-icon la la-dedent"></i>
+                    <span class="m-menu__link-title">
+                        <span class="m-menu__link-wrap">
+                            <span class="m-menu__link-text">
+                                Job Category
+                            </span>
+                        </span>
+                    </span>
+                </a>
+            </li>
+
+            <li class="m-menu__item " aria-haspopup="true">
+                <a href="/admin/job_level" class="m-menu__link ">
+                    <i class="m-menu__link-icon la la-pencil"></i>
+                    <span class="m-menu__link-title">
+                        <span class="m-menu__link-wrap">
+                            <span class="m-menu__link-text">
+                                Job Level
+                            </span>
+                        </span>
+                    </span>
+                </a>
+            </li>
+
+            <li class="m-menu__item " aria-haspopup="true">
+                <a href="/admin/skills" class="m-menu__link ">
+                    <i class="m-menu__link-icon la la-mortar-board"></i>
+                    <span class="m-menu__link-title">
+                        <span class="m-menu__link-wrap">
+                            <span class="m-menu__link-text">
+                                Skills
+                            </span>
+                        </span>
+                    </span>
+                </a>
+            </li>
+
+            <li class="m-menu__item " aria-haspopup="true">
+                <a href="/admin/job_experience" class="m-menu__link ">
+                    <i class="m-menu__link-icon la la-mortar-board"></i>
+                    <span class="m-menu__link-title">
+                        <span class="m-menu__link-wrap">
+                            <span class="m-menu__link-text">
+                                Job Experience
+                            </span>
+                        </span>
+                    </span>
+                </a>
+            </li>
+
             {{-- menu headline --}}
             {{-- <li class="m-menu__section">
                 <h4 class="m-menu__section-text">

@@ -15,11 +15,13 @@
     <title>{{ config('app.name', 'Laravel Multi Auth Guard') }}</title>
 
     {{-- favicon --}}
-    <link rel="shortcut icon" href="/admin/demo/default/media/img/logo/favicon.ico" />
+    {{-- <link rel="shortcut icon" href="/admin/demo/default/media/img/logo/favicon.ico" /> --}}
+    <link rel="shortcut icon" href="/favicon.ico" />
 
     <!-- Styles -->
     <!--begin::Base Styles -->
     <link href="/admin/vendors/base/vendors.bundle.css" rel="stylesheet" type="text/css" />
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/toastr.js/2.1.4/toastr.min.css" />
     <link href="/admin/demo/default/base/style.bundle.css" rel="stylesheet" type="text/css" />
     <!--end::Base Styles -->
     
@@ -78,6 +80,7 @@
     <!--begin::Base Scripts -->
     <script src="/admin/vendors/base/vendors.bundle.js" type="text/javascript"></script>
     <script src="/admin/demo/default/base/scripts.bundle.js" type="text/javascript"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/toastr.js/2.1.4/toastr.min.js"></script>
     <!--end::Base Scripts -->   
     <!--begin::Page Resources -->
     <script src="/admin/demo/default/custom/header/actions.js" type="text/javascript"></script>
