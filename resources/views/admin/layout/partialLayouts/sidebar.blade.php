@@ -98,6 +98,31 @@
                 </a>
             </li>
 
+            <li class="m-menu__item " aria-haspopup="true">
+                <a href="/admin/job_packages" class="m-menu__link ">
+                    <i class="m-menu__link-icon la la-cart-plus"></i>
+                    <span class="m-menu__link-title">
+                        <span class="m-menu__link-wrap">
+                            <span class="m-menu__link-text">
+                                Job Packages
+                            </span>
+                        </span>
+                    </span>
+                </a>
+            </li>
+            <li class="m-menu__item " aria-haspopup="true">
+                <a href="/admin/featured_packages" class="m-menu__link ">
+                    <i class="m-menu__link-icon la la-cart-plus"></i>
+                    <span class="m-menu__link-title">
+                        <span class="m-menu__link-wrap">
+                            <span class="m-menu__link-text">
+                                Featured Packages
+                            </span>
+                        </span>
+                    </span>
+                </a>
+            </li>
+
             {{-- menu headline --}}
             {{-- <li class="m-menu__section">
                 <h4 class="m-menu__section-text">

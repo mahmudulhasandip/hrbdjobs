@@ -77,10 +77,15 @@
                     </tr>
                 </thead>
                 <tbody>
+
+                    @php
+                    $id= 1;
+                    @endphp
+
                     @foreach( $skills as $skill )
                     <tr>
                         <td>
-                            {{ $skill->id }}
+                            {{ $id++ }}
                         </td>
                         <td>
                             {{ $skill->name }}

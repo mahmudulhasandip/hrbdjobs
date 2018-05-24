@@ -22,7 +22,9 @@ class CreateJobsTable extends Migration
             $table->integer('job_designation_id')->unsigned();
             $table->integer('job_level_id')->unsigned();
             $table->integer('experience_id')->unsigned();
-            $table->integer('salary_range')->unsigned();
+            $table->double('salary_min')->default(0);
+            $table->double('salary_max')->default(0);
+            $table->integer('is_negotiable')->default(0);
             $table->integer('gender')->default(0); // 0 == all, 1 == male, 2 == female, 3 == other
             $table->string('qualification');
             $table->date('deadline');
@@ -34,8 +36,8 @@ class CreateJobsTable extends Migration
             $table->foreign('job_category_id')->references('id')->on('job_categories');
             $table->foreign('job_designation_id')->references('id')->on('job_designations');
             $table->foreign('experience_id')->references('id')->on('job_experiences');
-            $table->foreign('salary_range')->references('id')->on('salaries');
-            $table->foreign('job_level_id')->references('id')->on('job_lavels');
+            // $table->foreign('salary_range')->references('id')->on('salaries');
+            $table->foreign('job_level_id')->references('id')->on('job_levels');
             $table->timestamps();
         });
     }

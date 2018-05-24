@@ -8,7 +8,7 @@
     <div class="d-flex align-items-center">
         <div class="mr-auto">
             <h3 class="m-subheader__title m-subheader__title--separator">
-                Job Category List
+                Job Packages List
             </h3>
         </div>
 
@@ -21,7 +21,7 @@
             <i class="flaticon-exclamation m--font-brand"></i>
         </div>
         <div class="m-alert__text">
-            There will be a short instruction about Job Category's operation
+            There will be a short instruction about Job Packages's operation
         </div>
     </div>
     <div class="m-portlet m-portlet--mobile">
@@ -29,7 +29,7 @@
             <div class="m-portlet__head-caption">
                 <div class="m-portlet__head-title">
                     <h3 class="m-portlet__head-text">
-                            Job Category Table
+                        Job Packages Table
                     </h3>
                 </div>
             </div>
@@ -41,14 +41,24 @@
             <div class="m-form m-form--label-align-right  m--margin-bottom-30">
                 <div class="row align-items-center">
                     <div class="col-xl-12 order-2 order-xl-1">
-                        <form class="m-form m-form--fit m-form--label-align-right" method='post' action="{{ route('admin.jobCategories.store') }}">
+                        <form class="m-form m-form--fit m-form--label-align-right" method='post' action="{{ route('admin.featuredPackages.store') }}">
                             @csrf
                             <div class="form-group m-form__group">
                                 <label>
-                                    Add New Job Designation
+                                    Add New Job Packages
                                 </label>
                                 <div class="input-group">
-                                    <input type="text" class="form-control" placeholder="Add New Job Category" name="job_category">
+                                    <input type="text" class="form-control" placeholder="Package Namge" name="name" required>
+                                    <input type="text" class="form-control" placeholder="Price" name="price" required>
+                                    <input type="text" class="form-control" placeholder="Discount" name="discount">
+                                    <select name="featured_type" id="featured_type" class="form-control" required>
+                                        <option value="">Featured Type</option>
+                                        <option value="0">Company Featured</option>
+                                        <option value="1">Job Featured</option>
+                                        <option value="2">Hot Job</option>
+                                    </select>
+                                    <input type="text" class="form-control" placeholder="Featured Amount" name="featured_amount" required>
+                                    <input type="text" class="form-control" placeholder="Duration" name="duration" required>
                                     <div class="input-group-append">
                                         <button class="btn btn-secondary" type="submit">
                                             ADD
@@ -65,29 +75,66 @@
 
                     <tr>
 
-                        <th title="Field #1">
+                        <th>
                             ID
                         </th>
-                        <th title="Field #2">
-                            Job Category
+                        <th >
+                            Name
                         </th>
-                        <th title="Field #3">
-                            Actions
+                        <th >
+                            Price (TK)
+                        </th>
+                        <th>
+                            Discount (TK)
+                        </th>
+                        <th>
+                            Featured Type
+                        </th>
+                        <th>
+                            Featured amount
+                        </th>
+                        <th >
+                            Duration/Month(s)
+                        </th>
+                        <th title="Field #6">
+                            Action
                         </th>
                     </tr>
                 </thead>
                 <tbody>
+
                     @php
                     $id= 1;
                     @endphp
 
-                    @foreach( $job_categories as $job_category )
+                    @foreach( $featured_packages as $featured_package )
                     <tr>
                         <td>
                             {{ $id++ }}
                         </td>
                         <td>
-                            {{ $job_category->name }}
+                            {{ $featured_package->name }}
+                        </td>
+                        <td>
+                            {{ $featured_package->price }}
+                        </td>
+                        <td>
+                            {{ $featured_package->discount }}
+                        </td>
+                        <td>
+                            @if( $featured_package->featured_type  == 0)
+                            Company Featured
+                            @elseif( $featured_package->featured_type  == 1 )
+                            Job Featured
+                            @elseif( $featured_package->featured_type  == 2 )
+                            Stand Out
+                            @endif
+                        </td>
+                        <td>
+                            {{ $featured_package->featured_amount }}
+                        </td>
+                        <td>
+                            {{ $featured_package->duration }}
                         </td>
                         <td>
                             <span style="overflow: visible; position: relative; width: 110px;">			

@@ -17,7 +17,7 @@ class CreateJobPackagesTable extends Migration
             $table->increments('id')->unsigned()->unique();
             $table->string('name');
             $table->decimal('price', 10, 2);
-            $table->decimal('discount', 10, 2);
+            $table->decimal('discount', 10, 2)->default(0);
             $table->integer('job_post')->default(1);
             $table->integer('duration')->default(1); // month
             $table->timestamps();

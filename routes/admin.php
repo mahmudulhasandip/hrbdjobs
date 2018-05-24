@@ -24,6 +24,14 @@ Route::post('job_level', 'AdminController\JobLevelsController@store')->name('job
 Route::get('job_experience', 'AdminController\JobExperiencesController@index')->name('jobExperience.show');
 Route::post('job_experience', 'AdminController\JobExperiencesController@store')->name('jobExperience.store');
 
+// job Packages
+Route::get('job_packages', 'AdminController\JobPackagesController@index')->name('jobPackages.show');
+Route::post('job_packages', 'AdminController\JobPackagesController@store')->name('jobPackages.store');
+
+// job Packages
+Route::get('featured_packages', 'AdminController\FeaturedPackagesController@index')->name('featuredPackages.show');
+Route::post('featured_packages', 'AdminController\FeaturedPackagesController@store')->name('featuredPackages.store');
+
 // Skill
 Route::get('skills', 'AdminController\SkillsController@index')->name('skills.show');
 Route::post('skills', 'AdminController\SkillsController@store')->name('skills.store');

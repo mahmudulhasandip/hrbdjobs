@@ -238,10 +238,13 @@
                     </tr>
                 </thead>
                 <tbody>
+                    @php
+                    $id= 1;
+                    @endphp
                     @foreach( $industries as $industry )
                     <tr>
                         <td>
-                            {{ $industry->id }}
+                            {{ $id++ }}
                         </td>
                         <td>
                             {{ $industry->name }}

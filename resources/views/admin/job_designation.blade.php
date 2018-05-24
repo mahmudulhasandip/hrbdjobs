@@ -77,10 +77,15 @@
                     </tr>
                 </thead>
                 <tbody>
+                
+                    @php
+                    $id= 1;
+                    @endphp
+
                     @foreach( $job_designations as $job_designation )
                     <tr>
                         <td>
-                            {{ $job_designation->id }}
+                            {{ $id++ }}
                         </td>
                         <td>
                             {{ $job_designation->name }}
