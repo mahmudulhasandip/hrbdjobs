@@ -41,10 +41,10 @@
 				 					</div>
 				 					<div class="col-lg-3">
 				 						<div class="share-bar text-center">
-											 <a href="{{ $social_links->gplus_link }}" title="" target="blank" class="share-google {{ !($social_links->gplus_link) ? 'd-none' : '' }}"><i class="la la-google"></i></a>
-											 <a href=" {{ $social_links->fb_link }} " title="" target="blank" class="share-fb {{ !($social_links->fb_link) ? 'd-none' : '' }}"><i class="fa fa-facebook"></i></a>
-											 <a href="{{ $social_links->twitter_link }}" title="" target="blank" class="share-twitter {{ !($social_links->twitter_link) ? 'd-none' : '' }}"><i class="fa fa-twitter"></i></a>
-											 <a href="{{ $social_links->linkedin_link }}" title="" target="blank" class="share-linkedin {{ !($social_links->linkedin_link) ? 'd-none' : '' }}"><i class="fa fa-linkedin"></i></a>
+											 <a href="{{ ($social_links && $social_links->gplus_link) ? $social_links->gplus_link : '#' }}" title="" target="blank" class="share-google {{ ($social_links && $social_links->gplus_link) ? '' : 'd-none' }}"><i class="la la-google"></i></a>
+											 <a href="{{ ($social_links && $social_links->fb_link) ? $social_links->fb_link : '#' }} " title="" target="blank" class="share-fb {{ ($social_links && $social_links->fb_link) ? '' : 'd-none' }}"><i class="fa fa-facebook"></i></a>
+											 <a href="{{ ($social_links && $social_links->twitter_link) ? $social_links->twitter_link : '#' }}" title="" target="blank" class="share-twitter {{ ($social_links && $social_links->twitter_link) ? '' : 'd-none' }}"><i class="fa fa-twitter"></i></a>
+											 <a href="{{ ($social_links && $social_links->linkedin_link) ? $social_links->linkedin_link : '#' }}" title="" target="blank" class="share-linkedin {{ ($social_links && $social_links->linkedin_link) ? '' : 'd-none' }}"><i class="fa fa-linkedin"></i></a>
 							 			</div>
 								 		<div class="emply-btns">
 								 			{{-- <a class="seemap" href="#" title=""><i class="la la-map-marker"></i> See On Map</a> --}}

@@ -236,6 +236,29 @@ html {
       order: 12;
 }
 
+
+/* colors */
+
+.text-info {
+  color: #17a2b8!important;
+}
+
+.text-primary {
+  color: #007bff!important;
+}
+
+.text-success {
+  color: #28a745!important;
+}
+
+.text-danger {
+  color: #dc3545!important;
+}
+
+.text-warning {
+  color: #ffc107!important;
+}
+
 @media (min-width: 576px) {
   .col-sm {
     -ms-flex-preferred-size: 0;

@@ -143,28 +143,28 @@
 									<div class="col-lg-6">
 										<span class="pf-title">Facebook</span>
 										<div class="pf-field">
-											<input type="text" placeholder="www.facebook.com/TeraPlaner" name="fb_link" value="{{ $social_links->fb_link }}" />
+											<input type="text" placeholder="www.facebook.com/TeraPlaner" name="fb_link" value="{{ ($social_links && $social_links->fb_link) ? $social_links->fb_link : '' }}" />
 											<i class="fa fa-facebook"></i>
 										</div>
 									</div>
 									<div class="col-lg-6">
 										<span class="pf-title">Twitter</span>
 										<div class="pf-field">
-											<input type="text" placeholder="www.twitter.com/TeraPlaner" name="twitter_link" value="{{ $social_links->twitter_link }}"  />
+											<input type="text" placeholder="www.twitter.com/TeraPlaner" name="twitter_link" value="{{ ($social_links && $social_links->twitter_link) ? $social_links->twitter_link : '' }}"  />
 											<i class="fa fa-twitter"></i>
 										</div>
 									</div>
 									<div class="col-lg-6">
 										<span class="pf-title">Google</span>
 										<div class="pf-field">
-											<input type="text" placeholder="www.google-plus.com/TeraPlaner" name="gplus_link" value="{{ $social_links->gplus_link }}"  />
+											<input type="text" placeholder="www.google-plus.com/TeraPlaner" name="gplus_link" value="{{ ($social_links && $social_links->gplus_link) ? $social_links->gplus_link : '' }}"  />
 											<i class="la la-google"></i>
 										</div>
 									</div>
 									<div class="col-lg-6">
 										<span class="pf-title">Linkedin</span>
 										<div class="pf-field">
-											<input type="text" placeholder="www.Linkedin.com/TeraPlaner" name="linkedin_link" value="{{ $social_links->linkedin_link }}"  />
+											<input type="text" placeholder="www.Linkedin.com/TeraPlaner" name="linkedin_link" value="{{ ($social_links && $social_links->linkedin_link) ? $social_links->linkedin_link : '' }}"  />
 											<i class="la la-linkedin"></i>
 										</div>
 									</div>

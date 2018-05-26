@@ -17,7 +17,7 @@ class CreateEmployerPackagesTable extends Migration
             $table->increments('id')->unsigned()->unique();
             $table->integer('employer_id')->unsigned();
             $table->integer('job_package_id')->unsigned();
-            $table->integer('featured_package_id')->unsigned();
+            $table->integer('featured_package_id')->unsigned()->nullable();
             $table->date('start_date');
             $table->date('expired_date');
             $table->integer('remain_amount');

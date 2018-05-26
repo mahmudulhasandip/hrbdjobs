@@ -12,7 +12,8 @@ use App\Industry;
 use App\Country;
 use App\Company_industry;
 use App\Company_social_media;
-
+use App\Job_package;
+use App\Featured_package;
 
 
 
@@ -22,6 +23,29 @@ class HomeController extends Controller
     public function dashboard(){
         $data['left_active'] = 'dashboard';
         return view('employer.dashboard', $data);
+    }
+
+    public function getPackages(){
+        $data['left_active'] = 'packages';
+        $data['packages'] = Job_package::all();
+        $data['featured_packages'] = Featured_package::all();
+        return view('employer.packages', $data);
+    }
+
+    public function purchasePackages($id){
+        $data['left_active'] = 'packages';
+        $data['packages'] = Job_package::findOrFail($id);
+        return view('employer.package_details' , $data);
+    }
+
+    public function packagesFeaturedPurchase($id) {
+        $data['left_active'] = 'packages';
+        $data['packages'] = Featured_package::findOrFail($id);
+        return view('employer.package_details' , $data);
+    }
+
+    public function confirmPackage($id) {
+        
     }
 
     public function getNewJob(){
@@ -39,11 +63,11 @@ class HomeController extends Controller
         return view('employer.manage_job', $data);
     }
 
-    public function getProfile(){
+    // public function getProfile(){
         
-        $data['left_active'] = 'profile';
-        return view('employer.profile', $data);
-    }
+    //     $data['left_active'] = 'profile';
+    //     return view('employer.profile', $data);
+    // }
 
     public function getEditProfile(){
         $data['left_active'] = 'profile';
@@ -51,8 +75,14 @@ class HomeController extends Controller
     }
 
     public function getCompanyProfile(){
+        
         $data['company_info'] = Employer_company_info::where('employer_id', Auth::guard('employer')->user()->id)->firstOrFail();
-        $data['social_links'] = Company_social_media::findOrFail($data['company_info']->id);
+        try{
+            $data['social_links'] = Company_social_media::where('employer_company_info_id', $data['company_info']->id)->first();
+        }catch(ModelNotFoundException $ex){
+            $data['social_links'] = new Company_social_media();
+        }
+         
         // $data['industries'] = Industry::all();
         $data['company_industries'] = Company_industry::where('employer_company_info_id', $data['company_info']->id)->get();
         $data['left_active'] = 'company';
@@ -70,7 +100,11 @@ class HomeController extends Controller
             array_push($industries, $industry->industry_id);
         }
         $data['company_industry'] = $industries;
-        $data['social_links'] = Company_social_media::findOrFail($data['company_info']->id);
+        try{
+            $data['social_links'] = Company_social_media::find($data['company_info']->id);
+        }catch(ModelNotFoundException $ex){
+            $data['social_links'] = new Company_social_media();
+        }
 
         return view('employer.edit_company_profile', $data);
     }
@@ -104,7 +138,7 @@ class HomeController extends Controller
     public function updateProfile(Request $request){
         // $this->validator($request->all())->validate();
         
-        $employerCompanyInfo = Employer_company_info::where('id', Auth::user()->id)->firstOrFail();
+        $employerCompanyInfo = Employer_company_info::where('employer_id', Auth::user()->id)->firstOrFail();
         $employerCompanyInfo->name = $request->input('name');
         $employerCompanyInfo->phone = $request->input('contact_phone');
         $employerCompanyInfo->email = $request->input('contact_email');

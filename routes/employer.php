@@ -11,6 +11,13 @@ Route::get('/company/profile/edit', 'EmployerController\HomeController@getEditCo
 Route::get('/shortlisted/candidate', 'EmployerController\HomeController@getCandidateShortList')->name('shortlisted.candidate');
 Route::get('/browse/candidate/resume', 'EmployerController\HomeController@getBrowseResume')->name('browse.candidate.resume');
 
-Route::post('/profile/edit', 'EmployerController\HomeController@updateProfile')->name('update.profile');
+// update company profile
+Route::post('/company/profile/edit', 'EmployerController\HomeController@updateProfile')->name('update.profile');
+
+// packages
+Route::get('/package', 'EmployerController\HomeController@getPackages')->name('packages.list');
+Route::get('/package/{id}', 'EmployerController\HomeController@purchasePackages')->name('packagesPurchase');
+Route::get('/featured_package/{id}', 'EmployerController\HomeController@purchaseFeaturedPackages')->name('packagesFeaturedPurchase');
+Route::get('/confirm_package/{id}', 'EmployerController\HomeController@confirmPackage')->name('confirmPackage');
 
 

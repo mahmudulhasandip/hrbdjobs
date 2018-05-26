@@ -5,6 +5,8 @@ use App\Employer_company_info;
 use App\Industry;
 use App\Company_industry;
 use App\Country;
+use App\Job_package;
+use App\Employer_package;
 use Validator;
 use App\Http\Controllers\Controller;
 use Illuminate\Foundation\Auth\RegistersUsers;
@@ -104,7 +106,18 @@ class RegisterController extends Controller
             $companyIndustry->industry_id = $data['industry_type'][$i];
             $companyIndustry->save();
         }
-        
+
+        // create employer package
+        $jobPackage = Job_package::first();
+        $employerPackage = new Employer_package();
+        $employerPackage->employer_id = $employer->id;
+        $employerPackage->job_package_id = $jobPackage->id;
+        $employerPackage->start_date = date("Y-m-d H:i:s");
+        $employerPackage->expired_date = date("Y-m-d H:i:s", strtotime('+'.$jobPackage->duration.' months'));
+        $employerPackage->remain_amount = $jobPackage->job_post;
+        $employerPackage->is_verified = 1;
+        $employerPackage->save();
+
         return $employer;
     }
     /**

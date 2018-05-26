@@ -31,6 +31,9 @@
         <li class="inner-child {{ ($left_active == 'browse_resume')? 'active':'' }}">
             <a href="{{ route('employer.browse.candidate.resume') }}" title="" class=""><i class="la la-binoculars"></i>Browse Resume</a>
         </li>
+        <li class="inner-child {{ ($left_active == 'packages') ? 'active':'' }}">
+            <a href="{{ route('employer.packages.list') }}" title="" class=""><i class="la la-cart-arrow-down"></i>Packages</a>
+        </li>
         <li class="inner-child">
             <a href="{{ route('employer.profile.edit') }}" title="" class=""><i class="la la-user"></i>Edit My Profile</a>
         </li>
