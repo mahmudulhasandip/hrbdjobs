@@ -18,6 +18,8 @@ Route::post('/company/profile/edit', 'EmployerController\HomeController@updatePr
 Route::get('/package', 'EmployerController\HomeController@getPackages')->name('packages.list');
 Route::get('/package/{id}', 'EmployerController\HomeController@purchasePackages')->name('packagesPurchase');
 Route::get('/featured_package/{id}', 'EmployerController\HomeController@purchaseFeaturedPackages')->name('packagesFeaturedPurchase');
-Route::get('/confirm_package/{id}', 'EmployerController\HomeController@confirmPackage')->name('confirmPackage');
+Route::post('/confirm_package', 'EmployerController\HomeController@confirmPackage')->name('confirmPackage');
+Route::get('/package_history', 'EmployerController\HomeController@getPackagesHistory')->name('packages.history');
+
 
 

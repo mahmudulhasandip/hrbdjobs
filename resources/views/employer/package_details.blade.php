@@ -50,9 +50,17 @@
                                                     font-weight: bold;">Package Name: </span> {{ $packages->name }}</h3>
                                             </li>
                                             
-                                            <li>
+                                            <li class="{{ !($packages->job_post) ? 'd-none' : '' }}" >
                                                 <h3 class="text">
                                                     <span>Job Post(s): </span> {{ $packages->job_post }}</h3>
+                                            </li>
+                                            <li class="{{ !($packages->featured_type) ? 'd-none' : '' }}" >
+                                                <h3 class="text">
+                                                    <span>Featured Type: </span> {{ $packages->featured_type }}</h3>
+                                            </li>
+                                            <li class="{{ !($packages->featured_amount) ? 'd-none' : '' }}" >
+                                                <h3 class="text">
+                                                    <span>Featured Amount: </span> {{ $packages->featured_amount }}</h3>
                                             </li>
                                             <li>
                                                 <h3 class="text">
@@ -77,10 +85,35 @@
 
                                 <div class="col-sm-8 col-sm-offset-1">
                                     <div class="package_details mb50">
-                                        <span style="margin-bottom: 10px; display: inline-block;">Tranxaction ID:</span>
+                                        <span style="margin-bottom: 10px; display: inline-block;">Payment:</span>
                                         <br>
-                                        <input type="text" placeholder="ex: TXD15623454"> 
-                                        <a href="" type="submit" class="post-job-btn pull-right">Submit</a>
+                                        <form role="form" action="/employer/confirm_package" method="POST">
+                                            @csrf
+                                            <input type="hidden" value="{{ $package_type }}" name="package_type">
+                                            <input type="hidden" value="{{ $packages->id }}" name="job_package_id">
+                                            <div class="col-lg-12">
+
+                                                <span class="pf-title">Transection Type:</span>
+                                                <div class="pf-field">
+                                                    <select name="transaction_type" id="transaction_type" autocomplete="off" data-placeholder="Transaction Type" class="chosen">
+                                                            <option>Transaction Type</option>
+                                                            <option selected value="bkash">Bkash</option>
+                                                    </select>
+                                                </div>
+                                                
+                                            
+                                                <span class="pf-title">Tranxaction ID:</span>
+                                                <div class="pf-field">
+                                                    <input type="text" placeholder="ex: TXD15623454" name="txdID" autocomplete="off"> 
+                                                </div>
+                                                
+                                            
+                                                <button type="submit" class="post-job-btn pull-right">Submit</button>
+                                            </div>
+                                            
+                                        </form>
+                                        
+                                        
                                     </div>
                                 </div>
 					 		</div>

@@ -14,6 +14,8 @@ use App\Company_industry;
 use App\Company_social_media;
 use App\Job_package;
 use App\Featured_package;
+use App\Employer_package;
+use App\Payment_history;
 
 
 
@@ -34,18 +36,79 @@ class HomeController extends Controller
 
     public function purchasePackages($id){
         $data['left_active'] = 'packages';
+        $data['package_type'] = 0;
         $data['packages'] = Job_package::findOrFail($id);
         return view('employer.package_details' , $data);
     }
 
-    public function packagesFeaturedPurchase($id) {
+    public function purchaseFeaturedPackages($id) {
         $data['left_active'] = 'packages';
+        $data['package_type'] = 1;
         $data['packages'] = Featured_package::findOrFail($id);
         return view('employer.package_details' , $data);
     }
 
-    public function confirmPackage($id) {
+    public function confirmPackage(Request $request) {
+        $data['left_active'] = 'packages';
+
+        $job_package = "";
+        $featured_package = "";
+        if($request->input('package_type') == 0){
+            $job_package = Job_package::where('id', $request->input('job_package_id'))->first();
+        }else{
+            $featured_package = Featured_package::where('id', $request->input('job_package_id'))->first();
+        }
         
+        // payment History
+        $paymentHistory = new Payment_history();
+        $paymentHistory->employer_id = Auth::guard('employer')->user()->id;
+        if($job_package){
+            $paymentHistory->job_package_id = $job_package->id;
+            $paymentHistory->price = $job_package->price;
+            $paymentHistory->discount = $job_package->discount;
+        }else{
+            $paymentHistory->job_package_id = $featured_package->id;
+            $paymentHistory->price = $featured_package->price;
+            $paymentHistory->discount = $featured_package->discount;
+        }
+
+        $paymentHistory->transaction_type = $request->input('transaction_type');
+        $paymentHistory->transaction_id = $request->input('txdID');
+        $paymentHistory->transaction_date = date('Y-m-d H:i:s');
+
+        $paymentHistory->save();
+
+
+        // employer package
+        $employerPackages = new Employer_package();
+        $employerPackages->employer_id = Auth::guard('employer')->user()->id;
+        $employerPackages->start_date = date('Y-m-d H:i:s');
+        if($job_package){
+            $employerPackages->job_package_id = $job_package->id;
+            $employerPackages->expired_date = date("Y-m-d H:i:s", strtotime('+'.$job_package->duration.' months'));
+            $employerPackages->remain_amount = $job_package->job_post;
+        }else{
+            $employerPackages->featured_package_id = $featured_package->id;
+            $employerPackages->expired_date = date("Y-m-d H:i:s", strtotime('+'.$featured_package->duration.' months'));
+            $employerPackages->remain_amount = $featured_package->featured_amount;
+        }
+        $employerPackages->is_verified = 0;
+
+        $employerPackages->save();
+
+        return view('employer.package_confirm', $data);
+
+    }
+
+    public function getPackagesHistory() {
+        $data['left_active'] = 'packages';
+        $data['packageHistory'] = Employer_package::where('employer_id', Auth::guard('employer')->user()->id)->firstOrFail();
+        // if($request->input('package_type') == 0){
+        //     $job_package = Job_package::where('id', $request->input('job_package_id'))->first();
+        // }else{
+        //     $featured_package = Featured_package::where('id', $request->input('job_package_id'))->first();
+        // }
+        return view('employer.package_history', $data);
     }
 
     public function getNewJob(){
@@ -64,7 +127,6 @@ class HomeController extends Controller
     }
 
     // public function getProfile(){
-        
     //     $data['left_active'] = 'profile';
     //     return view('employer.profile', $data);
     // }
@@ -108,31 +170,6 @@ class HomeController extends Controller
 
         return view('employer.edit_company_profile', $data);
     }
-
-    // protected function validator(array $data)
-    // {
-        
-    //     return Validator::make($data, [
-    //         'name'                  => 'required|max:255',
-    //         'industry_type'         => 'required',
-    //         'since'                 => 'required',
-    //         'team_size'             => 'required',
-    //         'city'                  => 'required',
-    //         'country'               => 'required',
-    //         'description'           => 'required',
-    //         'address'               => 'required',
-    //         'billing_address'       => 'required',
-    //         'contact_phone'         => 'required',
-    //         'contact_email'         => 'required',
-    //         'website'               => 'required',
-    //         'logo'                  => 'required|image|mimes:jpeg,bmp,png,gif|max:1000',
-
-    //         'logo.required'        => 'Please upload an image',
-    //         'logo.image'           => 'Please upload a valid image',
-    //         'logo.max'             => 'Please upload an image within 1 MB'
-    //     ]);
-    // }
-
 
 
     public function updateProfile(Request $request){
