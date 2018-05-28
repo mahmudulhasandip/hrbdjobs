@@ -1,7 +1,7 @@
 <?php
 
 Route::get('/home', 'EmployerController\HomeController@dashboard')->name('home');
-Route::get('/post/new/job', 'EmployerController\HomeController@getNewJob')->name('new.job');
+
 Route::get('/drafted/job', 'EmployerController\HomeController@getDraftedJob')->name('drafted.job');
 Route::get('/manage/job', 'EmployerController\HomeController@getManageJob')->name('manage.job');
 // Route::get('/profile', 'EmployerController\HomeController@getProfile')->name('profile');
@@ -20,6 +20,9 @@ Route::get('/package/{id}', 'EmployerController\HomeController@purchasePackages'
 Route::get('/featured_package/{id}', 'EmployerController\HomeController@purchaseFeaturedPackages')->name('packagesFeaturedPurchase');
 Route::post('/confirm_package', 'EmployerController\HomeController@confirmPackage')->name('confirmPackage');
 Route::get('/package_history', 'EmployerController\HomeController@getPackagesHistory')->name('packages.history');
+
+// post
+Route::get('/post/new/job', 'EmployerController\HomeController@getNewJob')->name('new.job');
 
 
 

@@ -17,11 +17,12 @@
 	<link rel="stylesheet" href="/css/icons.css">
     <link rel="stylesheet" href="/css/animate.min.css">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/toastr.js/2.1.4/toastr.min.css" />
-	<link rel="stylesheet" type="text/css" href="/css/chosen.css" />
+    <link rel="stylesheet" type="text/css" href="/css/chosen.css" />
+    @stack('css')
 	<link rel="stylesheet" type="text/css" href="/css/style.css" />
 	<link rel="stylesheet" type="text/css" href="/css/responsive.css" />
     <link rel="stylesheet" type="text/css" href="/css/colors/colors.css" /> 
-    @stack('css')
+    
     
  <!-- Scripts -->
     <script>

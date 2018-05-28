@@ -43,29 +43,25 @@
                                                         <thead>
                                                             <tr>
                                                                 <th>No.</th>
-                                                                <th>Package</th>
+                                                                <th>Job Package</th>
+                                                                <th>Featured Package</th>
                                                                 <th>Expire Date</th>
                                                                 <th>Remain post</th>
                                                             </tr>
                                                         </thead>
                                                         <tbody class="table-hover">
+                                                            @php
+                                                            $id = 1;
+                                                            @endphp
+                                                            @foreach($packageHistories as $packageHistory)
                                                             <tr>
-                                                                @php
-                                                                $id = 1;
-                                                                @endphp
-                                                                @foreach($featured_packages as $featured_package)
                                                                 <td>{{ $id++ }}</td>
-                                                                <td>{{ $featured_package->name }}</td>
-                                                                <td>{{ $featured_package->price }}</td>
-                                                                <td>{{ $featured_package->discount }}</td>
-                                                                <td class="{{ ($featured_package->featured_type) ? "text-info" : "text-success" }} bold">{{ ($featured_package->featured_type) ? "Job Feature" : "Company Feature" }}</td>
-                                                                <td>{{ $featured_package->featured_amount }}</td>
-                                                                <td>{{ $featured_package->duration }}</td>
-                                                                <td class="text-center">
-                                                                    <a href="/employer/featured_package/{{ $featured_package->id }}" class="buy_btn">Buy</a>
-                                                                </td>
-                                                                @endforeach
+                                                                <td>{{ ($packageHistory->job_package_id) ? $packageHistory->jobPackage->first()->name : '-' }}</td>
+                                                                <td>{{ ($packageHistory->featured_package_id) ? $packageHistory->featuredPackage->first()->name : '-' }}</td>
+                                                                <td>{{ $packageHistory->expired_date }}</td>
+                                                                <td>{{ $packageHistory->remain_amount }}</td>
                                                             </tr>
+                                                            @endforeach
                                                         </tbody>
                                                     </table>
                                                 </div>

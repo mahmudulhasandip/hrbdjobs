@@ -12442,3 +12442,52 @@ header.style4 .account-btns > li a,
 .bold{
     font-weight: bold !important;
 }
+
+.select2.select2-container{
+    width: 100% !important; 
+}
+
+.select2-container--default.select2-container--focus .select2-selection--multiple{
+    padding: 5px 0 0 6px ;
+}
+
+.select2-container--default .select2-selection--multiple .select2-selection__rendered li{
+    margin-bottom: 10px;
+}
+
+.select2-container--default .select2-selection--multiple{
+    padding: 6px 6px 0;
+}
+
+.select2-container--default .select2-selection--multiple .select2-selection__rendered{
+    padding: 5px 5px 0px ;
+}
+
+.select2-container--default.select2-container--focus .select2-selection--multiple{
+    border: 2px solid #e8ecec;
+}
+
+.select2-container--default.select2-container--focus .select2-selection--multiple{
+    border: 2px solid #e8ecec;
+}
+
+
+.profile-form-edit > form .mce-tinymce button{
+    float: right;
+    background: #ffffff;
+    border: none;
+    color: #202020;
+    font-family: Open Sans;
+    font-size: 14px;
+    padding: 5px;
+    -webkit-border-radius: 0px;
+    -moz-border-radius: 0px;
+    -ms-border-radius: 0px;
+    -o-border-radius: 0px;
+    border-radius: 0px;
+    margin-top: 0px;
+}
+
+.profile-form-edit > form .mce-tinymce button:hover{
+    background: transparent;
+}

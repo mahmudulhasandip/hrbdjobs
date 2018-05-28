@@ -67,7 +67,7 @@ class HomeController extends Controller
             $paymentHistory->price = $job_package->price;
             $paymentHistory->discount = $job_package->discount;
         }else{
-            $paymentHistory->job_package_id = $featured_package->id;
+            $paymentHistory->featured_package_id = $featured_package->id;
             $paymentHistory->price = $featured_package->price;
             $paymentHistory->discount = $featured_package->discount;
         }
@@ -102,12 +102,8 @@ class HomeController extends Controller
 
     public function getPackagesHistory() {
         $data['left_active'] = 'packages';
-        $data['packageHistory'] = Employer_package::where('employer_id', Auth::guard('employer')->user()->id)->firstOrFail();
-        // if($request->input('package_type') == 0){
-        //     $job_package = Job_package::where('id', $request->input('job_package_id'))->first();
-        // }else{
-        //     $featured_package = Featured_package::where('id', $request->input('job_package_id'))->first();
-        // }
+        $data['packageHistories'] = Employer_package::where('employer_id', Auth::guard('employer')->user()->id)->where('is_verified', 1)->get();
+
         return view('employer.package_history', $data);
     }
 
