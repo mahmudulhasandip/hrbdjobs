@@ -12437,7 +12437,9 @@ header.style4 .account-btns > li a,
     cursor: pointer;
   }
   
-  
+  .pf-field > input:disabled, .pf-field > textarea:disabled{
+      background: #e8ecec !important;  
+  }
 
 .bold{
     font-weight: bold !important;
@@ -12490,4 +12492,28 @@ header.style4 .account-btns > li a,
 
 .profile-form-edit > form .mce-tinymce button:hover{
     background: transparent;
+}
+
+.mce-btn.mce-active i {
+    color: #595959 !important;
+}
+
+.mce-btn.mce-active:hover i {
+    color: white !important;
+}
+
+.pf-field .simple-checkbox {
+    margin-top: 26px;
+}
+
+.dropdown-menu{
+  z-index: 1000;
+  position: absolute;
+  padding: 5px;
+  background: #fff;
+  border: 1px solid rgba(0, 0, 0, 0.2);
+  list-style: none;
+  min-width: 160px;
+  background-clip: (padding-box);
+  box-shadow: (0 5px 10px rgba(0, 0, 0, 0.2));
 }

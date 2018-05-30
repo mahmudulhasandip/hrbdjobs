@@ -12,7 +12,14 @@ use App\Industry;
 use App\Country;
 use App\Company_industry;
 use App\Company_social_media;
+use App\Job;
 use App\Job_package;
+use App\Job_level;
+use App\Job_experience;
+use App\Job_designation;
+use App\Job_category;
+use App\Job_skill;
+use App\Skill;
 use App\Featured_package;
 use App\Employer_package;
 use App\Payment_history;
@@ -109,7 +116,45 @@ class HomeController extends Controller
 
     public function getNewJob(){
         $data['left_active'] = 'job';
+        $data['job_levels'] = Job_level::all();
+        $data['job_categories'] = Job_category::all();
+        $data['job_designations'] = Job_designation::all();
+        $data['job_experiences'] = Job_experience::all();
+        $data['skills'] = Skill::all();
         return view('employer.post_new_job', $data);
+    }
+
+    public function postJob(Request $request) {
+        $data['left_active'] = 'job';
+
+        $postJOb = new Job();
+        $postJOb->employer_id = Auth::guard('employer')->user()->id;
+        $postJOb->title = $request->input('title');
+        $postJOb->description = $request->input('description');
+        $postJOb->job_category_id = $request->input('job_category_id');
+        $postJOb->job_designation_id = $request->input('job_designation_id');
+        $postJOb->job_level_id = $request->input('job_level_id');
+        $postJOb->experience_id = $request->input('experience_id');
+        if($request->input('is_negotiable')) {
+            $postJOb->is_negotiable = $request->input('is_negotiable');
+        }else{
+            $postJOb->salary_min = $request->input('salary_min');
+            $postJOb->salary_max = $request->input('salary_max');
+        }
+        $postJOb->gender = $request->input('gender');
+        $postJOb->qualification = $request->input('qualification');
+        $postJOb->deadline = $request->input('deadline');
+        $postJOb->location = $request->input('location');
+        $postJOb->save();
+
+
+        for($i=0; $i < sizeof($request->input('skill')); $i++){
+            $jobSkill = new Job_skill();
+            $jobSkill->job_id = $postJOb->id;
+            $jobSkill->skill = $request->input('skill')[$i];
+            $jobSkill->save();
+        }
+        return redirect()->route('employer.manage.job');
     }
 
     public function getDraftedJob(){
