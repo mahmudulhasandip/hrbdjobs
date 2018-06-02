@@ -7,6 +7,8 @@ use App\Http\Controllers\Controller;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Storage;
 
+use DB;
+
 use App\Employer_company_info;
 use App\Industry;
 use App\Country;
@@ -127,30 +129,30 @@ class HomeController extends Controller
     public function postJob(Request $request) {
         $data['left_active'] = 'job';
 
-        $postJOb = new Job();
-        $postJOb->employer_id = Auth::guard('employer')->user()->id;
-        $postJOb->title = $request->input('title');
-        $postJOb->description = $request->input('description');
-        $postJOb->job_category_id = $request->input('job_category_id');
-        $postJOb->job_designation_id = $request->input('job_designation_id');
-        $postJOb->job_level_id = $request->input('job_level_id');
-        $postJOb->experience_id = $request->input('experience_id');
+        $postJob = new Job();
+        $postJob->employer_id = Auth::guard('employer')->user()->id;
+        $postJob->title = $request->input('title');
+        $postJob->description = $request->input('description');
+        $postJob->job_category_id = $request->input('job_category_id');
+        $postJob->job_designation_id = $request->input('job_designation_id');
+        $postJob->job_level_id = $request->input('job_level_id');
+        $postJob->experience_id = $request->input('experience_id');
         if($request->input('is_negotiable')) {
-            $postJOb->is_negotiable = $request->input('is_negotiable');
+            $postJob->is_negotiable = $request->input('is_negotiable');
         }else{
-            $postJOb->salary_min = $request->input('salary_min');
-            $postJOb->salary_max = $request->input('salary_max');
+            $postJob->salary_min = $request->input('salary_min');
+            $postJob->salary_max = $request->input('salary_max');
         }
-        $postJOb->gender = $request->input('gender');
-        $postJOb->qualification = $request->input('qualification');
-        $postJOb->deadline = $request->input('deadline');
-        $postJOb->location = $request->input('location');
-        $postJOb->save();
+        $postJob->gender = $request->input('gender');
+        $postJob->qualification = $request->input('qualification');
+        $postJob->deadline = $request->input('deadline');
+        $postJob->location = $request->input('location');
+        $postJob->save();
 
 
         for($i=0; $i < sizeof($request->input('skill')); $i++){
             $jobSkill = new Job_skill();
-            $jobSkill->job_id = $postJOb->id;
+            $jobSkill->job_id = $postJob->id;
             $jobSkill->skill = $request->input('skill')[$i];
             $jobSkill->save();
         }
@@ -164,7 +166,18 @@ class HomeController extends Controller
 
     public function getManageJob(){
         $data['left_active'] = 'manage_job';
+        $data['allJobs'] = Job::where('employer_id', Auth::guard('employer')->user()->id)->get();
+        $data['totalJobs'] = Job::count();
+        $data['activeJobs'] = Job::where('is_verified', 1)->count();
         return view('employer.manage_job', $data);
+    }
+
+
+    public function jobDetails($id) {
+        $data['left_active'] = 'manage_job';
+        $data['job'] = Job::find($id);
+        $data['company_info'] = DB::table('employer_company_infos')->where('employer_id', Auth::guard('employer')->user()->id)->first();
+        return view('employer.job_details', $data);
     }
 
     // public function getProfile(){

@@ -24,6 +24,7 @@ Route::get('/package_history', 'EmployerController\HomeController@getPackagesHis
 // post
 Route::get('/post/new/job', 'EmployerController\HomeController@getNewJob')->name('new.job');
 Route::post('/post/new/job', 'EmployerController\HomeController@postJob')->name('new.post.job');
+Route::get('/job_details/{id}', 'EmployerController\HomeController@jobDetails')->name('job.details');
 
 
 
