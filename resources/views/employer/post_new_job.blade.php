@@ -45,7 +45,12 @@
 					 					<div class="col-lg-12">
 					 						<span class="pf-title">Job Title</span>
 					 						<div class="pf-field">
-					 							<input type="text" placeholder="Title" name="title"/>
+												 <input type="text" placeholder="Title" name="title"/>
+												 @if ($errors->has('title'))
+													<span class="help-block">
+														<strong>{{ $errors->first('title') }}</strong>
+													</span> 
+												@endif
 					 						</div>
 					 					</div>
 					 					<div class="col-lg-12">
@@ -111,12 +116,19 @@
 											</div>
 										</div>
 
-										<div class="col-sm-6">
+										<div class="col-sm-3">
 											<span class="pf-title"></span>
 											<div class="pf-field">
 												<div class="simple-checkbox">
 													<p><input type="checkbox" name="is_negotiable" id="negotiable" value="1"><label for="negotiable">Negotiable</label></p>
 												</div>
+											</div>
+										</div>
+
+										<div class="col-lg-3">
+											<span class="pf-title">Vacancy</span>
+											<div class="pf-field">
+												<input type="number" placeholder="Vacancy" name="vacancy" />
 											</div>
 										</div>
 

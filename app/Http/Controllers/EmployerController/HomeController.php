@@ -8,6 +8,7 @@ use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Storage;
 
 use DB;
+use Validator;
 
 use App\Employer_company_info;
 use App\Industry;
@@ -126,8 +127,30 @@ class HomeController extends Controller
         return view('employer.post_new_job', $data);
     }
 
+
+    protected function validator(array $data)
+    {
+        
+        return Validator::make($data, [
+            'title'                 => 'required|max:255',
+            'description'           => 'required|max:255',
+            'job_category_id'       => 'required',
+            'job_designation_id'    => 'required',
+            'job_level_id'          => 'required',
+            'experience_id'         => 'required',
+            'vacancy'               => 'required',
+            'gender'                => 'required',
+            'qualification'         => 'required',
+            'deadline'              => 'required',
+            'location'              => 'required'
+        ]);
+    }
+
     public function postJob(Request $request) {
         $data['left_active'] = 'job';
+
+        // validation
+        $this->validator($request->all())->validate();
 
         $postJob = new Job();
         $postJob->employer_id = Auth::guard('employer')->user()->id;
@@ -143,6 +166,7 @@ class HomeController extends Controller
             $postJob->salary_min = $request->input('salary_min');
             $postJob->salary_max = $request->input('salary_max');
         }
+        $postJob->vacancy = $request->input('vacancy');
         $postJob->gender = $request->input('gender');
         $postJob->qualification = $request->input('qualification');
         $postJob->deadline = $request->input('deadline');
@@ -167,7 +191,7 @@ class HomeController extends Controller
     public function getManageJob(){
         $data['left_active'] = 'manage_job';
         $data['allJobs'] = Job::where('employer_id', Auth::guard('employer')->user()->id)->get();
-        $data['totalJobs'] = Job::count();
+        $data['totalJobs'] = Job::where('employer_id', Auth::guard('employer')->user()->id)->count();
         $data['activeJobs'] = Job::where('is_verified', 1)->count();
         return view('employer.manage_job', $data);
     }

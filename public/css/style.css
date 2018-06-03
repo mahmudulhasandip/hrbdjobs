@@ -5155,7 +5155,8 @@ aside .widget.border:first-child {
     float: left;
     width: 100%;
     font-family: Open Sans;
-    font-size: 16px;
+    /* font-size: 16px; */
+    font-weight: 300;
     color: #202020;
     margin-bottom: 15px;
     margin-top: 10px;
@@ -5165,7 +5166,7 @@ aside .widget.border:first-child {
     float: left;
     width: 100%;
     font-size: 14px;
-    color: #888888;
+    color: #4c4c4c;
     line-height: 24px;
     margin: 0;
     margin-bottom: 19px;
@@ -5185,7 +5186,7 @@ aside .widget.border:first-child {
     line-height: 21px;
     margin-bottom: 10px;
     font-size: 14px;
-    color: #888888;
+    color: #4c4c4c;
 }
 .job-details > ul li::before {
     position: absolute;
@@ -12516,4 +12517,16 @@ header.style4 .account-btns > li a,
   min-width: 160px;
   background-clip: (padding-box);
   box-shadow: (0 5px 10px rgba(0, 0, 0, 0.2));
+}
+
+.mt-100{
+    margin-top: 100px;
+}
+
+.text-blue{
+    color: #8b91dd;
+}
+
+.job-overview ul{
+    padding: 20px;
 }

@@ -25,6 +25,7 @@ class CreateJobsTable extends Migration
             $table->double('salary_min')->nullable();
             $table->double('salary_max')->nullable();
             $table->integer('is_negotiable')->default(0);
+            $table->integer('vacancy')->nullable();
             $table->integer('gender')->default(0); // 0 == all, 1 == male, 2 == female, 3 == other
             $table->string('qualification');
             $table->date('deadline');
