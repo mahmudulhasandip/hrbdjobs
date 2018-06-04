@@ -12530,3 +12530,10 @@ header.style4 .account-btns > li a,
 .job-overview ul{
     padding: 20px;
 }
+input[type="text"], input[type="password"], input[type="email"], textarea{
+    margin-bottom: 0;
+}
+.help-block{
+    color: #e54545;
+    font-size: 12px;
+}

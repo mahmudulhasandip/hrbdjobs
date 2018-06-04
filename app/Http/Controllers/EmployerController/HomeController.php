@@ -124,35 +124,45 @@ class HomeController extends Controller
         $data['job_designations'] = Job_designation::all();
         $data['job_experiences'] = Job_experience::all();
         $data['skills'] = Skill::all();
+        $data['draft'] = false;
         return view('employer.post_new_job', $data);
     }
 
 
-    protected function validator(array $data)
-    {
-        
-        return Validator::make($data, [
-            'title'                 => 'required|max:255',
-            'description'           => 'required|max:255',
-            'job_category_id'       => 'required',
-            'job_designation_id'    => 'required',
-            'job_level_id'          => 'required',
-            'experience_id'         => 'required',
-            'vacancy'               => 'required',
-            'gender'                => 'required',
-            'qualification'         => 'required',
-            'deadline'              => 'required',
-            'location'              => 'required'
-        ]);
-    }
+    
 
     public function postJob(Request $request) {
         $data['left_active'] = 'job';
 
-        // validation
-        $this->validator($request->all())->validate();
+        
 
-        $postJob = new Job();
+        // validation
+        if($request['post']){
+            $validator = Validator::make($request->all(),[
+                'title'                 => 'required|max:255',
+                'description'           => 'required|max:255',
+                'job_category_id'       => 'required',
+                'job_designation_id'    => 'required',
+                'job_level_id'          => 'required',
+                'experience_id'         => 'required',
+                'vacancy'               => 'required',
+                'gender'                => 'required',
+                'qualification'         => 'required',
+                'deadline'              => 'required',
+                'location'              => 'required'
+            ]);
+    
+            if ($validator->fails()) {
+                return redirect()->route('employer.new.job')->withErrors($validator)->withInput();
+            }
+        }
+
+        
+        if($request['job_id']){
+            $postJob = Job::where('employer_id', Auth::guard('employer')->user()->id)->where('id', $request['job_id'])->first();
+        }else{
+            $postJob = new Job();
+        }
         $postJob->employer_id = Auth::guard('employer')->user()->id;
         $postJob->title = $request->input('title');
         $postJob->description = $request->input('description');
@@ -171,26 +181,56 @@ class HomeController extends Controller
         $postJob->qualification = $request->input('qualification');
         $postJob->deadline = $request->input('deadline');
         $postJob->location = $request->input('location');
+        if($request['draft']){
+            $postJob->is_drafted = 1;
+        }
         $postJob->save();
 
-
-        for($i=0; $i < sizeof($request->input('skill')); $i++){
-            $jobSkill = new Job_skill();
-            $jobSkill->job_id = $postJob->id;
-            $jobSkill->skill = $request->input('skill')[$i];
-            $jobSkill->save();
+        if($request->input('skill')){
+            // if already exists job skills
+            if($request['job_id']){
+                Job_skill::where('job_id', $request['job_id'])->delete();
+            }
+            for($i=0; $i < sizeof($request->input('skill')); $i++){
+                $jobSkill = new Job_skill();
+                $jobSkill->job_id = $postJob->id;
+                $jobSkill->skill = $request->input('skill')[$i];
+                $jobSkill->save();
+            }
+        }
+        
+        if($request['draft']){
+            return redirect()->route('employer.draft.job');
         }
         return redirect()->route('employer.manage.job');
     }
 
+
+    // Draft jobs
     public function getDraftedJob(){
         $data['left_active'] = 'job';
-        return view('employer.drafted_job', $data);
+        $data['allJobs'] = Job::where('employer_id', Auth::guard('employer')->user()->id)->where('is_drafted', 1)->get();
+        $data['totalJobs'] = Job::where('employer_id', Auth::guard('employer')->user()->id)->where('is_drafted', 1)->count();
+        $data['activeJobs'] = Job::where('is_verified', 1)->count();
+        return view('employer.draft_job', $data);
     }
 
+    public function draftedJobForm($id){
+        $data['left_active'] = 'job';
+        $data['job_levels'] = Job_level::all();
+        $data['job_categories'] = Job_category::all();
+        $data['job_designations'] = Job_designation::all();
+        $data['job_experiences'] = Job_experience::all();
+        $data['skills'] = Skill::all();
+        $data['draft'] = Job::where('employer_id', Auth::guard('employer')->user()->id)->where('id', $id)->first();
+        return view('employer.post_new_job', $data);
+    }
+    
+
+    // Manage job
     public function getManageJob(){
         $data['left_active'] = 'manage_job';
-        $data['allJobs'] = Job::where('employer_id', Auth::guard('employer')->user()->id)->get();
+        $data['allJobs'] = Job::where('employer_id', Auth::guard('employer')->user()->id)->where('is_drafted', 0)->get();
         $data['totalJobs'] = Job::where('employer_id', Auth::guard('employer')->user()->id)->count();
         $data['activeJobs'] = Job::where('is_verified', 1)->count();
         return view('employer.manage_job', $data);

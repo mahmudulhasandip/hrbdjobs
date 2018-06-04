@@ -2,8 +2,8 @@
 
 Route::get('/home', 'EmployerController\HomeController@dashboard')->name('home');
 
-Route::get('/drafted/job', 'EmployerController\HomeController@getDraftedJob')->name('drafted.job');
-Route::get('/manage/job', 'EmployerController\HomeController@getManageJob')->name('manage.job');
+// Route::get('/drafted/job', 'EmployerController\HomeController@getDraftedJob')->name('drafted.job');
+
 // Route::get('/profile', 'EmployerController\HomeController@getProfile')->name('profile');
 Route::get('/profile/edit', 'EmployerController\HomeController@getEditProfile')->name('profile.edit');
 Route::get('/company/profile', 'EmployerController\HomeController@getCompanyProfile')->name('company.profile');
@@ -25,6 +25,11 @@ Route::get('/package_history', 'EmployerController\HomeController@getPackagesHis
 Route::get('/post/new/job', 'EmployerController\HomeController@getNewJob')->name('new.job');
 Route::post('/post/new/job', 'EmployerController\HomeController@postJob')->name('new.post.job');
 Route::get('/job_details/{id}', 'EmployerController\HomeController@jobDetails')->name('job.details');
+
+Route::get('/manage/job', 'EmployerController\HomeController@getManageJob')->name('manage.job');
+Route::get('/draft/job', 'EmployerController\HomeController@getDraftedJob')->name('draft.job');
+Route::get('/post/new/job/{id}', 'EmployerController\HomeController@draftedJobForm')->name('draft.job.view');
+
 
 
 

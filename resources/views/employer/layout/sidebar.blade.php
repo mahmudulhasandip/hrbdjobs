@@ -19,7 +19,7 @@
             <a href="#" title="" class="main-a"><i class="la la-file-text"></i>Post a Job</a>
             <ul>
                 <li><a href="{{ route('employer.new.job') }}" title="">New Job</a></li>
-                <li><a href="{{ route('employer.drafted.job') }}" title="">Drafted Job</a></li>
+                <li><a href="{{ route('employer.draft.job') }}" title="">Drafted Job</a></li>
             </ul>
         </li>
         <li class="inner-child {{ ($left_active == 'manage_job')? 'active':'' }}">
