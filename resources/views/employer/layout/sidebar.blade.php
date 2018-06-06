@@ -38,7 +38,7 @@
                 <li><a href="{{ route('employer.packages.history') }}" title="">My Packages</a></li>
             </ul>
         </li>
-        <li class="inner-child">
+        <li class="inner-child {{ ($left_active == 'profile') ? 'active':'' }}">
             <a href="{{ route('employer.profile.edit') }}" title="" class=""><i class="la la-user"></i>Edit My Profile</a>
         </li>
         <li class="inner-child">

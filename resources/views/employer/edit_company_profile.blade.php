@@ -43,19 +43,20 @@
 							<form role="form" method="POST" action="{{ route('employer.update.profile') }}" enctype="multipart/form-data">
 								@csrf
 								<div class="row">
-										@if($errors->has('logo'))
-											<div class="alert alert-danger" role="alert">
-											<h4 class="alert-heading">Uh oh!</h4>
-											@foreach($errors->get('image') as $message)
-											<p>{{ $message }}</p>
-											@endforeach
-											</div>
-										@endif
+									@if($errors->has('logo'))
+										<div class="alert alert-danger" role="alert">
+										<h4 class="alert-heading">Uh oh!</h4>
+										@foreach($errors->get('image') as $message)
+										<p>{{ $message }}</p>
+										@endforeach
+										</div>
+									@endif
+
 									<div id="file-upload-form" class="uploader">
 										<input id="file-upload" type="file" name="logo" accept="image/*" />
 		
 										<label for="file-upload" id="file-drag">
-										<img id="file-image" src="/storage/app/uploads/{{ $company_info->logo }}" alt="Preview" class="hidden">
+											<img id="file-image" src="/storage/app/uploads/{{ $company_info->logo }}" alt="Preview" class="hidden">
 											<div id="start">
 											<i class="fa fa-download" aria-hidden="true"></i>
 											<div>Select a logo or drag here</div>
@@ -70,6 +71,7 @@
 											</div>
 										</label>
 									</div>
+									
 									<div class="col-lg-6">
 										<span class="pf-title">Company Name</span>
 										<div class="pf-field">
@@ -326,41 +328,7 @@ function ekUpload(){
     }
   }
 
-//   function uploadFile(file) {
 
-//     var xhr = new XMLHttpRequest(),
-//       fileInput = document.getElementById('class-roster-file'),
-//       pBar = document.getElementById('file-progress'),
-//       fileSizeLimit = 1024; // In MB
-//     if (xhr.upload) {
-//       // Check if file is less than x MB
-//       if (file.size <= fileSizeLimit * 1024 * 1024) {
-//         // Progress bar
-//         pBar.style.display = 'inline';
-//         xhr.upload.addEventListener('loadstart', setProgressMaxValue, false);
-//         xhr.upload.addEventListener('progress', updateFileProgress, false);
-
-//         // File received / failed
-//         xhr.onreadystatechange = function(e) {
-//           if (xhr.readyState == 4) {
-//             // Everything is good!
-
-//             // progress.className = (xhr.status == 200 ? "success" : "failure");
-//             // document.location.reload(true);
-//           }
-//         };
-
-//         // Start upload
-//         xhr.open('POST', document.getElementById('file-upload-form').action, true);
-//         xhr.setRequestHeader('X-File-Name', file.name);
-//         xhr.setRequestHeader('X-File-Size', file.size);
-//         xhr.setRequestHeader('Content-Type', 'multipart/form-data');
-//         xhr.send(file);
-//       } else {
-//         output('Please upload a smaller file (< ' + fileSizeLimit + ' MB).');
-//       }
-//     }
-//   }
 
   // Check for the various File API support.
   if (window.File && window.FileList && window.FileReader) {

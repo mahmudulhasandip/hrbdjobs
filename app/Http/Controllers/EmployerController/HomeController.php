@@ -297,6 +297,7 @@ class HomeController extends Controller
     }
 
 
+    // employer profile update
     public function updateProfile(Request $request){
         // $this->validator($request->all())->validate();
         

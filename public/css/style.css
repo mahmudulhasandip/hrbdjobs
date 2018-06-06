@@ -12537,3 +12537,9 @@ input[type="text"], input[type="password"], input[type="email"], textarea{
     color: #e54545;
     font-size: 12px;
 }
+
+.border-bottom{
+    border-bottom: 1px solid #edeff7;
+    padding-bottom: 20px;
+    padding-left: 30px;
+}
