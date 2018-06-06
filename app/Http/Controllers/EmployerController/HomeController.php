@@ -183,8 +183,13 @@ class HomeController extends Controller
         $postJob->location = $request->input('location');
         if($request['draft']){
             $postJob->is_drafted = 1;
+            $postJob->save();
         }
-        $postJob->save();
+        if($request['post']){
+            $postJob->is_drafted = 0;
+            $postJob->save();
+        }
+        
 
         if($request->input('skill')){
             // if already exists job skills
@@ -201,8 +206,10 @@ class HomeController extends Controller
         
         if($request['draft']){
             return redirect()->route('employer.draft.job');
+        }else{
+            return redirect()->route('employer.manage.job');
         }
-        return redirect()->route('employer.manage.job');
+        
     }
 
 

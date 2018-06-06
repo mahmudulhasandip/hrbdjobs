@@ -23,6 +23,7 @@
 			<div class="container">
 				 <div class="row no-gape">
 				 	<aside class="col-lg-3 column border-right">
+						 {{-- Sidebar --}}
 				 		<div class="widget">
 							@include('employer.layout.sidebar')
 				 		</div>

@@ -156,7 +156,7 @@
 											<span class="pf-title"></span>
 											<div class="pf-field">
 												<div class="simple-checkbox">
-													<p><input type="checkbox" name="is_negotiable" id="negotiable"  value="@if (old("is_negotiable")){{ old('is_negotiable') }}@elseif ( $draft ){{ $draft->is_negotiable }}@endif"><label for="negotiable">Negotiable</label></p>
+													<p><input type="checkbox" name="is_negotiable" id="negotiable"  value="@if (old("is_negotiable")){{ old('is_negotiable') }}@elseif ( $draft ){{ $draft->is_negotiable }}@else {{ '1' }} @endif"><label for="negotiable">Negotiable</label></p>
 													@if ($errors->has('is_negotiable'))
 														<span class="help-block">
 															{{ $errors->first('is_negotiable') }}
