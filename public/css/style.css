@@ -291,7 +291,7 @@ button{
     -o-border-radius:4px;
     border-radius:4px;
 
-    background:black;
+    /* background:black; */
     border:0;
     letter-spacing:1px;
 }

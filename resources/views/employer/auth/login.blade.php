@@ -34,14 +34,13 @@
                 <div class="col-lg-12">
                     <div class="account-popup-area signin-popup-box static">
                         <div class="account-popup">
-                            <span>Lorem ipsum dolor sit amet consectetur adipiscing elit odio duis risus at lobortis ullamcorper</span>
                             @if (session('status'))
-                                <div class="alert alert-success">
+                                <div class="alert alert-success alert-dismissible fade show">
                                     {{ session('status') }}
                                 </div>
                             @endif
                             @if (session('warning'))
-                                <div class="alert alert-warning">
+                                <div class="alert alert-warning alert-dismissible fade show">
                                     {{ session('warning') }}
                                 </div>
                             @endif

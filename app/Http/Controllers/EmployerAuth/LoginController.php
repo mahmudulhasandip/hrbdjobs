@@ -6,6 +6,7 @@ use App\Http\Controllers\Controller;
 use Illuminate\Foundation\Auth\AuthenticatesUsers;
 use Illuminate\Support\Facades\Auth;
 use Hesto\MultiAuth\Traits\LogsoutGuard;
+use Illuminate\Http\Request;
 
 class LoginController extends Controller
 {
@@ -60,10 +61,13 @@ class LoginController extends Controller
         // return 'email';
     }
 
-    public function authenticated(Request $request, $user)
+    protected function authenticated(Request $request, $user)
     {
+        
         if (!$user->verified) {
-            auth()->logout();
+            // dd($user->verified);
+            $this->guard()->logout();
+            $request->session()->invalidate();
             return back()->with('warning', 'You need to confirm your account. We have sent you an activation code, please check your email.');
         }
         return redirect()->intended($this->redirectPath());

@@ -12,7 +12,9 @@
     <title>@yield('title')</title>
 
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.5.0/css/font-awesome.min.css" />
-	<!-- Styles -->
+    <!-- Styles -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/normalize/8.0.0/normalize.css" />
+
 	<link rel="stylesheet" type="text/css" href="/css/bootstrap-grid.css" />
 	<link rel="stylesheet" href="/css/icons.css">
     <link rel="stylesheet" href="/css/animate.min.css">
