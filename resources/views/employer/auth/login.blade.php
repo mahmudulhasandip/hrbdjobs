@@ -73,13 +73,6 @@
                                 </a>
                                 <button type="submit">Login</button>
                             </form>
-                            <div class="extra-login">
-                                <span>Or</span>
-                                <div class="login-social">
-                                    <a class="google-login" href="#" title=""><i class="fa fa-google"></i></a>
-                                    <!-- <a class="tw-login" href="#" title=""><i class="fa fa-twitter"></i></a> -->
-                                </div>
-                            </div>
                         </div>
                     </div><!-- LOGIN POPUP -->
                 </div>
