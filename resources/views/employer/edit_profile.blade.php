@@ -38,8 +38,8 @@
 									<input id="file-upload" type="file" name="logo" accept="image/*" />
 	
 									<label for="file-upload" id="file-drag">
-										{{-- <img id="file-image" src="/storage/app/uploads/{{ $company_info->logo }}" alt="Preview" class="hidden"> --}}
-										<img id="file-image" src="" alt="Preview" class="hidden">
+										<img id="file-image" src="/storage/app/uploads/{{ $employer_info->logo }}" alt="Preview" class="hidden">
+										{{-- <img id="file-image" src="" alt="Preview" class="hidden"> --}}
 										<div id="start">
 										<i class="fa fa-download" aria-hidden="true"></i>
 										<div>Select a logo or drag here</div>
