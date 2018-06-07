@@ -35,6 +35,16 @@
                     <div class="account-popup-area signin-popup-box static">
                         <div class="account-popup">
                             <span>Lorem ipsum dolor sit amet consectetur adipiscing elit odio duis risus at lobortis ullamcorper</span>
+                            @if (session('status'))
+                                <div class="alert alert-success">
+                                    {{ session('status') }}
+                                </div>
+                            @endif
+                            @if (session('warning'))
+                                <div class="alert alert-warning">
+                                    {{ session('warning') }}
+                                </div>
+                            @endif
                             <form role="form" method="POST" action="{{ url('/employer/login') }}">
                                 {{ csrf_field() }}
                                 <div class="cfield {{ $errors->has('username') ? ' has-error' : '' }}" >

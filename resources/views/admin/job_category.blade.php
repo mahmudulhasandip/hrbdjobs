@@ -45,7 +45,7 @@
                             @csrf
                             <div class="form-group m-form__group">
                                 <label>
-                                    Add New Job Designation
+                                    Add New Job Category
                                 </label>
                                 <div class="input-group">
                                     <input type="text" class="form-control" placeholder="Add New Job Category" name="job_category">

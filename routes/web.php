@@ -57,6 +57,7 @@ Route::group(['prefix' => 'employer'], function () {
   Route::get('/password/reset', 'EmployerAuth\ForgotPasswordController@showLinkRequestForm')->name('password.reset');
   Route::get('/password/reset/{token}', 'EmployerAuth\ResetPasswordController@showResetForm');
 
+  Route::get('/email/verify/{token}', 'EmployerAuth\RegisterController@verifyUser')->name('mail.verify');
 });
  // employer custom pages
 Route::middleware(['employer'])->group(function () {

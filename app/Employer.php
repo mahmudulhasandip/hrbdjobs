@@ -66,4 +66,9 @@ class Employer extends Authenticatable
     public function paymentHistory(){
         return $this->hasMany('App\Payment_history', 'employer_id', 'id');
     }
+
+    public function verifyUser()
+    {
+        return $this->hasOne('App\VerifyUser', 'user_id', 'id');
+    }
 }

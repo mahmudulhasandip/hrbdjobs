@@ -7,7 +7,13 @@ use App\Company_industry;
 use App\Country;
 use App\Job_package;
 use App\Employer_package;
+use App\VerifyUser;
+use App\Mail\VerifyMail;
 use Validator;
+use Mail;
+use Illuminate\Mail\Mailer;
+use App\Http\Requests;
+use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
 use Illuminate\Foundation\Auth\RegistersUsers;
 use Illuminate\Support\Facades\Auth;
@@ -84,6 +90,7 @@ class RegisterController extends Controller
         $employer->email = $data['person_email'];
         $employer->password = bcrypt($data['password']);
         $employer->save();
+
         
         // create employer company info
         $employerCompanyInfo = new Employer_company_info();
@@ -118,8 +125,42 @@ class RegisterController extends Controller
         $employerPackage->is_verified = 1;
         $employerPackage->save();
 
+        $verifyUser = VerifyUser::create([
+            'user_id' => $employer->id,
+            'token' => str_random(40)
+        ]);
+
+        Mail::to($employer->email)->send(new VerifyMail($employer));
+
         return $employer;
     }
+
+    public function verifyUser($token)
+    {
+        $verifyUser = VerifyUser::where('token', $token)->first();
+        if(isset($verifyUser) ){
+            $employer = $verifyUser->employer;
+            if(!$employer->verified) {
+                $verifyUser->employer->verified = 1;
+                $verifyUser->employer->save();
+                $verifyUser->delete();
+                $status = "Your e-mail is verified. You can now login.";
+            }else{
+                $status = "Your e-mail is already verified. You can now login.";
+            }
+        }else{
+            return redirect('/employer/login')->with('warning', "Sorry your email cannot be identified.");
+        }
+ 
+        return redirect('/employer/login')->with('status', $status);
+    }
+
+    protected function registered(Request $request, $user)
+    {
+        $this->guard()->logout();
+        return redirect('/employer/login')->with('status', 'We sent you an activation code. Check your email and click on the link to verify.');
+    }
+
     /**
      * Show the application registration form.
      *

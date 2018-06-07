@@ -167,7 +167,7 @@
                                 </div>
                                 <div class="col-sm-6 dropdown-field">
 
-                                    <select name="country" id="country" autocomplete="off" data-placeholder="Choose Company Category" class="chosen form-control">
+                                    <select name="country" id="country" autocomplete="off" data-placeholder="Country" class="chosen form-control">
                                             @foreach($countries as $country)
                                                 <option value="{{ $country->name }}">{{ $country->name }}</option>
                                             @endforeach

@@ -19,15 +19,16 @@ class FeaturedPackagesController extends Controller
     public function store(Request $request) {
         //
         if(Auth::guard('admin')->user()){
-
-            Featured_package::create([
-                'name' => $request->input('name'),
-                'price' => $request->input('price'),
-                'discount' => $request->input('discount'),
-                'featured_type' => $request->input('featured_type'),
-                'featured_amount' => $request->input('featured_amount'),
-                'duration' => $request->input('duration'),
-            ]);
+            $featurePackage = new Featured_package();
+            
+            $featurePackage->name = $request->input('name');
+            $featurePackage->price = $request->input('price');
+            $featurePackage->discount = $request->input('discount');
+            $featurePackage->featured_type = $request->input('featured_type');
+            $featurePackage->featured_amount = $request->input('featured_amount');
+            $featurePackage->duration = $request->input('duration');
+            $featurePackage->save();
+            
             return redirect()->route('admin.featuredPackages.show')->with('status', 'New featured package successfully Added!!');
         }
         // redirect 

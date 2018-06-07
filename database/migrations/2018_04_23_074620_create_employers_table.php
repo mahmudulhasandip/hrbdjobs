@@ -25,6 +25,7 @@ class CreateEmployersTable extends Migration
             $table->text('address')->nullable();
             $table->string('website')->nullable();
             $table->integer('status')->default(0);
+            $table->boolean('verified')->default(false);
             $table->rememberToken();
             $table->timestamps();
         });
