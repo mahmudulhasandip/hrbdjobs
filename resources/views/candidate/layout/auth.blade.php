@@ -34,8 +34,8 @@
                 </button>
 
                 <!-- Branding Image -->
-                <a class="navbar-brand" href="{{ url('/candidate') }}">
-                    {{ config('app.name', 'Laravel Multi Auth Guard') }}: Candidate
+                <a class="navbar-brand" href="{{ url('/employer') }}">
+                    {{ config('app.name', 'Laravel Multi Auth Guard') }}: Employer
                 </a>
             </div>
 
@@ -49,8 +49,8 @@
                 <ul class="nav navbar-nav navbar-right">
                     <!-- Authentication Links -->
                     @if (Auth::guest())
-                        <li><a href="{{ url('/candidate/login') }}">Login</a></li>
-                        <li><a href="{{ url('/candidate/register') }}">Register</a></li>
+                        <li><a href="{{ url('/employer/login') }}">Login</a></li>
+                        <li><a href="{{ url('/employer/register') }}">Register</a></li>
                     @else
                         <li class="dropdown">
                             <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-expanded="false">
@@ -59,13 +59,13 @@
 
                             <ul class="dropdown-menu" role="menu">
                                 <li>
-                                    <a href="{{ url('/candidate/logout') }}"
+                                    <a href="{{ url('/employer/logout') }}"
                                         onclick="event.preventDefault();
                                                  document.getElementById('logout-form').submit();">
                                         Logout
                                     </a>
 
-                                    <form id="logout-form" action="{{ url('/candidate/logout') }}" method="POST" style="display: none;">
+                                    <form id="logout-form" action="{{ url('/employer/logout') }}" method="POST" style="display: none;">
                                         {{ csrf_field() }}
                                     </form>
                                 </li>

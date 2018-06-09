@@ -52,9 +52,9 @@ Route::group(['prefix' => 'employer'], function () {
   Route::get('/register', 'EmployerAuth\RegisterController@showRegistrationForm')->name('employer.register');
   Route::post('/register', 'EmployerAuth\RegisterController@register');
 
-  Route::post('/password/email', 'EmployerAuth\ForgotPasswordController@sendResetLinkEmail')->name('password.request');
+  Route::post('/password/email', 'EmployerAuth\ForgotPasswordController@sendResetLinkEmail')->name('employer.password.request');
   Route::post('/password/reset', 'EmployerAuth\ResetPasswordController@reset')->name('password.email');
-  Route::get('/password/reset', 'EmployerAuth\ForgotPasswordController@showLinkRequestForm')->name('password.reset');
+  Route::get('/password/reset', 'EmployerAuth\ForgotPasswordController@showLinkRequestForm')->name('employer.password.reset');
   Route::get('/password/reset/{token}', 'EmployerAuth\ResetPasswordController@showResetForm');
 
   Route::get('/email/verify/{token}', 'EmployerAuth\RegisterController@verifyUser')->name('mail.verify');
@@ -66,15 +66,15 @@ Route::middleware(['employer'])->group(function () {
 
 
 Route::group(['prefix' => 'candidate'], function () {
-  Route::get('/login', 'CandidateAuth\LoginController@showLoginForm')->name('login');
+  Route::get('/login', 'CandidateAuth\LoginController@showLoginForm')->name('candidate.login');
   Route::post('/login', 'CandidateAuth\LoginController@login');
-  Route::post('/logout', 'CandidateAuth\LoginController@logout')->name('logout');
+  Route::post('/logout', 'CandidateAuth\LoginController@logout')->name('candidate.logout');
 
-  Route::get('/register', 'CandidateAuth\RegisterController@showRegistrationForm')->name('register');
+  Route::get('/register', 'CandidateAuth\RegisterController@showRegistrationForm')->name('candidate.register');
   Route::post('/register', 'CandidateAuth\RegisterController@register');
 
-  Route::post('/password/email', 'CandidateAuth\ForgotPasswordController@sendResetLinkEmail')->name('password.request');
-  Route::post('/password/reset', 'CandidateAuth\ResetPasswordController@reset')->name('password.email');
-  Route::get('/password/reset', 'CandidateAuth\ForgotPasswordController@showLinkRequestForm')->name('password.reset');
+  Route::post('/password/email', 'CandidateAuth\ForgotPasswordController@sendResetLinkEmail')->name('candidate.password.request');
+  Route::post('/password/reset', 'CandidateAuth\ResetPasswordController@reset')->name('candidate.password.email');
+  Route::get('/password/reset', 'CandidateAuth\ForgotPasswordController@showLinkRequestForm')->name('candidate.password.reset');
   Route::get('/password/reset/{token}', 'CandidateAuth\ResetPasswordController@showResetForm');
 });

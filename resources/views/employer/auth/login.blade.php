@@ -68,7 +68,7 @@
                                 <p class="remember-label">
                                     <input type="checkbox" name="remember" id="cb1"><label for="cb1">Remember me</label>
                                 </p>
-                                <a class="btn btn-link" href="{{ url('/candidate/password/reset') }}">
+                                <a class="btn btn-link" href="{{ url('/employer/password/reset') }}">
                                     Forgot Your Password?
                                 </a>
                                 <button type="submit">Login</button>
