@@ -20,6 +20,7 @@ class CreateEmployersTable extends Migration
             $table->string('designation')->nullable();
             $table->string('email')->unique();
             $table->string('password')->nullable();
+            $table->string('logo')->nullable();
             $table->string('country')->nullable();
             $table->string('city')->nullable();
             $table->text('address')->nullable();

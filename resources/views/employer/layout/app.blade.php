@@ -47,6 +47,8 @@
     <!-- sections -->
     @yield('content')
 
+    @include('employer.layout.alert')
+
     <!-- footer -->
     @include('employer.layout.footer')
 

@@ -5,7 +5,7 @@ Route::get('/home', 'EmployerController\HomeController@dashboard')->name('home')
 // Route::get('/drafted/job', 'EmployerController\HomeController@getDraftedJob')->name('drafted.job');
 
 // Route::get('/profile', 'EmployerController\HomeController@getProfile')->name('profile');
-Route::get('/profile/edit', 'EmployerController\HomeController@getEditProfile')->name('profile.edit');
+
 Route::get('/company/profile', 'EmployerController\HomeController@getCompanyProfile')->name('company.profile');
 Route::get('/company/profile/edit', 'EmployerController\HomeController@getEditCompanyProfile')->name('company.profile.edit');
 Route::get('/shortlisted/candidate', 'EmployerController\HomeController@getCandidateShortList')->name('shortlisted.candidate');
@@ -30,6 +30,9 @@ Route::get('/manage/job', 'EmployerController\HomeController@getManageJob')->nam
 Route::get('/draft/job', 'EmployerController\HomeController@getDraftedJob')->name('draft.job');
 Route::get('/post/new/job/{id}', 'EmployerController\HomeController@draftedJobForm')->name('draft.job.view');
 
-
+// employer profile update
+Route::get('/profile/edit', 'EmployerController\HomeController@getEditProfile')->name('profile.edit');
+Route::post('/profile/edit', 'EmployerController\HomeController@updateEmployerProfile')->name('update.employer.profile');
+Route::post('/profile/edit/password', 'EmployerController\HomeController@updateEmployerPassword')->name('update.employer.password');
 
 
