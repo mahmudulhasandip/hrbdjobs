@@ -81,7 +81,11 @@
 						 						<ul class="action_job">
 						 							<li><span>View Job</span><a href="#" title=""><i class="la la-eye"></i></a></li>
 						 							<li><span>Edit</span><a href="#" title=""><i class="la la-pencil"></i></a></li>
-						 							<li><span>Delete</span><a href="#" title=""><i class="la la-trash-o"></i></a></li>
+													<li><span>Delete</span><a href="{{ route('employer.delete.job', $job->id) }}" title=""><i class="la la-trash-o"></i></a></li>
+													<form action="{{ route('employer.delete.job', $job->id) }}" method="post">
+														<input type="hidden" name="_method" value="delete" />
+														@csrf
+													</form>
 						 						</ul>
 						 					</td>
 										</tr>

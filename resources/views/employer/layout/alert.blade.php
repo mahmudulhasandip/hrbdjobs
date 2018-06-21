@@ -5,7 +5,14 @@
     @push('js')
 
     <script>
-        toastr.success('{{ session('status') }}');
+        // toastr.success('{{ session('status') }}');
+        iziToast.success({
+            title: 'Error',
+            message: '{{ session('status') }}',
+            timeout: 2500,
+            overlay: true,
+            position: 'topRight',
+        });
     </script>
 
     @endpush
@@ -15,7 +22,14 @@
     @push('js')
 
     <script>
-        toastr.error('{{ session('error') }}');
+        // toastr.error('{{ session('error') }}');
+        iziToast.error({
+            title: 'Error',
+            message: '{{ session('error') }}',
+            timeout: 3000,
+            overlay: true,
+            position: 'topRight',
+        });
     </script>
 
     @endpush
@@ -28,8 +42,16 @@
         @push('js')
 
         <script>
-            var message = "{{ $message }}";
-            toastr.error(message);
+            // var message = "{{ $message }}";
+            // toastr.error(message);
+
+            iziToast.error({
+                title: 'Error',
+                message: '{{ $message }}',
+                timeout: 5000,
+                overlay: true,
+                position: 'topRight',
+            });
         </script>
 
         @endpush

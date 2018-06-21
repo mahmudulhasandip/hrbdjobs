@@ -21,7 +21,7 @@ Route::get('/featured_package/{id}', 'EmployerController\HomeController@purchase
 Route::post('/confirm_package', 'EmployerController\HomeController@confirmPackage')->name('confirmPackage');
 Route::get('/package_history', 'EmployerController\HomeController@getPackagesHistory')->name('packages.history');
 
-// post
+// job post
 Route::get('/post/new/job', 'EmployerController\HomeController@getNewJob')->name('new.job');
 Route::post('/post/new/job', 'EmployerController\HomeController@postJob')->name('new.post.job');
 Route::get('/job_details/{id}', 'EmployerController\HomeController@jobDetails')->name('job.details');
@@ -29,6 +29,7 @@ Route::get('/job_details/{id}', 'EmployerController\HomeController@jobDetails')-
 Route::get('/manage/job', 'EmployerController\HomeController@getManageJob')->name('manage.job');
 Route::get('/draft/job', 'EmployerController\HomeController@getDraftedJob')->name('draft.job');
 Route::get('/post/new/job/{id}', 'EmployerController\HomeController@draftedJobForm')->name('draft.job.view');
+Route::get('/delete/job/{id}', 'EmployerController\HomeController@deleteJob')->name('delete.job');
 
 // employer profile update
 Route::get('/profile/edit', 'EmployerController\HomeController@getEditProfile')->name('profile.edit');

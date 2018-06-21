@@ -149,7 +149,7 @@ class HomeController extends Controller
         if($request['post']){
             $validator = Validator::make($request->all(),[
                 'title'                 => 'required|max:255',
-                'description'           => 'required|max:255',
+                'description'           => 'required',
                 'job_category_id'       => 'required',
                 'job_designation_id'    => 'required',
                 'job_level_id'          => 'required',
@@ -219,6 +219,12 @@ class HomeController extends Controller
             return redirect()->route('employer.manage.job');
         }
         
+    }
+
+    public function deleteJob($id) {
+        $postedJob = Job::where('employer_id', Auth::guard('employer')->user()->id)->where('id', $id)->first();
+        $postedJob->delete();
+        return redirect()->route('employer.manage.job');
     }
 
 
