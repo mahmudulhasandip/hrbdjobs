@@ -50,7 +50,7 @@
     <div class="menu-sec">
         <div class="container">
             <div class="logo">
-                <a href="{{ url('/') }}" title=""><img class="hidesticky" src="/images/logo.png" alt="" /><img class="showsticky" src="/images/logo-2.png" alt="" /></a>
+                <a href="{{ url('/') }}" title=""><img class="hidesticky" src="/images/logo-2.png" alt="" /><img class="showsticky" src="/images/logo-2.png" alt="" /></a>
             </div><!-- Logo -->
             @if (Auth::guest())
             <div class="btn-extars">

@@ -1,3 +1,4 @@
+
  @extends('candidate.layout.app')
 
 @section('title', 'Candidate | Registration')
