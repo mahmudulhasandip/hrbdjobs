@@ -148,15 +148,7 @@
 								 				<li class=""><i class="la la-user"></i><h3>Followers</h3><span>15</span></li>
 								 			</ul>
 								 		</div><!-- Job Overview -->
-								 		<div class="job-overview">
-                                            <h3>Company Information</h3>
-                                            <ul>
-                                                
-                                                <li><i class="la la-map"></i><h3>Address</h3><span>125, Ramna Century Avenue, Boro Moghbazar, Dhaka-1217, Bangladesh</span></li>
-                                                <li><i class="la la-map"></i><h3>Website</h3><span><a href="http://www.limbangladesh.com" target="blank">http://www.limbangladesh.com</a></span></li>
-                                                
-                                            </ul>
-                                        </div><!-- Job Overview -->
+								 		
 							 		</div>
 							 	</div>
 							 </div>

@@ -26,6 +26,7 @@ use App\Skill;
 use App\Featured_package;
 use App\Employer_package;
 use App\Payment_history;
+use App\Employer;
 
 
 
@@ -258,6 +259,10 @@ class HomeController extends Controller
 
     public function getEditProfile(){
         $data['left_active'] = 'profile';
+
+        $data['employer_info'] = Employer::find(Auth::guard('employer')->user()->id);
+        
+
         return view('employer.edit_profile', $data);
     }
 
