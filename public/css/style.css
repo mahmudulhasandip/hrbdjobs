@@ -674,6 +674,7 @@ label::after {
 .menu-sec nav {
     float: right;
     margin-right: 20px;
+    margin-top: 4px;
 }
 .menu-sec nav > ul {
     float: left;
@@ -6966,6 +6967,9 @@ aside .widget.border:first-child {
     border-radius: 50%;
 
     margin-right: 13px;
+
+    width: 45px;
+    height: 45px;
 }
 .btns-profiles-sec > span > i {
     float: right;

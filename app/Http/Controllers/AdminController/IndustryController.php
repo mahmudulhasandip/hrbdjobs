@@ -47,7 +47,7 @@ class IndustryController extends Controller
             Industry::create([
                 'name' => $request->input('new_industry'),
             ]);
-            return redirect()->route('industry.show')->with('success', 'New Industry successfully Added!!');
+            return redirect()->route('industry.show')->with('Status', 'New Industry successfully Added!!');
         }
         // // redirect 
         return back()->withInput()->with('errors', 'Industry added failed !!');

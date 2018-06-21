@@ -3,6 +3,7 @@
 @section('title', 'HRBDJobs | Employer Profile')
 
 @section('content')
+
 <section class="overlape">
 		<div class="block no-padding">
 			<div data-velocity="-.1" style="background: url(/images/top-bg.jpg) repeat scroll 50% 422.28px transparent;" class="parallax scrolly-invisible no-parallax"></div><!-- PARALLAX BACKGROUND IMAGE -->
@@ -34,69 +35,70 @@
 					 		<div class="profile-title">
 					 			<h3>Employee Profile</h3>
 					 			
-					 			<div id="file-upload-form" class="uploader">
-									<input id="file-upload" type="file" name="logo" accept="image/*" />
-	
-									<label for="file-upload" id="file-drag">
-										<img id="file-image" src="/storage/app/uploads/{{ $employer_info->logo }}" alt="Preview" class="hidden">
-										{{-- <img id="file-image" src="" alt="Preview" class="hidden"> --}}
-										<div id="start">
-										<i class="fa fa-download" aria-hidden="true"></i>
-										<div>Select a logo or drag here</div>
-										<div id="notimage" class="hidden">Please select an image</div>
-										<span id="file-upload-btn" class="btn btn-primary">Select a file</span>
-										</div>
-										<div id="response" class="hidden">
-										<div id="messages"></div>
-										</div>
-									</label>
-								</div>
+					 			
 					 		</div>
 					 		<div class="profile-form-edit">
-					 			<form>
+					 			<form method="post" action="{{ route('employer.update.employer.profile') }}" enctype="multipart/form-data">
+									@csrf
 					 				<div class="row">
+											<div id="file-upload-form" class="uploader">
+												<input id="file-upload" type="file" name="logo" accept="image/*" />
+				
+												<label for="file-upload" id="file-drag">
+													<img id="file-image" src="{{ asset('storage/uploads/'.(($employer_info->logo) ? $employer_info->logo : 'default_user.png'))}}" alt="Preview" class="">
+													<div id="start">
+													<i class="fa fa-download" aria-hidden="true"></i>
+													<div>Select a logo or drag here</div>
+													<div id="notimage" class="hidden">Please select an image</div>
+													<span id="file-upload-btn" class="btn btn-primary">Select a file</span>
+													</div>
+													<div id="response" class="hidden">
+													<div id="messages"></div>
+													</div>
+												</label>
+											</div>
 					 					<div class="col-lg-6">
 					 						<span class="pf-title">First Name</span>
 					 						<div class="pf-field">
-					 							<input type="text" placeholder="First Name" name="fname" />
+					 							<input type="text" placeholder="First Name" name="fname"  value="{{ 	old('fname') ? old('fname') : $employer_info->fname }}"/>
 					 						</div>
 										 </div>
 										 
 					 					<div class="col-lg-6">
 					 						<span class="pf-title">Last Name</span>
 					 						<div class="pf-field">
-					 							<input type="text" placeholder="Last Name" name="lname" />
+					 							<input type="text" placeholder="Last Name" name="lname"  value="{{ 	old('lname') ? old('lname') : $employer_info->lname }}"/>
 					 						</div>
 										 </div>
 										 
 					 					<div class="col-lg-6">
 					 						<span class="pf-title">Designation</span>
 					 						<div class="pf-field">
-					 							<input type="text" placeholder="Designation" name="designation" />
+					 							<input type="text" placeholder="Designation" name="designation"  value="{{ 	old('designation') ? old('designation') : $employer_info->designation }}"/>
 					 						</div>
 					 					</div>
 					 					<div class="col-lg-6">
 					 						<span class="pf-title">Website</span>
 					 						<div class="pf-field">
-					 							<input type="text" placeholder="Website" name="website" />
+					 							<input type="text" placeholder="Website" name="website" value="{{ 	old('website') ? old('website') : $employer_info->website }}" />
 					 						</div>
 					 					</div>
 					 					<div class="col-lg-6">
 					 						<span class="pf-title">Country</span>
 					 						<div class="pf-field">
-					 							<input type="text" placeholder="Country" name="country" />
+					 							<input type="text" placeholder="Country" name="country" value="{{ 	old('country') ? old('country') : $employer_info->country }}" />
 					 						</div>
 					 					</div>
 					 					<div class="col-lg-6">
 					 						<span class="pf-title">City</span>
 					 						<div class="pf-field">
-					 							<input type="text" placeholder="City" name="city" />
+					 							<input type="text" placeholder="City" name="city" value="{{ 	old('city') ? old('city') : $employer_info->city }}" />
 					 						</div>
 					 					</div>
 					 					<div class="col-lg-12">
 					 						<span class="pf-title">Address</span>
 					 						<div class="pf-field">
-					 							<textarea placeholder="Address" name="address"></textarea>
+					 							<textarea placeholder="Address" name="address">{{ 	old('address') ? old('address') : $employer_info->address }}</textarea>
 					 						</div>
 					 					</div>
 					 					<div class="col-lg-12">
@@ -108,24 +110,25 @@
 					 		
 					 		<div class="contact-edit">
 					 			<h3>Change Password</h3>
-					 			<form>
+								 <form method="POST" action="{{ route('employer.update.employer.password') }}">
+									@csrf
 					 				<div class="row">
 					 					<div class="col-lg-4">
 					 						<span class="pf-title">Old Password</span>
 					 						<div class="pf-field">
-					 							<input type="password" placeholder="Old Password" />
+											 <input type="password" placeholder="Old Password" name="old_password" value="{{ old('old_password') }}"/>
 					 						</div>
 					 					</div>
 					 					<div class="col-lg-4">
 					 						<span class="pf-title">New Password</span>
 					 						<div class="pf-field">
-					 							<input type="password" placeholder="New Password" />
+					 							<input type="password" placeholder="New Password" name="password" value="{{ old('password') }}"/>
 					 						</div>
 					 					</div>
 					 					<div class="col-lg-4">
 					 						<span class="pf-title">Retype Password</span>
 					 						<div class="pf-field">
-					 							<input type="password" placeholder="Retype Password" />
+					 							<input type="password" placeholder="Retype Password" name="password_confirmation"  value="{{ old('password_confirmation') }}"/>
 					 						</div>
 					 					</div>
 					 					<div class="col-lg-12">

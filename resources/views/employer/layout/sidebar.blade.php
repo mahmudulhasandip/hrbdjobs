@@ -8,6 +8,9 @@
                 <li><a href="{{ route('employer.profile.edit') }}" title="">Edit Profile</a></li>
             </ul>
         </li> --}}
+        <li class="inner-child {{ ($left_active == 'dashboard') ? 'active':'' }}">
+            <a href="{{ route('employer.home') }}" title="" class=""><i class="la la-dashboard"></i>Dashboard</a>
+        </li>
         <li class="inner-child {{ ($left_active == 'company')? 'active':'' }}">
             <a href="#" title="" class="main-a"><i class="la la-industry"></i>Company Details</a>
             <ul>
