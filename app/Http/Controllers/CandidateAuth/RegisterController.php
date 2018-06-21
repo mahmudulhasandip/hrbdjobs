@@ -7,6 +7,7 @@ use Validator;
 use App\Http\Controllers\Controller;
 use Illuminate\Foundation\Auth\RegistersUsers;
 use Illuminate\Support\Facades\Auth;
+use Illuminate\Http\Request;
 
 class RegisterController extends Controller
 {
@@ -49,7 +50,9 @@ class RegisterController extends Controller
     protected function validator(array $data)
     {
         return Validator::make($data, [
-            'name' => 'required|max:255',
+            'fname' => 'required|max:255',
+            'lname' => 'required|max:255',
+            'username' => 'required|max:255|unique:candidates',
             'email' => 'required|email|max:255|unique:candidates',
             'password' => 'required|min:6|confirmed',
         ]);
@@ -63,11 +66,16 @@ class RegisterController extends Controller
      */
     protected function create(array $data)
     {
-        return Candidate::create([
-            'name' => $data['name'],
-            'email' => $data['email'],
-            'password' => bcrypt($data['password']),
-        ]);
+        $candidate = new Candidate();
+        $candidate->fname = $data['fname'];
+        $candidate->lname = $data['lname'];
+        $candidate->username = $data['username'];
+        $candidate->gender = $data['gender'];
+        $candidate->email = $data['email'];
+        $candidate->password = bcrypt($data['password']);
+        $candidate->save();
+        
+        return $candidate;
     }
 
     /**
@@ -85,6 +93,19 @@ class RegisterController extends Controller
      *
      * @return \Illuminate\Contracts\Auth\StatefulGuard
      */
+
+    public function checkUsername(Request $request){
+        $username = $request->input('username');
+        $username = Candidate::where('username', $username)->first();
+        return ($username) ? 1 : 0;
+    }
+
+    public function checkEmail(Request $request){
+        $email = $request->input('email');
+        $email = Candidate::where('email', $email)->first();
+        return ($email) ? 1 : 0;
+    }
+
     protected function guard()
     {
         return Auth::guard('candidate');

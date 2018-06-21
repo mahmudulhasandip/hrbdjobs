@@ -3,10 +3,10 @@
         <div class="res-logo"><a href="index.html" title=""><img src="http://placehold.it/178x40" alt="" /></a></div>
         <div class="menu-resaction">
             <div class="res-openmenu">
-                <img src="images/icon.png" alt="" /> Menu
+                <img src="/images/icon.png" alt="" /> Menu
             </div>
             <div class="res-closemenu">
-                <img src="images/icon2.png" alt="" /> Close
+                <img src="/images/icon2.png" alt="" /> Close
             </div>
         </div>
     </div>
