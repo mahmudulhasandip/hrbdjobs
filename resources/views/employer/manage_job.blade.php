@@ -81,8 +81,8 @@
 						 						<ul class="action_job">
 						 							<li><span>View Job</span><a href="#" title=""><i class="la la-eye"></i></a></li>
 						 							<li><span>Edit</span><a href="#" title=""><i class="la la-pencil"></i></a></li>
-													<li><span>Delete</span><a href="{{ route('employer.delete.job', $job->id) }}" title=""><i class="la la-trash-o"></i></a></li>
-													<form action="{{ route('employer.delete.job', $job->id) }}" method="post">
+													<li><span>Delete</span><a class="delete" href="" title=""><i class="la la-trash-o"></i></a></li>
+													<form id="delete-form" action="{{ route('employer.delete.job', $job->id) }}" method="get">
 														<input type="hidden" name="_method" value="delete" />
 														@csrf
 													</form>
@@ -100,3 +100,37 @@
 		</div>
 	</section>
 @endsection
+
+@push('js')
+
+<script>
+
+	$('.delete').on('click', function(e){
+		e.preventDefault();
+		iziToast.show({
+		theme: 'dark',
+		icon: 'la la-trash-o',
+		title: 'Are you sure?',
+		message: '',
+		position: 'center', // bottomRight, bottomLeft, topRight, topLeft, topCenter, bottomCenter
+		progressBar: true,
+		overlay: true,
+		progressBarColor: 'rgb(0, 255, 184)',
+		buttons: [
+			['<button>Delete</button>', function (instance, toast) {
+				$('#delete-form').submit();
+			}, true], // true to focus
+			['<button>Close</button>', function (instance, toast) {
+				instance.hide({
+					transitionOut: 'fadeOutUp',
+					onClosing: function(instance, toast, closedBy){
+						console.info('closedBy: ' + closedBy); // The return will be: 'closedBy: buttonName'
+					}
+				}, toast, 'buttonName');
+			}]
+		],
+		});
+	});
+</script>
+
+@endpush

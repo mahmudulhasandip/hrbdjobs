@@ -44,9 +44,6 @@
         <li class="inner-child {{ ($left_active == 'profile') ? 'active':'' }}">
             <a href="{{ route('employer.profile.edit') }}" title="" class=""><i class="la la-user"></i>Edit My Profile</a>
         </li>
-        <li class="inner-child">
-            <a href="#" title="" class=""><i class="la la-lock"></i>Change Password</a>
-        </li>
         <li><a href="{{ route('employer.logout') }}" onclick="event.preventDefault();
                 document.getElementById('logout-form').submit();" title="" class=""><i class="la la-unlink"></i>Logout</a>
         </li>

@@ -114,8 +114,9 @@
 									</div>
 									
 									<div class="col-lg-12">
-											<span class="pf-title desc">Description</span>
-										<div id="description" >{!! $company_info->description !!}</div>
+										<span class="pf-title desc">Description</span>
+										{{-- <div id="description" >{!! $company_info->description !!}</div> --}}
+										<textarea id="tinymce" name="description" placeholder="Description">{{ $company_info->description }}</textarea>
 									</div>
 
 									{{-- <div class="col-lg-12">
@@ -229,7 +230,7 @@
 </section>
 @endsection
  @push('js')
-
+ <script src="{{ asset('js/tinymce/tinymce.min.js') }}"></script>
 <script>
 	// File Upload
 function ekUpload(){
@@ -344,7 +345,7 @@ ekUpload();
 <script src="https://cdnjs.cloudflare.com/ajax/libs/Trumbowyg/2.10.0/trumbowyg.min.js"></script>
 
 
-<script>
+{{-- <script>
 	$('#description').trumbowyg({
 		autogrowOnEnter: true,
 		autogrow: true,
@@ -352,7 +353,7 @@ ekUpload();
 		hideButtonTexts: true,
 		btns: [
 			['viewHTML'],
-			['undo', 'redo'], // Only supported in Blink browsers
+			['undo', 'redo'], 
 			['formatting'],
 			['strong', 'em', 'del'],
 			['superscript', 'subscript'],
@@ -364,6 +365,27 @@ ekUpload();
 			['removeformat']
 		]
 	});
-</script>
+</script> --}}
+
+<script>
+
+		tinymce.init({
+			selector: "textarea#tinymce",
+			theme: "modern",
+			branding: false,
+			plugins: [
+				'advlist autolink lists link image charmap print preview hr anchor pagebreak',
+				'searchreplace wordcount visualblocks visualchars code fullscreen',
+				'insertdatetime media nonbreaking save table contextmenu directionality',
+				'emoticons template paste textcolor colorpicker textpattern imagetools'
+			],
+			toolbar1: 'insertfile undo redo | styleselect | bold italic | alignleft aligncenter alignright alignjustify | bullist numlist outdent indent | link image',
+			toolbar2: 'print preview media | forecolor backcolor emoticons',
+			image_advtab: true
+		});
+		tinymce.suffix = ".min";
+		tinyMCE.baseURL = "{{ asset('js/tinymce/') }}";
+	
+	 </script>
 
 @endpush
