@@ -38,6 +38,7 @@ class HomeController extends Controller
     public function dashboard(){
         $data['left_active'] = 'dashboard';
         $data['employer_info'] = Employer::find(Auth::guard('employer')->user()->id);
+        $data['jobCount'] = Job::all()->count();
         return view('employer.dashboard', $data);
     }
 
@@ -220,6 +221,18 @@ class HomeController extends Controller
         }
         
     }
+
+    public function editJobForm($id) {
+        $data['left_active'] = 'manage_job';
+        $data['editJob'] = Job::findOrFail($id)->first();
+        $data['employer_info'] = Employer::find(Auth::guard('employer')->user()->id);
+        $data['job_levels'] = Job_level::all();
+        $data['job_categories'] = Job_category::all();
+        $data['job_designations'] = Job_designation::all();
+        $data['job_experiences'] = Job_experience::all();
+        $data['skills'] = Skill::all();
+        return view('employer.edit_job', $data);
+    }   
 
     public function deleteJob($id) {
         $postedJob = Job::where('employer_id', Auth::guard('employer')->user()->id)->where('id', $id)->first();

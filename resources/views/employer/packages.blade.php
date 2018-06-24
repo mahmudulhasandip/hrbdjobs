@@ -101,11 +101,11 @@
                                                                 </tr>
                                                             </thead>
                                                             <tbody class="table-hover">
+                                                                @php
+                                                                $id2 = 1;
+                                                                @endphp
+                                                                @foreach($featured_packages as $featured_package)
                                                                 <tr>
-                                                                    @php
-                                                                    $id2 = 1;
-                                                                    @endphp
-                                                                    @foreach($featured_packages as $featured_package)
                                                                     <td>{{ $id2++ }}</td>
                                                                     <td>{{ $featured_package->name }}</td>
                                                                     <td>{{ $featured_package->price }}</td>
@@ -116,8 +116,8 @@
                                                                     <td class="text-center">
                                                                         <a href="/employer/featured_package/{{ $featured_package->id }}" class="buy_btn">Buy</a>
                                                                     </td>
-                                                                    @endforeach
                                                                 </tr>
+                                                                @endforeach
                                                             </tbody>
                                                         </table>
                                                     </div>

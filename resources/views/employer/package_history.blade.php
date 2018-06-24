@@ -56,8 +56,8 @@
                                                             @foreach($packageHistories as $packageHistory)
                                                             <tr>
                                                                 <td>{{ $id++ }}</td>
-                                                                <td>{{ ($packageHistory->job_package_id) ? $packageHistory->jobPackage->first()->name : '-' }}</td>
-                                                                <td>{{ ($packageHistory->featured_package_id) ? $packageHistory->featuredPackage->first()->name : '-' }}</td>
+                                                                <td>{{ ($packageHistory->job_package_id) ? $packageHistory->jobPackage->name : '-' }}</td>
+                                                                <td>{{ ($packageHistory->featured_package_id) ? $packageHistory->featuredPackage->name : '-' }}</td>
                                                                 <td>{{ $packageHistory->expired_date }}</td>
                                                                 <td>{{ $packageHistory->remain_amount }}</td>
                                                             </tr>

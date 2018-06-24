@@ -79,8 +79,8 @@
 						 					</td>
 						 					<td>
 						 						<ul class="action_job">
-						 							<li><span>View Job</span><a href="#" title=""><i class="la la-eye"></i></a></li>
-						 							<li><span>Edit</span><a href="#" title=""><i class="la la-pencil"></i></a></li>
+						 							<li><span>View Job</span><a href="/employer/job_details/{{ $job->id }}" title=""><i class="la la-eye"></i></a></li>
+						 							<li><span>Edit</span><a href="{{ route('employer.edit.job.view', $job->id) }}" title=""><i class="la la-pencil"></i></a></li>
 													<li><span>Delete</span><a class="delete" href="" title=""><i class="la la-trash-o"></i></a></li>
 													<form id="delete-form" action="{{ route('employer.delete.job', $job->id) }}" method="get">
 														<input type="hidden" name="_method" value="delete" />
@@ -115,7 +115,7 @@
 		position: 'center', // bottomRight, bottomLeft, topRight, topLeft, topCenter, bottomCenter
 		progressBar: true,
 		overlay: true,
-		progressBarColor: 'rgb(0, 255, 184)',
+		progressBarColor: '#e54545',
 		buttons: [
 			['<button>Delete</button>', function (instance, toast) {
 				$('#delete-form').submit();

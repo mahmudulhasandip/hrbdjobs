@@ -36,7 +36,7 @@
 									<div class="row no-gape">
 										<div class="col-lg-4 col-md-4 col-sm-12">
 											<div class="p-category">
-												<a href="company_profile.html" title="">
+												<a href="{{ route('employer.company.profile') }}" title="">
 													<i class="la la-briefcase"></i>
 													<span>Company Details</span>
 													<p>Show Details</p>
@@ -46,7 +46,7 @@
 										
 										<div class="col-lg-4 col-md-4 col-sm-12">
 											<div class="p-category">
-												<a href="post_a_new_job.html" title="">
+												<a href="{{ route('employer.new.job') }}" title="">
 													<i class="la la-file-text "></i>
 													<span>Post A Job</span>
 													<p>Create New Job</p>
@@ -55,10 +55,10 @@
 										</div>
 										<div class="col-lg-4 col-md-4 col-sm-12">
 											<div class="p-category">
-												<a href="employer_manage_jobs.html" title="">
+												<a href="{{ route('employer.manage.job') }}" title="">
 													<i class="la la-check"></i>
 													<span>Manage Jobs</span>
-													<p>(05 Jobs)</p>
+													<p>({{$jobCount}} Job{{ $jobCount>1 ? 's' : '' }})</p>
 												</a>
 											</div>
 										</div>
@@ -68,7 +68,7 @@
 									<div class="row no-gape">
 										<div class="col-lg-4 col-md-4 col-sm-12">
 											<div class="p-category">
-												<a href="packages.html" title="">
+												<a href="{{ route('employer.packages.list') }}" title="">
 													<i class="la la-file-o"></i>
 													<span>Packages</span>
 													<p>View Packages</p>
