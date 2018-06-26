@@ -82,4 +82,8 @@ class Candidate extends Authenticatable
     public function favouriteJob(){
         return $this->hasMany('App\Favourite_job', 'candidate_id', 'id');
     }
+
+    public function verifyCandidate(){
+        return $this->hasOne('App\VerifyCandidate', 'user_id', 'id');
+    }
 }

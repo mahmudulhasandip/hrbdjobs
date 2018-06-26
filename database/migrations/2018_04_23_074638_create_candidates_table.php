@@ -35,6 +35,7 @@ class CreateCandidatesTable extends Migration
             $table->text('about_me')->nullable();
             $table->string('website')->nullable();
             $table->string('linkedin')->nullable();
+            $table->boolean('verified')->default(false);
             $table->string('dp')->nullable();
             $table->rememberToken();
             $table->timestamps();

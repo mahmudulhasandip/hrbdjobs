@@ -1,50 +1,29 @@
 <div class="tree_widget-sec">
+
     <ul>
-        {{--
         <li class="inner-child {{ ($left_active == 'profile')? 'active':'' }}">
             <a href="#" title="" class="main-a"><i class="la la-file-text"></i>My Profile</a>
             <ul>
-                <li><a href="{{ route('employer.profile') }}" title="">View Profile</a></li>
-                <li><a href="{{ route('employer.profile.edit') }}" title="">Edit Profile</a></li>
-            </ul>
-        </li> --}}
-        <li class="inner-child {{ ($left_active == 'company')? 'active':'' }}">
-            <a href="#" title="" class="main-a"><i class="la la-industry"></i>Company Details</a>
-            <ul>
-                <li><a href="{{ route('employer.company.profile') }}" title="">View Details</a></li>
-                <li><a href="{{ route('employer.company.profile.edit') }}" title="">Edit Details</a></li>
+                <li><a href="{{ route('candidate.profile') }}" title="">View Profile</a></li>
+                <li><a href="{{ route('candidate.profile.edit') }}" title="">Edit Profile</a></li>
             </ul>
         </li>
-        <li class="inner-child {{ ($left_active == 'job')? 'active':'' }}">
-            <a href="#" title="" class="main-a"><i class="la la-file-text"></i>Post a Job</a>
-            <ul>
-                <li><a href="{{ route('employer.new.job') }}" title="">New Job</a></li>
-                <li><a href="{{ route('employer.draft.job') }}" title="">Drafted Job</a></li>
-            </ul>
+        <li class="inner-child  {{ ($left_active == 'applied_jobs')? 'active':'' }}">
+            <a href="{{ route('candidate.applied.jobs') }}" title="" class=""><i class="la la-briefcase"></i>Applied Job</a>
         </li>
-        <li class="inner-child {{ ($left_active == 'manage_job')? 'active':'' }}">
-            <a href="{{ route('employer.manage.job') }}" title="" class=""><i class="la la-briefcase"></i>Manage Jobs</a>
+        <li class="inner-child {{ ($left_active == 'resume')? 'active':'' }}">
+            <a href="{{ route('candidate.resume') }}" title="" class=""><i class="la la-paper-plane"></i>My Resume</a>
         </li>
-        <li class="inner-child {{ ($left_active == 'shortlisted')? 'active':'' }}">
-            <a href="{{ route('employer.shortlisted.candidate')}}" title="" class=""><i class="la la-bookmark"></i>Shorlisted</a>
+        <li class="inner-child {{ ($left_active == 'appropriate_job')? 'active':'' }}">
+            <a href="{{ route('candidate.appropriate.job') }}" title="" class=""><i class="la la-check-circle"></i>Appropriate For Me</a>
         </li>
-        <li class="inner-child {{ ($left_active == 'browse_resume')? 'active':'' }}">
-            <a href="{{ route('employer.browse.candidate.resume') }}" title="" class=""><i class="la la-binoculars"></i>Browse Resume</a>
-        </li>
-        <li class="inner-child {{ ($left_active == 'packages') ? 'active':'' }}">
-            <a href="#" title="" class="main-a"><i class="la la-cart-arrow-down"></i>Packages</a>
-            <ul>
-                <li><a href="{{ route('employer.packages.list') }}" title="">Purchase</a></li>
-                <li><a href="{{ route('employer.packages.history') }}" title="">My Packages</a></li>
-            </ul>
-        </li>
-        <li class="inner-child {{ ($left_active == 'profile') ? 'active':'' }}">
-            <a href="{{ route('employer.profile.edit') }}" title="" class=""><i class="la la-user"></i>Edit My Profile</a>
+        <li class="inner-child {{ ($left_active == 'follow_companies')? 'active':'' }}">
+            <a href="{{ route('candidate.follow.companies') }}" title="" class=""><i class="la la-binoculars"></i>Follow Companies</a>
         </li>
         <li class="inner-child">
-            <a href="#" title="" class=""><i class="la la-lock"></i>Change Password</a>
+            <a href="./job_list_modern.html" title="" class=""><i class="la la-bookmark"></i>Shorlisted</a>
         </li>
-        <li><a href="{{ route('employer.logout') }}" onclick="event.preventDefault();
+        <li><a href="{{ route('candidate.logout') }}" onclick="event.preventDefault();
                 document.getElementById('logout-form').submit();" title="" class=""><i class="la la-unlink"></i>Logout</a>
         </li>
     </ul>

@@ -34,11 +34,11 @@
             <div class="row">
                 <div class="col-lg-12">
                     <div class="account-popup-area signin-popup-box static">
-                        <div class="account-popup signup">
+                        <div class="account-popup">
                             <form method="POST" action="{{ url('/candidate/register') }}" name="registration">
                                 {{ csrf_field() }}
-                                <div class="cfield col-sm-6 {{ $errors->has('fname') ? ' has-error' : '' }}">
-                                    <input type="text" placeholder="First Name" name="fname" required />
+                                <div class="cfield {{ $errors->has('fname') ? ' has-error' : '' }}">
+                                    <input type="text" placeholder="First Name" name="fname" value="{{ old('fname') }}" required />
                                     <i class="la la-user"></i>
 
                                     @if ($errors->has('fname'))
@@ -47,8 +47,8 @@
                                         </span>
                                     @endif
                                 </div>
-                                <div class="cfield col-sm-6 {{ $errors->has('lname') ? ' has-error' : '' }}">
-                                    <input type="text" placeholder="Last Name" name="lname" required />
+                                <div class="cfield {{ $errors->has('lname') ? ' has-error' : '' }}">
+                                    <input type="text" placeholder="Last Name" name="lname" value="{{ old('lname') }}" required />
                                     <i class="la la-user"></i>
 
                                     @if ($errors->has('lname'))
@@ -57,8 +57,8 @@
                                         </span>
                                     @endif
                                 </div>
-                                <div class="cfield col-sm-6 {{ $errors->has('username') ? ' has-error' : '' }}">
-                                    <input type="text" id="username" placeholder="username" name="username" required/>
+                                <div class="cfield {{ $errors->has('username') ? ' has-error' : '' }}">
+                                    <input type="text" id="username" placeholder="Username" name="username" value="{{ old('username') }}" required/>
                                     <i class="la la-user"></i>
 
                                     @if ($errors->has('username'))
@@ -67,16 +67,16 @@
                                         </span>
                                     @endif
                                 </div>
-                                <div class="dropdown-field col-sm-6">
+                                <div class="dropdown-field">
                                     <select data-placeholder="Please Select Specialism" class="chosen" name="gender">
-                                        <option value="Male">Male</option>
-                                        <option value="Female">Female</option>
-                                        <option value="Other">Other</option>
+                                        <option {{ old('gender') == 'Male' ? 'selected':'' }} value="Male">Male</option>
+                                        <option {{ old('gender') == 'Female' ? 'selected':'' }} value="Female">Female</option>
+                                        <option {{ old('gender') == 'Other' ? 'selected':'' }} value="Other">Other</option>
                                     </select>
                                 </div>
 
-                                <div class="cfield col-sm-6 {{ $errors->has('email') ? ' has-error' : '' }}">
-                                    <input type="email" id="email" placeholder="Email" name="email" required/>
+                                <div class="cfield {{ $errors->has('email') ? ' has-error' : '' }}">
+                                    <input type="email" id="email" placeholder="Email" name="email" value="{{ old('email') }}" required/>
                                     <i class="la la-envelope"></i>
 
                                     @if ($errors->has('email'))
@@ -86,7 +86,7 @@
                                     @endif
                                 </div>
 
-                                <div class="cfield col-sm-6 {{ $errors->has('password') ? ' has-error' : '' }}">
+                                <div class="cfield {{ $errors->has('password') ? ' has-error' : '' }}">
                                     <input type="password" placeholder="Password" name="password" />
                                     <i class="la la-key"></i>
 
@@ -97,7 +97,7 @@
                                     @endif
                                 </div>
 
-                                <div class="cfield col-sm-6 {{ $errors->has('password_confirmation') ? ' has-error' : '' }}">
+                                <div class="cfield {{ $errors->has('password_confirmation') ? ' has-error' : '' }}">
                                     <input type="password" placeholder="Confirm Password" name="password_confirmation" />
                                     <i class="la la-key"></i>
 
@@ -116,7 +116,6 @@
                                     <a class="google-login" href="#" title=""><i class="fa fa-google"></i></a>
                                     <!-- <a class="tw-login" href="#" title=""><i class="fa fa-twitter"></i></a> -->
                                 </div>
-                                
                             </div>
                         </div>
                     </div><!-- LOGIN POPUP -->
