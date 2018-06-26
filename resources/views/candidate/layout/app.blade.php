@@ -60,6 +60,7 @@
 <script src="/js/parallax.js" type="text/javascript"></script>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/toastr.js/2.1.4/toastr.min.js"></script>
 <script src="/js/select-chosen.js" type="text/javascript"></script>
+
 @stack('js')
 
 </body>

@@ -78,6 +78,8 @@ Route::group(['prefix' => 'candidate'], function () {
   Route::get('/password/reset', 'CandidateAuth\ForgotPasswordController@showLinkRequestForm')->name('candidate.password.reset');
   Route::get('/password/reset/{token}', 'CandidateAuth\ResetPasswordController@showResetForm');
 
+  Route::get('/email/verify/{token}', 'CandidateAuth\RegisterController@verifyCandidate');
+
   Route::post('/check/username', 'CandidateAuth\RegisterController@checkUsername');
 });
 

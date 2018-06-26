@@ -128,9 +128,6 @@ class HomeController extends Controller
         return view('employer.post_new_job', $data);
     }
 
-
-    
-
     public function postJob(Request $request) {
         $data['left_active'] = 'job';
 

@@ -4,6 +4,10 @@ namespace App\Http\Controllers\CandidateAuth;
 
 use App\Candidate;
 use Validator;
+use App\VerifyCandidate;
+use App\Mail\VerifyCandidateMail;
+use Mail;
+use Illuminate\Mail\Mailer;
 use App\Http\Controllers\Controller;
 use Illuminate\Foundation\Auth\RegistersUsers;
 use Illuminate\Support\Facades\Auth;
@@ -74,8 +78,38 @@ class RegisterController extends Controller
         $candidate->email = $data['email'];
         $candidate->password = bcrypt($data['password']);
         $candidate->save();
+
+        // verify email
+        $verifyUser = VerifyCandidate::create([
+            'user_id' => $candidate->id,
+            'token' => str_random(40)
+        ]);
+
+        Mail::to($candidate->email)->send(new VerifyCandidateMail($candidate));
         
         return $candidate;
+    }
+
+
+    # verify candidate from mail link
+    public function verifyCandidate($token)
+    {
+        $verifyCandidate = VerifyCandidate::where('token', $token)->first();
+        if(isset($verifyCandidate) ){
+            $candidate = $verifyCandidate->candidate;
+            if(!$candidate->verified) {
+                $verifyCandidate->candidate->verified = 1;
+                $verifyCandidate->candidate->save();
+                VerifyCandidate::where('token', $token)->delete();
+                $status = "Your e-mail is verified. You can now login.";
+            }else{
+                $status = "Your e-mail is already verified. You can now login.";
+            }
+        }else{
+            return redirect('/candidate/login')->with('warning', "Sorry your email cannot be identified.");
+        }
+ 
+        return redirect('/candidate/login')->with('status', $status);
     }
 
     /**
@@ -104,6 +138,12 @@ class RegisterController extends Controller
         $email = $request->input('email');
         $email = Candidate::where('email', $email)->first();
         return ($email) ? 1 : 0;
+    }
+
+    protected function registered(Request $request, $user)
+    {
+        $this->guard()->logout();
+        return redirect('/candidate/login')->with('status', 'We sent you an activation code. Check your email and click on the link to verify.');
     }
 
     protected function guard()
