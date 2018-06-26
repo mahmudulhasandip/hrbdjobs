@@ -33,18 +33,28 @@
 				 		<div class="padding-left">
 					 		<div class="profile-title">
 					 			<h3>Candidate's Profile</h3>
-					 			
-					 			<div class="upload-img-bar">
-					 				<span class="round"><img src="http://placehold.it/140x140" alt="" /><i>x</i></span>
-					 				<div class="upload-info">
-					 					<a href="#" title="">Browse</a>
-					 					<span>Max file size is 1MB, Minimum dimension: 270x210 And Suitable files are .jpg & .png</span>
-					 				</div>
-					 			</div>
 					 		</div>
 					 		<div class="profile-form-edit">
-					 			<form>
+					 			<form method="post" action="{{ route('candidate.update.profile') }}" enctype="multipart/form-data">
+					 				@csrf
 					 				<div class="row">
+					 					<div id="file-upload-form" class="uploader">
+											<input id="file-upload" type="file" name="dp" accept="image/*" />
+			
+											<label for="file-upload" id="file-drag">
+												<img id="file-image" src="{{ asset('storage/uploads/'.(($candidate->dp) ? $candidate->dp : 'default_user.png'))}}" alt="Preview" class="">
+												<div id="start">
+												<i class="fa fa-download" aria-hidden="true"></i>
+												<div>Select a profile picture or drag here</div>
+												<div id="notimage" class="hidden">Please select an image</div>
+												<span id="file-upload-btn" class="btn btn-primary">Select a file</span>
+												</div>
+												<div id="response" class="hidden">
+												<div id="messages"></div>
+												</div>
+											</label>
+										</div>
+
 					 					<div class="col-lg-6">
 					 						<span class="pf-title">Full Name</span>
 					 						<div class="pf-field">
@@ -281,4 +291,119 @@
 		</div>
 	</section>
 @endsection
+
+@push('js')
+
+<script>
+	// File Upload
+function ekUpload(){
+  function Init() {
+
+    // console.log("Upload Initialised");
+
+    var fileSelect    = document.getElementById('file-upload'),
+        fileDrag      = document.getElementById('file-drag'),
+        submitButton  = document.getElementById('submit-button');
+
+    fileSelect.addEventListener('change', fileSelectHandler, false);
+
+    // Is XHR2 available?
+    var xhr = new XMLHttpRequest();
+    if (xhr.upload) {
+      // File Drop
+      fileDrag.addEventListener('dragover', fileDragHover, false);
+      fileDrag.addEventListener('dragleave', fileDragHover, false);
+      fileDrag.addEventListener('drop', fileSelectHandler, false);
+    }
+  }
+
+  function fileDragHover(e) {
+    var fileDrag = document.getElementById('file-drag');
+
+    e.stopPropagation();
+    e.preventDefault();
+
+    fileDrag.className = (e.type === 'dragover' ? 'hover' : 'modal-body file-upload');
+  }
+
+  function fileSelectHandler(e) {
+    // Fetch FileList object
+    var files = e.target.files || e.dataTransfer.files;
+
+    // Cancel event and hover styling
+    fileDragHover(e);
+
+    // Process all File objects
+    for (var i = 0, f; f = files[i]; i++) {
+      parseFile(f);
+      uploadFile(f);
+    }
+  }
+
+  // Output
+  function output(msg) {
+    // Response
+    var m = document.getElementById('messages');
+    m.innerHTML = msg;
+  }
+
+  function parseFile(file) {
+
+    console.log(file.name);
+    output(
+      '<strong>' + encodeURI(file.name) + '</strong>'
+    );
+    
+    // var fileType = file.type;
+    // console.log(fileType);
+    var imageName = file.name;
+
+    var isGood = (/\.(?=gif|jpg|png|jpeg)/gi).test(imageName);
+    if (isGood) {
+      document.getElementById('start').classList.add("hidden");
+      document.getElementById('response').classList.remove("hidden");
+      document.getElementById('notimage').classList.add("hidden");
+      // Thumbnail Preview
+      document.getElementById('file-image').classList.remove("hidden");
+      document.getElementById('file-image').src = URL.createObjectURL(file);
+    }
+    else {
+      document.getElementById('file-image').classList.add("hidden");
+      document.getElementById('notimage').classList.remove("hidden");
+      document.getElementById('start').classList.remove("hidden");
+      document.getElementById('response').classList.add("hidden");
+      document.getElementById("file-upload-form").reset();
+    }
+  }
+
+  function setProgressMaxValue(e) {
+    var pBar = document.getElementById('file-progress');
+
+    if (e.lengthComputable) {
+      pBar.max = e.total;
+    }
+  }
+
+  function updateFileProgress(e) {
+    var pBar = document.getElementById('file-progress');
+
+    if (e.lengthComputable) {
+      pBar.value = e.loaded;
+    }
+  }
+
+
+
+  // Check for the various File API support.
+  if (window.File && window.FileList && window.FileReader) {
+    Init();
+  } else {
+    document.getElementById('file-drag').style.display = 'none';
+  }
+}
+ekUpload();
+
+</script>
+
+@endpush
 

@@ -1,10 +1,12 @@
 <?php
 
+Route::get('/', 'CandidateController\HomeController@dashboard');
 Route::get('/home', 'CandidateController\HomeController@dashboard')->name('home');
 
 //
 Route::get('/profile', 'CandidateController\ProfileController@getProfile')->name('profile');
 Route::get('/profile/edit', 'CandidateController\ProfileController@getEditProfile')->name('profile.edit');
+Route::post('profile/edit', 'CandidateController\ProfileController@postEditProfile')->name('update.profile');
 
 //
 Route::get('/applied/jobs', 'CandidateController\AppliedJobController@getAppliedJobs')->name('applied.jobs');
