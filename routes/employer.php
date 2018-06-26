@@ -32,6 +32,8 @@ Route::get('/post/new/job/{id}', 'EmployerController\HomeController@draftedJobFo
 Route::get('/edit/job/{id}', 'EmployerController\HomeController@editJobForm')->name('edit.job.view');
 Route::get('/delete/job/{id}', 'EmployerController\HomeController@deleteJob')->name('delete.job');
 
+Route::post('/manage/job/feature_job', 'EmployerController\HomeController@featureJob')->name('feature.job');
+
 // employer profile update
 Route::get('/profile/edit', 'EmployerController\HomeController@getEditProfile')->name('profile.edit');
 Route::post('/profile/edit', 'EmployerController\HomeController@updateEmployerProfile')->name('update.employer.profile');

@@ -7620,6 +7620,19 @@ aside .widget.border:first-child {
     border-bottom: 1px solid #e8ecec;
 }
 
+.manage-jobs-sec>table tbody tr td:first-child{
+    position: relative;
+    padding-left: 30px;
+    padding-right: 5px;
+}
+
+.feature_icon{
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 18%;
+}
+
 .table-list-title>h3 {
     font-family: Open Sans;
     font-size: 14px;
@@ -13308,7 +13321,7 @@ header.style4 .account-btns>li a,
 }
 
 .text-blue {
-    color: #8b91dd;
+    color: #8b91dd !important;
 }
 
 /*  */

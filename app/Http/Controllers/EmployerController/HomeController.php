@@ -268,6 +268,7 @@ class HomeController extends Controller
         $data['allJobs'] = Job::where('employer_id', Auth::guard('employer')->user()->id)->where('is_drafted', 0)->get();
         $data['totalJobs'] = Job::where('employer_id', Auth::guard('employer')->user()->id)->count();
         $data['activeJobs'] = Job::where('is_verified', 1)->count();
+        $data['featured_job'] = Employer_package::where('employer_id', Auth::guard('employer')->user()->id)->where('featured_package_id', '=', 1)->first();
         return view('employer.manage_job', $data);
     }
 
@@ -278,6 +279,18 @@ class HomeController extends Controller
         $data['job'] = Job::find($id);
         $data['company_info'] = DB::table('employer_company_infos')->where('employer_id', Auth::guard('employer')->user()->id)->first();
         return view('employer.job_details', $data);
+    }
+
+    // feature a job post
+    public function featureJob(Request $request){
+        $job = Job::where('employer_id', Auth::guard('employer')->user()->id)->findOrFail($request->featureJobId);
+        $feature_package = Employer_package::where('employer_id', Auth::guard('employer')->user()->id)->where('featured_package_id', '=', 1)->first();
+        $feature_package->remain_amount = $feature_package->remain_amount - 1;
+        $job->is_featured = 1;
+        $feature_package->save();
+        $job->save();
+
+        return redirect()->route('employer.manage.job')->with('status', 'Your job post successfully Featured.');
     }
 
     // public function getProfile(){

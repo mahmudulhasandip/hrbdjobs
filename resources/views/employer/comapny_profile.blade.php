@@ -29,7 +29,7 @@
 				 					<div class="col-lg-9">
 										@include('employer.layout.alert')
 				 						<div class="job-single-head3 emplye">
-										 <div class="job-thumb"> <img src="{{ asset('storage/uploads/'.$company_info->logo)}}" alt="" /></div>
+										 <div class="job-thumb"> <img src="{{ ( $company_info->logo ) ? asset('storage/uploads/'.$company_info->logo) : asset('storage/uploads/company-avatar.png') }}" alt="" /></div>
 							 				<div class="job-single-info3">
 							 					<h3>{{ $company_info->name }}</h3>
 							 					<span><i class="la la-map-marker"></i>{{ $company_info->city }}, {{ $company_info->country }}</span>
