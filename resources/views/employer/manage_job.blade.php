@@ -46,9 +46,10 @@
 						 		<table>
 						 			<thead>
 						 				<tr>
-						 					<td>Title</td>
+						 					<td width="300">Title</td>
 						 					<td>Applications</td>
-						 					<td>Created & Expired</td>
+											<td>Created<br> Expired</td>
+											<td>Featured</td>
 						 					<td>Status</td>
 						 					<td>Action</td>
 						 				</tr>
@@ -57,9 +58,9 @@
 
 										@foreach($allJobs as $job)
 										@php
-										$year = $job->created_at->year;
-										$month = $job->created_at->month;
-										$day = $job->created_at->day;
+										// $year = $job->created_at->year;
+										// $month = $job->created_at->month;
+										// $day = $job->created_at->day;
 										@endphp
 						 				<tr>
 						 					<td>
@@ -71,9 +72,12 @@
 						 						<span class="applied-field">3+ Applied</span>
 						 					</td>
 						 					<td>
-						 						<span>{{ $year ."-". $month ."-". $day }}</span><br />
-						 						<span>{{ $job->deadline }}</span>
-						 					</td>
+						 						<span>{{ date("d M Y", strtotime($job->created_at)) }}</span><br />
+						 						<span>{{ date("d M Y", strtotime($job->deadline)) }}</span>
+											</td>
+											<td>
+												
+											</td>
 						 					<td>
 						 						<span class="status  {{ ($job->is_varified) ? 'active' : 'inactive' }} ">{{ ($job->is_varified) ? 'Active' : 'Inactive' }}</span>
 						 					</td>
