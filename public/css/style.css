@@ -67,12 +67,6 @@ span,
 applet,
 object,
 iframe,
-h1,
-h2,
-h3,
-h4,
-h5,
-h6,
 p,
 blockquote,
 pre,
@@ -217,7 +211,6 @@ h3,
 h4,
 h5,
 h6 {
-    margin-bottom: 20px;
     font-family: 'Quicksand', serif;
 }
 
@@ -478,7 +471,6 @@ textarea {
 
 textarea {
     max-width: 100%;
-    min-height: 200px;
     padding: 19px 28px;
 }
 
@@ -7419,7 +7411,7 @@ aside .widget.border:first-child {
     -ms-border-radius: 8px;
     -o-border-radius: 8px;
     border-radius: 8px;
-    padding: 12px 45px 12px 15px;
+    padding: 12px 15px 12px 15px;
     background: #ffffff;
     font-family: Open Sans;
     font-size: 13px;
@@ -7429,7 +7421,7 @@ aside .widget.border:first-child {
 
 .pf-field>textarea {
     color: #888888;
-    padding: 30px 30px;
+    padding: 20px 20px;
 }
 
 .profile-form-edit>form button {
@@ -13846,4 +13838,9 @@ textarea {
     width: 100%;
     /* padding: 45px 40px 40px 40px; */
     background-color: white;
+}
+
+.pf-field>input:read-only, .pf-field>textarea:read-only { 
+    background-color: #e8ecec;
+    cursor: no-drop;
 }

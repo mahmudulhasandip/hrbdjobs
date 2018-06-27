@@ -18,97 +18,158 @@
 			</label>
 		</div>
 		<div class="col-lg-6">
-			<span class="pf-title">Full Name</span>
+			<span class="pf-title">First Name</span>
 			<div class="pf-field">
-				<input type="text" placeholder="Ali TUFAN" />
+				<input type="text" name="fname" value="{{ $candidate->fname }}" />
 			</div>
 		</div>
 		<div class="col-lg-6">
-			<span class="pf-title">Job Title</span>
+			<span class="pf-title">Last Name</span>
 			<div class="pf-field">
-				<input type="text" placeholder="UX / UI Designer" />
+				<input type="text" name="lname" value="{{ $candidate->lname }}" />
 			</div>
 		</div>
 		<div class="col-lg-6">
-			<span class="pf-title">Allow In Search</span>
+			<span class="pf-title">Username</span>
 			<div class="pf-field">
-				<select data-placeholder="Allow In Search" class="chosen">
-					<option>Yes</option>
-					<option>No</option>
+				<input type="text" name="username" value="{{ $candidate->username }}" readonly />
+			</div>
+		</div>
+		<div class="col-lg-6">
+			<span class="pf-title">Email</span>
+			<div class="pf-field">
+				<input type="text" name="email" value="{{ $candidate->email }}" readonly />
+			</div>
+		</div>
+		<div class="col-lg-6">
+			<span class="pf-title">Gender</span>
+			<div class="pf-field">
+				<select name="gender" data-placeholder="Allow In Search" class="chosen">
+					<option value="Male" {{ $candidate->gender == 'Male' ? 'selected':'' }}>Male</option>
+					<option value="Female" {{ $candidate->gender == 'Female' ? 'selected':'' }}>Female</option>
+					<option value="Other" {{ $candidate->gender == 'Other' ? 'selected':'' }}>Other</option>
 				</select>
 			</div>
 		</div>
 		<div class="col-lg-6">
-			<span class="pf-title">Minimum Salary</span>
+			<span class="pf-title">Birthday</span>
 			<div class="pf-field">
-				<input type="text" placeholder="$4250" />
+				<input type="text" name="date_of_birth" id="datepicker" value="{{ date('m/d/Y', strtotime(($candidate->date_of_birth) ? $candidate->date_of_birth : '01-01-1990')) }}">
 			</div>
 		</div>
 		<div class="col-lg-6">
-			<span class="pf-title">Experience</span>
+			<span class="pf-title">Country</span>
 			<div class="pf-field">
-				<select data-placeholder="Allow In Search" class="chosen">
-					<option>2-6 Years</option>
-					<option>6-12 Years</option>
+				<select name="country" class="chosen">
+					@foreach($countries as $country)
+					@if($candidate->country)
+						<option value="{{ $country->name }}" {{ ($candidate->country == $country->name) ? 'selected':''}}>{{ $country->name }}</option>
+					@else
+						<option value="{{ $country->name }}" {{ ($country->name == 'Bangladesh') ? 'selected':''}}>{{ $country->name }}</option>
+					@endif
+					@endforeach
 				</select>
 			</div>
 		</div>
 		<div class="col-lg-6">
-			<span class="pf-title">Age</span>
+			<span class="pf-title">City</span>
 			<div class="pf-field">
-				<select data-placeholder="Allow In Search" class="chosen">
-					<option>22-30 Years</option>
-					<option>30-40 Years</option>
-					<option>40-50 Years</option>
-				</select>
+				<input type="text" name="city" value="{{ $candidate->city }}" placeholder="Your City" />
 			</div>
 		</div>
-		<div class="col-lg-3">
-			<span class="pf-title">Current Salary($) min</span>
-			<div class="pf-field">
-				<input type="text" placeholder="20K" />
-			</div>
-		</div>
-		<div class="col-lg-3">
-			<span class="pf-title">Max</span>
-			<div class="pf-field">
-				<input type="text" placeholder="30K" />
-			</div>
-		</div>
-		<div class="col-lg-3">
-			<span class="pf-title">Expected Salary($) min</span>
-			<div class="pf-field">
-				<input type="text" placeholder="30k" />
-			</div>
-		</div>
-		<div class="col-lg-3">
-			<span class="pf-title">Max</span>
-			<div class="pf-field">
-				<input type="text" placeholder="40K" />
-			</div>
-		</div>
+
 		<div class="col-lg-6">
-			<span class="pf-title">Education Levels</span>
+			<span class="pf-title">Current Address</span>
+			<div class="pf-field">
+				<textarea name="current_address" rows="2">{{ $candidate->current_address }}</textarea>
+			</div>
+		</div>
+
+		<div class="col-lg-6">
+			<span class="pf-title">Permanent Address</span>
+			<div class="pf-field">
+				<textarea name="permanent_address" rows="2">{{ $candidate->permanent_address }}</textarea>
+			</div>
+		</div>
+
+		<div class="col-lg-3">
+			<span class="pf-title">Nationality</span>
+			<div class="pf-field">
+				<input type="text" name="nationality" value="{{ $candidate->nationality }}" placeholder="Your Nationality" />
+			</div>
+		</div>
+
+		<div class="col-lg-3">
+			<span class="pf-title">NID/Passport</span>
+			<div class="pf-field">
+				<input type="text" name="nid_passport" value="{{ $candidate->nid_passport }}" placeholder="Your NID or Passport" />
+			</div>
+		</div>
+
+		<div class="col-lg-3">
+			<span class="pf-title">Contact No</span>
+			<div class="pf-field">
+				<input type="text" name="phone" value="{{ $candidate->phone }}" placeholder="Your Contact Number" />
+			</div>
+		</div>
+
+		<div class="col-lg-3">
+			<span class="pf-title">Marital Status</span>
 			<div class="pf-field">
 				<select data-placeholder="Please Select Specialism" class="chosen">
-					<option>Diploma</option>
-					<option>Inter</option>
-					<option>Bachelor</option>
-					<option>Graduate</option>
+					<option value="Married" {{ $candidate->marital_status == 'Married' ? 'selected':'' }}>Married</option>
+					<option value="Unmarried" {{ $candidate->marital_status == 'Unmarried' ? 'selected':'' }}>Unmarried</option>
+					<option value="Divorced" {{ $candidate->marital_status == 'Divorced' ? 'selected':'' }}>Divorced</option>
 				</select>
 			</div>
 		</div>
-		<div class="col-lg-6">
-			<span class="pf-title">Languages</span>
+
+		<div class="col-lg-3">
+			<span class="pf-title">Father's Name</span>
 			<div class="pf-field">
-				<div class="pf-field">
-					<select data-placeholder="Please Select Specialism" class="chosen">
-						<option>English</option>
-						<option>German</option>
-					</select>
-				</div>
+				<input type="text" name="father_name" value="{{ $candidate->father_name }}" placeholder="Your Father Name" />
 			</div>
 		</div>
+
+		<div class="col-lg-3">
+			<span class="pf-title">Mother's Name</span>
+			<div class="pf-field">
+				<input type="text" name="mother_name" value="{{ $candidate->mother_name }}" placeholder="Your Mother Name" />
+			</div>
+		</div>
+
+		<div class="col-lg-6">
+			<span class="pf-title">Spouse Name</span>
+			<div class="pf-field">
+				<input type="text" name="spouse_name" value="{{ $candidate->spouse_name }}" placeholder="Your Mother Name" />
+			</div>
+		</div>
+
+		<div class="col-lg-6">
+			<span class="pf-title">Website</span>
+			<div class="pf-field">
+				<input type="text" name="website" value="{{ $candidate->website }}" placeholder="www.example.com" />
+			</div>
+		</div>
+
+		<div class="col-lg-6">
+			<span class="pf-title">Linkedin</span>
+			<div class="pf-field">
+				<input type="text" name="linkedin" value="{{ $candidate->linkedin }}" placeholder="www.linkedin.com/in/exapmle123/" />
+			</div>
+		</div>
+
+		<div class="col-lg-12">
+			<span class="pf-title">Summary</span>
+			<div class="pf-field">
+				<textarea name="about_me" rows="5">Spent several years working on sheep on Wall Street. Had moderate success investing in Yugos on Wall Street. Managed a small team buying and selling pogo sticks for farmers. Spent several years licensing licorice in West Palm Beach, FL. Developed severalnew methods for working with banjos in the aftermarket. Spent a weekend importing banjos in West Palm Beach, FL.In this position, the Software Engineer ollaborates with Evention's Development team to continuously enhance our current software solutions as well as create new solutions to eliminate the back-office operations and management challenges present</textarea>
+			</div>
+		</div>
+
+		<div class="col-lg-12">
+			<h3 class="text-center">Skill Info</h3>
+		</div>
+		
 		<div class="col-lg-12">
 			<span class="pf-title">Categories</span>
 			<div class="pf-field no-margin">
@@ -125,12 +186,7 @@
 				</ul>
 			</div>
 		</div>
-		<div class="col-lg-12">
-			<span class="pf-title">Description</span>
-			<div class="pf-field">
-				<textarea>Spent several years working on sheep on Wall Street. Had moderate success investing in Yugos on Wall Street. Managed a small team buying and selling pogo sticks for farmers. Spent several years licensing licorice in West Palm Beach, FL. Developed severalnew methods for working with banjos in the aftermarket. Spent a weekend importing banjos in West Palm Beach, FL.In this position, the Software Engineer ollaborates with Evention's Development team to continuously enhance our current software solutions as well as create new solutions to eliminate the back-office operations and management challenges present</textarea>
-			</div>
-		</div>
+		
 		<div class="col-lg-12">
 			<button type="submit">Update</button>
 		</div>

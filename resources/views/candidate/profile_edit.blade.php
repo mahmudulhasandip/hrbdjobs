@@ -3,6 +3,7 @@
 
 @push('css')
 <link rel="stylesheet" type="text/css" href="/css/preloader.css" />
+<link rel="stylesheet" href="//code.jquery.com/ui/1.12.1/themes/base/jquery-ui.css">
 @endpush
 
 @section('content')
@@ -96,9 +97,13 @@
 @endsection
 
 @push('js')
+<script src="https://code.jquery.com/ui/1.12.1/jquery-ui.js"></script>
 <script src="/js/preloader.js" type="text/javascript"></script>
 <script>
 	var base_url = "{{ url('/candidate/') }}";
+	$(function(){
+	    $( "#datepicker" ).datepicker();
+	});
 	function ekUpload(){
 		function Init() {
 
@@ -267,8 +272,9 @@
 				url: base_url+"/profile/basic/info",
 				type: "post",
 				headers: {'X-CSRF-TOKEN': Laravel.csrfToken},
-				success: function(education){
-					$('#basic_view').html(education);
+				success: function(basic_info){
+					$('#basic_view').html(basic_info);
+					$(".chosen").chosen();
 					setTimeout(function(){host.hide();}, 1000);
 				}
 			});
