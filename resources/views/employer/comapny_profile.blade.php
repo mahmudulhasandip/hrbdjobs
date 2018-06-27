@@ -47,8 +47,13 @@
 											 <a href="{{ ($social_links && $social_links->linkedin_link) ? $social_links->linkedin_link : '#' }}" title="" target="blank" class="share-linkedin {{ ($social_links && $social_links->linkedin_link) ? '' : 'd-none' }}"><i class="fa fa-linkedin"></i></a>
 							 			</div>
 								 		<div class="emply-btns">
-								 			{{-- <a class="seemap" href="#" title=""><i class="la la-map-marker"></i> See On Map</a> --}}
-								 			<a class="followus" href="#" title=""><i class="la la-paper-plane"></i> Follow us</a>
+											@if($company_info->is_featured == 1)
+											<a class="followus" href="#" title=""><i class="la la-paper-plane"></i> Featured Company</a>
+											@elseif( $featured_job )
+											<a class="followus" href="#" title=""><i class="la la-paper-plane"></i> Click to feature Company</a>
+											@else
+											<a class="followus" href="#" title=""><i class="la la-paper-plane"></i> Buy Package to feature</a>
+											@endif
 								 		</div>
 				 					</div>
 				 				</div>

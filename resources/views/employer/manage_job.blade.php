@@ -79,11 +79,12 @@
 												<ul class="action_job">
 													@if($job->is_featured == 1)
 													<li><span>This is a featured post.</span><a href="javascript: void(0);" class="text-blue">Featured</a></li>
-													@elseif( $featured_job && $featured_job->remain_amount > 0 && $job->is_featured == 0)
+													@elseif( $featured_job)
 													<li><span>Want to feature?</span><a href="javascript: void(0);" id="feature_job">Feature</a></li>
 													<form id="feature_job_form" action="{{ route('employer.feature.job') }}" method="POST">
 														@csrf
-														<input type="hidden" value="{{ $job->id }}" name="featureJobId">
+														<input type="hidden" value="{{ $job->id }}" name="JobId">
+														<input type="hidden" value="{{ $featured_job->id }}" name="featureJobId">
 													</form>
 													@else
 													<li><span>Buy Package for feature</span><a href="{{ route('employer.packages.list') }}">Buy Package</a></li>

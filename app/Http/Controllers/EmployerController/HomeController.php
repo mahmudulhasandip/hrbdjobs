@@ -268,7 +268,17 @@ class HomeController extends Controller
         $data['allJobs'] = Job::where('employer_id', Auth::guard('employer')->user()->id)->where('is_drafted', 0)->get();
         $data['totalJobs'] = Job::where('employer_id', Auth::guard('employer')->user()->id)->count();
         $data['activeJobs'] = Job::where('is_verified', 1)->count();
-        $data['featured_job'] = Employer_package::where('employer_id', Auth::guard('employer')->user()->id)->where('featured_package_id', '=', 1)->first();
+        $data['featured_job']= DB::table('employer_packages')
+                                ->join('featured_packages', 'featured_packages.id', '=', 'employer_packages.featured_package_id')
+                                ->select('employer_packages.*')
+                                ->where('employer_packages.featured_package_id','!=', NULL)
+                                ->where('employer_packages.expired_date', '>=', date("Y-m-d"))
+                                ->where('featured_packages.featured_type', 1)
+                                ->where('employer_packages.remain_amount', '>=', 1)
+                                ->where('employer_packages.employer_id',  Auth::guard('employer')->user()->id)
+                                ->where('employer_packages.is_verified', 1)
+                                ->first();
+        // $data['featured_job'] = Employer_package::where('employer_id', Auth::guard('employer')->user()->id)->where('featured_package_id', '!=', NULL)->where('expired_date', '>=', date("Y-m-d"))->first();
         return view('employer.manage_job', $data);
     }
 
@@ -283,8 +293,9 @@ class HomeController extends Controller
 
     // feature a job post
     public function featureJob(Request $request){
-        $job = Job::where('employer_id', Auth::guard('employer')->user()->id)->findOrFail($request->featureJobId);
-        $feature_package = Employer_package::where('employer_id', Auth::guard('employer')->user()->id)->where('featured_package_id', '=', 1)->first();
+        $job = Job::where('employer_id', Auth::guard('employer')->user()->id)->findOrFail($request->JobId);
+        $feature_package = Employer_package::where('employer_id', Auth::guard('employer')->user()->id)->findOrFail($request->featureJobId);
+        
         $feature_package->remain_amount = $feature_package->remain_amount - 1;
         $job->is_featured = 1;
         $feature_package->save();
@@ -375,6 +386,19 @@ class HomeController extends Controller
         $data['left_active'] = 'company';
         $data['employer_info'] = Employer::find(Auth::guard('employer')->user()->id);
         $data['company_info'] = Employer_company_info::where('employer_id', Auth::guard('employer')->user()->id)->firstOrFail();
+        $data['featured_job'] = DB::table('employer_packages')
+                                ->join('featured_packages', 'featured_packages.id', '=', 'employer_packages.featured_package_id')
+                                ->select('employer_packages.*')
+                                ->where('employer_packages.featured_package_id','!=', NULL)
+                                ->where('employer_packages.expired_date', '>=', date("Y-m-d"))
+                                ->where('featured_packages.featured_type', 0)
+                                ->where('employer_packages.remain_amount', '>=', 1)
+                                ->where('employer_packages.employer_id',  Auth::guard('employer')->user()->id)
+                                ->where('employer_packages.is_verified', 1)
+                                ->first();
+        
+        //$data['featured_job'] = Employer_package::where('employer_id', Auth::guard('employer')->user()->id)->where('featured_package_id', '!=', NULL)->where('expired_date', '>=', date("Y-m-d"))->featuredPackage->featured_type;
+        
         try{
             $data['social_links'] = Company_social_media::where('employer_company_info_id', $data['company_info']->id)->first();
         }catch(ModelNotFoundException $ex){
