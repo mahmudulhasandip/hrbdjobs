@@ -169,9 +169,9 @@ class HomeController extends Controller
             $postJob = Job::where('employer_id', Auth::guard('employer')->user()->id)->where('id', $request['job_id'])->first();
         }else{
             $postJob = new Job();
+            $postJob->title = $request->input('title');
         }
         $postJob->employer_id = Auth::guard('employer')->user()->id;
-        $postJob->title = $request->input('title');
         $postJob->description = $request->input('description');
         $postJob->job_category_id = $request->input('job_category_id');
         $postJob->job_designation_id = $request->input('job_designation_id');
@@ -304,6 +304,22 @@ class HomeController extends Controller
         return redirect()->route('employer.manage.job')->with('status', 'Your job post successfully Featured.');
     }
 
+    // pause job
+    public function pauseJob($id){
+        $job = Job::where('employer_id', Auth::guard('employer')->user()->id)->findOrFail($id);
+        if($job->is_paused == 1){
+            $job->is_paused = 0;
+            $message = "Your job is activated now.";
+        }else{
+            $job->is_paused = 1;
+            $message = "Your job is paused now.";
+        }
+
+        $job->save();
+
+        return redirect()->route('employer.manage.job')->with('status', $message);
+    }
+
     // public function getProfile(){
     //     $data['left_active'] = 'profile';
     //     return view('employer.profile', $data);
@@ -397,8 +413,6 @@ class HomeController extends Controller
                                 ->where('employer_packages.is_verified', 1)
                                 ->first();
         
-        //$data['featured_job'] = Employer_package::where('employer_id', Auth::guard('employer')->user()->id)->where('featured_package_id', '!=', NULL)->where('expired_date', '>=', date("Y-m-d"))->featuredPackage->featured_type;
-        
         try{
             $data['social_links'] = Company_social_media::where('employer_company_info_id', $data['company_info']->id)->first();
         }catch(ModelNotFoundException $ex){
@@ -409,6 +423,18 @@ class HomeController extends Controller
         $data['company_industries'] = Company_industry::where('employer_company_info_id', $data['company_info']->id)->get();
         $data['left_active'] = 'company';
         return view('employer.comapny_profile', $data);
+    }
+
+    // feature company profile
+    public function featureCompany($company_id, $package_id) {
+        $company = Employer_company_info::find($company_id);
+        $feature_package = Employer_package::find($package_id);
+        $feature_package->remain_amount -= 1;
+        $company->is_featured = 1;
+        $feature_package->save();
+        $company->save();
+
+        return redirect()->route('employer.company.profile')->with('status', 'Your company featured successfully');
     }
 
     public function getEditCompanyProfile(){

@@ -33,6 +33,7 @@ class CreateJobsTable extends Migration
             $table->integer('is_featured')->default(0);
             $table->integer('is_drafted')->default(0);
             $table->integer('is_verified')->default(0);
+            $table->integer('is_paused')->default(0);
             
             $table->foreign('employer_id')->references('id')->on('employers');
             $table->foreign('job_category_id')->references('id')->on('job_categories');

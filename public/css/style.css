@@ -4710,6 +4710,8 @@ header.style5 .logo {
     background-color: #26ae61;
 }
 
+
+
 /* Who am */
 
 .who-am {
@@ -13859,4 +13861,8 @@ textarea {
     width: 100%;
     /* padding: 45px 40px 40px 40px; */
     background-color: white;
+}
+
+.text-green{
+    color: #26ae61 !important;
 }

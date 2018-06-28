@@ -83,8 +83,8 @@
 													<li><span>Want to feature?</span><a href="javascript: void(0);" id="feature_job">Feature</a></li>
 													<form id="feature_job_form" action="{{ route('employer.feature.job') }}" method="POST">
 														@csrf
-														<input type="hidden" value="{{ $job->id }}" name="JobId">
-														<input type="hidden" value="{{ $featured_job->id }}" name="featureJobId">
+														<input type = "hidden" value = "{{ $job->id }}" name = "JobId">
+														<input type = "hidden" value = "{{ $featured_job->id }}" name = "featureJobId">
 													</form>
 													@else
 													<li><span>Buy Package for feature</span><a href="{{ route('employer.packages.list') }}">Buy Package</a></li>
@@ -92,11 +92,11 @@
 												</ul>
 											</td>
 						 					<td>
-						 						<span class="status  {{ ($job->is_varified) ? 'active' : 'inactive' }} ">{{ ($job->is_varified) ? 'Active' : 'Inactive' }}</span>
+						 						<span class = "status  {{ ($job->is_varified) ? 'active' : 'inactive' }} ">{{ ($job->is_varified) ? 'Active': 'Inactive' }}</span>
 						 					</td>
 						 					<td>
 						 						<ul class="action_job">
-						 							<li><span>View Job</span><a href="/employer/job_details/{{ $job->id }}" title=""><i class="la la-eye"></i></a></li>
+												 <li><span>{{ ($job->is_paused) ? 'Click to active' : 'Click to pause' }}</span><a href="/employer/job_pause/{{ $job->id }}" title="" class="{{ ($job->is_paused) ? 'text-red' : 'text-green' }}"><i class="{{ ($job->is_paused) ? 'la la-pause' : 'la la-play' }}"></i></a></li>
 						 							<li><span>Edit</span><a href="{{ route('employer.edit.job.view', $job->id) }}" title=""><i class="la la-pencil"></i></a></li>
 													<li><span>Delete</span><a class="delete" href="" title=""><i class="la la-trash-o"></i></a></li>
 													<form id="delete-form" action="{{ route('employer.delete.job', $job->id) }}" method="get">

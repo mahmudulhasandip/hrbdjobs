@@ -46,7 +46,7 @@
 					 					<div class="col-lg-12">
 					 						<span class="pf-title">Job Title</span>
 					 						<div class="pf-field">
-                                                <input type="text" placeholder="Title" name="title" value="{{ $editJob->title }}"/>
+                                                <input type="text" placeholder="Title" name="title" value="{{ $editJob->title }}" readonly/>
 												@if ($errors->has('title'))
 													<span class="help-block">
 														{{ $errors->first('title') }}
