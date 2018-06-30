@@ -33,8 +33,6 @@ class EmployerListController extends Controller
 
     public function deleteEmployer($id) {
         $employer = Employer::find($id);
-        
-        
         $employer->delete();
         return redirect()->route('admin.employerList.show')->with('status', "$employer->fname successfully deleted.");
     }
