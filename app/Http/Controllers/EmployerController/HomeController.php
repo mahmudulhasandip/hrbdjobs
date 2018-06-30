@@ -221,7 +221,7 @@ class HomeController extends Controller
 
     public function editJobForm($id) {
         $data['left_active'] = 'manage_job';
-        $data['editJob'] = Job::findOrFail($id)->first();
+        $data['editJob'] = Job::findOrFail($id);
         $data['employer_info'] = Employer::find(Auth::guard('employer')->user()->id);
         $data['job_levels'] = Job_level::all();
         $data['job_categories'] = Job_category::all();

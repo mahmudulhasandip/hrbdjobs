@@ -18,7 +18,7 @@ class CreateCompanyIndustriesTable extends Migration
             $table->integer('employer_company_info_id')->unsigned();
             $table->integer('industry_id')->unsigned();
             $table->foreign('industry_id')->references('id')->on('industries');
-            $table->foreign('employer_company_info_id')->references('id')->on('employer_company_infos');
+            $table->foreign('employer_company_info_id')->references('id')->on('employer_company_infos')->onDelete('cascade');
             $table->timestamps();
         });
     }

@@ -22,9 +22,9 @@ class CreateEmployerPackagesTable extends Migration
             $table->date('expired_date');
             $table->integer('remain_amount');
             $table->integer('is_verified')->default(0);
-            $table->foreign('employer_id')->references('id')->on('employers');
-            $table->foreign('job_package_id')->references('id')->on('job_packages');
-            $table->foreign('featured_package_id')->references('id')->on('featured_packages');
+            $table->foreign('employer_id')->references('id')->on('employers')->onDelete('cascade');
+            $table->foreign('job_package_id')->references('id')->on('job_packages')->onDelete('cascade');
+            $table->foreign('featured_package_id')->references('id')->on('featured_packages')->onDelete('cascade');
             $table->timestamps();
         });
     }

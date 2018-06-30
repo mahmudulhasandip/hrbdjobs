@@ -12,8 +12,9 @@ class JobExperiencesController extends Controller
 {
     //
     public function index() {
-        $job_experiences = Job_experience::all();
-        return view('admin.job_experience', ['job_experiences' => $job_experiences]);
+        $data['menu_active'] = 'job_experience';
+        $data['job_experiences'] = Job_experience::all();
+        return view('admin.job_experience', $data);
     }
 
     public function store(Request $request) {

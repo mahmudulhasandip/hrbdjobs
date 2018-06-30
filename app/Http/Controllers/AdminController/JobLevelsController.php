@@ -12,8 +12,9 @@ class JobLevelsController extends Controller
 {
     //
     public function index() {
-        $job_levels = Job_level::all();
-        return view('admin.job_level', ['job_levels' => $job_levels]);
+        $data['menu_active'] = 'job_level';
+        $data['job_levels'] = Job_level::all();
+        return view('admin.job_level', $data);
     }
 
     public function store(Request $request) {

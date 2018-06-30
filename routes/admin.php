@@ -1,11 +1,19 @@
 <?php
 
-Route::get('/home', function () {
-    $users[] = Auth::user();
-    $users[] = Auth::guard()->user();
-    $users[] = Auth::guard('admin')->user();
-    return view('admin.dashboard');
-})->name('home');
+// Route::get('/home', function () {
+//     $users[] = Auth::user();
+//     $users[] = Auth::guard()->user();
+//     $users[] = Auth::guard('admin')->user();
+//     return view('admin.dashboard');
+// })->name('home');
+
+// dashboard
+Route::get('/home', 'AdminController\DashboardController@index')->name('home');
+
+// employer list
+Route::get('employer/list', 'AdminController\EmployerListController@index')->name('employerList.show');
+Route::get('employer/list/approve/{empId}', 'AdminController\EmployerListController@approve')->name('employer.approve');
+Route::get('employer/delete/{id}', 'AdminController\EmployerListController@deleteEmployer')->name('employer.delete');
 
 
 // job designation
@@ -35,3 +43,5 @@ Route::post('featured_packages', 'AdminController\FeaturedPackagesController@sto
 // Skill
 Route::get('skills', 'AdminController\SkillsController@index')->name('skills.show');
 Route::post('skills', 'AdminController\SkillsController@store')->name('skills.store');
+
+

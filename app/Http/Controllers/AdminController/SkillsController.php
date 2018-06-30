@@ -12,8 +12,9 @@ class SkillsController extends Controller
 {
     //
     public function index() {
-        $skills = Skill::all();
-        return view('admin.skill', ['skills' => $skills]);
+        $data['menu_active'] = 'skill';
+        $data['skills'] = Skill::all();
+        return view('admin.skill', $data);
     }
 
     public function store(Request $request) {

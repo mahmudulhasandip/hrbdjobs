@@ -19,9 +19,9 @@ class CreateShortListedResumesTable extends Migration
             $table->integer('job_id')->unsigned()->nullable();
             $table->integer('candidate_id')->unsigned()->nullable();
             $table->integer('status')->default(0);
-            $table->foreign('employer_id')->references('id')->on('employers');
-            $table->foreign('job_id')->references('id')->on('jobs');
-            $table->foreign('candidate_id')->references('id')->on('candidates');
+            $table->foreign('employer_id')->references('id')->on('employers')->onDelete('cascade');
+            $table->foreign('job_id')->references('id')->on('jobs')->onDelete('cascade');
+            $table->foreign('candidate_id')->references('id')->on('candidates')->onDelete('cascade');
             $table->timestamps();
         });
     }

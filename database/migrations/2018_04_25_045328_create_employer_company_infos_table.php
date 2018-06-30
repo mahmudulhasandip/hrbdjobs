@@ -29,7 +29,7 @@ class CreateEmployerCompanyInfosTable extends Migration
             $table->text('description')->nullable();
             $table->string('logo')->nullable();
             $table->integer('is_featured')->nullable();
-            $table->foreign('employer_id')->references('id')->on('employers');
+            $table->foreign('employer_id')->references('id')->on('employers')->onDelete('cascade');
             $table->timestamps();
         });
     }

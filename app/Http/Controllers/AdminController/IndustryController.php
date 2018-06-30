@@ -17,9 +17,9 @@ class IndustryController extends Controller
      */
     public function index()
     {
-        //
-        $industries = Industry::all();
-        return view('admin.industry', ['industries'=>$industries]);
+        $data['menu_active'] = 'industry';
+        $data['industries'] = Industry::all();;
+        return view('admin.industry', $data);
     }
 
     /**

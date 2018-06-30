@@ -21,7 +21,7 @@ class CreateCompanySocialMediaTable extends Migration
             $table->string('gplus_link')->nullable();
             $table->string('twitter_link')->nullable();
             // $table->string('gmap_link')->nullable();
-            $table->foreign('employer_company_info_id')->references('id')->on('employer_company_infos');
+            $table->foreign('employer_company_info_id')->references('id')->on('employer_company_infos')->onDelete('cascade');
             $table->timestamps();
         });
     }

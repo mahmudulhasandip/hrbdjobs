@@ -18,9 +18,9 @@ class CreateCandidateInvitationsTable extends Migration
             $table->integer('candidate_id')->unsigned();
             $table->integer('employer_id')->unsigned();
             $table->integer('job_id')->unsigned();
-            $table->foreign('candidate_id')->references('id')->on('candidates');
-            $table->foreign('employer_id')->references('id')->on('employers');
-            $table->foreign('job_id')->references('id')->on('jobs');
+            $table->foreign('candidate_id')->references('id')->on('candidates')->onDelete('cascade');
+            $table->foreign('employer_id')->references('id')->on('employers')->onDelete('cascade');
+            $table->foreign('job_id')->references('id')->on('jobs')->onDelete('cascade');
             $table->timestamps();
         });
     }

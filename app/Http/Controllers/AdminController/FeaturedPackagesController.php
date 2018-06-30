@@ -12,8 +12,10 @@ class FeaturedPackagesController extends Controller
 {
     //
     public function index() {
-        $featured_packages = Featured_package::all();
-        return view('admin.featured_package', ['featured_packages' => $featured_packages]);
+        // $featured_packages = Featured_package::all();
+        $data['menu_active'] = 'featured_packages';
+        $data['featured_packages'] = Featured_package::all();
+        return view('admin.featured_package', $data);
     }
 
     public function store(Request $request) {

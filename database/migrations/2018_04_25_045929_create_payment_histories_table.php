@@ -23,9 +23,9 @@ class CreatePaymentHistoriesTable extends Migration
             $table->string('transaction_type')->nullable();
             $table->string('transaction_id')->nullable();
             $table->date('transaction_date');
-            $table->foreign('employer_id')->references('id')->on('employers');
-            $table->foreign('job_package_id')->references('id')->on('job_packages');
-            $table->foreign('featured_package_id')->references('id')->on('featured_packages');
+            $table->foreign('employer_id')->references('id')->on('employers')->onDelete('cascade');
+            $table->foreign('job_package_id')->references('id')->on('job_packages')->onDelete('cascade');
+            $table->foreign('featured_package_id')->references('id')->on('featured_packages')->onDelete('cascade');
             $table->timestamps();
         });
     }

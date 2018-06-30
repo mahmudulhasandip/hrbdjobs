@@ -35,12 +35,12 @@ class CreateJobsTable extends Migration
             $table->integer('is_verified')->default(0);
             $table->integer('is_paused')->default(0);
             
-            $table->foreign('employer_id')->references('id')->on('employers');
-            $table->foreign('job_category_id')->references('id')->on('job_categories');
-            $table->foreign('job_designation_id')->references('id')->on('job_designations');
-            $table->foreign('experience_id')->references('id')->on('job_experiences');
+            $table->foreign('employer_id')->references('id')->on('employers')->onDelete('cascade');
+            $table->foreign('job_category_id')->references('id')->on('job_categories')->onDelete('cascade');
+            $table->foreign('job_designation_id')->references('id')->on('job_designations')->onDelete('cascade');
+            $table->foreign('experience_id')->references('id')->on('job_experiences')->onDelete('cascade');
             // $table->foreign('salary_range')->references('id')->on('salaries');
-            $table->foreign('job_level_id')->references('id')->on('job_levels');
+            $table->foreign('job_level_id')->references('id')->on('job_levels')->onDelete('cascade');
 
             $table->softDeletes();
             $table->timestamps();
