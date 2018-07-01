@@ -4,7 +4,7 @@
     <div class="d-flex align-items-center">
         <div class="mr-auto">
             <h3 class="m-subheader__title m-subheader__title--separator">
-                Employer List
+                Employer's posted List
             </h3>
         </div>
 
@@ -17,7 +17,7 @@
             <i class="flaticon-exclamation m--font-brand"></i>
         </div>
         <div class="m-alert__text">
-            There will be a short instruction about Employer List's operation
+            There will be a short instruction about Employer's posted job operation
         </div>
     </div>
     <div class="m-portlet m-portlet--mobile">
@@ -25,7 +25,7 @@
             <div class="m-portlet__head-caption">
                 <div class="m-portlet__head-title">
                     <h3 class="m-portlet__head-text">
-                        Employer List Table
+                        Employer's posted List Table
                     </h3>
                 </div>
             </div>
@@ -85,33 +85,30 @@
                             ID
                         </th>
                         <th title="Field #2">
-                            Name
+                            Employer Name
                         </th>
                         <th title="Field #3">
-                            User Name
+                            Title
                         </th>
                         <th title="Field #4">
-                            Email
+                            Job Category
                         </th>
                         <th title="Field #5">
-                            Designation
+                            Job Designation
                         </th>
                         <th title="Field #6">
-                            Address
+                            Job Level
                         </th>
                         <th title="Field #7">
-                            City
+                            Experience
                         </th>
                         <th title="Field #8">
-                            Country
+                            Featured?
                         </th>
                         <th title="Field #9">
-                            Website
-                        </th>
-                        <th title="Field #10">
                             Status
                         </th>
-                        <th title="Field #11">
+                        <th title="Field #10">
                             Action
                         </th>
                     </tr>
@@ -120,7 +117,7 @@
                     @php
                         $id = 0;
                     @endphp
-                    @foreach($employers as $employer)
+                    @foreach($jobs as $job)
                     @php 
                         $id++;
                     @endphp
@@ -130,34 +127,31 @@
                             {{ $id }}
                         </td>
                         <td>
-                            {{ $employer->fname }} {{ $employer->lname }}
+                            {{ $job->employer->fname }} {{ $job->employer->lname }}
                         </td>
                         <td>
-                            {{ $employer->username }}
+                            {{ $job->title }}
                         </td>
                         <td>
-                            {{ $employer->email }}
+                            {{ $job->jobCategory->name }}
                         </td>
                         <td>
-                            {{ $employer->designation }}
+                            {{ $job->jobDesignation->name }}
                         </td>
                         <td>
-                            {{ $employer->address }}
+                            {{ $job->jobLevel->name }}
                         </td>
                         <td>
-                            {{ $employer->city }}
+                            {{ $job->jobExperience->name }}
                         </td>
                         <td>
-                            {{ $employer->country }}
+                            {{ ($job->is_featured) ? 'Featured' : 'Not Featured' }}
                         </td>
                         <td>
-                            {{ $employer->website }}
+                            <a href="{{ route('admin.job.post.approve', $job->id) }}" class="m-badge {{ ($job->status) ? 'm-badge--success' : 'm-badge--danger' }} m-badge--wide text-white">{{ ($job->status) ? 'Approved' : 'Pending' }}</a>
                         </td>
                         <td>
-                            <a href="{{ route('admin.employer.approve', $employer->id) }}" class="m-badge {{ ($employer->status) ? 'm-badge--success' : 'm-badge--danger' }} m-badge--wide text-white">{{ ($employer->status) ? 'Approved' : 'Pending' }}</a>
-                        </td>
-                        <td>
-                            <a href="javascript: void(0);" data-toggle="modal" data-target="#employer_modal" class="btn m-btn m-btn--hover-accent m-btn--icon m-btn--icon-only m-btn--pill employer_view" data-employerindex="{{ json_encode($employer) }}">
+                            <a href="javascript: void(0);" data-toggle="modal" data-target="#job_modal" class="btn m-btn m-btn--hover-accent m-btn--icon m-btn--icon-only m-btn--pill job_view" data-jobindex="{{ json_encode($job) }}">
                                 <i class="la la-eye"></i>
                             </a>
                             <a href="javascript: void(0);" class="btn m-btn m-btn--hover-accent m-btn--icon m-btn--icon-only m-btn--pill" data-toggle="dropdown">
@@ -168,10 +162,10 @@
                                 <a class="dropdown-item" href="#">
                                     <i class="la la-edit"></i> Edit Details
                                 </a>
-                                <a class="dropdown-item" href="{{ route('admin.employer.delete', $employer->id) }}" id="deleteEmp">
+                                <a class="dropdown-item" href="{{ route('admin.job.post.delete', $job->id) }}" id="deleteEmp">
                                     <i class="la la-trash"></i> Delete Employer
                                 </a>
-                                <form id="delete-form" action="{{ route('admin.employer.delete', $employer->id) }}" method="get">
+                                <form id="delete-form" action="{{ route('admin.job.post.delete', $job->id) }}" method="get">
                                     @csrf
                                 </form>
                             </div>
@@ -185,7 +179,7 @@
     </div>
 </div>
 
-<div class="modal fade" id="employer_modal" tabindex="-1" role="dialog" aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
+<div class="modal fade" id="job_modal" tabindex="-1" role="dialog" aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
     <div class="modal-dialog modal-dialog-centered" role="document">
         <div class="modal-content">
             <div class="modal-header">
@@ -252,7 +246,7 @@
 <script src="https://cdnjs.cloudflare.com/ajax/libs/izitoast/1.3.0/js/iziToast.min.js"></script>
 
 <script type="text/javascript">
-    // delete employer
+    // delete job
 	// $('#deleteEmp').on('click', function(e){
 	// 	e.preventDefault();
 	// 	iziToast.show({
@@ -283,9 +277,9 @@
 
     $(document).ready(function() {
 
-        $('#employer_modal').on('show.bs.modal', function (event) {
+        $('#job_modal').on('show.bs.modal', function (event) {
             var button = $(event.relatedTarget); // Button that triggered the modal
-            var recipient = button.data('employerindex'); // Extract info from data-* attributes
+            var recipient = button.data('jobindex'); // Extract info from data-* attributes
             var modal = $(this);
             modal.find('#empName').text(recipient.fname + " " + recipient.lname);
             modal.find('#empUsername').text(recipient.username);

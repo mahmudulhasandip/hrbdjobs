@@ -29,6 +29,7 @@ class CreateEmployersTable extends Migration
             $table->boolean('verified')->default(false);
             $table->rememberToken();
             $table->timestamps();
+            $table->softDeletes();
         });
     }
 

@@ -136,6 +136,19 @@
                 </a>
             </li>
 
+            <li class="m-menu__item {{ ($menu_active == 'job_post_list') ? 'm-menu__item--active' : '' }}" aria-haspopup="true">
+                <a href="/admin/job/post/list" class="m-menu__link ">
+                    <i class="m-menu__link-icon la la-newspaper-o"></i>
+                    <span class="m-menu__link-title">
+                        <span class="m-menu__link-wrap">
+                            <span class="m-menu__link-text">
+                                All Posted Jobs
+                            </span>
+                        </span>
+                    </span>
+                </a>
+            </li>
+
             {{-- menu headline --}}
             {{-- <li class="m-menu__section">
                 <h4 class="m-menu__section-text">
