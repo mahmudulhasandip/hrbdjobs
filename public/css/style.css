@@ -13825,7 +13825,7 @@ textarea {
 
 .tab__content>li {
     width: 100%;
-    position: absolute;
+    /*position: absolute;*/
     top: 0;
     left: 0;
     display: none;
@@ -13861,7 +13861,9 @@ textarea {
     display: none;
 }
 
-.add_education{
+.margin_top_25{
     margin-top: 25px;
     display: inline-block;
 }
+
+hr { background-color: #edeff7; height: 1px; border: 0; }

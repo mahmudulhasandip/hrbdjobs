@@ -109,8 +109,8 @@
 
 	$(document).ready(function() {
 		$('.req-skill').select2({
-			placeholder: 'Maximum 5 skills',
-			maximumSelectionLength: 5,
+			placeholder: 'Maximum 10 skills',
+			maximumSelectionLength: 10,
 			tags: true,
 			tokenSeparators: [',', ' '],
   			allowClear: true
@@ -289,8 +289,8 @@
 					$('#basic_view').html(basic_info);
 					$(".chosen").chosen();
 					$('.req-skill').select2({
-						placeholder: 'Maximum 5 skills',
-						maximumSelectionLength: 5,
+						placeholder: 'Maximum 10 skills',
+						maximumSelectionLength: 10,
 						tags: true,
 						tokenSeparators: [',', ' '],
 			  			allowClear: true
@@ -321,6 +321,7 @@
 				headers: {'X-CSRF-TOKEN': Laravel.csrfToken},
 				success: function(education){
 					$('#training_view').html(education);
+					$(".chosen").chosen();
 					setTimeout(function(){host.hide();}, 1000);
 				}
 			});
@@ -356,6 +357,9 @@
 	});
 
 	function addEducation(){
+		$('#make_clone_box').append($('#make_clone').html());
+	}
+	function addTraining(){
 		$('#make_clone_box').append($('#make_clone').html());
 	}
 
