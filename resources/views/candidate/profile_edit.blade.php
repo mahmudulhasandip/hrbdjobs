@@ -4,6 +4,7 @@
 @push('css')
 <link rel="stylesheet" type="text/css" href="/css/preloader.css" />
 <link rel="stylesheet" href="//code.jquery.com/ui/1.12.1/themes/base/jquery-ui.css">
+<link href="https://cdnjs.cloudflare.com/ajax/libs/select2/4.0.6-rc.0/css/select2.min.css" rel="stylesheet" />
 @endpush
 
 @section('content')
@@ -98,12 +99,24 @@
 
 @push('js')
 <script src="https://code.jquery.com/ui/1.12.1/jquery-ui.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/select2/4.0.6-rc.0/js/select2.min.js"></script>
 <script src="/js/preloader.js" type="text/javascript"></script>
 <script>
 	var base_url = "{{ url('/candidate/') }}";
 	$(function(){
 	    $( "#datepicker" ).datepicker();
 	});
+
+	$(document).ready(function() {
+		$('.req-skill').select2({
+			placeholder: 'Maximum 5 skills',
+			maximumSelectionLength: 5,
+			tags: true,
+			tokenSeparators: [',', ' '],
+  			allowClear: true
+		});
+	});
+
 	function ekUpload(){
 		function Init() {
 
@@ -275,6 +288,13 @@
 				success: function(basic_info){
 					$('#basic_view').html(basic_info);
 					$(".chosen").chosen();
+					$('.req-skill').select2({
+						placeholder: 'Maximum 5 skills',
+						maximumSelectionLength: 5,
+						tags: true,
+						tokenSeparators: [',', ' '],
+			  			allowClear: true
+					});
 					setTimeout(function(){host.hide();}, 1000);
 				}
 			});
@@ -334,6 +354,11 @@
 			
 			
 	});
+
+	function addEducation(){
+		$('#make_clone_box').append($('#make_clone').html());
+	}
+
 
 </script>
 

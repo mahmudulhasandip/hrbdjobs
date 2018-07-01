@@ -13844,3 +13844,24 @@ textarea {
     background-color: #e8ecec;
     cursor: no-drop;
 }
+
+.select2-container--default .select2-search--inline .select2-search__field{
+    width: 100% !important;
+}
+
+.preloader-wrapper {
+    width: 100%;
+    height: 100%;
+    background-color: rgba(0,0,0,.6);
+    z-index: 11;
+    position: relative;
+}
+
+.hidden{
+    display: none;
+}
+
+.add_education{
+    margin-top: 25px;
+    display: inline-block;
+}

@@ -162,28 +162,77 @@
 		<div class="col-lg-12">
 			<span class="pf-title">Summary</span>
 			<div class="pf-field">
-				<textarea name="about_me" rows="5">Spent several years working on sheep on Wall Street. Had moderate success investing in Yugos on Wall Street. Managed a small team buying and selling pogo sticks for farmers. Spent several years licensing licorice in West Palm Beach, FL. Developed severalnew methods for working with banjos in the aftermarket. Spent a weekend importing banjos in West Palm Beach, FL.In this position, the Software Engineer ollaborates with Evention's Development team to continuously enhance our current software solutions as well as create new solutions to eliminate the back-office operations and management challenges present</textarea>
+				<textarea name="about_me" rows="5">{{ $candidate->about_me }}</textarea>
 			</div>
 		</div>
 
 		<div class="col-lg-12">
 			<h3 class="text-center">Skill Info</h3>
 		</div>
+
+		<div class="col-md-6">
+			<span class="pf-title">Experience (Years)</span>
+			<div class="pf-field">
+				<select data-placeholder="Please Select Specialism" class="chosen">
+					@foreach($jobExperiences as $jobExperience)
+					<option value="{{ $jobExperience->name }}" {{ (sizeof($candidateSkills) && ($$candidateSkills[0]->experience == $jobExperience->name)) ? 'selected':'' }}>{{ $jobExperience->name }}</option>
+					@endforeach
+				</select>
+			</div>
+		</div>
+
+		<div class="col-md-6">
+			<span class="pf-title">Job Level</span>
+			<div class="pf-field">
+				<select data-placeholder="Please Select Specialism" class="chosen">
+					@foreach($jobLevels as $jobLevel)
+					<option value="{{ $jobLevel->name }}" {{ (sizeof($candidateSkills) && ($$candidateSkills[0]->job_level == $jobLevel->name)) ? 'selected':'' }}>{{ $jobLevel->name }}</option>
+					@endforeach
+				</select>
+			</div>
+		</div>
+
+		<div class="col-md-6">
+			<span class="pf-title">Job Category</span>
+			<div class="pf-field">
+				<select data-placeholder="Please Select Specialism" class="chosen">
+					@foreach($jobCategories as $jobCategory)
+					<option value="{{ $jobCategory->id }}" {{ (sizeof($candidateSkills) && ($$candidateSkills[0]->category_id == $jobCategory->id)) ? 'selected':'' }}>{{ $jobCategory->name }}</option>
+					@endforeach
+				</select>
+			</div>
+		</div>
+
+		<div class="col-md-6">
+			<span class="pf-title">Job Designation</span>
+			<div class="pf-field">
+				<select data-placeholder="Please Select Specialism" class="chosen">
+					@foreach($jobDesignations as $jobDesignation)
+					<option value="{{ $jobDesignation->id }}" {{ (sizeof($candidateSkills) && ($$candidateSkills[0]->designation_id == $jobDesignation->id)) ? 'selected':'' }}>{{ $jobDesignation->name }}</option>
+					@endforeach
+				</select>
+			</div>
+		</div>
 		
 		<div class="col-lg-12">
-			<span class="pf-title">Categories</span>
+			<span class="pf-title">Expertise Area</span>
 			<div class="pf-field no-margin">
-				<ul class="tags">
-					<li class="addedTag">Photoshop<span onclick="$(this).parent().remove();" class="tagRemove">x</span><input type="hidden" name="tags[]"
-						 value="Photoshop"></li>
-					<li class="addedTag">Digital & Creative<span onclick="$(this).parent().remove();" class="tagRemove">x</span><input type="hidden"
-						 name="tags[]" value="Digital"></li>
-					<li class="addedTag">Agency<span onclick="$(this).parent().remove();" class="tagRemove">x</span><input type="hidden" name="tags[]"
-						 value="Agency"></li>
-					<li class="tagAdd taglist">
-						<input type="text" id="search-field">
-					</li>
-				</ul>
+				@php 
+					$canSkills = array();
+					if(sizeof($candidateSkills)){
+						foreach ($candidateSkills as $skill) {
+							$canSkills[] = $skill->id;
+						}
+					}
+					
+					
+				@endphp
+
+				<select multiple="multiple" class="req-skill"  name="expertise_area[]">
+					@foreach($skills as $skill)
+					<option value="{{ $skill->id }}"  {{ (in_array($skill->id, $canSkills)) ? 'selected':'' }}>{{ $skill->name }}</option>
+					@endforeach
+				</select>
 			</div>
 		</div>
 		
