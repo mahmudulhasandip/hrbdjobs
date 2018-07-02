@@ -21,7 +21,7 @@ class CreateCandidateProfessionalCertificatesTable extends Migration
             $table->string('location');
             $table->date('start_date');
             $table->date('end_time');
-            $table->foreign('candidate_id')->references('id')->on('candidates');
+            $table->foreign('candidate_id')->references('id')->on('candidates')->onDelete('cascade');
             $table->timestamps();
         });
     }

@@ -169,9 +169,9 @@ class HomeController extends Controller
             $postJob = Job::where('employer_id', Auth::guard('employer')->user()->id)->where('id', $request['job_id'])->first();
         }else{
             $postJob = new Job();
+            $postJob->title = $request->input('title');
         }
         $postJob->employer_id = Auth::guard('employer')->user()->id;
-        $postJob->title = $request->input('title');
         $postJob->description = $request->input('description');
         $postJob->job_category_id = $request->input('job_category_id');
         $postJob->job_designation_id = $request->input('job_designation_id');
@@ -221,7 +221,7 @@ class HomeController extends Controller
 
     public function editJobForm($id) {
         $data['left_active'] = 'manage_job';
-        $data['editJob'] = Job::findOrFail($id)->first();
+        $data['editJob'] = Job::findOrFail($id);
         $data['employer_info'] = Employer::find(Auth::guard('employer')->user()->id);
         $data['job_levels'] = Job_level::all();
         $data['job_categories'] = Job_category::all();
@@ -268,6 +268,17 @@ class HomeController extends Controller
         $data['allJobs'] = Job::where('employer_id', Auth::guard('employer')->user()->id)->where('is_drafted', 0)->get();
         $data['totalJobs'] = Job::where('employer_id', Auth::guard('employer')->user()->id)->count();
         $data['activeJobs'] = Job::where('is_verified', 1)->count();
+        $data['featured_job']= DB::table('employer_packages')
+                                ->join('featured_packages', 'featured_packages.id', '=', 'employer_packages.featured_package_id')
+                                ->select('employer_packages.*')
+                                ->where('employer_packages.featured_package_id','!=', NULL)
+                                ->where('employer_packages.expired_date', '>=', date("Y-m-d"))
+                                ->where('featured_packages.featured_type', 1)
+                                ->where('employer_packages.remain_amount', '>=', 1)
+                                ->where('employer_packages.employer_id',  Auth::guard('employer')->user()->id)
+                                ->where('employer_packages.is_verified', 1)
+                                ->first();
+        // $data['featured_job'] = Employer_package::where('employer_id', Auth::guard('employer')->user()->id)->where('featured_package_id', '!=', NULL)->where('expired_date', '>=', date("Y-m-d"))->first();
         return view('employer.manage_job', $data);
     }
 
@@ -278,6 +289,35 @@ class HomeController extends Controller
         $data['job'] = Job::find($id);
         $data['company_info'] = DB::table('employer_company_infos')->where('employer_id', Auth::guard('employer')->user()->id)->first();
         return view('employer.job_details', $data);
+    }
+
+    // feature a job post
+    public function featureJob(Request $request){
+        $job = Job::where('employer_id', Auth::guard('employer')->user()->id)->findOrFail($request->JobId);
+        $feature_package = Employer_package::where('employer_id', Auth::guard('employer')->user()->id)->findOrFail($request->featureJobId);
+        
+        $feature_package->remain_amount = $feature_package->remain_amount - 1;
+        $job->is_featured = 1;
+        $feature_package->save();
+        $job->save();
+
+        return redirect()->route('employer.manage.job')->with('status', 'Your job post successfully Featured.');
+    }
+
+    // pause job
+    public function pauseJob($id){
+        $job = Job::where('employer_id', Auth::guard('employer')->user()->id)->findOrFail($id);
+        if($job->is_paused == 1){
+            $job->is_paused = 0;
+            $message = "Your job is activated now.";
+        }else{
+            $job->is_paused = 1;
+            $message = "Your job is paused now.";
+        }
+
+        $job->save();
+
+        return redirect()->route('employer.manage.job')->with('status', $message);
     }
 
     // public function getProfile(){
@@ -362,6 +402,17 @@ class HomeController extends Controller
         $data['left_active'] = 'company';
         $data['employer_info'] = Employer::find(Auth::guard('employer')->user()->id);
         $data['company_info'] = Employer_company_info::where('employer_id', Auth::guard('employer')->user()->id)->firstOrFail();
+        $data['featured_job'] = DB::table('employer_packages')
+                                ->join('featured_packages', 'featured_packages.id', '=', 'employer_packages.featured_package_id')
+                                ->select('employer_packages.*')
+                                ->where('employer_packages.featured_package_id','!=', NULL)
+                                ->where('employer_packages.expired_date', '>=', date("Y-m-d"))
+                                ->where('featured_packages.featured_type', 0)
+                                ->where('employer_packages.remain_amount', '>=', 1)
+                                ->where('employer_packages.employer_id',  Auth::guard('employer')->user()->id)
+                                ->where('employer_packages.is_verified', 1)
+                                ->first();
+        
         try{
             $data['social_links'] = Company_social_media::where('employer_company_info_id', $data['company_info']->id)->first();
         }catch(ModelNotFoundException $ex){
@@ -372,6 +423,18 @@ class HomeController extends Controller
         $data['company_industries'] = Company_industry::where('employer_company_info_id', $data['company_info']->id)->get();
         $data['left_active'] = 'company';
         return view('employer.comapny_profile', $data);
+    }
+
+    // feature company profile
+    public function featureCompany($company_id, $package_id) {
+        $company = Employer_company_info::find($company_id);
+        $feature_package = Employer_package::find($package_id);
+        $feature_package->remain_amount -= 1;
+        $company->is_featured = 1;
+        $feature_package->save();
+        $company->save();
+
+        return redirect()->route('employer.company.profile')->with('status', 'Your company featured successfully');
     }
 
     public function getEditCompanyProfile(){

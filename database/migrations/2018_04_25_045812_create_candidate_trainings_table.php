@@ -23,7 +23,7 @@ class CreateCandidateTrainingsTable extends Migration
             $table->string('institution_name')->nullable();
             $table->integer('duration')->default(1); // month
             $table->string('location')->nullable();
-            $table->foreign('candidate_id')->references('id')->on('candidates');
+            $table->foreign('candidate_id')->references('id')->on('candidates')->onDelete('cascade');
             $table->timestamps();
         });
     }

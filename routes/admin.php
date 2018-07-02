@@ -1,11 +1,25 @@
 <?php
 
-Route::get('/home', function () {
-    $users[] = Auth::user();
-    $users[] = Auth::guard()->user();
-    $users[] = Auth::guard('admin')->user();
-    return view('admin.dashboard');
-})->name('home');
+// Route::get('/home', function () {
+//     $users[] = Auth::user();
+//     $users[] = Auth::guard()->user();
+//     $users[] = Auth::guard('admin')->user();
+//     return view('admin.dashboard');
+// })->name('home');
+
+// dashboard
+Route::get('/home', 'AdminController\DashboardController@index')->name('home');
+
+// employer list
+Route::get('employer/list', 'AdminController\EmployerListController@index')->name('employerList.show');
+Route::get('employer/list/approve/{empId}', 'AdminController\EmployerListController@approve')->name('employer.approve');
+Route::get('employer/delete/{id}', 'AdminController\EmployerListController@deleteEmployer')->name('employer.delete');
+
+
+// posted job list
+Route::get('job/post/list', 'AdminController\jobPostedList@index')->name('job.post.list');
+Route::get('job/post/approve/{empId}', 'AdminController\jobPostedList@approve')->name('job.post.approve');
+Route::get('job/post/delete/{id}', 'AdminController\jobPostedList@deletePost')->name('job.post.delete');
 
 
 // job designation

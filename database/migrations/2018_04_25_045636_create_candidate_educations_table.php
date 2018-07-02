@@ -24,7 +24,7 @@ class CreateCandidateEducationsTable extends Migration
             $table->string('institution_name')->nullable();
             $table->integer('passing_year');
             $table->string('achievement')->nullable(); 
-            $table->foreign('candidate_id')->references('id')->on('candidates');
+            $table->foreign('candidate_id')->references('id')->on('candidates')->onDelete('cascade');
             $table->timestamps();
         });
     }

@@ -12,8 +12,9 @@ class JobPackagesController extends Controller
 {
     //
     public function index() {
-        $job_packages = Job_package::all();
-        return view('admin.job_package', ['job_packages' => $job_packages]);
+        $data['menu_active'] = 'job_package';
+        $data['job_packages'] = Job_package::all();
+        return view('admin.job_package', $data);
     }
 
     public function store(Request $request) {

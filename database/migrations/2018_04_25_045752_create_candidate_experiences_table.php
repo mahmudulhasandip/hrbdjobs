@@ -22,8 +22,8 @@ class CreateCandidateExperiencesTable extends Migration
             $table->string('company_designation');
             $table->date('start_date');
             $table->date('end_date');
-            $table->foreign('candidate_id')->references('id')->on('candidates');
-            $table->foreign('candidate_designation')->references('id')->on('job_designations');
+            $table->foreign('candidate_id')->references('id')->on('candidates')->onDelete('cascade');
+            $table->foreign('candidate_designation')->references('id')->on('job_designations')->onDelete('cascade');
         
             $table->timestamps();
         });

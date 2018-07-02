@@ -19,8 +19,8 @@ class CreateAppliedJobsTable extends Migration
             $table->integer('job_id')->unsigned();
             $table->integer('is_short_listed')->default(0);
             $table->integer('is_viewed_resume')->default(0);
-            $table->foreign('candidate_id')->references('id')->on('candidates');
-            $table->foreign('job_id')->references('id')->on('jobs');
+            $table->foreign('candidate_id')->references('id')->on('candidates')->onDelete('cascade');
+            $table->foreign('job_id')->references('id')->on('jobs')->onDelete('cascade');
             $table->timestamps();
         });
     }

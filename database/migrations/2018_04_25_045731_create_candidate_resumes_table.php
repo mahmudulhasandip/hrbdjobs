@@ -17,7 +17,7 @@ class CreateCandidateResumesTable extends Migration
             $table->increments('id')->unsigned()->unique();
             $table->integer('candidate_id')->unsigned();
             $table->string('resume');
-            $table->foreign('candidate_id')->references('id')->on('candidates');
+            $table->foreign('candidate_id')->references('id')->on('candidates')->onDelete('cascade');
             $table->timestamps();
         });
     }

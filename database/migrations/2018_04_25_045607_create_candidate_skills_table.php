@@ -21,10 +21,10 @@ class CreateCandidateSkillsTable extends Migration
             $table->integer('designation_id')->unsigned();
             $table->integer('category_id')->unsigned();
             $table->integer('expertise_area')->unsigned();
-            $table->foreign('candidate_id')->references('id')->on('candidates');
-            $table->foreign('designation_id')->references('id')->on('job_designations');
-            $table->foreign('category_id')->references('id')->on('job_categories');
-            $table->foreign('expertise_area')->references('id')->on('skills');
+            $table->foreign('candidate_id')->references('id')->on('candidates')->onDelete('cascade');
+            $table->foreign('designation_id')->references('id')->on('job_designations')->onDelete('cascade');
+            $table->foreign('category_id')->references('id')->on('job_categories')->onDelete('cascade');
+            $table->foreign('expertise_area')->references('id')->on('skills')->onDelete('cascade');
             $table->timestamps();
         });
     }

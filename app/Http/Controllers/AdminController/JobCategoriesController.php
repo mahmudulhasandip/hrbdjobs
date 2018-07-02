@@ -12,8 +12,9 @@ class JobCategoriesController extends Controller
 {
     //
     public function index() {
-        $job_categories = Job_category::all();
-        return view('admin.job_category', ['job_categories' => $job_categories]);
+        $data['menu_active'] = 'job_category';
+        $data['job_categories'] = Job_category::all();
+        return view('admin.job_category', $data);
     }
 
     public function store(Request $request) {

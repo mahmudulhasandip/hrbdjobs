@@ -27,9 +27,8 @@
 				 			<div class="job-head-wide">
 				 				<div class="row">
 				 					<div class="col-lg-9">
-										@include('employer.layout.alert')
 				 						<div class="job-single-head3 emplye">
-										 <div class="job-thumb"> <img src="{{ asset('storage/uploads/'.$company_info->logo)}}" alt="" /></div>
+										 <div class="job-thumb"> <img src="{{ ( $company_info->logo ) ? asset('storage/uploads/'.$company_info->logo) : asset('storage/uploads/company-avatar.png') }}" alt="" /></div>
 							 				<div class="job-single-info3">
 							 					<h3>{{ $company_info->name }}</h3>
 							 					<span><i class="la la-map-marker"></i>{{ $company_info->city }}, {{ $company_info->country }}</span>
@@ -41,16 +40,26 @@
 				 					</div>
 				 					<div class="col-lg-3">
 				 						<div class="share-bar text-center">
-											 <a href="{{ ($social_links && $social_links->gplus_link) ? $social_links->gplus_link : '#' }}" title="" target="blank" class="share-google {{ ($social_links && $social_links->gplus_link) ? '' : 'd-none' }}"><i class="la la-google"></i></a>
-											 <a href="{{ ($social_links && $social_links->fb_link) ? $social_links->fb_link : '#' }} " title="" target="blank" class="share-fb {{ ($social_links && $social_links->fb_link) ? '' : 'd-none' }}"><i class="fa fa-facebook"></i></a>
-											 <a href="{{ ($social_links && $social_links->twitter_link) ? $social_links->twitter_link : '#' }}" title="" target="blank" class="share-twitter {{ ($social_links && $social_links->twitter_link) ? '' : 'd-none' }}"><i class="fa fa-twitter"></i></a>
-											 <a href="{{ ($social_links && $social_links->linkedin_link) ? $social_links->linkedin_link : '#' }}" title="" target="blank" class="share-linkedin {{ ($social_links && $social_links->linkedin_link) ? '' : 'd-none' }}"><i class="fa fa-linkedin"></i></a>
+											<a href="{{ ($social_links && $social_links->gplus_link) ? $social_links->gplus_link : '#' }}" title="" target="blank" class="share-google {{ ($social_links && $social_links->gplus_link) ? '' : 'd-none' }}"><i class="la la-google"></i></a>
+											<a href="{{ ($social_links && $social_links->fb_link) ? $social_links->fb_link : '#' }} " title="" target="blank" class="share-fb {{ ($social_links && $social_links->fb_link) ? '' : 'd-none' }}"><i class="fa fa-facebook"></i></a>
+											<a href="{{ ($social_links && $social_links->twitter_link) ? $social_links->twitter_link : '#' }}" title="" target="blank" class="share-twitter {{ ($social_links && $social_links->twitter_link) ? '' : 'd-none' }}"><i class="fa fa-twitter"></i></a>
+											<a href="{{ ($social_links && $social_links->linkedin_link) ? $social_links->linkedin_link : '#' }}" title="" target="blank" class="share-linkedin {{ ($social_links && $social_links->linkedin_link) ? '' : 'd-none' }}"><i class="fa fa-linkedin"></i></a>
 							 			</div>
 								 		<div class="emply-btns">
-								 			{{-- <a class="seemap" href="#" title=""><i class="la la-map-marker"></i> See On Map</a> --}}
-								 			<a class="followus" href="#" title=""><i class="la la-paper-plane"></i> Follow us</a>
+											@if($company_info->is_featured == 1)
+											<a class="followus" href="javascript: void(0);" title=""><i class="la la-star" style="color: #ffd700;"></i> Featured Company</a>
+											@elseif( $featured_job )
+											<a class="followus" id="feature_company" href="#" title="Feature your company"><i class="la la-paper-plane"></i> Click to feature Company</a>
+											@else
+											<a class="followus" href="{{ route('employer.packages.list') }}" title=""><i class="la la-paper-plane"></i> Buy Package to feature</a>
+											@endif
+											@if($featured_job)
+											<form id="feature_company_form" action="{{ route('employer.feature.company', [ 'company_id'=>$company_info->id, 'package_id'=>$featured_job->id]) }}" method="get">
+												@csrf
+											</form>
+											@endif
 								 		</div>
-				 					</div>
+				 					</div>  
 				 				</div>
 				 			</div>
 				 			<div class="job-wide-devider">
@@ -159,3 +168,38 @@
 		</div>
 	</section>
 @endsection
+
+
+@push('js')
+
+<script>
+	// Feature Company
+	$('#feature_company').on('click', function(e){
+		e.preventDefault();
+		iziToast.show({
+		theme: 'dark',
+		icon: 'la la-bullhorn',
+		title: 'Are you sure?',
+		message: 'Want to feature your company?',
+		position: 'center', // bottomRight, bottomLeft, topRight, topLeft, topCenter, bottomCenter
+		progressBar: true,
+		overlay: true,
+		progressBarColor: '#8b91dd',
+		buttons: [
+			['<button>Feature</button>', function (instance, toast) {
+				$('#feature_company_form').submit();
+			}, true], // true to focus
+			['<button>Close</button>', function (instance, toast) {
+				instance.hide({
+					transitionOut: 'fadeOutUp',
+					onClosing: function(instance, toast, closedBy){
+						console.info('closedBy: ' + closedBy); // The return will be: 'closedBy: buttonName'
+					}
+				}, toast, 'buttonName');
+			}]
+		],
+		});
+	});
+</script>
+
+@endpush

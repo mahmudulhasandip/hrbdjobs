@@ -12,8 +12,9 @@ class JobDesignationsController extends Controller
 {
     //
     public function index() {
-        $job_designations = Job_designation::all();
-        return view('admin.job_designation', ['job_designations' => $job_designations]);
+        $data['menu_active'] = 'job_designation';
+        $data['job_designations'] = Job_designation::all();
+        return view('admin.job_designation', $data);
     }
 
     public function store(Request $request) {

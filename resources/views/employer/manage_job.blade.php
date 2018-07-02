@@ -46,7 +46,7 @@
 						 		<table>
 						 			<thead>
 						 				<tr>
-						 					<td width="300">Title</td>
+						 					<td width="350">Title</td>
 						 					<td>Applications</td>
 											<td>Created<br> Expired</td>
 											<td>Featured</td>
@@ -58,12 +58,12 @@
 
 										@foreach($allJobs as $job)
 										@php
-										// $year = $job->created_at->year;
-										// $month = $job->created_at->month;
-										// $day = $job->created_at->day;
 										@endphp
 						 				<tr>
 						 					<td>
+												@if($job->is_featured == 1)
+												<img src="{{ asset('/images/featured_ribbon.png') }}" alt="photo" class="feature_icon">
+												@endif
 						 						<div class="table-list-title">
 												 <h3><a href="/employer/job_details/{{ $job->id }}" title="">{{ $job->title }}</a></h3>
 						 						</div>
@@ -76,14 +76,27 @@
 						 						<span>{{ date("d M Y", strtotime($job->deadline)) }}</span>
 											</td>
 											<td>
-												
+												<ul class="action_job">
+													@if($job->is_featured == 1)
+													<li><span>This is a featured post.</span><a href="javascript: void(0);" class="text-blue">Featured</a></li>
+													@elseif( $featured_job)
+													<li><span>Want to feature?</span><a href="javascript: void(0);" id="feature_job">Feature</a></li>
+													<form id="feature_job_form" action="{{ route('employer.feature.job') }}" method="POST">
+														@csrf
+														<input type = "hidden" value = "{{ $job->id }}" name = "JobId">
+														<input type = "hidden" value = "{{ $featured_job->id }}" name = "featureJobId">
+													</form>
+													@else
+													<li><span>Buy Package for feature</span><a href="{{ route('employer.packages.list') }}">Buy Package</a></li>
+													@endif
+												</ul>
 											</td>
 						 					<td>
-						 						<span class="status  {{ ($job->is_varified) ? 'active' : 'inactive' }} ">{{ ($job->is_varified) ? 'Active' : 'Inactive' }}</span>
+						 						<span class = "status  {{ ($job->is_varified) ? 'active' : 'inactive' }} ">{{ ($job->is_varified) ? 'Active': 'Inactive' }}</span>
 						 					</td>
 						 					<td>
 						 						<ul class="action_job">
-						 							<li><span>View Job</span><a href="/employer/job_details/{{ $job->id }}" title=""><i class="la la-eye"></i></a></li>
+												 <li><span>{{ ($job->is_paused) ? 'Click to active' : 'Click to pause' }}</span><a href="/employer/job_pause/{{ $job->id }}" title="" class="{{ ($job->is_paused) ? 'text-red' : 'text-green' }}"><i class="{{ ($job->is_paused) ? 'la la-pause' : 'la la-play' }}"></i></a></li>
 						 							<li><span>Edit</span><a href="{{ route('employer.edit.job.view', $job->id) }}" title=""><i class="la la-pencil"></i></a></li>
 													<li><span>Delete</span><a class="delete" href="" title=""><i class="la la-trash-o"></i></a></li>
 													<form id="delete-form" action="{{ route('employer.delete.job', $job->id) }}" method="get">
@@ -109,6 +122,7 @@
 
 <script>
 
+	// delete Job Post
 	$('.delete').on('click', function(e){
 		e.preventDefault();
 		iziToast.show({
@@ -123,6 +137,35 @@
 		buttons: [
 			['<button>Delete</button>', function (instance, toast) {
 				$('#delete-form').submit();
+			}, true], // true to focus
+			['<button>Close</button>', function (instance, toast) {
+				instance.hide({
+					transitionOut: 'fadeOutUp',
+					onClosing: function(instance, toast, closedBy){
+						console.info('closedBy: ' + closedBy); // The return will be: 'closedBy: buttonName'
+					}
+				}, toast, 'buttonName');
+			}]
+		],
+		});
+	});
+	
+
+	// Feature Job Post
+	$('#feature_job').on('click', function(e){
+		e.preventDefault();
+		iziToast.show({
+		theme: 'dark',
+		icon: 'la la-bullhorn',
+		title: 'Are you sure?',
+		message: 'Want to feature this job post?',
+		position: 'center', // bottomRight, bottomLeft, topRight, topLeft, topCenter, bottomCenter
+		progressBar: true,
+		overlay: true,
+		progressBarColor: '#8b91dd',
+		buttons: [
+			['<button>Feature</button>', function (instance, toast) {
+				$('#feature_job_form').submit();
 			}, true], // true to focus
 			['<button>Close</button>', function (instance, toast) {
 				instance.hide({

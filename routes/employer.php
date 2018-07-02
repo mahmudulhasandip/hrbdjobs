@@ -13,6 +13,8 @@ Route::get('/browse/candidate/resume', 'EmployerController\HomeController@getBro
 
 // update company profile
 Route::post('/company/profile/edit', 'EmployerController\HomeController@updateProfile')->name('update.profile');
+// feature Company profile
+Route::get('/company/profile/feature_company/{company_id}/{package_id}', 'EmployerController\HomeController@featureCompany')->name('feature.company');
 
 // packages
 Route::get('/package', 'EmployerController\HomeController@getPackages')->name('packages.list');
@@ -31,6 +33,9 @@ Route::get('/draft/job', 'EmployerController\HomeController@getDraftedJob')->nam
 Route::get('/post/new/job/{id}', 'EmployerController\HomeController@draftedJobForm')->name('draft.job.view');
 Route::get('/edit/job/{id}', 'EmployerController\HomeController@editJobForm')->name('edit.job.view');
 Route::get('/delete/job/{id}', 'EmployerController\HomeController@deleteJob')->name('delete.job');
+Route::get('/job_pause/{id}', 'EmployerController\HomeController@pauseJob')->name('pause.job');
+
+Route::post('/manage/job/feature_job', 'EmployerController\HomeController@featureJob')->name('feature.job');
 
 // employer profile update
 Route::get('/profile/edit', 'EmployerController\HomeController@getEditProfile')->name('profile.edit');
