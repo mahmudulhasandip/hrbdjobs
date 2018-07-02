@@ -18,8 +18,11 @@ Route::get('employer/delete/{id}', 'AdminController\EmployerListController@delet
 
 // posted job list
 Route::get('job/post/list', 'AdminController\jobPostedList@index')->name('job.post.list');
-Route::get('job/post/approve/{empId}', 'AdminController\jobPostedList@approve')->name('job.post.approve');
-Route::get('job/post/delete/{id}', 'AdminController\jobPostedList@deletePost')->name('job.post.delete');
+Route::get('job/post/approve/{jobId}', 'AdminController\jobPostedList@approve')->name('job.post.approve');
+
+// Employer package list
+Route::get('employer/package/list', 'AdminController\employerPackageList@index')->name('employer.package.list');
+Route::get('job/post/approve/{jobId}', 'AdminController\jobPostedList@approve')->name('job.post.approve');
 
 
 // job designation
