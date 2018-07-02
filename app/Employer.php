@@ -32,6 +32,22 @@ class Employer extends Authenticatable
         'password', 'remember_token',
     ];
 
+    // this is a recommended way to declare event handlers
+    protected static function boot() {
+        parent::boot();
+
+        static::deleting(function($employer) { // before delete() method call this 
+            sizeof($employer->employerPackages) ? $employer->employerPackages()->delete(): '';
+            ($employer->employerCompanyInfo != null) ? $employer->employerCompanyInfo->delete(): '';
+            sizeof($employer->shortListedResume) ? $employer->shortListedResume()->delete(): '';
+            sizeof($employer->followEmployer) ? $employer->followEmployer()->delete(): '';
+            sizeof($employer->candidateInvitation) ? $employer->candidateInvitation()->delete(): '';
+            sizeof($employer->paymentHistory) ? $employer->paymentHistory()->delete(): '';
+            sizeof($employer->job) ? $employer->job()->delete(): '';
+            // do the rest of the cleanup...
+        });
+    }
+
     /**
      * Send the password reset notification.
      *
