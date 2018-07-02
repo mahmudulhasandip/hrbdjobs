@@ -15,4 +15,21 @@ class JobPostedList extends Controller
         $data['jobs'] = Job::all();
         return view('admin.job_post_list', $data);
     }
+
+    public function approve($jobId) {
+        $job = Job::find($jobId);
+        if($job->is_verified == 1){
+            $job->is_verified = 0;
+            $msg = 'Job post status make pending';
+        } else{
+            $job->is_verified = 1;
+            $msg = 'Job post status make approved';
+        }
+
+        $job->save();
+
+        return redirect()->route('admin.job.post.list')->with('status', $msg);
+    }
+
+
 }

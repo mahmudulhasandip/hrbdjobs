@@ -4,7 +4,7 @@
     <div class="d-flex align-items-center">
         <div class="mr-auto">
             <h3 class="m-subheader__title m-subheader__title--separator">
-                Employer's posted List
+                Employer's posted job List
             </h3>
         </div>
 
@@ -25,7 +25,7 @@
             <div class="m-portlet__head-caption">
                 <div class="m-portlet__head-title">
                     <h3 class="m-portlet__head-text">
-                        Employer's posted List Table
+                        Employer's posted job List Table
                     </h3>
                 </div>
             </div>
@@ -148,7 +148,7 @@
                             {{ ($job->is_featured) ? 'Featured' : 'Not Featured' }}
                         </td>
                         <td>
-                            <a href="{{ route('admin.job.post.approve', $job->id) }}" class="m-badge {{ ($job->status) ? 'm-badge--success' : 'm-badge--danger' }} m-badge--wide text-white">{{ ($job->status) ? 'Approved' : 'Pending' }}</a>
+                            <a href="{{ route('admin.job.post.approve', $job->id) }}" class="m-badge {{ ($job->is_verified) ? 'm-badge--success' : 'm-badge--danger' }} m-badge--wide text-white">{{ ($job->is_verified) ? 'Approved' : 'Pending' }}</a>
                         </td>
                         <td>
                             <a href="javascript: void(0);" data-toggle="modal" data-target="#job_modal" class="btn m-btn m-btn--hover-accent m-btn--icon m-btn--icon-only m-btn--pill job_view" data-jobindex="{{ json_encode($job) }}">
@@ -162,12 +162,6 @@
                                 <a class="dropdown-item" href="#">
                                     <i class="la la-edit"></i> Edit Details
                                 </a>
-                                <a class="dropdown-item" href="{{ route('admin.job.post.delete', $job->id) }}" id="deleteEmp">
-                                    <i class="la la-trash"></i> Delete Employer
-                                </a>
-                                <form id="delete-form" action="{{ route('admin.job.post.delete', $job->id) }}" method="get">
-                                    @csrf
-                                </form>
                             </div>
                         </td>
                     </tr>
