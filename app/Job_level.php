@@ -14,4 +14,8 @@ class Job_level extends Model
     public function job(){
         return $this->belongsTo('App\Job');
     }
+
+    public function candidateSkill(){
+        return $this->belongsTo('App\Candidate_skill');
+    }
 }

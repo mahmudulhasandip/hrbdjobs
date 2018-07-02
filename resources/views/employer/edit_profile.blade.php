@@ -34,33 +34,31 @@
 				 		<div class="padding-left">
 					 		<div class="profile-title">
 					 			<h3>Employee Profile</h3>
-					 			
-					 			
 					 		</div>
 					 		<div class="profile-form-edit">
 					 			<form method="post" action="{{ route('employer.update.employer.profile') }}" enctype="multipart/form-data">
 									@csrf
 					 				<div class="row">
-											<div id="file-upload-form" class="uploader">
-												<input id="file-upload" type="file" name="logo" accept="image/*" />
-				
-												<label for="file-upload" id="file-drag">
-													<img id="file-image" src="{{ asset('storage/uploads/'.(($employer_info->logo) ? $employer_info->logo : 'default_user.png'))}}" alt="Preview" class="">
-													<div id="start">
-													<i class="fa fa-download" aria-hidden="true"></i>
-													<div>Select a logo or drag here</div>
-													<div id="notimage" class="hidden">Please select an image</div>
-													<span id="file-upload-btn" class="btn btn-primary">Select a file</span>
-													</div>
-													<div id="response" class="hidden">
-													<div id="messages"></div>
-													</div>
-												</label>
-											</div>
+										<div id="file-upload-form" class="uploader">
+											<input id="file-upload" type="file" name="logo" accept="image/*" />
+			
+											<label for="file-upload" id="file-drag">
+												<img id="file-image" src="{{ asset('storage/uploads/'.(($employer_info->logo) ? $employer_info->logo : 'default_user.png'))}}" alt="Preview" class="">
+												<div id="start">
+												<i class="fa fa-download" aria-hidden="true"></i>
+												<div>Select a logo or drag here</div>
+												<div id="notimage" class="hidden">Please select an image</div>
+												<span id="file-upload-btn" class="btn btn-primary">Select a file</span>
+												</div>
+												<div id="response" class="hidden">
+												<div id="messages"></div>
+												</div>
+											</label>
+										</div>
 					 					<div class="col-lg-6">
 					 						<span class="pf-title">First Name</span>
 					 						<div class="pf-field">
-					 							<input type="text" placeholder="First Name" name="fname"  value="{{ 	old('fname') ? old('fname') : $employer_info->fname }}"/>
+					 							<input type="text" placeholder="First Name" name="fname"  value="{{ old('fname') ? old('fname') : $employer_info->fname }}"/>
 					 						</div>
 										 </div>
 										 

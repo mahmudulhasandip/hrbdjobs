@@ -15,7 +15,11 @@ class Candidate_skill extends Model
     }
 
     public function jobCategory(){
-        return $this->hasMany('App\Job_category', 'id', 'category_id');
+        return $this->hasOne('App\Job_category', 'id', 'category_id');
+    }
+
+    public function jobLevel(){
+        return $this->hasOne('App\Job_level', 'id', 'job_level');
     }
 
     public function jobDesignation(){

@@ -1,6 +1,9 @@
 <div class="tree_widget-sec">
 
     <ul>
+        <li class="inner-child  {{ ($left_active == 'dashboard')? 'active':'' }}">
+            <a href="{{ route('candidate.main') }}" title="" class=""><i class="la la-home"></i>Dashboard</a>
+        </li>
         <li class="inner-child {{ ($left_active == 'profile')? 'active':'' }}">
             <a href="#" title="" class="main-a"><i class="la la-file-text"></i>My Profile</a>
             <ul>

@@ -67,12 +67,6 @@ span,
 applet,
 object,
 iframe,
-h1,
-h2,
-h3,
-h4,
-h5,
-h6,
 p,
 blockquote,
 pre,
@@ -217,7 +211,6 @@ h3,
 h4,
 h5,
 h6 {
-    margin-bottom: 20px;
     font-family: 'Quicksand', serif;
 }
 
@@ -478,7 +471,6 @@ textarea {
 
 textarea {
     max-width: 100%;
-    min-height: 200px;
     padding: 19px 28px;
 }
 
@@ -7421,7 +7413,7 @@ aside .widget.border:first-child {
     -ms-border-radius: 8px;
     -o-border-radius: 8px;
     border-radius: 8px;
-    padding: 12px 45px 12px 15px;
+    padding: 12px 15px 12px 15px;
     background: #ffffff;
     font-family: Open Sans;
     font-size: 13px;
@@ -7431,7 +7423,7 @@ aside .widget.border:first-child {
 
 .pf-field>textarea {
     color: #888888;
-    padding: 30px 30px;
+    padding: 20px 20px;
 }
 
 .profile-form-edit>form button {
@@ -13848,7 +13840,7 @@ textarea {
 
 .tab__content>li {
     width: 100%;
-    position: absolute;
+    /*position: absolute;*/
     top: 0;
     left: 0;
     display: none;
@@ -13863,6 +13855,31 @@ textarea {
     background-color: white;
 }
 
+.pf-field>input:read-only, .pf-field>textarea:read-only { 
+    background-color: #e8ecec;
+    cursor: no-drop;
+}
+
+.select2-container--default .select2-search--inline .select2-search__field{
+    width: 100% !important;
+}
+
+.preloader-wrapper {
+    width: 100%;
+    height: 100%;
+    background-color: rgba(0,0,0,.6);
+    z-index: 11;
+    position: relative;
+}
+
+.hidden{
+    display: none;
+}
+
+.margin_top_25{
+    margin-top: 25px;
+    display: inline-block;
+}
 .text-green{
     color: #26ae61 !important;
 }
@@ -13871,3 +13888,4 @@ textarea {
     color: #222;
 }
 
+hr { background-color: #edeff7; height: 1px; border: 0; }
