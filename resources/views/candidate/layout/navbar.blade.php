@@ -64,7 +64,7 @@
             @else
                 <div class="btns-profiles-sec">
                     <span>
-                        <img src="http://placehold.it/50x50" alt="" /> {{ Auth::user()->fname}}
+                        <img src="{{ asset('storage/uploads/'.(($candidate->dp) ? $candidate->dp : 'default_user.png'))}}" alt="" /> {{ Auth::user()->fname}}
                         <i class="la la-angle-down"></i>
                     </span>
                     <ul>

@@ -4,8 +4,10 @@
 
 @push('css')
 <link href="https://cdnjs.cloudflare.com/ajax/libs/select2/4.0.6-rc.0/css/select2.min.css" rel="stylesheet" />
-<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-datepicker/1.8.0/css/bootstrap-datepicker.min.css" />
-@endpush
+{{-- <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-datepicker/1.8.0/css/bootstrap-datepicker.min.css" />
+ --}}
+ <link rel="stylesheet" href="//code.jquery.com/ui/1.12.1/themes/base/jquery-ui.css">
+ @endpush
 
 @section('content')
 <section class="overlape">
@@ -275,7 +277,8 @@
 @push('js')
 <script src="https://cdnjs.cloudflare.com/ajax/libs/select2/4.0.6-rc.0/js/select2.min.js"></script>
 <script src="{{ asset('js/tinymce/tinymce.min.js') }}"></script>
-<script src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-datepicker/1.8.0/js/bootstrap-datepicker.min.js"></script>
+{{-- <script src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-datepicker/1.8.0/js/bootstrap-datepicker.min.js"></script> --}}
+<script src="https://code.jquery.com/ui/1.12.1/jquery-ui.js"></script>
 
 <script>
 	$(document).ready(function() {
@@ -325,9 +328,12 @@
  </script>
 
  <script>
-	 $("#datepicker input").datepicker({
-		format: 'yyyy-mm-dd',
-	 });
+	 // $("#datepicker input").datepicker({
+		// format: 'yyyy-mm-dd',
+	 // });
+	$(function(){
+	    $( "#datepicker" ).datepicker();
+	});
  </script>
 
 @endpush

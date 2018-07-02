@@ -17,11 +17,11 @@ class CreateCandidateExperiencesTable extends Migration
             $table->increments('id')->unsigned()->unique();
             $table->integer('candidate_id')->unsigned();
             $table->string('company_name');
-            $table->string('responsibility'); 
+            $table->string('responsibility')->nullable(); 
             $table->integer('candidate_designation')->unsigned();
-            $table->string('company_designation');
-            $table->date('start_date');
-            $table->date('end_date');
+            $table->string('company_designation')->nullable();
+            $table->date('start_date')->nullable();
+            $table->date('end_date')->nullable();
             $table->foreign('candidate_id')->references('id')->on('candidates')->onDelete('cascade');
             $table->foreign('candidate_designation')->references('id')->on('job_designations')->onDelete('cascade');
         
