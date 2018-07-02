@@ -54,7 +54,7 @@
 		<div class="col-lg-6">
 			<span class="pf-title">Birthday</span>
 			<div class="pf-field">
-				<input type="text" name="date_of_birth" id="datepicker" value="{{ date('m/d/Y', strtotime(($candidate->date_of_birth) ? $candidate->date_of_birth : '01-01-1990')) }}">
+				<input type="text" name="date_of_birth" id="datepicker" class="datepicker" value="{{ date('m/d/Y', strtotime(($candidate->date_of_birth) ? $candidate->date_of_birth : '01-01-1990')) }}">
 			</div>
 		</div>
 		<div class="col-lg-6">
@@ -186,7 +186,7 @@
 			<div class="pf-field">
 				<select name="job_level" data-placeholder="Please Select Specialism" class="chosen">
 					@foreach($jobLevels as $jobLevel)
-					<option value="{{ $jobLevel->name }}" {{ (sizeof($candidateSkills) && ($candidateSkills[0]->job_level == $jobLevel->name)) ? 'selected':'' }}>{{ $jobLevel->name }}</option>
+					<option value="{{ $jobLevel->id }}" {{ (sizeof($candidateSkills) && ($candidateSkills[0]->job_level == $jobLevel->id)) ? 'selected':'' }}>{{ $jobLevel->name }}</option>
 					@endforeach
 				</select>
 			</div>

@@ -18,6 +18,8 @@ use App\Skill;
 
 use App\Candidate_education;
 use App\Candidate_training;
+use App\Candidate_experience;
+use App\Candidate_professional_certificate;
 
 class ProfileController extends Controller
 {
@@ -76,7 +78,7 @@ class ProfileController extends Controller
         }
 
 
-        return redirect()->route('candidate.profile.edit');
+        return redirect()->route('candidate.profile.edit')->with('status', 'Your Educational Information successfully Updated.');
     }
 
     public function getBasicInfo(Request $request){
@@ -129,8 +131,6 @@ class ProfileController extends Controller
         // delete candidate skill and add skills
         Candidate_skill::where('candidate_id', Auth::guard('candidate')->user()->id)->delete();
 
-        
-        // $expertise_areas = explode(",", $request->input('expertise_area'));
         $expertise_areas = $request->input('expertise_area');
         if(sizeof($expertise_areas)){
             for($i = 0; $i < sizeof($expertise_areas); $i++){
@@ -146,12 +146,42 @@ class ProfileController extends Controller
         }
 
 
-        return redirect()->route('candidate.profile.edit');
+        return redirect()->route('candidate.profile.edit')->with('status', 'Your Profile Information successfully Updated.');
     }
 
     public function getExperience(Request $request){
-        $data['candidate'] = Candidate::find(Auth::guard('candidate')->user()->id);
+        $data['candidateExperiences'] = Candidate_experience::where('candidate_id', Auth::guard('candidate')->user()->id)->get();
+        $data['jobDesignations'] = Job_designation::get();
         return view('candidate.profile_partials.experience', $data);
+    }
+
+    public function postUpdateExperience(Request $request){
+        // delete candidate all experiences
+        Candidate_experience::where('candidate_id', Auth::guard('candidate')->user()->id)->delete();
+       
+        $company_name = array_filter($request->input('company_name'));
+        $responsibility = $request->input('responsibility');
+        $candidate_designation = $request->input('candidate_designation');
+        $company_designation = $request->input('company_designation');
+        $start_date = $request->input('start_date');
+        $end_date = $request->input('end_date');
+        if(sizeof($company_name)){
+            for($i = 0; $i < sizeof($company_name); $i++){
+                $experience = new Candidate_experience();
+                $experience->candidate_id = Auth::guard('candidate')->user()->id;
+                $experience->company_name = $company_name[$i];
+                $experience->responsibility = $responsibility[$i];
+                $experience->candidate_designation = $candidate_designation[$i];
+                $experience->company_designation = $company_designation[$i];
+                $experience->start_date = date("Y-m-d", strtotime($start_date[$i]));
+                if($end_date[$i]){
+                    $experience->end_date = date("Y-m-d", strtotime($end_date[$i]));
+                }
+                $experience->save();
+            }
+        }
+
+        return redirect()->route('candidate.profile.edit')->with('status', 'Your Experience successfully Updated.');
     }
 
     public function getTraining(Request $request){
@@ -161,9 +191,8 @@ class ProfileController extends Controller
     }
 
     public function postUpdateTraining(Request $request){
-        // delete candidate skill and add skills
+        // delete candidate all training
         Candidate_training::where('candidate_id', Auth::guard('candidate')->user()->id)->delete();
-        // $expertise_areas = explode(",", $request->input('expertise_area'));
         $title = array_filter($request->input('title'));
         $country = $request->input('country');
         $topic_cover = $request->input('topic_cover');
@@ -187,11 +216,39 @@ class ProfileController extends Controller
         }
 
 
-        return redirect()->route('candidate.profile.edit');
+        return redirect()->route('candidate.profile.edit')->with('status', 'Your Training Information successfully Updated.');
     }
 
     public function getCertificate(Request $request){
-        $data['candidate'] = Candidate::find(Auth::guard('candidate')->user()->id);
+        $data['candidateCertificate'] = Candidate_professional_certificate::where('candidate_id', Auth::guard('candidate')->user()->id)->get();
         return view('candidate.profile_partials.certificate', $data);
+    }
+
+    public function postUpdateCertificate(Request $request){
+        // delete candidate all training
+        Candidate_professional_certificate::where('candidate_id', Auth::guard('candidate')->user()->id)->delete();
+        
+        $certification = array_filter($request->input('certification'));
+        $institution_name = $request->input('institution_name');
+        $location = $request->input('location');
+        $start_date = $request->input('start_date');
+        $end_date = $request->input('end_date');
+        if(sizeof($certification)){
+            for($i = 0; $i < sizeof($certification); $i++){
+                $certificate = new Candidate_professional_certificate();
+                $certificate->candidate_id = Auth::guard('candidate')->user()->id;
+                $certificate->certification = $certification[$i];
+                $certificate->institution_name = $institution_name[$i];
+                $certificate->location = $location[$i];
+                $certificate->start_date = date("Y-m-d", strtotime($start_date[$i]));
+                if($end_date[$i]){
+                    $certificate->end_date = date("Y-m-d", strtotime($end_date[$i]));
+                }
+                $certificate->save();
+            }
+        }
+
+
+        return redirect()->route('candidate.profile.edit')->with('status', 'Your Professional Certificate successfully Updated.');
     }
 }

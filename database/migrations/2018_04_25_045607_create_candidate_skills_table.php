@@ -17,7 +17,7 @@ class CreateCandidateSkillsTable extends Migration
             $table->increments('id')->unsigned()->unique();
             $table->integer('candidate_id')->unsigned();
             $table->integer('experience')->default(0); // 0 = fresher
-            $table->string('job_level')->default('Full Time'); // Part Time, Freelancer, Contractual ...
+            $table->integer('job_level')->unsigned();
             $table->integer('designation_id')->unsigned();
             $table->integer('category_id')->unsigned();
             $table->integer('expertise_area')->unsigned();
@@ -25,6 +25,7 @@ class CreateCandidateSkillsTable extends Migration
             $table->foreign('designation_id')->references('id')->on('job_designations')->onDelete('cascade');
             $table->foreign('category_id')->references('id')->on('job_categories')->onDelete('cascade');
             $table->foreign('expertise_area')->references('id')->on('skills')->onDelete('cascade');
+            $table->foreign('job_level')->references('id')->on('job_levels')->onDelete('cascade');
             $table->timestamps();
         });
     }

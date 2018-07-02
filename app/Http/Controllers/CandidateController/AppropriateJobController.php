@@ -14,6 +14,9 @@ class AppropriateJobController extends Controller
     public function getAppropriateJob(){
     	$data['left_active'] = 'appropriate_job';
     	$data['candidate'] = Candidate::find(Auth::guard('candidate')->user()->id);
+
+    	
+
      	return view('candidate.appropriate_job', $data);
     }
 }

@@ -104,7 +104,7 @@
 <script>
 	var base_url = "{{ url('/candidate/') }}";
 	$(function(){
-	    $( "#datepicker" ).datepicker();
+	    $( ".datepicker" ).datepicker();
 	});
 
 	$(document).ready(function() {
@@ -288,6 +288,7 @@
 				success: function(basic_info){
 					$('#basic_view').html(basic_info);
 					$(".chosen").chosen();
+					$( ".datepicker" ).datepicker();
 					$('.req-skill').select2({
 						placeholder: 'Maximum 10 skills',
 						maximumSelectionLength: 10,
@@ -322,6 +323,7 @@
 				success: function(education){
 					$('#training_view').html(education);
 					$(".chosen").chosen();
+
 					setTimeout(function(){host.hide();}, 1000);
 				}
 			});
@@ -335,6 +337,8 @@
 				headers: {'X-CSRF-TOKEN': Laravel.csrfToken},
 				success: function(education){
 					$('#experience_view').html(education);
+					$(".chosen").chosen();
+					$( ".datepicker" ).datepicker();
 					setTimeout(function(){host.hide();}, 1000);
 				}
 			});
@@ -348,6 +352,7 @@
 				headers: {'X-CSRF-TOKEN': Laravel.csrfToken},
 				success: function(education){
 					$('#certificate_view').html(education);
+					$( ".datepicker" ).datepicker();
 					setTimeout(function(){host.hide();}, 1000);
 				}
 			});
@@ -356,11 +361,11 @@
 			
 	});
 
-	function addEducation(){
+	function makeBox(){
 		$('#make_clone_box').append($('#make_clone').html());
-	}
-	function addTraining(){
-		$('#make_clone_box').append($('#make_clone').html());
+		$(".hasDatepicker").removeClass("hasDatepicker");
+		$(".datepicker").datepicker("destroy");
+		$(".datepicker").datepicker();
 	}
 
 

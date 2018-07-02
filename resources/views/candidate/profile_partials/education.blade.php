@@ -76,7 +76,7 @@
 				
 			</div>
 			<div class="col-lg-12">
-				<a href="javascript:void(0)" onclick="addEducation()" id="add_education" class="margin_top_25 text-blue"><span class="la la-plus"></span> Add Education</a>
+				<a href="javascript:void(0)" onclick="makeBox()" id="add_education" class="margin_top_25 text-blue"><span class="la la-plus"></span> Add Education</a>
 				<button type="submit">Update</button>
 			</div>
 		</div>
@@ -154,7 +154,7 @@
 			</div>
 		</div>
 		<div class="col-lg-12">
-			<a href="javascript:void(0)" onclick="addEducation()" id="add_education" class="margin_top_25 text-blue"><span class="la la-plus"></span> Add Education</a>
+			<a href="javascript:void(0)" onclick="makeBox()" id="add_education" class="margin_top_25 text-blue"><span class="la la-plus"></span> Add Education</a>
 			<button type="submit">Update</button>
 		</div>
 	</div>
