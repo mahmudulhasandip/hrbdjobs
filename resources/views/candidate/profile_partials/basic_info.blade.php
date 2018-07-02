@@ -1,4 +1,4 @@
-<form method="post" action="{{ route('candidate.update.profile') }}" enctype="multipart/form-data">
+<form method="post" action="{{ route('candidate.update.profile.basic') }}" enctype="multipart/form-data">
 	@csrf
 		<div class="row">
 		<div id="file-upload-form" class="uploader">
@@ -116,9 +116,9 @@
 		<div class="col-lg-3">
 			<span class="pf-title">Marital Status</span>
 			<div class="pf-field">
-				<select data-placeholder="Please Select Specialism" class="chosen">
-					<option value="Married" {{ $candidate->marital_status == 'Married' ? 'selected':'' }}>Married</option>
+				<select name="marital_status" data-placeholder="Please Select Specialism" class="chosen">
 					<option value="Unmarried" {{ $candidate->marital_status == 'Unmarried' ? 'selected':'' }}>Unmarried</option>
+					<option value="Married" {{ $candidate->marital_status == 'Married' ? 'selected':'' }}>Married</option>
 					<option value="Divorced" {{ $candidate->marital_status == 'Divorced' ? 'selected':'' }}>Divorced</option>
 				</select>
 			</div>
@@ -173,9 +173,9 @@
 		<div class="col-md-6">
 			<span class="pf-title">Experience (Years)</span>
 			<div class="pf-field">
-				<select data-placeholder="Please Select Specialism" class="chosen">
+				<select name="experience" data-placeholder="Please Select Specialism" class="chosen">
 					@foreach($jobExperiences as $jobExperience)
-					<option value="{{ $jobExperience->name }}" {{ (sizeof($candidateSkills) && ($$candidateSkills[0]->experience == $jobExperience->name)) ? 'selected':'' }}>{{ $jobExperience->name }}</option>
+					<option value="{{ $jobExperience->id }}" {{ (sizeof($candidateSkills) && ($candidateSkills[0]->experience == $jobExperience->id)) ? 'selected':'' }}>{{ $jobExperience->name }}</option>
 					@endforeach
 				</select>
 			</div>
@@ -184,9 +184,9 @@
 		<div class="col-md-6">
 			<span class="pf-title">Job Level</span>
 			<div class="pf-field">
-				<select data-placeholder="Please Select Specialism" class="chosen">
+				<select name="job_level" data-placeholder="Please Select Specialism" class="chosen">
 					@foreach($jobLevels as $jobLevel)
-					<option value="{{ $jobLevel->name }}" {{ (sizeof($candidateSkills) && ($$candidateSkills[0]->job_level == $jobLevel->name)) ? 'selected':'' }}>{{ $jobLevel->name }}</option>
+					<option value="{{ $jobLevel->name }}" {{ (sizeof($candidateSkills) && ($candidateSkills[0]->job_level == $jobLevel->name)) ? 'selected':'' }}>{{ $jobLevel->name }}</option>
 					@endforeach
 				</select>
 			</div>
@@ -195,9 +195,9 @@
 		<div class="col-md-6">
 			<span class="pf-title">Job Category</span>
 			<div class="pf-field">
-				<select data-placeholder="Please Select Specialism" class="chosen">
+				<select name="job_category" data-placeholder="Please Select Specialism" class="chosen">
 					@foreach($jobCategories as $jobCategory)
-					<option value="{{ $jobCategory->id }}" {{ (sizeof($candidateSkills) && ($$candidateSkills[0]->category_id == $jobCategory->id)) ? 'selected':'' }}>{{ $jobCategory->name }}</option>
+					<option value="{{ $jobCategory->id }}" {{ (sizeof($candidateSkills) && ($candidateSkills[0]->category_id == $jobCategory->id)) ? 'selected':'' }}>{{ $jobCategory->name }}</option>
 					@endforeach
 				</select>
 			</div>
@@ -206,9 +206,9 @@
 		<div class="col-md-6">
 			<span class="pf-title">Job Designation</span>
 			<div class="pf-field">
-				<select data-placeholder="Please Select Specialism" class="chosen">
+				<select name="job_designation" data-placeholder="Please Select Specialism" class="chosen">
 					@foreach($jobDesignations as $jobDesignation)
-					<option value="{{ $jobDesignation->id }}" {{ (sizeof($candidateSkills) && ($$candidateSkills[0]->designation_id == $jobDesignation->id)) ? 'selected':'' }}>{{ $jobDesignation->name }}</option>
+					<option value="{{ $jobDesignation->id }}" {{ (sizeof($candidateSkills) && ($candidateSkills[0]->designation_id == $jobDesignation->id)) ? 'selected':'' }}>{{ $jobDesignation->name }}</option>
 					@endforeach
 				</select>
 			</div>
@@ -221,10 +221,9 @@
 					$canSkills = array();
 					if(sizeof($candidateSkills)){
 						foreach ($candidateSkills as $skill) {
-							$canSkills[] = $skill->id;
+							$canSkills[] = $skill->expertise_area;
 						}
 					}
-					
 					
 				@endphp
 

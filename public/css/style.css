@@ -13840,7 +13840,7 @@ textarea {
 
 .tab__content>li {
     width: 100%;
-    position: absolute;
+    /*position: absolute;*/
     top: 0;
     left: 0;
     display: none;
@@ -13855,7 +13855,6 @@ textarea {
     background-color: white;
 }
 
-<<<<<<< HEAD
 .pf-field>input:read-only, .pf-field>textarea:read-only { 
     background-color: #e8ecec;
     cursor: no-drop;
@@ -13877,7 +13876,7 @@ textarea {
     display: none;
 }
 
-.add_education{
+.margin_top_25{
     margin-top: 25px;
     display: inline-block;
 }
@@ -13888,3 +13887,5 @@ textarea {
 .text-white{
     color: #222;
 }
+
+hr { background-color: #edeff7; height: 1px; border: 0; }
