@@ -17,11 +17,6 @@ class Job extends Model
      */
     protected $dates = ['deleted_at'];
 
-
-
-
-    
-
     public function employer(){
         return $this->belongsTo('App\Employer');
     }
