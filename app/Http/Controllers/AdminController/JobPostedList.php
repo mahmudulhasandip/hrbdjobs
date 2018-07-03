@@ -12,7 +12,7 @@ class JobPostedList extends Controller
 {
     public function index() {
         $data['menu_active'] = 'job_post_list';
-        $data['jobs'] = Job::all();
+        $data['jobs'] = Job::orderBy('is_verified', 'asc')->get();
         return view('admin.job_post_list', $data);
     }
 
