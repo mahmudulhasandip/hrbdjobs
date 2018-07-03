@@ -13,7 +13,6 @@ class AppliedJobController extends Controller
 {
     public function getAppliedJobs(){
     	$data['left_active'] = 'applied_jobs';
-    	$data['candidate'] = Candidate::find(Auth::guard('candidate')->user()->id);
      	return view('candidate.applied_jobs', $data);
     }
 }

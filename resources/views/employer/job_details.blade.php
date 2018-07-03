@@ -144,7 +144,7 @@
                                     </span></li>
                                     <li><i class="la la-thumb-tack"></i><h3>Career Level</h3><span>{{ $job->jobLevel->name }}</span></li>
                                     <li><i class="la la-puzzle-piece"></i><h3>Job Category</h3><span>{{ $job->jobCategory->name }}</span></li>
-                                    <li><i class="la la-shield"></i><h3>Experience</h3><span>{{ $job->jobExperience->name }} Year(s)</span></li>
+                                    <li><i class="la la-shield"></i><h3>Experience</h3><span>{{ $job->experience }} Year(s)</span></li>
                                     <li><i class="la la-map"></i><h3>Location</h3><span>{{ $job->location }}</span></li>
                                 </ul>
                             </div><!-- Job Overview -->

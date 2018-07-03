@@ -23,8 +23,8 @@
         <li class="inner-child {{ ($left_active == 'follow_companies')? 'active':'' }}">
             <a href="{{ route('candidate.follow.companies') }}" title="" class=""><i class="la la-binoculars"></i>Follow Companies</a>
         </li>
-        <li class="inner-child">
-            <a href="./job_list_modern.html" title="" class=""><i class="la la-bookmark"></i>Shorlisted</a>
+        <li class="inner-child {{ ($left_active == 'shortlisted')? 'active':'' }}">
+            <a href="{{ route('candidate.shortlisted.job') }}" title="" class=""><i class="la la-bookmark"></i>Shorlisted</a>
         </li>
         <li><a href="{{ route('candidate.logout') }}" onclick="event.preventDefault();
                 document.getElementById('logout-form').submit();" title="" class=""><i class="la la-unlink"></i>Logout</a>

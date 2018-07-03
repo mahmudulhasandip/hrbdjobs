@@ -361,17 +361,14 @@
 			
 	});
 
-	function makeBox(){
-		$('#make_clone_box').append($('#make_clone').html());
+	function makeBox(name){
+		$('#make_clone_box_'+name).append($('#make_clone_'+name).html());
 		$(".hasDatepicker").removeClass("hasDatepicker");
 		$(".datepicker").datepicker("destroy");
 		$(".datepicker").datepicker();
 	}
 
-
 </script>
-
-
 
 
 @endpush

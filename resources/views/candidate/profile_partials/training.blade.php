@@ -73,11 +73,11 @@
 					@endforeach
 				</div>
 			</div>
-			<div class="col-lg-12" id="make_clone_box">
+			<div class="col-lg-12" id="make_clone_box_training">
 				
 			</div>
 			<div class="col-lg-12">
-				<a href="javascript:void(0)" onclick="makeBox()" id="add_training" class="margin_top_25 text-blue"><span class="la la-plus"></span> Add Training</a>
+				<a href="javascript:void(0)" onclick="makeBox('training')" id="add_training" class="margin_top_25 text-blue"><span class="la la-plus"></span> Add Training</a>
 				<button type="submit">Update</button>
 			</div>
 		</div>
@@ -147,19 +147,19 @@
 					</div>
 				</div>
 			</div>
-			<div class="col-lg-12" id="make_clone_box">
+			<div class="col-lg-12" id="make_clone_box_training">
 				
 			</div>
 		</div>
 		<div class="col-lg-12">
-			<a href="javascript:void(0)" onclick="makeBox()" id="add_education" class="margin_top_25 text-blue"><span class="la la-plus"></span> Add Training</a>
+			<a href="javascript:void(0)" onclick="makeBox('training')" id="add_education" class="margin_top_25 text-blue"><span class="la la-plus"></span> Add Training</a>
 			<button type="submit">Update</button>
 		</div>
 	</div>
 </form>
 @endif
 
-<div id="make_clone" class="hidden">
+<div id="make_clone_training" class="hidden">
 	<div class="row">
 
 		<div class="col-lg-12">

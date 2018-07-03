@@ -32,95 +32,41 @@
                         <div class="padding-left">
                             <div class="manage-jobs-sec">
                                 <div class="border-title"><h3>Appropriate jobs</h3></div>
+                                @foreach($jobs as $ap_job)
+                                @php 
+                                    $job = App\Job::where('id', $ap_job->id)->first();
+                                    $favJob = App\Favourite_job::where('job_id', $ap_job->id)->where('candidate_id', Auth::guard('candidate')->user()->id)->where('status', 1)->first();
+                                @endphp
                                 <div class="job-listing wtabs">
                                     <div class="job-title-sec">
-                                        <div class="c-logo"> <img src="http://placehold.it/98x51" alt="" /> </div>
-                                        <h3><a href="./job_single.html" title="">Web Designer / Developer</a></h3>
-                                        <span>Massimo Artemisistator</span>
-                                        <div class="job-lctn">November 6, 2017</div>
+                                        <div class="c-logo"> <img src="{{ ( $job->employer->employerCompanyInfo->logo ) ? asset('storage/uploads/'.$job->employer->employerCompanyInfo->logo) : asset('storage/uploads/company-avatar.png') }}" alt="" /> </div>
+                                        <h3><a href="{{ route('single.job', $job->id) }}" target="_blank">{{ $job->title }}</a></h3>
+                                        <span>{{ $job->employer->employerCompanyInfo->name }}</span>
+                                        <div class="job-lctn">{{ date("M d, Y", strtotime($job->deadline)) }}</div>
                                     </div>
                                     <div class="job-list-del">
-                                        <a href="#" title=""><i class="la la-trash-o"></i></a>
+                                        <ul class="action_job">
+                                            <li>
+                                                @if($favJob)
+                                                <span>Make it Unshorted</span>
+                                                <a href="javascript:void(0)" data-jobId="{{ $job->id }}" class="short-listed text-blue"><i class="fa fa-bookmark fa-2x"></i></a>
+                                                @else
+                                                <span>Make it Shortlisted</span>
+                                                <a href="javascript:void(0)" data-jobId="{{ $job->id }}" class="short-listed text-blue"><i class="la la-bookmark la-2x"></i></a>
+                                                @endif
+                                            </li>
+                                        </ul>
                                     </div>
                                 </div><!-- Job -->
-                                <div class="job-listing wtabs">
-                                    <div class="job-title-sec">
-                                        <div class="c-logo"> <img src="http://placehold.it/98x51" alt="" /> </div>
-                                        <h3><a href="job_single.html" title="">Web Designer / Developer</a></h3>
-                                        <span>Massimo Artemisistator</span>
-                                        <div class="job-lctn">November 6, 2017</div>
-                                    </div>
-                                    <div class="job-list-del">
-                                        <a href="#" title=""><i class="la la-trash-o"></i></a>
-                                    </div>
-                                </div><!-- Job -->
-                                <div class="job-listing wtabs">
-                                    <div class="job-title-sec">
-                                        <div class="c-logo"> <img src="http://placehold.it/98x51" alt="" /> </div>
-                                        <h3><a href="job_single.html" title="">Web Designer / Developer</a></h3>
-                                        <span>Massimo Artemisistator</span>
-                                        <div class="job-lctn">November 6, 2017</div>
-                                    </div>
-                                    <div class="job-list-del">
-                                        <a href="#" title=""><i class="la la-trash-o"></i></a>
-                                    </div>
-                                </div><!-- Job -->
-                                <div class="job-listing wtabs">
-                                    <div class="job-title-sec">
-                                        <div class="c-logo"> <img src="http://placehold.it/98x51" alt="" /> </div>
-                                        <h3><a href="job_single.html" title="">Web Designer / Developer</a></h3>
-                                        <span>Massimo Artemisistator</span>
-                                        <div class="job-lctn">November 6, 2017</div>
-                                    </div>
-                                    <div class="job-list-del">
-                                        <a href="#" title=""><i class="la la-trash-o"></i></a>
-                                    </div>
-                                </div><!-- Job -->
-                                <div class="job-listing wtabs">
-                                    <div class="job-title-sec">
-                                        <div class="c-logo"> <img src="http://placehold.it/98x51" alt="" /> </div>
-                                        <h3><a href="job_single.html" title="">Web Designer / Developer</a></h3>
-                                        <span>Massimo Artemisistator</span>
-                                        <div class="job-lctn">November 6, 2017</div>
-                                    </div>
-                                    <div class="job-list-del">
-                                        <a href="#" title=""><i class="la la-trash-o"></i></a>
-                                    </div>
-                                </div><!-- Job -->
-                                <div class="job-listing wtabs">
-                                    <div class="job-title-sec">
-                                        <div class="c-logo"> <img src="http://placehold.it/98x51" alt="" /> </div>
-                                        <h3><a href="job_single.html" title="">Web Designer / Developer</a></h3>
-                                        <span>Massimo Artemisistator</span>
-                                        <div class="job-lctn">November 6, 2017</div>
-                                    </div>
-                                    <div class="job-list-del">
-                                        <a href="#" title=""><i class="la la-trash-o"></i></a>
-                                    </div>
-                                </div><!-- Job -->
-                                <div class="job-listing wtabs">
-                                    <div class="job-title-sec">
-                                        <div class="c-logo"> <img src="http://placehold.it/98x51" alt="" /> </div>
-                                        <h3><a href="job_single.html" title="">Web Designer / Developer</a></h3>
-                                        <span>Massimo Artemisistator</span>
-                                        <div class="job-lctn">November 6, 2017</div>
-                                    </div>
-                                    <div class="job-list-del">
-                                        <a href="#" title=""><i class="la la-trash-o"></i></a>
-                                    </div>
-                                </div><!-- Job -->
-                                <div style="margin: 60px auto;" class="pagination">
-                                    <ul>
-                                        <li class="prev"><a href=""><i class="la la-long-arrow-left"></i> Prev</a></li>
-                                        <li><a href="">1</a></li>
-                                        <li class="active"><a href="">2</a></li>
-                                        <li><a href="">3</a></li>
-                                        <li><span class="delimeter">...</span></li>
-                                        <li><a href="">14</a></li>
-                                        <li class="next"><a href="">Next <i class="la la-long-arrow-right"></i></a></li>
-                                    </ul>
+                                @endforeach
+
+                                <div class="pagination-laravel">
+                                    {{ $jobs->links() }}
                                 </div><!-- Pagination -->
-                                <br>
+
+                                {{-- <div class="">
+                                    
+                                </div> --}}
                             </div>
                         </div>
                     </div>
@@ -129,4 +75,37 @@
         </div>
     </section>
 @endsection
+
+@push('js')
+
+<script>
+    var base_url = "{{ url('/candidate/') }}";
+    $('.short-listed').click(function() {
+        var jobId = $(this).data('jobid');
+        if($(this).children().hasClass('fa')){
+            $(this).children().removeClass().addClass('la la-bookmark la-2x');
+        }else if($(this).children().hasClass('la')){
+            $(this).children().removeClass().addClass('fa fa-bookmark fa-2x');
+        }
+        $.ajax({
+            url: base_url+"/shortlisted/job/create",
+            type: "post",
+            headers: {'X-CSRF-TOKEN': Laravel.csrfToken},
+            data:{job_id: jobId},
+            success: function(message){
+                iziToast.success({
+                    title: message,
+                    timeout: 2000,
+                    overlay: true,
+                    position: 'topRight',
+                });
+
+                
+                
+            }
+        });
+        
+    });
+</script>
+@endpush
 

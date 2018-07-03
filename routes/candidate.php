@@ -33,3 +33,7 @@ Route::get('/appropriate/job', 'CandidateController\AppropriateJobController@get
 //
 Route::get('/follow/companies', 'CandidateController\FollowCompanyController@getFollowCompanies')->name('follow.companies');
 
+// shortlisted
+Route::get('/shortlisted/job', 'CandidateController\ShortlistedController@getShortlistedJob')->name('shortlisted.job');
+Route::post('/shortlisted/job/create', 'CandidateController\ShortlistedController@postShortlistedJob')->name('create.shortlisted.job');
+
