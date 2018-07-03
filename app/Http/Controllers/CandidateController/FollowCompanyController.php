@@ -13,7 +13,6 @@ class FollowCompanyController extends Controller
 {
     public function getFollowCompanies(){
     	$data['left_active'] = 'follow_companies';
-    	$data['candidate'] = Candidate::find(Auth::guard('candidate')->user()->id);
      	return view('candidate.follow_companies', $data);
     }
 }

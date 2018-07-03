@@ -17,7 +17,7 @@ class CreateFavouriteJobsTable extends Migration
             $table->increments('id')->unsigned()->unique();
             $table->integer('candidate_id')->unsigned();
             $table->integer('job_id')->unsigned();
-            $table->integer('status')->default(0);
+            $table->integer('status')->default(1);
             $table->foreign('candidate_id')->references('id')->on('candidates')->onDelete('cascade');
             $table->foreign('job_id')->references('id')->on('jobs')->onDelete('cascade');
             $table->timestamps();

@@ -21,7 +21,7 @@ class CreateJobsTable extends Migration
             $table->integer('job_category_id')->unsigned()->nullable();
             $table->integer('job_designation_id')->unsigned()->nullable();
             $table->integer('job_level_id')->unsigned()->nullable();
-            $table->integer('experience_id')->unsigned()->nullable();
+            $table->integer('experience')->unsigned()->nullable();
             $table->double('salary_min')->nullable();
             $table->double('salary_max')->nullable();
             $table->integer('is_negotiable')->default(0);
@@ -38,7 +38,7 @@ class CreateJobsTable extends Migration
             $table->foreign('employer_id')->references('id')->on('employers')->onDelete('cascade');
             $table->foreign('job_category_id')->references('id')->on('job_categories')->onDelete('cascade');
             $table->foreign('job_designation_id')->references('id')->on('job_designations')->onDelete('cascade');
-            $table->foreign('experience_id')->references('id')->on('job_experiences')->onDelete('cascade');
+            // $table->foreign('experience_id')->references('id')->on('job_experiences')->onDelete('cascade');
             // $table->foreign('salary_range')->references('id')->on('salaries');
             $table->foreign('job_level_id')->references('id')->on('job_levels')->onDelete('cascade');
 

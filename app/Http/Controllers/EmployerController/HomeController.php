@@ -151,7 +151,7 @@ class HomeController extends Controller
                 'job_category_id'       => 'required',
                 'job_designation_id'    => 'required',
                 'job_level_id'          => 'required',
-                'experience_id'         => 'required',
+                'experience'         => 'required',
                 'vacancy'               => 'required',
                 'gender'                => 'required',
                 'qualification'         => 'required',
@@ -176,7 +176,7 @@ class HomeController extends Controller
         $postJob->job_category_id = $request->input('job_category_id');
         $postJob->job_designation_id = $request->input('job_designation_id');
         $postJob->job_level_id = $request->input('job_level_id');
-        $postJob->experience_id = $request->input('experience_id');
+        $postJob->experience = $request->input('experience');
         if($request->input('is_negotiable')) {
             $postJob->is_negotiable = $request->input('is_negotiable');
         }else{
@@ -186,7 +186,7 @@ class HomeController extends Controller
         $postJob->vacancy = $request->input('vacancy');
         $postJob->gender = $request->input('gender');
         $postJob->qualification = $request->input('qualification');
-        $postJob->deadline = $request->input('deadline');
+        $postJob->deadline = date("Y-m-d", strtotime($request->input('deadline')));
         $postJob->location = $request->input('location');
         if($request['draft']){
             $postJob->is_drafted = 1;

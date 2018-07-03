@@ -33,9 +33,9 @@ class Job extends Model
         return $this->hasOne('App\Job_level', 'id', 'job_level_id');
     }
 
-    public function jobExperience(){
-        return $this->hasOne('App\Job_experience', 'id', 'experience_id');
-    }
+    // public function jobExperience(){
+    //     return $this->hasOne('App\Job_experience', 'id', 'experience_id');
+    // }
 
     public function salary(){
         return $this->hasOne('App\Salary', 'id', 'salary_range');
