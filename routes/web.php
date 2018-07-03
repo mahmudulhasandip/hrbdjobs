@@ -17,10 +17,12 @@ Route::get('/', [
 ]);
 
 
-// Route::get('/store/country/from/api', [
-//   'as'    => 'store.country.api',
-//   'uses'  => 'AdminController\CountryController@storeCountryFromAPI'
-// ]);
+// for all users
+Route::get('/job/{id}', [            
+  'as'  => 'single.job',
+  'uses'  => 'JobController@getSingleJob'
+]);
+
 
 Route::group(['prefix' => 'admin'], function () {
   Route::get('/login', 'AdminAuth\LoginController@showLoginForm')->name('admin.login');

@@ -1860,14 +1860,15 @@ label::after {
 
 .c-logo {
     float: left;
-    width: 130px;
+    width: 150px;
+    padding: 0 10px;
     text-align: center;
 }
 
 .c-logo img {
     float: none;
     display: inline-block;
-    max-width: 100%;
+    max-width: 85%;
 }
 
 .job-title-sec h3 {
@@ -5081,7 +5082,7 @@ section.overlape {
 
 /* pagination */
 
-.pagination {
+/*.pagination {
     float: left;
     margin: 60px 0 0;
     padding: 0;
@@ -5160,7 +5161,7 @@ section.overlape {
 .pagination a i {
     font-size: 15px;
     color: #e54545;
-}
+}*/
 
 .inner-header>h3 {
     float: left;
@@ -13889,3 +13890,108 @@ textarea {
 }
 
 hr { background-color: #edeff7; height: 1px; border: 0; }
+
+/* pagination */
+
+.pagination-laravel {
+    float: left;
+    margin: 60px 0 0;
+    padding: 0;
+    text-align: center;
+    width: 100%;
+}
+
+.pagination-laravel ul {
+    display: inline-block;
+    list-style: outside none none;
+    margin: 0;
+    padding: 0;
+}
+
+.pagination-laravel li {
+    float: left;
+    font-family: Montserrat;
+    font-size: 12px;
+    margin: 0 10px 0 0;
+}
+
+.pagination-laravel li:last-child {
+    margin: 0;
+}
+
+.pagination-laravel li.active a,
+.pagination-laravel li a:active {
+    -webkit-box-shadow: none;
+    -moz-box-shadow: none;
+    -ms-box-shadow: none;
+    -o-box-shadow: none;
+    box-shadow: none;
+}
+
+.pagination-laravel li.active a,
+.pagination-laravel li.active span,
+.pagination-laravel li a:hover {
+    color: #ffffff;
+    background-color: #8b91dd;
+    border-color: #8b91dd;
+}
+
+.pagination-laravel li .delimeter {
+    display: block;
+    padding-top: 6px;
+}
+
+.pagination-laravel a,
+.pagination-laravel span {
+    background: #ffffff none repeat scroll 0 0;
+    -webkit-box-shadow: none;
+    -moz-box-shadow: none;
+    -ms-box-shadow: none;
+    -o-box-shadow: none;
+    box-shadow: none;
+    float: left;
+    font-family: Open Sans;
+    padding: 3px 13px;
+    text-decoration: none;
+    border: 3px solid #edeff7;
+    padding: 9px 15px;
+    font-size: 14px;
+    color: #000000;
+    -webkit-border-radius: 30px;
+    -moz-border-radius: 30px;
+    -ms-border-radius: 30px;
+    -o-border-radius: 30px;
+    border-radius: 30px;
+    height: 41px;
+}
+
+.pagination-laravel li.prev a,
+.pagination-laravel li.next a {
+    padding: 9px 25px;
+}
+
+.pagination-laravel a i {
+    font-size: 15px;
+    color: #e54545;
+}
+
+.pointer {cursor: pointer;}
+
+.job-style-bx>i.remove_shortlist {
+    position: absolute;
+    right: 16px;
+    bottom: -13px;
+    font-style: normal;
+    font-size: 13px;
+    color: #888888;
+}
+
+.job-style-bx>i.deadline {
+    position: absolute;
+    right: 16px;
+    bottom: 5px;
+    font-style: normal;
+    font-size: 13px;
+    color: #888888;
+}
+

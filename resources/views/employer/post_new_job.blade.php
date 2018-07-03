@@ -118,15 +118,15 @@
 					 					<div class="col-lg-6">
 					 						<span class="pf-title">Experience</span>
 					 						<div class="pf-field">
-					 							<select data-placeholder="Please Select Specialism" class="chosen" name="experience_id">
+					 							<select data-placeholder="Please Select Specialism" class="chosen" name="experience">
 													<option value="">Experience</option>
 													@foreach($job_experiences as $job_experience)
-													<option value="{{ $job_experience->id }}" @if(old('experience_id')){{ old('experience_id') == $job_experience->id ? 'selected' : '' }}@elseif( $draft &&  $draft->experience_id == $job_experience->id ){{ 'selected' }}@endif>{{ $job_experience->name }}</option>
+													<option value="{{ $job_experience->name }}" @if(old('experience')){{ old('experience') == $job_experience->name ? 'selected' : '' }}@elseif( $draft &&  $draft->experience == $job_experience->name ){{ 'selected' }}@endif>{{ $job_experience->name }}</option>
 													@endforeach
 												</select>
-												@if ($errors->has('experience_id'))
+												@if ($errors->has('experience'))
 													<span class="help-block">
-														{{ $errors->first('experience_id') }}
+														{{ $errors->first('experience') }}
 													</span> 
 												@endif
 					 						</div>
@@ -209,8 +209,8 @@
 					 					</div>
 					 					<div class="col-lg-3">
 					 						<span class="pf-title">Application Deadline Date</span>
-					 						<div class="pf-field" id="datepicker">
-												<input type="text" class="form-control"  placeholder="2018-05-17" name="deadline"  value="@if (old("deadline")){{ old('deadline') }}@elseif ( $draft ){{ $draft->deadline }}@endif"/>
+					 						<div class="pf-field" >
+												<input type="text" id="datepicker" class="form-control"  placeholder="2018-05-17" name="deadline"  value="@if (old("deadline")){{ old('deadline') }}@elseif ( $draft ){{ $draft->deadline }}@endif"/>
 												@if ($errors->has('deadline'))
 													<span class="help-block">
 														{{ $errors->first('deadline') }}

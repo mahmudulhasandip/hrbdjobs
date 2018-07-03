@@ -50,11 +50,11 @@
 					@endforeach
 				</div>
 			</div>
-			<div class="col-lg-12" id="make_clone_box">
+			<div class="col-lg-12" id="make_clone_box_certificate">
 				
 			</div>
 			<div class="col-lg-12">
-				<a href="javascript:void(0)" onclick="makeBox()" id="add_certificate" class="margin_top_25 text-blue"><span class="la la-plus"></span> Add Certificate</a>
+				<a href="javascript:void(0)" onclick="makeBox('certificate')" id="add_certificate" class="margin_top_25 text-blue"><span class="la la-plus"></span> Add Certificate</a>
 				<button type="submit">Update</button>
 			</div>
 		</div>
@@ -104,19 +104,19 @@
 						<input type="text" name="end_date[]" class="datepicker" />
 					</div>
 				</div>
-			<div class="col-lg-12" id="make_clone_box">
+			<div class="col-lg-12" id="make_clone_box_certificate">
 				
 			</div>
 		</div>
 		<div class="col-lg-12">
-			<a href="javascript:void(0)" onclick="makeBox()" id="add_certificate" class="margin_top_25 text-blue"><span class="la la-plus"></span> Add Certificate</a>
+			<a href="javascript:void(0)" onclick="makeBox('certificate')" id="add_certificate" class="margin_top_25 text-blue"><span class="la la-plus"></span> Add Certificate</a>
 			<button type="submit">Update</button>
 		</div>
 	</div>
 </form>
 @endif
 
-<div id="make_clone" class="hidden">
+<div id="make_clone_certificate" class="hidden">
 	<div class="row">
 
 		<div class="col-lg-12">

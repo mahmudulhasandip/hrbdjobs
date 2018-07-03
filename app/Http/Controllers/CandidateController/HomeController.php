@@ -13,7 +13,6 @@ class HomeController extends Controller
 {
     public function dashboard(){
         $data['left_active'] = 'dashboard';
-        $data['candidate'] = Candidate::find(Auth::guard('candidate')->user()->id);
         return view('candidate.dashboard', $data);
     }
 }
