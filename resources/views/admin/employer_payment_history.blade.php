@@ -4,7 +4,7 @@
     <div class="d-flex align-items-center">
         <div class="mr-auto">
             <h3 class="m-subheader__title m-subheader__title--separator">
-                Employer's package List
+                Employer's payment List
             </h3>
         </div>
 
@@ -17,7 +17,7 @@
             <i class="flaticon-exclamation m--font-brand"></i>
         </div>
         <div class="m-alert__text">
-            There will be a short instruction about Employer's package operation
+            There will be a short instruction about Employer's payment operation
         </div>
     </div>
     <div class="m-portlet m-portlet--mobile">
@@ -25,7 +25,7 @@
             <div class="m-portlet__head-caption">
                 <div class="m-portlet__head-title">
                     <h3 class="m-portlet__head-text">
-                        Employer's package List Table
+                        Employer's payment List Table
                     </h3>
                 </div>
             </div>
@@ -91,19 +91,16 @@
                             Package
                         </th>
                         <th title="Field #4">
-                            Start Date
+                            Price
                         </th>
                         <th title="Field #5">
-                            Expired Date
+                            Discount
                         </th>
                         <th title="Field #6">
-                            Remain Amount
+                            Transaction Type
                         </th>
                         <th title="Field #7">
-                            Status
-                        </th>
-                        <th title="Field #8">
-                            Action
+                            TXID
                         </th>
                     </tr>
                 </thead>
@@ -111,7 +108,7 @@
                     @php
                         $id = 0;
                     @endphp
-                    @foreach($packages as $package)
+                    @foreach($payments as $payment)
                     @php 
                         $id++;
                     @endphp
@@ -121,30 +118,22 @@
                             {{ $id }}
                         </td>
                         <td>
-                            {{ $package->employer->fname }} {{ $package->employer->lname }}
+                            {{ $payment->employer->fname }} {{ $payment->employer->lname }}
+                        </td>
+                        <td >
+                            {{( $payment->job_package_id ) ?  $payment->jobPackage['name']  : $payment->featuredPackage['name'] }}
                         </td>
                         <td>
-                            {{( $package->jobPackage['name'] ) ?  $package->jobPackage['name']  : $package->featurePackage['name'] }}
-                            {{-- {{ $package->jobPackage['name'] }} --}}
-
+                            {{ $payment->price }}
                         </td>
                         <td>
-                            {{ $package->start_date }}
+                            {{ $payment->discount }}
                         </td>
                         <td>
-                            {{ $package->expired_date }}
+                            {{ $payment->transaction_type }}
                         </td>
                         <td>
-                            {{ $package->remain_amount }}
-                        </td>
-                        <td>
-                            <a href="{{ route('admin.employer.package.approve', $package->id) }}" class="m-badge {{ ($package->is_verified) ? 'm-badge--success' : 'm-badge--danger' }} m-badge--wide text-white">{{ ($package->is_verified) ? 'Approved' : 'Pending' }}</a>
-                        </td>
-
-                        <td>
-                            <a href="javascript: void(0);" data-toggle="modal" data-target="#employer_modal" class="btn m-btn m-btn--hover-accent m-btn--icon m-btn--icon-only m-btn--pill employer_view" data-packageindex="{{ json_encode($package) }}">
-                                <i class="la la-eye"></i>
-                            </a>
+                            {{ $payment->transaction_id }}
                         </td>
                         
                     </tr>
@@ -156,48 +145,7 @@
     </div>
 </div>
 
-<div class="modal fade" id="employer_modal" tabindex="-1" role="dialog" aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
-        <div class="modal-dialog modal-dialog-centered" role="document">
-            <div class="modal-content">
-                <div class="modal-header">
-                    <h5 class="modal-title" id="exampleModalLongTitle">
-                        Employer Info
-                    </h5>
-                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-                        <span aria-hidden="true">
-                            &times;
-                        </span>
-                    </button>
-                </div>
-                <div class="modal-body">
-                    <table>
-                        <tr>
-                            <td style="font-weight: bold; width: 150px;">Package:</td>
-                            <td id="package_name"></td>
-                        </tr>
-                        <tr>
-                            <td style="font-weight: bold; width: 150px;">price:</td>
-                            <td id="price"></td>
-                        </tr>
-                        <tr>
-                            <td style="font-weight: bold; width: 150px;">Discount:</td>
-                            <td id="discount"></td>
-                        </tr>
-                        <tr>
-                            <td style="font-weight: bold; width: 150px;">Transaction Type:</td>
-                            <td id="transaction_type"></td>
-                        </tr>
-                        <tr>
-                            <td style="font-weight: bold; width: 150px;">Transaction ID:</td>
-                            <td class="text-danger" id="transaction_id"></td>
-                        </tr>
-                        
-                    </table>
-                </div>
-                
-            </div>
-        </div>
-    </div>
+
 @endsection 
 
 @push('css')
@@ -211,40 +159,6 @@
 <!--begin::Page Resources -->
 <script src="https://cdnjs.cloudflare.com/ajax/libs/izitoast/1.3.0/js/iziToast.min.js"></script>
 
-
-<script>
-    $(document).ready(function() {
-        var base_url = "{{ url('/admin/') }}";
-        $('#employer_modal').on('show.bs.modal', function (event) {
-            var modal = $(this);
-            var button = $(event.relatedTarget); // Button that triggered the modal
-            var recipient = button.data('packageindex'); // Extract info from data-* attributes
-            var employerId = recipient.employer_id;
-            var jobPackageId = recipient.job_package_id;
-            var featurePackageId = recipient.featured_package_id;
-
-            
-            $.ajax({
-				url: base_url+"/employer/package/payment/",
-				type: "post",
-				headers: {'X-CSRF-TOKEN': Laravel.csrfToken},
-                data: { employer_package_id: recipient.id, employer_id: employerId},
-				success: function(data){
-
-                    var payment = JSON.parse(data);
-
-                    modal.find('#package_name').text(payment.package);
-                    modal.find('#price').text(payment.price);
-                    modal.find('#discount').text(payment.discount);
-                    modal.find('#transaction_type').text(payment.transaction_type);
-                    modal.find('#transaction_id').text(payment.transaction_id);
-                    
-				}
-			});
-            
-        });
-    });
-</script>
 
 
 <script>
@@ -260,6 +174,13 @@
             search: {
                 input: $("#generalSearch")
             },
+            columns: [{
+                field: "TXID",
+                title: "TXID",
+                template: function (e) {
+                    return '<span style="color: #8b91dd">' + e.TXID + "</span>"
+                }
+            }],
             
             }), $("#m_form_status").on("change", function () {
                 e.search($(this).val().toLowerCase(), "Status")
