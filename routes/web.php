@@ -12,15 +12,20 @@
 */
 
 Route::get('/', [							
-	'as'	=> 'users.home',
+	'as'	  => 'users.home',
 	'uses'	=> 'UserController@index'
 ]);
 
 
 // for all users
 Route::get('/job/{id}', [            
-  'as'  => 'single.job',
+  'as'    => 'single.job',
   'uses'  => 'JobController@getSingleJob'
+]);
+
+Route::get('/public/employer/profile/{id}', [
+  'as'    => 'public.employer.profile',
+  'uses'  => 'EmployerController@getEmployerProfile'
 ]);
 
 

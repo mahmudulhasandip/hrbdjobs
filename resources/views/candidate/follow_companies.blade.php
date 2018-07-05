@@ -32,87 +32,24 @@
 				 		<div class="padding-left">
 					 		<div class="manage-jobs-sec">
 					 			<div class="border-title"><h3>Followed Companies</h3></div>
-						 		<div class="job-listing wtabs">
-									<div class="job-title-sec">
-										<div class="c-logo"> <img src="http://placehold.it/98x51" alt="" /> </div>
-										<h3><a href="#" title="">Company Name</a></h3>
-										<span>2 jobs opening</span>
+					 			@foreach($followCompanies as $follow)
+						 		<div id="follow-tab-{{ $follow->employer_id }}" class="job-listing wtabs">
+									<div class="job-title-sec newtab pointer" data-url="{{ route('public.employer.profile', $follow->employer_id) }}">
+										<div class="c-logo"> <img src="{{ ( $follow->employer->employerCompanyInfo->logo ) ? asset('storage/uploads/'.$follow->employer->employerCompanyInfo->logo) : asset('storage/uploads/company-avatar.png') }}" alt="" /> </div>
+										<h3><a href="javascript:void(0)" title="">{{ $follow->employer->employerCompanyInfo->name }}</a></h3>
+                                        @php
+                                            $openingJob = App\Job::where('employer_id', $follow->employer_id)->where('is_verified', 1)->where('deadline', '>', date("Y-m-d"))->count();
+                                        @endphp
+										<span>{{ $openingJob ? $openingJob.' Jobs opening': 'No Vacancy' }}</span>
 									</div>
 									<div class="job-list-del">
-										<span class="job-is ft"><a href="" class="unfollow">Unfollow</a></span>
+										<span class="job-is ft"><a href="javascript:void(0)" data-employerId="{{ $follow->employer_id }}" class="unfollow">Unfollow</a></span>
 									</div>
 								</div><!-- Job -->
-								<div class="job-listing wtabs">
-									<div class="job-title-sec">
-										<div class="c-logo"> <img src="http://placehold.it/98x51" alt="" /> </div>
-										<h3><a href="#" title="">Company Name</a></h3>
-										<span>2 jobs opening</span>
-									</div>
-									<div class="job-list-del">
-										<span class="job-is ft"><a href="" class="unfollow">Unfollow</a></span>
-									</div>
-								</div><!-- Job -->
-								<div class="job-listing wtabs">
-									<div class="job-title-sec">
-										<div class="c-logo"> <img src="http://placehold.it/98x51" alt="" /> </div>
-										<h3><a href="#" title="">Company Name</a></h3>
-										<span>2 jobs opening</span>
-									</div>
-									<div class="job-list-del">
-										<span class="job-is ft"><a href="" class="unfollow">Unfollow</a></span>
-									</div>
-								</div><!-- Job -->
-								<div class="job-listing wtabs">
-									<div class="job-title-sec">
-										<div class="c-logo"> <img src="http://placehold.it/98x51" alt="" /> </div>
-										<h3><a href="#" title="">Company Name</a></h3>
-										<span>2 jobs opening</span>
-									</div>
-									<div class="job-list-del">
-										<span class="job-is ft"><a href="" class="unfollow">Unfollow</a></span>
-									</div>
-								</div><!-- Job -->
-								<div class="job-listing wtabs">
-									<div class="job-title-sec">
-										<div class="c-logo"> <img src="http://placehold.it/98x51" alt="" /> </div>
-										<h3><a href="#" title="">Company Name</a></h3>
-										<span>2 jobs opening</span>
-									</div>
-									<div class="job-list-del">
-										<span class="job-is ft"><a href="" class="unfollow">Unfollow</a></span>
-									</div>
-								</div><!-- Job -->
-								<div class="job-listing wtabs">
-									<div class="job-title-sec">
-										<div class="c-logo"> <img src="http://placehold.it/98x51" alt="" /> </div>
-										<h3><a href="#" title="">Company Name</a></h3>
-										<span>2 jobs opening</span>
-									</div>
-									<div class="job-list-del">
-										<span class="job-is ft"><a href="" class="unfollow">Unfollow</a></span>
-									</div>
-								</div><!-- Job -->
-								<div class="job-listing wtabs">
-									<div class="job-title-sec">
-										<div class="c-logo"> <img src="http://placehold.it/98x51" alt="" /> </div>
-										<h3><a href="#" title="">Company Name</a></h3>
-										<span>2 jobs opening</span>
-									</div>
-									<div class="job-list-del">
-										<span class="job-is ft"><a href="" class="unfollow">Unfollow</a></span>
-									</div>
-								</div><!-- Job -->
-								<div class="pagination">
-									<ul>
-										<li class="prev"><a href=""><i class="la la-long-arrow-left"></i> Prev</a></li>
-										<li><a href="">1</a></li>
-										<li class="active"><a href="">2</a></li>
-										<li><a href="">3</a></li>
-										<li><span class="delimeter">...</span></li>
-										<li><a href="">14</a></li>
-										<li class="next"><a href="">Next <i class="la la-long-arrow-right"></i></a></li>
-									</ul>
-								</div><!-- Pagination -->
+								@endforeach
+								<div class="margin-0 pagination-laravel">
+                                    {{ $followCompanies->links() }}
+                                </div><!-- Pagination -->
 					 		</div>
 					 	</div>
 					</div>
@@ -121,6 +58,40 @@
         </div>
     </section>
 @endsection
+
+@push('js')
+
+<script>
+    var base_url = "{{ url('/candidate/') }}";
+    $('.newtab').click(function() {
+        window.open(
+            $(this).data('url'),
+            '_blank'
+        );
+    });
+    $('.unfollow').click(function() {
+        var employerId = $(this).data('employerid');
+       
+        $.ajax({
+            url: base_url+"/follow/company/status/change",
+            type: "post",
+            headers: {'X-CSRF-TOKEN': Laravel.csrfToken},
+            data:{employer_id: employerId},
+            success: function(message){
+                iziToast.success({
+                    title: message,
+                    timeout: 2000,
+                    overlay: true,
+                    position: 'topRight',
+                }); 
+
+                $('#follow-tab-'+employerId).remove(); 
+            }
+        });
+        
+    });
+</script>
+@endpush
 
 
 

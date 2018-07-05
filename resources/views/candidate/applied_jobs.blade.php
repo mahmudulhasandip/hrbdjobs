@@ -42,92 +42,34 @@
                                         </tr>
                                     </thead>
                                     <tbody>
-                                        <tr>
-                                            <td>
+                                        @foreach($applied_jobs as $app_job)
+                                        <tr id="job-tab-{{$app_job->job_id}}">
+                                            <td class="pointer newtab" data-url="{{ route('single.job', $app_job->job_id) }}">
                                                 <div class="table-list-title">
-                                                    <i>Massimo Artemisis</i><br />
-                                                    <span><i class="la la-map-marker"></i>Sacramento, California</span>
+                                                    <i>{{ $app_job->job->employer->employerCompanyInfo->name }}</i><br />
+                                                    <span><i class="la la-map-marker"></i>{{ $app_job->job->location }}</span>
                                                 </div>
                                             </td>
                                             <td>
-                                                <div class="table-list-title">
-                                                    <h3><a href="#" title="">Web Designer / Developer</a></h3>
+                                                <div class="pointer newtab table-list-title" data-url="{{ route('single.job', $app_job->job_id) }}">
+                                                    <h3><a href="{{ route('single.job', $app_job->job_id) }}" title="">{{ $app_job->job->title }}</a></h3>
                                                 </div>
                                             </td>
                                             <td>
-                                                <span>October 27, 2017</span><br />
+                                                <span>{{ date("M d, Y", strtotime($app_job->created_at)) }}</span><br />
                                             </td>
                                             <td>
                                                 <ul class="action_job">
-                                                    <li><span>Withdraw</span><a href="#" title=""><i class="la la-close"></i></a></li>
+                                                    <li class="pointer"><span>Withdraw</span><a href="javascript:void(0)" class="withdraw-job" data-jobId="{{ $app_job->job_id }}"><i class="la la-close"></i></a></li>
                                                 </ul>
                                             </td>
                                         </tr>
-                                        <tr>
-                                            <td>
-                                                <div class="table-list-title">
-                                                    <i>StarHealth</i><br />
-                                                    <span><i class="la la-map-marker"></i>Rennes, France</span>
-                                                </div>
-                                            </td>
-                                            <td>
-                                                <div class="table-list-title">
-                                                    <h3><a href="#" title="">Regional Sales Manager South east Asia</a></h3>
-                                                </div>
-                                            </td>
-                                            <td>
-                                                <span>October 27, 2017</span><br />
-                                            </td>
-                                            <td>
-                                                <ul class="action_job">
-                                                    <li><span>Withdraw</span><a href="#" title=""><i class="la la-close"></i></a></li>
-                                                </ul>
-                                            </td>
-                                        </tr>
-                                        <tr>
-                                            <td>
-                                                <div class="table-list-title">
-                                                    <i>Altes Bank</i><br />
-                                                    <span><i class="la la-map-marker"></i>Istanbul, Turkey</span>
-                                                </div>
-                                            </td>
-                                            <td>
-                                                <div class="table-list-title">
-                                                    <h3><a href="#" title="">C Developer (Senior) C .Net</a></h3>
-                                                </div>
-                                            </td>
-                                            <td>
-                                                <span>October 27, 2017</span><br />
-                                            </td>
-                                            <td>
-                                                <ul class="action_job">
-                                                    <li><span>Withdraw</span><a href="#" title=""><i class="la la-close"></i></a></li>
-                                                </ul>
-                                            </td>
-                                        </tr>
-                                        <tr>
-                                            <td>
-                                                <div class="table-list-title">
-                                                    <i>MediaLab</i><br />
-                                                    <span><i class="la la-map-marker"></i>Ajax, Ontario</span>
-                                                </div>
-                                            </td>
-                                            <td>
-                                                <div class="table-list-title">
-                                                    <h3><a href="#" title="">Marketing Director</a></h3>
-                                                </div>
-                                            </td>
-                                            <td>
-                                                <span>October 27, 2017</span><br />
-                                            </td>
-                                            <td>
-                                                <ul class="action_job">
-                                                    <li><span>Withdraw</span><a href="#" title=""><i class="la la-close"></i></a></li>
-                                                </ul>
-                                            </td>
-                                        </tr>
+                                        @endforeach
                                     </tbody>
                                 </table>
+                                <div class="margin-0 pagination-laravel">
+                                    {{ $applied_jobs->links() }}
+                                </div><!-- Pagination -->
                             </div>
                         </div>
                     </div>
@@ -136,4 +78,38 @@
         </div>
     </section>
 @endsection
+
+@push('js')
+
+<script>
+    var base_url = "{{ url('/candidate/') }}";
+    $('.newtab').click(function() {
+        window.open(
+            $(this).data('url'),
+            '_blank'
+        );
+    });
+    $('.withdraw-job').click(function() {
+        var jobId = $(this).data('jobid');
+       
+        $.ajax({
+            url: base_url+"/applied/job/withdraw",
+            type: "post",
+            headers: {'X-CSRF-TOKEN': Laravel.csrfToken},
+            data:{job_id: jobId},
+            success: function(message){
+                iziToast.success({
+                    title: message,
+                    timeout: 2000,
+                    overlay: true,
+                    position: 'topRight',
+                }); 
+
+                $('#job-tab-'+jobId).remove(); 
+            }
+        });
+        
+    });
+</script>
+@endpush
 

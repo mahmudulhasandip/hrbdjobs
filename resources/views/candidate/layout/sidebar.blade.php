@@ -15,7 +15,11 @@
             <a href="{{ route('candidate.applied.jobs') }}" title="" class=""><i class="la la-briefcase"></i>Applied Job</a>
         </li>
         <li class="inner-child {{ ($left_active == 'resume')? 'active':'' }}">
-            <a href="{{ route('candidate.resume') }}" title="" class=""><i class="la la-paper-plane"></i>My Resume</a>
+            <a href="#" title="" class="main-a"><i class="la la-file-pdf-o"></i></i>My Resume</a>
+            <ul>
+                <li><a href="{{ route('candidate.resume.view') }}">View Resume</a></li>
+                <li><a href="{{ route('candidate.resume.upload') }}" title="">Upload Resume</a></li>
+            </ul>
         </li>
         <li class="inner-child {{ ($left_active == 'appropriate_job')? 'active':'' }}">
             <a href="{{ route('candidate.appropriate.job') }}" title="" class=""><i class="la la-check-circle"></i>Appropriate For Me</a>
