@@ -39,10 +39,10 @@
                                 @foreach($jobs as $ap_job)
                                 <div id="job-tab-{{$ap_job->job_id}}" class="job-listing wtabs">
                                     <div class="job-title-sec pointer newtab" data-url="{{ route('single.job', $ap_job->job_id) }}">
-                                        <div class="c-logo"> <img src="{{ ( $ap_job->job->employer->employerCompanyInfo->logo ) ? asset('storage/uploads/'.$ap_job->job->employer->employerCompanyInfo->logo) : asset('storage/uploads/company-avatar.png') }}" alt="" /> </div>
+                                        <div class="c-logo"> <img src="{{ ( $ap_job->job->employer->employerCompanyInfo['logo'] ) ? asset('storage/uploads/'.$ap_job->job->employer->employerCompanyInfo['logo']) : asset('storage/uploads/company-avatar.png') }}" alt="" /> </div>
                                         <h3><a href="{{ route('single.job', $ap_job->job_id) }}" target="_blank">{{ $ap_job->job->title }}</a></h3>
-                                        <span>{{ $ap_job->job->employer->employerCompanyInfo->name }}</span>
-                                        <div class="job-lctn"><i class="la la-map-marker"></i>{{ $ap_job->job->employer->employerCompanyInfo->city.', '. $ap_job->job->employer->employerCompanyInfo->country}}</div>
+                                        <span>{{ $ap_job->job->employer->employerCompanyInfo['name'] }}</span>
+                                        <div class="job-lctn"><i class="la la-map-marker"></i>{{ $ap_job->job->employer->employerCompanyInfo['city'].', '. $ap_job->job->employer->employerCompanyInfo['country']}}</div>
                                     </div>
                                     <div class="job-style-bx">
                                         <span class="job-is ft">{{ $ap_job->job->jobLevel->name }}</span>

@@ -39,9 +39,9 @@
                                 @endphp
                                 <div class="job-listing wtabs">
                                     <div class="job-title-sec">
-                                        <div class="c-logo"> <img src="{{ ( $job->employer->employerCompanyInfo->logo ) ? asset('storage/uploads/'.$job->employer->employerCompanyInfo->logo) : asset('storage/uploads/company-avatar.png') }}" alt="" /> </div>
+                                        <div class="c-logo"> <img src="{{ ( $job->employer->employerCompanyInfo['logo'] ) ? asset('storage/uploads/'.$job->employer->employerCompanyInfo['logo']) : asset('storage/uploads/company-avatar.png') }}" alt="" /> </div>
                                         <h3><a href="{{ route('single.job', $job->id) }}" target="_blank">{{ $job->title }}</a></h3>
-                                        <span>{{ $job->employer->employerCompanyInfo->name }}</span>
+                                        <span>{{ $job->employer->employerCompanyInfo['name'] }}</span>
                                         <div class="job-lctn">{{ date("M d, Y", strtotime($job->deadline)) }}</div>
                                     </div>
                                     <div class="job-list-del">

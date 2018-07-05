@@ -64,7 +64,7 @@
             @else
                 <div class="btns-profiles-sec">
                     <span>
-                        <img src="{{ asset('storage/uploads/'.(($employer_info->logo) ? $employer_info->logo : 'default-user.png'))}}" alt="" /> {{ Auth::user()->fname}}
+                        <img src="{{ asset('storage/uploads/'.(($employer_info->logo) ? $employer_info->logo : 'default_user.png'))}}" alt="" /> {{ Auth::user()->fname}}
                         <i class="la la-angle-down"></i>
                     </span>
                     <ul>
