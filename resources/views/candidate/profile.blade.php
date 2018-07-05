@@ -5,7 +5,7 @@
 @section('content')
     <section class="overlape">
         <div class="block no-padding">
-            <div data-velocity="-.1" style="background: url(http://placehold.it/1600x800) repeat scroll 50% 422.28px transparent;" class="parallax scrolly-invisible no-parallax"></div><!-- PARALLAX BACKGROUND IMAGE -->
+            <div data-velocity="-.1" style="background: url(/images/slider-3.jpg) repeat scroll 50% 422.28px transparent;" class="parallax scrolly-invisible no-parallax"></div><!-- PARALLAX BACKGROUND IMAGE -->
             <div class="container fluid">
                 <div class="row">
                     <div class="col-lg-12">
@@ -29,20 +29,37 @@
                     <div class="col-lg-12">
                         <div class="cand-single-user">
                             <div class="share-bar circle">
-                                <a href="#" title="" class="share-linkedin"><i class="la la-linkedin"></i></a>
+                                <a href="{{ ($candidate->linkedin) ? (substr( $candidate->website, 0, 4 ) === "http" ? $candidate->linkedin : 'http://'.$candidate->linkedin) : 'javascript:void(0)' }}" target="_blank" class="share-linkedin"><i class="la la-linkedin"></i></a>
                             </div>
                             <div class="can-detail-s">
-                                <div class="cst"><img src="http://placehold.it/145x145" alt="" /></div>
-                                <h3>David CARLOS</h3>
-                                <span><i>UX / UI Designer</i> at Atract Solutions</span>
-                                <p>creativelayers088@gmail.com</p>
-                                <p>+880 1234 567890</p>
-                                <p><a href="www.davidcarlos.com">www.davidcarlos.com</a></p>
-                                <p><i class="la la-map-marker"></i>Istanbul / Turkey</p>
+                                <div class="cst"><img src="{{ asset('storage/uploads/'.(($candidate->dp) ? $candidate->dp : 'default_user.png'))}}" height="145" width="145" /></div>
+                                <h3>{{ $candidate->fname }} {{ $candidate->lname }}</h3>
+
+                                @if(sizeof($candidate->candidateExperience))
+                                    <span><i>{{ $candidate->candidateExperience()->first()->jobDesignation->name }}</i> at {{$candidate->candidateExperience()->first()->company_name}}</span>
+                                @endif
+                                
+                                <p>{{ $candidate->email }}</p>
+                                @if($candidate->phone)
+                                <p>{{ $candidate->phone }}</p>
+                                @endif
+                                @if($candidate->website)
+                                    <p><a href="{{ substr( $candidate->website, 0, 4 ) === "http" ? $candidate->website : 'http://'.$candidate->website }}" target="_blank">{{ $candidate->website }}</a></p>
+                                @endif
+                                 @if($candidate->country)
+                                    <p><i class="la la-map-marker"></i>{{ $candidate->city }} / {{ $candidate->country }}</p>
+                                @endif
                             </div>
-                            <div class="download-cv">
-                                <a href="#" title="">Download CV <i class="la la-download"></i></a>
-                            </div>
+
+                            @if($candidate->candidateResume()->exists())
+                                <div class="download-cv">
+                                    <a href="{{ asset('storage/uploads/resumes/'.$candidate->candidateResume->resume) }}" download="{{ $candidate->candidateResume->resume }}">Download CV <i class="la la-download"></i></a>
+                                </div>
+                            @else
+                                <div class="download-cv">
+                                    <a href="{{ route('candidate.resume.view') }}">Browse CV <i class="la la-share-square"></i></a>
+                                </div>
+                            @endif
                         </div>
                         <ul class="cand-extralink">
                             <li><a href="#about" title="">About</a></li>
