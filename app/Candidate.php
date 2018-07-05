@@ -56,7 +56,7 @@ class Candidate extends Authenticatable
     }
 
     public function candidateExperience(){
-        return $this->hasMany('App\Candidate_experience', 'candidate_id', 'id');
+        return $this->hasMany('App\Candidate_experience', 'candidate_id', 'id')->orderBy('id','desc');
     }
 
     public function candidateEducation(){
