@@ -22,7 +22,7 @@ Route::get('job/post/approve/{jobId}', 'AdminController\jobPostedList@approve')-
 
 // Employer package list
 Route::get('employer/package/list', 'AdminController\employerPackageList@index')->name('employer.package.list');
-Route::get('job/post/approve/{jobId}', 'AdminController\jobPostedList@approve')->name('job.post.approve');
+Route::get('employer/package/approve/{packageId}', 'AdminController\employerPackageList@approve')->name('employer.package.approve');
 
 
 // job designation

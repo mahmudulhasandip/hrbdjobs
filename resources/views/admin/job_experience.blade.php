@@ -121,12 +121,7 @@
         box.toggleClass('d-none');
 
     });
-
-    
-
 </script>
 <!--end::Page Resources -->
-
-
 
 @endpush
