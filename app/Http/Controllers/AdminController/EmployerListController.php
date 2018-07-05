@@ -12,7 +12,7 @@ class EmployerListController extends Controller
 {
     public function index() {
         $data['menu_active'] = 'employer_list';
-        $data['employers'] = Employer::all()->where('verified', 1);
+        $data['employers'] = Employer::orderBy('status', 'asc')->where('verified', 1)->get();
         return view('admin.employer_list', $data);
     }
 

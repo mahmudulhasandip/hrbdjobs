@@ -153,7 +153,7 @@
                                     <span></span>
                                 </i>
                                 <span class="m-menu__link-text">
-                                    Employer List
+                                    Employer Packages
                                 </span>
                             </a>
                         </li>

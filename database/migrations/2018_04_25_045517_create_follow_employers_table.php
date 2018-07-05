@@ -17,7 +17,7 @@ class CreateFollowEmployersTable extends Migration
             $table->increments('id')->unsigned()->unique();
             $table->integer('candidate_id')->unsigned();
             $table->integer('employer_id')->unsigned();
-            $table->integer('is_followed')->default(0);
+            $table->integer('is_followed')->default(1);
             $table->foreign('candidate_id')->references('id')->on('candidates')->onDelete('cascade');
             $table->foreign('employer_id')->references('id')->on('employers')->onDelete('cascade');
             $table->timestamps();

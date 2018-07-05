@@ -23,15 +23,20 @@ Route::post('/profile/edit/certificate', 'CandidateController\ProfileController@
 
 //
 Route::get('/applied/jobs', 'CandidateController\AppliedJobController@getAppliedJobs')->name('applied.jobs');
+Route::post('/applied/job/withdraw', 'CandidateController\AppliedJobController@postWithdrawAppliedJob')->name('applied.jobs.withdraw');
 
 //
-Route::get('/candidate/resume', 'CandidateController\ResumeController@getResume')->name('resume');
+Route::get('/candidate/resume', 'CandidateController\ResumeController@getResume')->name('resume.view');
+Route::get('/candidate/resume/upload', 'CandidateController\ResumeController@getUploadResume')->name('resume.upload');
+Route::get('/candidate/uploaded/resume/view', 'CandidateController\ResumeController@getUploadedResumeView')->name('uploaded.resume.view');
+Route::post('/candidate/resume/upload', 'CandidateController\ResumeController@postUploadResume')->name('post.resume.upload');
 
 //
 Route::get('/appropriate/job', 'CandidateController\AppropriateJobController@getAppropriateJob')->name('appropriate.job');
 
 //
 Route::get('/follow/companies', 'CandidateController\FollowCompanyController@getFollowCompanies')->name('follow.companies');
+Route::post('/follow/company/status/change', 'CandidateController\FollowCompanyController@postFollowCompanyStatus')->name('follow.company.status');
 
 // shortlisted
 Route::get('/shortlisted/job', 'CandidateController\ShortlistedController@getShortlistedJob')->name('shortlisted.job');

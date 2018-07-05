@@ -39,33 +39,13 @@
                                                     <div class="col-lg-12">
                                                         <div class="tab-sec">
                                                             <ul class="nav nav-tabs">
-                                                              <li><a class="current" data-tab="upcv">Upload CV</a></li>
+                                                              <li><a href="{{ route('candidate.uploaded.resume.view') }}" target="_blank" class="current" data-tab="upcv">Uploaded CV</a></li>
                                                               <li><a data-tab="dwcv">Download CV</a></li>
                                                               <li><a data-tab="viewcv">View CV</a></li>
                                                             </ul>
                                                             <div id="upcv" class="tab-content current">
-                                                                <div class="uploadbox center">
-                                                                    <label for="file-upload" class="custom-file-upload">
-                                                                        <i class="la la-cloud-upload"></i> <span>Upload CV</span>
-                                                                    </label>
-                                                                    <input id="file-upload" type="file">
-                                                                </div>
-                                                            </div>
-                                                            <div id="dwcv" class="tab-content">
-                                                                <div class="uploadbox center">
-                                                                    <label for="file-upload" class="custom-file-upload">
-                                                                        <i class="la la-cloud-upload"></i> <span>Download CV</span>
-                                                                    </label>
-                                                                    <input id="file-upload" type="file">
-                                                                </div>
-                                                            </div>
-                                                            <div id="viewcv" class="tab-content">
-                                                                <div class="uploadbox center">
-                                                                    <label for="file-upload" class="custom-file-upload">
-                                                                        <i class="la la-cloud-upload"></i> <span>View CV</span>
-                                                                    </label>
-                                                                    <input id="file-upload" type="file">
-                                                                </div>
+                                                                
+                                                                
                                                             </div>
                                                             
                                                         </div>
