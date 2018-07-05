@@ -14099,3 +14099,104 @@ form.cv-upload {
 .cv-upload label::before{
     border: none;
 }
+
+.p0{
+    padding: 0;
+}
+
+.mb-65 {
+    margin-bottom: 65px;
+}
+
+/* view resume */
+
+
+#resume table {
+    max-width: 100%;
+    background-color: transparent;
+    margin: auto;
+}
+
+#resume table td {
+    margin: auto;
+    
+}
+
+#resume table td ul{
+    list-style-type: disc;
+    padding-left: 35px;
+    margin-bottom: 10px;
+    margin-top: 10px;
+}
+
+.HRBDApplicantsName {
+    background: #ffffff;
+    font-size: 18px;
+    font-family: Verdana, Geneva, sans-serif;
+    font-weight: bold;
+    color: #333399;
+    padding-left: 7px;
+    padding-top: 16px;
+    padding-bottom: 3.5px;
+}
+
+.HRBDNormalText04 {
+    background: #FFFFFF;
+    font-size: 14px;
+    font-family: Verdana, Geneva, sans-serif;
+    font-weight: normal;
+    padding-left: 7px;
+    padding-top: 2px;
+    padding-bottom: 2px;
+}
+
+.HRBDHeadline01 {
+    background: #E6E6E6;
+    font-size: 16px;
+    font-family: Verdana, Geneva, sans-serif;
+    font-weight: bold;
+    padding-left: 4px;
+    padding-top: 4px;
+    padding-bottom: 4px;
+    text-align: left
+}
+
+.HRBDNormalText01 {
+    background: #FFFFFF;
+    font-size: 14px;
+    font-family: Verdana, Geneva, sans-serif;
+    font-weight: normal;
+    padding-left: 2px;
+    padding-top: 7px;
+    padding-bottom: 10px;
+}
+
+.HRBDBoldText01 {
+    background: #FFFFFF;
+    font-size: 14px;
+    font-family: Verdana, Geneva, sans-serif;
+    font-weight: bold;
+    padding-left: 2px;
+    padding-top: 2px;
+    padding-bottom: 2px;
+}
+
+.HRBDNormalText02 {
+    background: #FFFFFF;
+    font-size: 14px;
+    font-family: Verdana, Geneva, sans-serif;
+    font-weight: normal;
+    padding-left: 4px;
+    padding-top: 4px;
+    padding-bottom: 4px;
+}
+
+.HRBDNormalText03 {
+    background: #FFFFFF;
+    font-size: 14px;
+    font-family: Verdana, Geneva, sans-serif;
+    font-weight: normal;
+    padding-left: 7px;
+    padding-top: 4px;
+    padding-bottom: 4px;
+}
