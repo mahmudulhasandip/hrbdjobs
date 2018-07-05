@@ -116,15 +116,15 @@
 					 					<div class="col-lg-6">
 					 						<span class="pf-title">Experience</span>
 					 						<div class="pf-field">
-					 							<select data-placeholder="Please Select Specialism" class="chosen" name="experience_id">
+					 							<select data-placeholder="Please Select Specialism" class="chosen" name="experience">
 													<option value="">Experience</option>
 													@foreach($job_experiences as $job_experience)
-													<option value="{{ $job_experience->id }}" {{ ($editJob->experience_id == $job_experience->id) ? 'selected' : '' }}>{{ $job_experience->name }}</option>
+													<option value="{{ $job_experience->name }}" {{ ($editJob->experience == $job_experience->name) ? 'selected' : '' }}>{{ $job_experience->name }}</option>
 													@endforeach
 												</select>
-												@if ($errors->has('experience_id'))
+												@if ($errors->has('experience'))
 													<span class="help-block">
-														{{ $errors->first('experience_id') }}
+														{{ $errors->first('experience') }}
 													</span> 
 												@endif
 					 						</div>

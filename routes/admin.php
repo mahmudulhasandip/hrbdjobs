@@ -21,8 +21,12 @@ Route::get('job/post/list', 'AdminController\jobPostedList@index')->name('job.po
 Route::get('job/post/approve/{jobId}', 'AdminController\jobPostedList@approve')->name('job.post.approve');
 
 // Employer package list
-Route::get('employer/package/list', 'AdminController\employerPackageList@index')->name('employer.package.list');
-Route::get('employer/package/approve/{packageId}', 'AdminController\employerPackageList@approve')->name('employer.package.approve');
+Route::get('employer/package/list', 'AdminController\EmployerPackageList@index')->name('employer.package.list');
+Route::post('employer/package/payment/', 'AdminController\EmployerPackageList@checkPayment')->name('employer.package.payment');
+Route::get('employer/package/approve/{packageId}', 'AdminController\EmployerPackageList@approve')->name('employer.package.approve');
+
+// Employer payment history
+Route::get('employer/payment/history', 'AdminController\EmployerPaymentHistory@index')->name('employer.payment.history');
 
 
 // job designation

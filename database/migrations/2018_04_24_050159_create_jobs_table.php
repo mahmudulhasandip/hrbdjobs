@@ -21,7 +21,7 @@ class CreateJobsTable extends Migration
             $table->integer('job_category_id')->unsigned()->nullable();
             $table->integer('job_designation_id')->unsigned()->nullable();
             $table->integer('job_level_id')->unsigned()->nullable();
-            $table->integer('experience')->unsigned()->nullable();
+            $table->double('experience')->unsigned()->nullable();
             $table->double('salary_min')->nullable();
             $table->double('salary_max')->nullable();
             $table->integer('is_negotiable')->default(0);

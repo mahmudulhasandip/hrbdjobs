@@ -16,6 +16,7 @@ class CreatePaymentHistoriesTable extends Migration
         Schema::create('payment_histories', function (Blueprint $table) {
             $table->increments('id')->unsigned()->unique();
             $table->integer('employer_id')->unsigned();
+            $table->integer('employer_package_id')->unsigned()->nullable(); 
             $table->integer('job_package_id')->unsigned()->nullable(); 
             $table->integer('featured_package_id')->unsigned()->nullable();
             $table->decimal('price', 10, 2);
@@ -23,6 +24,7 @@ class CreatePaymentHistoriesTable extends Migration
             $table->string('transaction_type')->nullable();
             $table->string('transaction_id')->nullable();
             $table->date('transaction_date');
+            $table->foreign('employer_package_id')->references('id')->on('employer_packages')->onDelete('cascade');
             $table->foreign('employer_id')->references('id')->on('employers')->onDelete('cascade');
             $table->foreign('job_package_id')->references('id')->on('job_packages')->onDelete('cascade');
             $table->foreign('featured_package_id')->references('id')->on('featured_packages')->onDelete('cascade');

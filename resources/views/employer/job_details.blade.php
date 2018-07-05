@@ -25,7 +25,7 @@
                         <div class="col-lg-8 column">
                             <div class="job-single-sec">
                                 <div class="job-single-head">
-                                    <div class="job-thumb"> <img src="{{ asset('storage/uploads/'.(($company_info->logo) == '' ? 'default_user.png' : $company_info->logo) )}}" alt="" /> </div>
+                                    <div class="job-thumb"> <img src="{{ asset('storage/uploads/'.(($company_info->logo) == '' ? 'company-avatar.png' : $company_info->logo) )}}" alt="" /> </div>
                                     <div class="job-head-info">
                                         <h3 class="bold text-blue">{{ $job->title }}</h3>
                                         <span><i class="la la-map-marker"></i>{{ $job->location }}</span>

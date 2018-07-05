@@ -142,7 +142,7 @@
                             {{ $job->jobLevel->name }}
                         </td>
                         <td>
-                            {{ $job->jobExperience->name }}
+                            {{ $job->experience }}
                         </td>
                         <td>
                             {{ ($job->is_featured) ? 'Featured' : 'Not Featured' }}

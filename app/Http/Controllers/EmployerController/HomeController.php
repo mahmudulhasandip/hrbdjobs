@@ -76,27 +76,6 @@ class HomeController extends Controller
         }else{
             $featured_package = Featured_package::where('id', $request->input('job_package_id'))->first();
         }
-        
-        // payment History
-        $paymentHistory = new Payment_history();
-        $paymentHistory->employer_id = Auth::guard('employer')->user()->id;
-        if($job_package){
-            $paymentHistory->job_package_id = $job_package->id;
-            $paymentHistory->price = $job_package->price;
-            $paymentHistory->discount = $job_package->discount;
-        }else{
-            $paymentHistory->featured_package_id = $featured_package->id;
-            $paymentHistory->price = $featured_package->price;
-            $paymentHistory->discount = $featured_package->discount;
-        }
-
-        $paymentHistory->transaction_type = $request->input('transaction_type');
-        $paymentHistory->transaction_id = $request->input('txdID');
-        $paymentHistory->transaction_date = date('Y-m-d H:i:s');
-
-        $paymentHistory->save();
-
-
         // employer package
         $employerPackages = new Employer_package();
         $employerPackages->employer_id = Auth::guard('employer')->user()->id;
@@ -113,6 +92,26 @@ class HomeController extends Controller
         $employerPackages->is_verified = 0;
 
         $employerPackages->save();
+
+        // payment History
+        $paymentHistory = new Payment_history();
+        $paymentHistory->employer_id = Auth::guard('employer')->user()->id;
+        if($job_package){
+            $paymentHistory->job_package_id = $job_package->id;
+            $paymentHistory->price = $job_package->price;
+            $paymentHistory->discount = $job_package->discount;
+        }else{
+            $paymentHistory->featured_package_id = $featured_package->id;
+            $paymentHistory->price = $featured_package->price;
+            $paymentHistory->discount = $featured_package->discount;
+        }
+
+        $paymentHistory->employer_package_id = $employerPackages->id;
+        $paymentHistory->transaction_type = $request->input('transaction_type');
+        $paymentHistory->transaction_id = $request->input('txdID');
+        $paymentHistory->transaction_date = date('Y-m-d H:i:s');
+
+        $paymentHistory->save();
 
         return view('employer.package_confirm', $data);
 
@@ -141,8 +140,6 @@ class HomeController extends Controller
     public function postJob(Request $request) {
         $data['left_active'] = 'job';
 
-        
-
         // validation
         if($request['post']){
             $validator = Validator::make($request->all(),[
@@ -151,7 +148,7 @@ class HomeController extends Controller
                 'job_category_id'       => 'required',
                 'job_designation_id'    => 'required',
                 'job_level_id'          => 'required',
-                'experience'         => 'required',
+                'experience'            => 'required',
                 'vacancy'               => 'required',
                 'gender'                => 'required',
                 'qualification'         => 'required',

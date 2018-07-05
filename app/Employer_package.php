@@ -17,4 +17,8 @@ class Employer_package extends Model
     public function jobPackage(){
         return $this->hasOne('App\Job_package', 'id', 'job_package_id');
     }
+
+    public function paymentHistory(){
+        return $this->hasOne('App\Payment_history', 'id', 'employer_package_id');
+    }
 }

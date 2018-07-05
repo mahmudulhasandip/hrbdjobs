@@ -23,6 +23,7 @@
     <link href="/admin/vendors/base/vendors.bundle.css" rel="stylesheet" type="text/css" />
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/toastr.js/2.1.4/toastr.min.css" />
     <link href="/admin/demo/default/base/style.bundle.css" rel="stylesheet" type="text/css" />
+    <link href="/admin/custom/style.css" rel="stylesheet" type="text/css" />
     <!--end::Base Styles -->
     
     @stack('css')
