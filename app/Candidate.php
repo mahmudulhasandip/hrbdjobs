@@ -40,7 +40,7 @@ class Candidate extends Authenticatable
     }
 
     public function candidateTraining(){
-        return $this->hasMany('App\Candidate_training', 'candidate_id', 'id');
+        return $this->hasMany('App\Candidate_training', 'candidate_id', 'id')->orderBy('id','desc');
     }
 
     public function candidateSkill(){
@@ -52,7 +52,7 @@ class Candidate extends Authenticatable
     }
 
     public function candidateProfessionalCertificate(){
-        return $this->hasMany('App\Candidate_professional_certificate', 'candidate_id', 'id');
+        return $this->hasMany('App\Candidate_professional_certificate', 'candidate_id', 'id')->orderBy('id','desc');
     }
 
     public function candidateExperience(){
@@ -60,27 +60,27 @@ class Candidate extends Authenticatable
     }
 
     public function candidateEducation(){
-        return $this->hasMany('App\Candidate_education', 'candidate_id', 'id');
+        return $this->hasMany('App\Candidate_education', 'candidate_id', 'id')->orderBy('id','desc');
     }
 
     public function appliedJob(){
-        return $this->hasMany('App\Applied_job', 'candidate_id', 'id');
+        return $this->hasMany('App\Applied_job', 'candidate_id', 'id')->orderBy('id','desc');
     }
 
     public function candidateInvitation(){
-        return $this->hasMany('App\Candidate_invitation', 'candidate_id', 'id');
+        return $this->hasMany('App\Candidate_invitation', 'candidate_id', 'id')->orderBy('id','desc');
     }
 
     public function shortListedResume(){
-        return $this->hasMany('App\Short_listed_resume', 'candidate_id', 'id');
+        return $this->hasMany('App\Short_listed_resume', 'candidate_id', 'id')->orderBy('id','desc');
     }
 
     public function followEmployer(){
-        return $this->hasMany('App\Follow_employer', 'candidate_id', 'id');
+        return $this->hasMany('App\Follow_employer', 'candidate_id', 'id')->orderBy('id','desc');
     }
 
     public function favouriteJob(){
-        return $this->hasMany('App\Favourite_job', 'candidate_id', 'id');
+        return $this->hasMany('App\Favourite_job', 'candidate_id', 'id')->orderBy('id','desc');
     }
 
     public function verifyCandidate(){
