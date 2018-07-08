@@ -33,7 +33,7 @@
 							 					<h3>{{ $company_info->name }}</h3>
 							 					<span><i class="la la-map-marker"></i>{{ $company_info->city }}, {{ $company_info->country }}</span>
 							 					<ul class="tags-jobs">
-								 					<li><i class="la la-file-text"></i> Posted Jobs 1 <span class="text-red">(todo)</span></li>
+								 					<li><i class="la la-file-text"></i> Posted Jobs: {{ $total_jobs }} </li>
 								 				</ul>
 							 				</div>
 							 			</div><!-- Job Head -->
@@ -67,64 +67,30 @@
 							 		<div class="col-lg-8 column">	
 										 	{{-- company about details  --}}
 							 			<div class="job-details">
-											 <h3>About Business Network</h3>
+											 <h3>About Company</h3>
 											 {{-- company about details  --}}
 							 				{!! $company_info->description !!}
 										 </div>
 										 
 										 {{-- recent job posts --}}
 								 		<div class="recent-jobs">
-							 				<h3>Jobs from Business Network</h3>
+							 				<h3>Recent open jobs</h3>
 							 				<div class="job-list-modern">
 											 	<div class="job-listings-sec no-border">
+													 @foreach($jobs as $job)
 													<div class="job-listing wtabs noimg">
 														<div class="job-title-sec">
-															<h3><a href="#" title="">Web Designer / Developer</a></h3>
-															<span>Massimo Artemisis</span>
-															<div class="job-lctn"><i class="la la-map-marker"></i>Sacramento, California</div>
+														<h3><a href="#" title="" target="_blank" onclick='window.open("{{ route('employer.job.details', $job->id) }}");return false;'>{{ $job['title'] }}</a></h3>
+															<span>{{ $job->employer->employerCompanyInfo['name'] }}</span>
+															<div class="job-lctn"><i class="la la-map-marker"></i>{{ $job['location'] }}</div>
 														</div>
 														<div class="job-style-bx">
-															<span class="job-is ft">Full time</span>
-															<span class="fav-job"><i class="la la-heart-o"></i></span>
-															<i>5 months ago</i>
+															<span class="job-is ft">{{ $job->jobLevel->name }}</span>
+															<i>{{ $job->created_at->diffForHumans() }}</i>
 														</div>
 													</div>
-													<div class="job-listing wtabs noimg">
-														<div class="job-title-sec">
-															<h3><a href="#" title="">C Developer (Senior) C .Net</a></h3>
-															<span>Massimo Artemisis</span>
-															<div class="job-lctn"><i class="la la-map-marker"></i>Sacramento, California</div>
-														</div>
-														<div class="job-style-bx">
-															<span class="job-is pt ">Part time</span>
-															<span class="fav-job"><i class="la la-heart-o"></i></span>
-															<i>5 months ago</i>
-														</div>
-													</div><!-- Job -->
-													<div class="job-listing wtabs noimg">
-														<div class="job-title-sec">
-															<h3><a href="#" title="">Regional Sales Manager South</a></h3>
-															<span>Massimo Artemisis</span>
-															<div class="job-lctn"><i class="la la-map-marker"></i>Sacramento, California</div>
-														</div>
-														<div class="job-style-bx">
-															<span class="job-is ft ">Full time</span>
-															<span class="fav-job"><i class="la la-heart-o"></i></span>
-															<i>5 months ago</i>
-														</div>
-													</div><!-- Job -->
-													<div class="job-listing wtabs noimg">
-														<div class="job-title-sec">
-															<h3><a href="#" title="">Marketing Dairector</a></h3>
-															<span>Massimo Artemisis</span>
-															<div class="job-lctn"><i class="la la-map-marker"></i>Sacramento, California</div>
-														</div>
-														<div class="job-style-bx">
-															<span class="job-is ft ">Full time</span>
-															<span class="fav-job"><i class="la la-heart-o"></i></span>
-															<i>5 months ago</i>
-														</div>
-													</div><!-- Job -->
+													@endforeach
+													<!-- Job -->
 												</div>
 											 </div>
 							 			</div>

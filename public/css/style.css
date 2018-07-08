@@ -1882,6 +1882,15 @@ label::after {
     margin-top: 3px;
 }
 
+.job-title-sec h3:hover{
+    color: #e54545;
+    transition: all .15s ease;
+    -webkit-transition: all .15s ease;
+    -moz-transition: all .15s ease;
+    -ms-transition: all .15s ease;
+    -o-transition: all .15s ease;
+}
+
 .job-title-sec span {
     float: left;
     font-family: Open Sans;
@@ -5819,6 +5828,7 @@ aside .widget.border:first-child {
     float: left;
     width: 100%;
     padding-top: 20px;
+    min-height: 250px;
 }
 
 .job-details h3 {
@@ -7625,7 +7635,7 @@ aside .widget.border:first-child {
     position: absolute;
     top: 0;
     left: 0;
-    width: 18%;
+    width: 15%;
 }
 
 .table-list-title>h3 {

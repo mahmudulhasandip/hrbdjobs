@@ -473,9 +473,9 @@ class HomeController extends Controller
             $data['social_links'] = new Company_social_media();
         }
          
-        // $data['industries'] = Industry::all();
+        $data['jobs'] = Job::where('employer_id', Auth::guard('employer')->user()->id)->where('is_paused', 0)->where('is_drafted', 0)->get();
+        $data['total_jobs'] = $data['jobs']->count();
         $data['company_industries'] = Company_industry::where('employer_company_info_id', $data['company_info']->id)->get();
-        $data['left_active'] = 'company';
         return view('employer.comapny_profile', $data);
     }
 
@@ -508,7 +508,7 @@ class HomeController extends Controller
         }catch(ModelNotFoundException $ex){
             $data['social_links'] = new Company_social_media();
         }
-
+        
         return view('employer.edit_company_profile', $data);
     }
 

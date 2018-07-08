@@ -20,7 +20,7 @@
     <link rel="stylesheet" href="/css/animate.min.css">
     {{-- <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/toastr.js/2.1.4/toastr.min.css" /> --}}
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/izitoast/1.3.0/css/iziToast.min.css" />
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/pace/1.0.2/themes/black/pace-theme-flash.min.css" />
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/pace/1.0.2/themes/red/pace-theme-flash.min.css" />
     <link rel="stylesheet" type="text/css" href="/css/chosen.css" />
     @stack('css')
 	<link rel="stylesheet" type="text/css" href="/css/style.css" />
@@ -67,15 +67,7 @@
 <script src="https://cdnjs.cloudflare.com/ajax/libs/pace/1.0.2/pace.js"></script>
 <script src="/js/select-chosen.js" type="text/javascript"></script>
 <script>
-        paceOptions = {
-            ajax: true, // disabled
-            document: true, // disabled
-            eventLag: false, // disabled
-            elements: {
-                
-            }
-        };
-    
+    $(document).ajaxStart(function() { Pace.restart(); });
 </script>
 @stack('js')
 
