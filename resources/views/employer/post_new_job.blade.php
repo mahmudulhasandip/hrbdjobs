@@ -389,7 +389,7 @@
 
 		var base_url = "{{ url('/employer/') }}";
 		$('input[type="checkbox"][name="is_special"]').on('click', function() {
-			var draft = {{$draft}};
+			var draft = "{{ $draft }}";
 			if(draft){
 				var job_id = '{{ $draft["id"] }}';
 			}

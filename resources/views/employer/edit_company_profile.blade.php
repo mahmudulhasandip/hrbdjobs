@@ -56,7 +56,7 @@
 										<input id="file-upload" type="file" name="logo" accept="image/*" />
 		
 										<label for="file-upload" id="file-drag">
-											<img id="file-image" src="/storage/app/uploads/{{ $company_info->logo }}" alt="Preview" class="hidden">
+											<img id="file-image" src="{{ asset('storage/uploads/'.(($company_info->logo) ? $company_info->logo : 'company-avatar.png'))}}" alt="Preview" class="">
 											<div id="start">
 											<i class="fa fa-download" aria-hidden="true"></i>
 											<div>Select a logo or drag here</div>
@@ -342,30 +342,8 @@ ekUpload();
 
 </script>
 
-<script src="https://cdnjs.cloudflare.com/ajax/libs/Trumbowyg/2.10.0/trumbowyg.min.js"></script>
 
 
-{{-- <script>
-	$('#description').trumbowyg({
-		autogrowOnEnter: true,
-		autogrow: true,
-		resetCss: true,
-		hideButtonTexts: true,
-		btns: [
-			['viewHTML'],
-			['undo', 'redo'], 
-			['formatting'],
-			['strong', 'em', 'del'],
-			['superscript', 'subscript'],
-			['link'],
-			['insertImage'],
-			['justifyLeft', 'justifyCenter', 'justifyRight', 'justifyFull'],
-			['unorderedList', 'orderedList'],
-			['horizontalRule'],
-			['removeformat']
-		]
-	});
-</script> --}}
 
 <script>
 
