@@ -26,10 +26,10 @@ Route::get('/applied/jobs', 'CandidateController\AppliedJobController@getApplied
 Route::post('/applied/job/withdraw', 'CandidateController\AppliedJobController@postWithdrawAppliedJob')->name('applied.jobs.withdraw');
 
 //
-Route::get('/candidate/resume', 'CandidateController\ResumeController@getResume')->name('resume.view');
-Route::get('/candidate/resume/upload', 'CandidateController\ResumeController@getUploadResume')->name('resume.upload');
-Route::get('/candidate/uploaded/resume/view', 'CandidateController\ResumeController@getUploadedResumeView')->name('uploaded.resume.view');
-Route::post('/candidate/resume/upload', 'CandidateController\ResumeController@postUploadResume')->name('post.resume.upload');
+Route::get('/resume', 'CandidateController\ResumeController@getResume')->name('resume.view');
+Route::get('/resume/upload', 'CandidateController\ResumeController@getUploadResume')->name('resume.upload');
+Route::get('/uploaded/resume/view', 'CandidateController\ResumeController@getUploadedResumeView')->name('uploaded.resume.view');
+Route::post('/resume/upload', 'CandidateController\ResumeController@postUploadResume')->name('post.resume.upload');
 
 //
 Route::get('/appropriate/job', 'CandidateController\AppropriateJobController@getAppropriateJob')->name('appropriate.job');

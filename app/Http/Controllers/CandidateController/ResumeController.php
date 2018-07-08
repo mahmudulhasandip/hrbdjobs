@@ -14,8 +14,7 @@ class ResumeController extends Controller
 {
     public function getResume(){
     	$data['left_active'] = 'resume';
-        $data['candidate_resume'] = Candidate_resume::where('candidate_id', Auth::guard('candidate')->user()->id)->first();
-        
+        $data['candidate'] = Candidate::find(Auth::guard('candidate')->user()->id);
      	return view('candidate.view_resume', $data);
     }
 

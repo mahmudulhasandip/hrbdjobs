@@ -14138,6 +14138,22 @@ form.cv-upload {
     padding-left: 7px;
     padding-top: 16px;
     padding-bottom: 3.5px;
+    vertical-align: middle;
+}
+
+.HRBDApplicantsName span{
+    background: #FFFFFF;
+    font-size: 14px;
+    font-family: Verdana, Geneva, sans-serif;
+    color: #666;
+    font-weight: normal;
+    padding-left: 2px;
+    padding-top: 7px;
+    padding-bottom: 10px;
+}
+
+.HRBDApplicantsName table{
+    margin: 0 !important;
 }
 
 .HRBDNormalText04 {
@@ -14189,6 +14205,7 @@ form.cv-upload {
     padding-left: 4px;
     padding-top: 4px;
     padding-bottom: 4px;
+    text-align: center;
 }
 
 .HRBDNormalText03 {
@@ -14199,4 +14216,38 @@ form.cv-upload {
     padding-left: 7px;
     padding-top: 4px;
     padding-bottom: 4px;
+    text-align: center;
+}
+.HRBDNormalText03 > .skill{
+    text-align: left;
+    margin-top: 10px;
+}
+.HRBDNormalText03 > .skill >span{
+    display: inline-block;
+    padding: 5px 10px;
+    border: 1px solid #666;
+    border-radius: 20px;
+    font-size: 14px;
+    margin-right: 10px;
+    margin-bottom: 10px;
+    color: #666;
+}
+
+
+.border-right-ash{
+    border-right: 1px solid #666;
+}
+.border-top-ash{
+    border-top: 1px solid #666;
+}
+
+.border-left-ash{
+    border-left: 1px solid #666;
+}
+.border-bottom-ash{
+    border-bottom: 1px solid #666;
+}
+
+.ml-10{
+    margin-left: 10px;
 }

@@ -11,7 +11,7 @@ class Candidate_skill extends Model
     }
 
     public function skill(){
-        return $this->hasMany('App\Skill', 'id', 'expertise_area');
+        return $this->hasOne('App\Skill', 'id', 'expertise_area');
     }
 
     public function jobCategory(){
@@ -23,6 +23,6 @@ class Candidate_skill extends Model
     }
 
     public function jobDesignation(){
-        return $this->hasMany('App\Job_designation', 'id', 'designation_id');
+        return $this->hasOne('App\Job_designation', 'id', 'designation_id');
     }
 }
