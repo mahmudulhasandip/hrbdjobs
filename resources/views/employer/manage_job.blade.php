@@ -65,7 +65,7 @@
 												<img src="{{ asset('/images/featured_ribbon.png') }}" alt="photo" class="feature_icon">
 												@endif
 						 						<div class="table-list-title">
-												 <h3><a href="/employer/job_details/{{ $job->id }}" title="">{{ $job->title }}</a></h3>
+												 <h3><a href="/employer/job_details/{{ $job->id }}" target="blank" title="">{{ $job->title }}</a></h3>
 						 						</div>
 						 					</td>
 						 					<td>
@@ -96,7 +96,7 @@
 						 					</td>
 						 					<td>
 						 						<ul class="action_job">
-												 <li><span>{{ ($job->is_paused) ? 'Click to active' : 'Click to pause' }}</span><a href="/employer/job_pause/{{ $job->id }}" title="" class="{{ ($job->is_paused) ? 'text-red' : 'text-green' }}"><i class="{{ ($job->is_paused) ? 'la la-pause' : 'la la-play' }}"></i></a></li>
+												 <li><span>{{ ($job->is_paused) ? 'Click to active' : 'Click to pause' }}</span><a href="/employer/job_pause/{{ $job->id }}" title="" class="{{ ($job->is_paused) ? 'text-red' : 'text-green' }}"><i class="{{ ($job->is_paused) ? 'la la-pause' : 'fa fa-play' }}"></i></a></li>
 						 							<li><span>Edit</span><a href="{{ route('employer.edit.job.view', $job->id) }}" title=""><i class="la la-pencil"></i></a></li>
 													<li><span>Delete</span><a class="delete" href="" title=""><i class="la la-trash-o"></i></a></li>
 													<form id="delete-form" action="{{ route('employer.delete.job', $job->id) }}" method="get">

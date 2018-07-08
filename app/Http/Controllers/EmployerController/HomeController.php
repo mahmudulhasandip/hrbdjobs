@@ -168,6 +168,11 @@ class HomeController extends Controller
             $postJob = new Job();
             $postJob->title = $request->input('title');
         }
+        if($request->input('is_special')) {
+            $postJob->is_special = $request->input('is_special');
+        }else{
+            $postJob->is_special = 0;
+        }
         $postJob->employer_id = Auth::guard('employer')->user()->id;
         $postJob->description = $request->input('description');
         $postJob->job_category_id = $request->input('job_category_id');
@@ -176,7 +181,10 @@ class HomeController extends Controller
         $postJob->experience = $request->input('experience');
         if($request->input('is_negotiable')) {
             $postJob->is_negotiable = $request->input('is_negotiable');
+            $postJob->salary_min = null;
+            $postJob->salary_max = null;
         }else{
+            $postJob->is_negotiable = 0;
             $postJob->salary_min = $request->input('salary_min');
             $postJob->salary_max = $request->input('salary_max');
         }
@@ -221,8 +229,14 @@ class HomeController extends Controller
         $data['editJob'] = Job::findOrFail($id);
         $data['employer_info'] = Employer::find(Auth::guard('employer')->user()->id);
         $data['job_levels'] = Job_level::all();
-        $data['job_categories'] = Job_category::all();
-        $data['job_designations'] = Job_designation::all();
+        if($data['editJob']['is_special']){
+            $data['job_categories'] = Job_category::where('is_special', 1)->get();
+            $data['job_designations'] = Job_designation::where('is_special', 1)->get();
+        }
+        else{
+            $data['job_categories'] = Job_category::where('is_special', 0)->get();
+            $data['job_designations'] = Job_designation::where('is_special', 0)->get();
+        }
         $data['job_experiences'] = Job_experience::all();
         $data['skills'] = Skill::all();
         return view('employer.edit_job', $data);
@@ -248,13 +262,56 @@ class HomeController extends Controller
     public function draftedJobForm($id){
         $data['left_active'] = 'job';
         $data['employer_info'] = Employer::find(Auth::guard('employer')->user()->id);
+        $data['draft'] = Job::where('employer_id', Auth::guard('employer')->user()->id)->where('id', $id)->first();
         $data['job_levels'] = Job_level::all();
-        $data['job_categories'] = Job_category::all();
-        $data['job_designations'] = Job_designation::all();
+        if($data['draft']['is_special'] == 1){
+            $data['job_categories'] = Job_category::where('is_special', 1)->get();
+            $data['job_designations'] = Job_designation::where('is_special', 1)->get();
+        }
+        else{
+            $data['job_categories'] = Job_category::where('is_special', 0)->get();
+            $data['job_designations'] = Job_designation::where('is_special', 0)->get();
+        }
         $data['job_experiences'] = Job_experience::all();
         $data['skills'] = Skill::all();
-        $data['draft'] = Job::where('employer_id', Auth::guard('employer')->user()->id)->where('id', $id)->first();
         return view('employer.post_new_job', $data);
+        
+    }
+
+    function getCategories(Request $request){
+        $id = $request->id;
+        $is_special = $request->is_special;
+        
+        if($is_special){
+            $job_categories = Job_category::where('is_special', $is_special)->get();
+        }else{
+            $job_categories = Job_category::where('is_special', $is_special)->get();
+        }
+        
+        $data = '<option value="" >Job Category</option>';
+        foreach($job_categories as $job_category){
+
+            $data .= '<option value="'. $job_category->id .'" >'. $job_category->name .'</option>';
+        }
+        return $data;
+        
+    }
+
+    function getDesignations(Request $request){
+        $id = $request->id;
+        $is_special = $request->is_special;
+        
+        if($is_special){
+            $job_designations = Job_designation::where('is_special', $is_special)->get();
+        }else{
+            $job_designations = Job_designation::where('is_special', $is_special)->get();
+        }
+
+        $data = '<option value="">Job Designation</option>';
+        foreach($job_designations as $job_designation){
+            $data .= '<option value="'. $job_designation->id .'">'. $job_designation->name .'</option>';
+        }
+        return $data;
     }
     
 
@@ -387,12 +444,12 @@ class HomeController extends Controller
                     $employerPass->save();
                     return redirect()->route('employer.home')->with('status', 'Your password successfully Changed.');
                 }
-                return redirect()->back()->with('errors', 'Password dose not match !!')->withInput();
+                return redirect()->back()->with('error', 'Password dose not match !!')->withInput();
             }
-            return redirect()->back()->with('errors', 'Retype Password dose not match !!')->withInput();
+            return redirect()->back()->with('error', 'Retype Password dose not match !!')->withInput();
             
         }
-        return redirect()->back()->with('errors', 'Old password is empty')->withInput();
+        return redirect()->back()->with('error', 'Old password is empty')->withInput();
     }
 
     public function getCompanyProfile(){

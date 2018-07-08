@@ -45,6 +45,7 @@
 									@csrf
 								 	<input type="hidden" name="job_id" value="{{ ($draft) ? $draft->id : '' }}">
 					 				<div class="row">
+										{{-- Job Title --}}
 					 					<div class="col-lg-12">
 					 						<span class="pf-title">Job Title</span>
 					 						<div class="pf-field">
@@ -55,7 +56,23 @@
 													</span> 
 												@endif
 					 						</div>
-					 					</div>
+										 </div>
+
+										 {{-- is_special job --}}
+										<div class="col-sm-3">
+											<div class="pf-field">
+												<div class="simple-checkbox">
+													<p><input type="checkbox" name="is_special" id="special_job"  value="@if (old("is_special")){{ old('is_special') }}@elseif ( $draft ){{ $draft->is_special }}@endif" @if (old("is_special")){{ 'checked' }}@elseif ( $draft['is_special'] ){{ 'checked' }} @endif><label for="special_job"><strong>Special Job</strong></label></p>
+													@if ($errors->has('is_special'))
+														<span class="help-block">
+															{{ $errors->first('is_special') }}
+														</span> 
+													@endif
+												</div>
+											</div>
+										</div>
+
+										{{-- description --}}
 					 					<div class="col-lg-12">
 					 						<span class="pf-title">Description</span>
 					 						<div class="pf-field">
@@ -66,11 +83,13 @@
 													</span> 
 												@endif
 					 						</div>
-					 					</div>
+										 </div>
+										 
+										 {{-- job categories --}}
 					 					<div class="col-lg-6">
 					 						<span class="pf-title">Job Categories</span>
 					 						<div class="pf-field">
-					 							<select data-placeholder="Please Select Specialism" class="chosen" name="job_category_id" >
+					 							<select id="job_category_id" data-placeholder="Please Select Specialism" class="chosen" name="job_category_id" >
 													<option value="">Job Category</option>
 													@foreach($job_categories as $job_category)
 													<option value="{{ $job_category->id }}" @if(old('job_category_id')){{ old('job_category_id') == $job_category->id ? 'selected' : '' }}@elseif( $draft && $draft->job_category_id == $job_category->id ){{ 'selected' }}@endif >{{ $job_category->name }}</option>
@@ -82,11 +101,13 @@
 													</span> 
 												@endif
 					 						</div>
-					 					</div>
+										 </div>
+										 
+										 {{-- job designation --}}
 					 					<div class="col-lg-6">
 					 						<span class="pf-title">Job Designation</span>
 					 						<div class="pf-field">
-					 							<select data-placeholder="Please Select Specialism" class="chosen" name="job_designation_id">
+					 							<select id="job_designation_id" data-placeholder="Please Select Specialism" class="chosen" name="job_designation_id">
 													<option value="">Job Designation</option>
 													@foreach($job_designations as $job_designation)
 													<option value="{{ $job_designation->id }}"  @if(old('job_designation_id')){{ old('job_designation_id') == $job_category->id ? 'selected' : '' }}@elseif( $draft &&  $draft->job_designation_id == $job_designation->id ){{ 'selected' }}@endif>{{ $job_designation->name }}</option>
@@ -98,7 +119,9 @@
 													</span> 
 												@endif
 					 						</div>
-					 					</div>
+										 </div>
+										 
+										 {{-- job level --}}
 					 					<div class="col-lg-6">
 					 						<span class="pf-title">Job Level</span>
 					 						<div class="pf-field">
@@ -114,7 +137,9 @@
 													</span> 
 												@endif
 					 						</div>
-					 					</div>
+										 </div>
+										 
+										 {{-- experience --}}
 					 					<div class="col-lg-6">
 					 						<span class="pf-title">Experience</span>
 					 						<div class="pf-field">
@@ -130,7 +155,9 @@
 													</span> 
 												@endif
 					 						</div>
-					 					</div>
+										 </div>
+										 
+										 {{-- minimum salary --}}
 					 					<div class="col-lg-3">
 											<span class="pf-title">Min Salary</span>
 											<div class="pf-field">
@@ -142,6 +169,8 @@
 												@endif
 											</div>
 										</div>
+
+										{{-- maximum salary --}}
 										<div class="col-lg-3">
 											<span class="pf-title">Max Salary</span>
 											<div class="pf-field">
@@ -154,11 +183,12 @@
 											</div>
 										</div>
 
+										{{-- is_negotiable --}}
 										<div class="col-sm-3">
 											<span class="pf-title"></span>
 											<div class="pf-field">
 												<div class="simple-checkbox">
-													<p><input type="checkbox" name="is_negotiable" id="negotiable"  value="@if (old("is_negotiable")){{ old('is_negotiable') }}@elseif ( $draft ){{ $draft->is_negotiable }}@else {{ '1' }} @endif"><label for="negotiable">Negotiable</label></p>
+													<p><input type="checkbox" name="is_negotiable" id="negotiable"  value="@if (old("is_negotiable")){{ old('is_negotiable') }}@elseif ( $draft ){{ $draft['is_negotiable'] }}@endif" @if (old("is_negotiable")){{ 'checked' }}@elseif ( $draft['is_negotiable'] ){{ 'checked' }} @endif><label for="negotiable">Negotiable</label></p>
 													@if ($errors->has('is_negotiable'))
 														<span class="help-block">
 															{{ $errors->first('is_negotiable') }}
@@ -168,6 +198,7 @@
 											</div>
 										</div>
 
+										{{-- vacancy --}}
 										<div class="col-lg-3">
 											<span class="pf-title">Vacancy</span>
 											<div class="pf-field">
@@ -180,6 +211,7 @@
 											</div>
 										</div>
 
+										{{-- gender --}}
 					 					<div class="col-lg-3">
 					 						<span class="pf-title">Gender</span>
 					 						<div class="pf-field">
@@ -195,7 +227,9 @@
 													</span> 
 												@endif
 					 						</div>
-					 					</div>
+										 </div>
+										 
+										 {{-- Qualification --}}
 					 					<div class="col-lg-6">
 					 						<span class="pf-title">Qualification</span>
 					 						<div class="pf-field">
@@ -206,7 +240,9 @@
 													</span> 
 												@endif
 					 						</div>
-					 					</div>
+										 </div>
+										 
+										 {{-- deadline --}}
 					 					<div class="col-lg-3">
 					 						<span class="pf-title">Application Deadline Date</span>
 					 						<div class="pf-field" >
@@ -217,7 +253,9 @@
 													</span> 
 												@endif
 					 						</div>
-					 					</div>
+										 </div>
+										 
+										 {{-- Skills --}}
 					 					<div class="col-lg-12">
 					 						<span class="pf-title">Skill Requirments</span>
 					 						<div class="pf-field">
@@ -246,7 +284,9 @@
 													</span> 
 												@endif
 											</div>
-					 					</div>
+										 </div>
+										 
+										 {{-- location --}}
 					 					<div class="col-lg-12">
 					 						<span class="pf-title">Location</span>
 					 						<div class="pf-field">
@@ -257,7 +297,9 @@
 													</span> 
 												@endif
 					 						</div>
-					 					</div>
+										 </div>
+										 
+										 {{-- buttons --}}
 										 <div class="col-lg-12">
 											<button type="submit" name="draft" value="draft" class="draft">Draft</button>
 											<button type="submit" name="post" value="post">Post</button>
@@ -315,16 +357,107 @@
  </script>
 
  <script>
-	$('input[type="checkbox"][name="is_negotiable"]').on('click', function() {
-		if(this.checked) {
-			$('.salary').attr('disabled', true);
-			$('#negotiable').attr('checked', true);
 
+	
+
+	$(document).ready(function(){
+		
+		if($('input[type="checkbox"][name="is_negotiable"]').val() == 1 ){
+			$('.salary').attr('disabled', true);
+			$('#negotiable').val(1);
+			$('#negotiable').attr('checked', true);
 		}else{
 			$('.salary').attr('disabled', false);
+			$('#negotiable').val(0);
 			$('#negotiable').attr('checked', false);
 		}
-	});
+
+		$('input[type="checkbox"][name="is_negotiable"]').on('click', function() {
+			if(this.checked) {
+				$('.salary').attr('disabled', true);
+				$('#negotiable').attr('checked', true);
+				$('#negotiable').val(1);
+
+			}else{
+				$('.salary').attr('disabled', false);
+				$('#negotiable').attr('checked', false);
+				$('#negotiable').val(0);
+			}
+		});
+
+
+
+		var base_url = "{{ url('/employer/') }}";
+		$('input[type="checkbox"][name="is_special"]').on('click', function() {
+			var draft = {{$draft}};
+			if(draft){
+				var job_id = '{{ $draft["id"] }}';
+			}
+			var job_id = '{{ $draft["id"] }}';
+			
+			if(this.checked) {
+				$('#special_job').attr('checked', true);
+				$('#special_job').val(1);
+				
+				var is_special = 1;
+				$.ajax({
+					url: base_url+'/get/job_cetegories',
+					type: 'post',
+					headers: {'X-CSRF-TOKEN': Laravel.csrfToken},
+					data: {is_special: is_special, id: job_id},
+					success: function(data){
+						$('#job_category_id').html(data);
+						$('.chosen').trigger("chosen:updated");
+					}
+				});
+
+				$.ajax({
+					url: base_url+'/get/job_designations',
+					type: 'post',
+					headers: {'X-CSRF-TOKEN': Laravel.csrfToken},
+					data: {is_special: is_special, id: job_id},
+					success: function(data){
+						$('#job_designation_id').html(data);
+						$('.chosen').trigger("chosen:updated");
+					}
+				});
+			}else{
+
+				$('#special_job').attr('checked', false);
+				$('#special_job').val(0);
+
+				var is_special = 0;
+				$.ajax({
+					url: base_url+'/get/job_cetegories',
+					type: 'post',
+					headers: {'X-CSRF-TOKEN': Laravel.csrfToken},
+					data: {is_special: is_special, id: job_id},
+					success: function(data){
+						$('#job_category_id').html(data);
+						$('.chosen').trigger("chosen:updated");
+					}
+				});
+				$.ajax({
+					url: base_url+'/get/job_designations',
+					type: 'post',
+					headers: {'X-CSRF-TOKEN': Laravel.csrfToken},
+					data: {is_special: is_special, id: job_id},
+					success: function(data){
+						$('#job_designation_id').html(data);
+						$('.chosen').trigger("chosen:updated");
+					}
+				});
+			}
+		});
+	})
+	 
+ </script>
+
+ {{-- ajax codes --}}
+ <script>
+	 
+	 
+
  </script>
 
  <script>

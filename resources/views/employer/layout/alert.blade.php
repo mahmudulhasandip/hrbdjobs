@@ -7,7 +7,7 @@
     <script>
         // toastr.success('{{ session('status') }}');
         iziToast.success({
-            title: 'Success',
+            // title: 'Success',
             message: '{{ session('status') }}',
             timeout: 2500,
             overlay: true,
@@ -24,7 +24,7 @@
     <script>
         // toastr.error('{{ session('error') }}');
         iziToast.error({
-            title: 'Error',
+            // title: 'Error',
             message: '{{ session('error') }}',
             timeout: 3000,
             overlay: true,

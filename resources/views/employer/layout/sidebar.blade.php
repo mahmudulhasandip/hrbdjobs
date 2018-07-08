@@ -14,7 +14,7 @@
         <li class="inner-child {{ ($left_active == 'company')? 'active':'' }}">
             <a href="#" title="" class="main-a"><i class="la la-industry"></i>Company Details</a>
             <ul>
-                <li><a href="{{ route('employer.company.profile') }}" title="">View Details</a></li>
+                <li><a href="{{ route('employer.company.profile') }}" target="blank" title="">View Details</a></li>
                 <li><a href="{{ route('employer.company.profile.edit') }}" title="">Edit Details</a></li>
             </ul>
         </li>
@@ -32,7 +32,7 @@
             <a href="{{ route('employer.shortlisted.candidate')}}" title="" class=""><i class="la la-bookmark"></i>Shorlisted</a>
         </li>
         <li class="inner-child {{ ($left_active == 'browse_resume')? 'active':'' }}">
-            <a href="{{ route('employer.browse.candidate.resume') }}" title="" class=""><i class="la la-binoculars"></i>Browse Resume</a>
+            <a href="{{ route('employer.browse.candidate.resume') }}" target="blank" title="" class=""><i class="la la-binoculars"></i>Browse Resume</a>
         </li>
         <li class="inner-child {{ ($left_active == 'packages') ? 'active':'' }}">
             <a href="#" title="" class="main-a"><i class="la la-cart-arrow-down"></i>Packages</a>

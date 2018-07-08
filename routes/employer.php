@@ -37,6 +37,9 @@ Route::get('/job_pause/{id}', 'EmployerController\HomeController@pauseJob')->nam
 
 Route::post('/manage/job/feature_job', 'EmployerController\HomeController@featureJob')->name('feature.job');
 
+Route::post('/get/job_cetegories', 'EmployerController\HomeController@getCategories')->name('getJobCetegories');
+Route::post('/get/job_designations', 'EmployerController\HomeController@getDesignations')->name('getJobDesignations');
+
 // employer profile update
 Route::get('/profile/edit', 'EmployerController\HomeController@getEditProfile')->name('profile.edit');
 Route::post('/profile/edit', 'EmployerController\HomeController@updateEmployerProfile')->name('update.employer.profile');

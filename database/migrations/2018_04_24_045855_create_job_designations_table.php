@@ -16,6 +16,7 @@ class CreateJobDesignationsTable extends Migration
         Schema::create('job_designations', function (Blueprint $table) {
             $table->increments('id')->unsigned()->unique();
             $table->string('name');
+            $table->integer('is_special')->default(0);
             $table->timestamps();
         });
     }
