@@ -1,6 +1,6 @@
-@extends('candidate.layout.app')
+@extends('users.layout.app')
 
-@section('title', 'HRBDJobs | Candidate Dashboard')
+@section('title', 'HRBDJobs | Candidate Profile')
 
 @section('content')
     <section class="overlape">

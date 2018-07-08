@@ -28,6 +28,15 @@ Route::get('/public/employer/profile/{id}', [
   'uses'  => 'EmployerController@getEmployerProfile'
 ]);
 
+Route::get('/public/candidate/profile/{id}', [
+  'as'    => 'public.candidate.profile',
+  'uses'  => 'UserController@getCandidateProfile'
+]);
+
+Route::get('/download/candidate/resume/{id}', [
+  'as'    => 'candidate.download.resume',
+  'uses'  => 'UserController@getCandidateResume'
+]);
 
 Route::group(['prefix' => 'admin'], function () {
   Route::get('/login', 'AdminAuth\LoginController@showLoginForm')->name('admin.login');
