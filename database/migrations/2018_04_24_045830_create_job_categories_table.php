@@ -17,6 +17,7 @@ class CreateJobCategoriesTable extends Migration
             $table->increments('id')->unsigned()->unique();
             $table->string('name');
             $table->integer('is_special')->default(0);
+            $table->string('icon')->nullable();
             $table->timestamps();
         });
     }
