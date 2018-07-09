@@ -38,26 +38,42 @@ Route::get('/browse/jobs', [
 ]);
 
 
+
+// for all users
+
+// single job view
 Route::get('/job/{id}', [            
   'as'    => 'single.job',
   'uses'  => 'JobController@getSingleJob'
 ]);
 
 // Profile view for all
+
+// Company Info
+Route::get('/company/{id}', [            
+  'as'    => 'company.profile',
+  'uses'  => 'CompaniesController@getCompanyProfile'
+]);
+
+// employer profile
 Route::get('/public/employer/profile/{id}', [
   'as'    => 'public.employer.profile',
   'uses'  => 'EmployerController@getEmployerProfile'
 ]);
 
+// candidate profile
 Route::get('/public/candidate/profile/{id}', [
   'as'    => 'public.candidate.profile',
   'uses'  => 'UserController@getCandidateProfile'
 ]);
 
+// candidate resume
 Route::get('/download/candidate/resume/{id}', [
   'as'    => 'candidate.download.resume',
   'uses'  => 'UserController@getCandidateResume'
 ]);
+
+
 
 Route::group(['prefix' => 'admin'], function () {
   Route::get('/login', 'AdminAuth\LoginController@showLoginForm')->name('admin.login');
