@@ -65,93 +65,66 @@
                     <div class="col-lg-12">
                         <div class="heading">
                             <h2>Popular Categories</h2>
-                            <span>37 jobs live - 0 added today.</span>
+                            <span>{{ $live_jobs }} jobs live - {{ $todays_jobs }} added today.</span>
                         </div>
                         <!-- Heading -->
                         <div class="cat-sec">
                             <div class="row no-gape">
+                                @for($i = 0; $i < sizeof($categories); $i++)
+                                @php
+                                    if($i > 3)
+                                        break;
+
+                                    $category = App\Job_category::where('id', $categories[$i]->id)->first();
+                                    $live_category_job = App\Job::where('job_category_id', $categories[$i]->id)
+                                                        ->where('jobs.deadline', '>=', date('Y-m-d'))
+                                                        ->where('is_paused', '=', 0)
+                                                        ->where('is_verified', '=', 1)
+                                                        ->count();
+                                @endphp
                                 <div class="col-lg-3 col-md-3 col-sm-6">
                                     <div class="p-category">
                                         <a href="#" title="">
-                                            <i class="la la-bullhorn"></i>
-                                            <span>Design, Art & Multimedia</span>
-                                            <p>(22 open positions)</p>
+                                            <i class="{{ $category->icon }}"></i>
+                                            <span>{{ $category->name }}</span>
+                                            <p>({{ $live_category_job }} open positions)</p>
                                         </a>
                                     </div>
                                 </div>
-                                <div class="col-lg-3 col-md-3 col-sm-6">
-                                    <div class="p-category">
-                                        <a href="#" title="">
-                                            <i class="la la-graduation-cap"></i>
-                                            <span>Education Training</span>
-                                            <p>(6 open positions)</p>
-                                        </a>
-                                    </div>
-                                </div>
-                                <div class="col-lg-3 col-md-3 col-sm-6">
-                                    <div class="p-category">
-                                        <a href="#" title="">
-                                            <i class="la la-line-chart "></i>
-                                            <span>Accounting / Finance</span>
-                                            <p>(3 open positions)</p>
-                                        </a>
-                                    </div>
-                                </div>
-                                <div class="col-lg-3 col-md-3 col-sm-6">
-                                    <div class="p-category">
-                                        <a href="#" title="">
-                                            <i class="la la-users"></i>
-                                            <span>Human Resource</span>
-                                            <p>(3 open positions)</p>
-                                        </a>
-                                    </div>
-                                </div>
+                                @endfor
                             </div>
                         </div>
+
+                        @if(sizeof($categories) > 4)
+
                         <div class="cat-sec">
                             <div class="row no-gape">
+                                @for($i = 4; $i < sizeof($categories); $i++)
+                                @php
+                                    $category = App\Job_category::where('id', $categories[$i]->id)->first();
+                                    $live_category_job = App\Job::where('job_category_id', $categories[$i]->id)
+                                                        ->where('jobs.deadline', '>=', date('Y-m-d'))
+                                                        ->where('is_paused', '=', 0)
+                                                        ->where('is_verified', '=', 1)
+                                                        ->count();
+                                @endphp
                                 <div class="col-lg-3 col-md-3 col-sm-6">
                                     <div class="p-category">
                                         <a href="#" title="">
-                                            <i class="la la-phone"></i>
-                                            <span>Telecommunications</span>
-                                            <p>(22 open positions)</p>
+                                            <i class="{{ $category->icon }}"></i>
+                                            <span>{{ $category->name }}</span>
+                                            <p>({{ $live_category_job }} open positions)</p>
                                         </a>
                                     </div>
                                 </div>
-                                <div class="col-lg-3 col-md-3 col-sm-6">
-                                    <div class="p-category">
-                                        <a href="#" title="">
-                                            <i class="la la-cutlery"></i>
-                                            <span>Restaurant / Food Service</span>
-                                            <p>(6 open positions)</p>
-                                        </a>
-                                    </div>
-                                </div>
-                                <div class="col-lg-3 col-md-3 col-sm-6">
-                                    <div class="p-category">
-                                        <a href="#" title="">
-                                            <i class="la la-building"></i>
-                                            <span>Construction / Facilities</span>
-                                            <p>(3 open positions)</p>
-                                        </a>
-                                    </div>
-                                </div>
-                                <div class="col-lg-3 col-md-3 col-sm-6">
-                                    <div class="p-category">
-                                        <a href="#" title="">
-                                            <i class="la la-user-md"></i>
-                                            <span>Health</span>
-                                            <p>(3 open positions)</p>
-                                        </a>
-                                    </div>
-                                </div>
+                                @endfor
                             </div>
                         </div>
+                        @endif
                     </div>
                     <div class="col-lg-12">
                         <div class="browse-all-cat">
-                            <a href="#" title="">Browse All Categories</a>
+                            <a href="{{ route('browse.jobs') }}" target="_blank" title="">Browse All Categories</a>
                         </div>
                     </div>
                 </div>
@@ -169,7 +142,7 @@
                         <div class="simple-text-block style2">
                             <h3>Make a Difference with Your Online Resume!</h3>
                             <span>Your resume in minutes with JobHunt resume assistant is ready!</span>
-                            <a href="./register.html" title="">Create an Account</a>
+                            <a href="{{ route('candidate.register') }}" title="">Create an Account</a>
                         </div>
                     </div>
                 </div>
@@ -226,130 +199,24 @@
                             <div id="fjobs" class="tab-content current">
                                 <div class="job-listings-tabs">
                                     <div class="row">
-                                        <div class="col-lg-12">
-                                            <div class="job-listing wtabs">
-                                                <div class="job-title-sec">
-                                                    <div class="c-logo"> <img src="http://placehold.it/98x51" alt="" /> </div>
-                                                    <h3><a href="job_single.html" title="">Web Designer / Developer</a></h3>
-                                                    <span>Massimo Artemisis</span>
-                                                    <div class="job-lctn"><i class="la la-map-marker"></i>Sacramento, California</div>
-                                                </div>
-                                                <div class="job-style-bx">
-                                                    <span class="job-is ft fill">Full time</span>
-                                                    <span class="fav-job"><i class="la la-heart-o"></i></span>
-                                                </div>
-                                            </div>
-                                            <!-- Job -->
-                                            <div class="job-listing wtabs">
-                                                <div class="job-title-sec">
-                                                    <div class="c-logo"> <img src="http://placehold.it/98x51" alt="" /> </div>
-                                                    <h3><a href="job_single.html" title="">C Developer (Senior) C .Net</a></h3>
-                                                    <span>Massimo Artemisis</span>
-                                                    <div class="job-lctn"><i class="la la-map-marker"></i>Sacramento, California</div>
-                                                </div>
-                                                <div class="job-style-bx">
-                                                    <span class="job-is pt fill">Part time</span>
-                                                    <span class="fav-job"><i class="la la-heart-o"></i></span>
-                                                </div>
-                                            </div>
-                                            <!-- Job -->
-                                            <div class="job-listing wtabs">
-                                                <div class="job-title-sec">
-                                                    <div class="c-logo"> <img src="http://placehold.it/98x51" alt="" /> </div>
-                                                    <h3><a href="job_single.html" title="">Regional Sales Manager South</a></h3>
-                                                    <span>Massimo Artemisis</span>
-                                                    <div class="job-lctn"><i class="la la-map-marker"></i>Sacramento, California</div>
-                                                </div>
-                                                <div class="job-style-bx">
-                                                    <span class="job-is ft fill">Full time</span>
-                                                    <span class="fav-job"><i class="la la-heart-o"></i></span>
-                                                </div>
-                                            </div>
-                                            <!-- Job -->
+                                        <div id="featured-jobs" class="col-lg-12">
+                                            
                                         </div>
-                                        <div class="col-lg-12">
-                                            <div class="job-listing wtabs">
-                                                <div class="job-title-sec">
-                                                    <div class="c-logo"> <img src="http://placehold.it/98x51" alt="" /> </div>
-                                                    <h3><a href="job_single.html" title="">Marketing Dairector</a></h3>
-                                                    <span>Massimo Artemisis</span>
-                                                    <div class="job-lctn"><i class="la la-map-marker"></i>Sacramento, California</div>
-                                                </div>
-                                                <div class="job-style-bx">
-                                                    <span class="job-is ft fill">Full time</span>
-                                                    <span class="fav-job"><i class="la la-heart-o"></i></span>
-                                                </div>
-                                            </div>
-                                            <!-- Job -->
-
-                                        </div>
+                                        
                                     </div>
                                 </div>
                             </div>
                             <div id="rjobs" class="tab-content">
                                 <div class="job-listings-tabs">
                                     <div class="row">
-                                        <div class="col-lg-12">
-                                            <div class="job-listing wtabs">
-                                                <div class="job-title-sec">
-                                                    <div class="c-logo"> <img src="http://placehold.it/98x51" alt="" /> </div>
-                                                    <h3><a href="job_single.html" title="">Marketing Dairector</a></h3>
-                                                    <span>Massimo Artemisis</span>
-                                                    <div class="job-lctn"><i class="la la-map-marker"></i>Sacramento, California</div>
-                                                </div>
-                                                <div class="job-style-bx">
-                                                    <span class="job-is ft fill">Full time</span>
-                                                    <span class="fav-job"><i class="la la-heart-o"></i></span>
-                                                </div>
-                                            </div>
-                                            <!-- Job -->
-                                            <div class="job-listing wtabs">
-                                                <div class="job-title-sec">
-                                                    <div class="c-logo"> <img src="http://placehold.it/98x51" alt="" /> </div>
-                                                    <h3><a href="job_single.html" title="">Application Developer</a></h3>
-                                                    <span>Massimo Artemisis</span>
-                                                    <div class="job-lctn"><i class="la la-map-marker"></i>Sacramento, California</div>
-                                                </div>
-                                                <div class="job-style-bx">
-                                                    <span class="job-is pt fill">Part time</span>
-                                                    <span class="fav-job"><i class="la la-heart-o"></i></span>
-                                                </div>
-                                            </div>
-                                            <!-- Job -->
-                                            <div class="job-listing wtabs">
-                                                <div class="job-title-sec">
-                                                    <div class="c-logo"> <img src="http://placehold.it/98x51" alt="" /> </div>
-                                                    <h3><a href="job_single.html" title="">Social Media and Public</a></h3>
-                                                    <span>Massimo Artemisis</span>
-                                                    <div class="job-lctn"><i class="la la-map-marker"></i>Sacramento, California</div>
-                                                </div>
-                                                <div class="job-style-bx">
-                                                    <span class="job-is fl fill">Freelance</span>
-                                                    <span class="fav-job"><i class="la la-heart-o"></i></span>
-                                                </div>
-                                            </div>
-                                            <!-- Job -->
-                                        </div>
-                                        <div class="col-lg-12">
-                                            <div class="job-listing wtabs">
-                                                <div class="job-title-sec">
-                                                    <div class="c-logo"> <img src="http://placehold.it/98x51" alt="" /> </div>
-                                                    <h3><a href="job_single.html" title="">Web Designer / Developer</a></h3>
-                                                    <span>Massimo Artemisis</span>
-                                                    <div class="job-lctn"><i class="la la-map-marker"></i>Sacramento, California</div>
-                                                </div>
-                                                <div class="job-style-bx">
-                                                    <span class="job-is ft fill">Full time</span>
-                                                    <span class="fav-job"><i class="la la-heart-o"></i></span>
-                                                </div>
-                                            </div>
-                                            <!-- Job -->
-                                        </div>
+                                        <div id="recent-jobs" class="col-lg-12">
+                                            
+                                        </div>   
                                     </div>
                                 </div>
                             </div>
                             <div class="browse-all-cat">
-                                <a href="#" title="" class="style2">Load more listings</a>
+                                <a href="{{ route('browse.jobs') }}" target="_blank" title="" class="style2">Load more listings</a>
                             </div>
                         </div>
                     </div>
@@ -404,104 +271,63 @@
                 <div class="row">
                     <div class="col-lg-12">
                         <div class="heading">
-                            <h2>Special Skills jobs</h2>
-                            <span>37 jobs live - 0 added today.</span>
+                            <h2>Popular Special Categories</h2>
+                            <span>{{ $live_special_jobs }} jobs live - {{ $todays_special_jobs }} added today.</span>
                         </div>
                         <!-- Heading -->
-                        <div class="tab-sec">
-                            <div id="fjobs" class="tab-content current">
-                                <div class="job-listings-tabs">
-                                    <div class="row">
-                                        <div class="col-lg-6">
-                                            <div class="job-listing wtabs">
-                                                <div class="job-title-sec">
-                                                    <div class="c-logo"> <img src="http://placehold.it/98x51" alt="" /> </div>
-                                                    <h3><a href="#" title="">Web Designer / Developer</a></h3>
-                                                    <span>Massimo Artemisis</span>
-                                                    <div class="job-lctn"><i class="la la-map-marker"></i>Sacramento, California</div>
-                                                </div>
-                                                <div class="job-style-bx">
-                                                    <span class="job-is ft fill">Full time</span>
-                                                    <span class="fav-job"><i class="la la-heart-o"></i></span>
-                                                </div>
-                                            </div>
-                                            <!-- Job -->
-                                            <div class="job-listing wtabs">
-                                                <div class="job-title-sec">
-                                                    <div class="c-logo"> <img src="http://placehold.it/98x51" alt="" /> </div>
-                                                    <h3><a href="#" title="">C Developer (Senior) C .Net</a></h3>
-                                                    <span>Massimo Artemisis</span>
-                                                    <div class="job-lctn"><i class="la la-map-marker"></i>Sacramento, California</div>
-                                                </div>
-                                                <div class="job-style-bx">
-                                                    <span class="job-is pt fill">Part time</span>
-                                                    <span class="fav-job"><i class="la la-heart-o"></i></span>
-                                                </div>
-                                            </div>
-                                            <!-- Job -->
-                                            <div class="job-listing wtabs">
-                                                <div class="job-title-sec">
-                                                    <div class="c-logo"> <img src="http://placehold.it/98x51" alt="" /> </div>
-                                                    <h3><a href="#" title="">Regional Sales Manager South</a></h3>
-                                                    <span>Massimo Artemisis</span>
-                                                    <div class="job-lctn"><i class="la la-map-marker"></i>Sacramento, California</div>
-                                                </div>
-                                                <div class="job-style-bx">
-                                                    <span class="job-is ft fill">Full time</span>
-                                                    <span class="fav-job"><i class="la la-heart-o"></i></span>
-                                                </div>
-                                            </div>
-                                            <!-- Job -->
-                                        </div>
-                                        <div class="col-lg-6">
-                                            <div class="job-listing wtabs">
-                                                <div class="job-title-sec">
-                                                    <div class="c-logo"> <img src="http://placehold.it/98x51" alt="" /> </div>
-                                                    <h3><a href="#" title="">Marketing Dairector</a></h3>
-                                                    <span>Massimo Artemisis</span>
-                                                    <div class="job-lctn"><i class="la la-map-marker"></i>Sacramento, California</div>
-                                                </div>
-                                                <div class="job-style-bx">
-                                                    <span class="job-is ft fill">Full time</span>
-                                                    <span class="fav-job"><i class="la la-heart-o"></i></span>
-                                                </div>
-                                            </div>
-                                            <!-- Job -->
-                                            <div class="job-listing wtabs">
-                                                <div class="job-title-sec">
-                                                    <div class="c-logo"> <img src="http://placehold.it/98x51" alt="" /> </div>
-                                                    <h3><a href="#" title="">Application Developer</a></h3>
-                                                    <span>Massimo Artemisis</span>
-                                                    <div class="job-lctn"><i class="la la-map-marker"></i>Sacramento, California</div>
-                                                </div>
-                                                <div class="job-style-bx">
-                                                    <span class="job-is pt fill">Part time</span>
-                                                    <span class="fav-job"><i class="la la-heart-o"></i></span>
-                                                </div>
-                                            </div>
-                                            <!-- Job -->
-                                            <div class="job-listing wtabs">
-                                                <div class="job-title-sec">
-                                                    <div class="c-logo"> <img src="http://placehold.it/98x51" alt="" /> </div>
-                                                    <h3><a href="#" title="">Social Media and Public</a></h3>
-                                                    <span>Massimo Artemisis</span>
-                                                    <div class="job-lctn"><i class="la la-map-marker"></i>Sacramento, California</div>
-                                                </div>
-                                                <div class="job-style-bx">
-                                                    <span class="job-is fl fill">Freelance</span>
-                                                    <span class="fav-job"><i class="la la-heart-o"></i></span>
-                                                </div>
-                                            </div>
-                                            <!-- Job -->
-                                        </div>
+                        <div class="cat-sec">
+                            <div class="row no-gape">
+                                @for($i = 0; $i < sizeof($special_job_categories); $i++)
+                                @php
+                                    if($i > 3)
+                                        break;
+
+                                    $category = App\Job_category::where('id', $special_job_categories[$i]->id)->first();
+                                    $live_category_job = App\Job::where('job_category_id', $special_job_categories[$i]->id)
+                                                        ->where('jobs.deadline', '>=', date('Y-m-d'))
+                                                        ->where('is_paused', '=', 0)
+                                                        ->where('is_verified', '=', 1)
+                                                        ->count();
+                                @endphp
+                                <div class="col-lg-3 col-md-3 col-sm-6">
+                                    <div class="p-category">
+                                        <a href="#" title="">
+                                            <i class="{{ $category->icon }}"></i>
+                                            <span>{{ $category->name }}</span>
+                                            <p>({{ $live_category_job }} open positions)</p>
+                                        </a>
                                     </div>
                                 </div>
-                            </div>
-
-                            <div class="browse-all-cat">
-                                <a href="#" title="" class="style2">Load more listings</a>
+                                @endfor
                             </div>
                         </div>
+
+                        @if(sizeof($special_job_categories) > 4)
+
+                        <div class="cat-sec">
+                            <div class="row no-gape">
+                                @for($i = 4; $i < sizeof($special_job_categories); $i++)
+                                @php
+                                    $category = App\Job_category::where('id', $special_job_categories[$i]->id)->first();
+                                    $live_category_job = App\Job::where('job_category_id', $special_job_categories[$i]->id)
+                                                        ->where('jobs.deadline', '>=', date('Y-m-d'))
+                                                        ->where('is_paused', '=', 0)
+                                                        ->where('is_verified', '=', 1)
+                                                        ->count();
+                                @endphp
+                                <div class="col-lg-3 col-md-3 col-sm-6">
+                                    <div class="p-category">
+                                        <a href="#" title="">
+                                            <i class="{{ $category->icon }}"></i>
+                                            <span>{{ $category->name }}</span>
+                                            <p>({{ $live_category_job }} open positions)</p>
+                                        </a>
+                                    </div>
+                                </div>
+                                @endfor
+                            </div>
+                        </div>
+                        @endif
                     </div>
                 </div>
             </div>
@@ -516,96 +342,19 @@
                 <div class="row">
                     <div class="col-lg-12">
                         <div class="heading">
-                            <h2>Recent Jobs</h2>
-                            <span>Leading Employers already using job and talent.</span>
+                            <h2>Special Jobs</h2>
+                            <span>My Job Is Special & I Love It!</span>
                         </div>
                         <!-- Heading -->
                         <div class="job-grid-sec">
-                            <div class="row">
-                                <div class="col-lg-4 col-md-6 col-sm-6 col-xs-12">
-                                    <div class="job-grid">
-                                        <div class="job-title-sec">
-                                            <div class="c-logo"> <img src="http://placehold.it/235x115" alt="" /> </div>
-                                            <h3><a href="#" title="">Web Designer / Developer</a></h3>
-                                            <span>Massimo Artemisis</span>
-                                            <span class="fav-job"><i class="la la-heart-o"></i></span>
-                                        </div>
-                                        <span class="job-lctn">Sacramento, California</span>
-                                        <a href="#" title="">APPLY NOW</a>
-                                    </div>
-                                    <!-- JOB Grid -->
-                                </div>
-                                <div class="col-lg-4 col-md-6 col-sm-6 col-xs-12">
-                                    <div class="job-grid">
-                                        <div class="job-title-sec">
-                                            <div class="c-logo"> <img src="http://placehold.it/235x115" alt="" /> </div>
-                                            <h3><a href="#" title="">Marketing Director</a></h3>
-                                            <span>Massimo Artemisis</span>
-                                            <span class="fav-job"><i class="la la-heart-o"></i></span>
-                                        </div>
-                                        <span class="job-lctn">Sacramento, California</span>
-                                        <a href="#" title="">APPLY NOW</a>
-                                    </div>
-                                    <!-- JOB Grid -->
-                                </div>
-                                <div class="col-lg-4 col-md-6 col-sm-6 col-xs-12">
-                                    <div class="job-grid">
-                                        <div class="job-title-sec">
-                                            <div class="c-logo"> <img src="http://placehold.it/235x115" alt="" /> </div>
-                                            <h3><a href="#" title="">Application Developer For Android</a></h3>
-                                            <span>Altes Bank</span>
-                                            <span class="fav-job"><i class="la la-heart-o"></i></span>
-                                        </div>
-                                        <span class="job-lctn">Sacramento, California</span>
-                                        <a href="#" title="">APPLY NOW</a>
-                                    </div>
-                                    <!-- JOB Grid -->
-                                </div>
-                                <div class="col-lg-4 col-md-6 col-sm-6 col-xs-12">
-                                    <div class="job-grid">
-                                        <div class="job-title-sec">
-                                            <div class="c-logo"> <img src="http://placehold.it/235x115" alt="" /> </div>
-                                            <h3><a href="#" title="">Web Designer / Developer</a></h3>
-                                            <span>Massimo Artemisis</span>
-                                            <span class="fav-job"><i class="la la-heart-o"></i></span>
-                                        </div>
-                                        <span class="job-lctn">Sacramento, California</span>
-                                        <a href="#" title="">APPLY NOW</a>
-                                    </div>
-                                    <!-- JOB Grid -->
-                                </div>
-                                <div class="col-lg-4 col-md-6 col-sm-6 col-xs-12">
-                                    <div class="job-grid">
-                                        <div class="job-title-sec">
-                                            <div class="c-logo"> <img src="http://placehold.it/235x115" alt="" /> </div>
-                                            <h3><a href="#" title="">Web Designer / Developer</a></h3>
-                                            <span>MediaLab</span>
-                                            <span class="fav-job"><i class="la la-heart-o"></i></span>
-                                        </div>
-                                        <span class="job-lctn">Sacramento, California</span>
-                                        <a href="#" title="">APPLY NOW</a>
-                                    </div>
-                                    <!-- JOB Grid -->
-                                </div>
-                                <div class="col-lg-4 col-md-6 col-sm-6 col-xs-12">
-                                    <div class="job-grid">
-                                        <div class="job-title-sec">
-                                            <div class="c-logo"> <img src="http://placehold.it/235x115" alt="" /> </div>
-                                            <h3><a href="#" title="">Web Designer / Developer</a></h3>
-                                            <span>StarHealth</span>
-                                            <span class="fav-job"><i class="la la-heart-o"></i></span>
-                                        </div>
-                                        <span class="job-lctn">Sacramento, California</span>
-                                        <a href="#" title="">APPLY NOW</a>
-                                    </div>
-                                    <!-- JOB Grid -->
-                                </div>
+                            <div class="row" id="special-jobs">
+                               
                             </div>
                         </div>
                     </div>
                     <div class="col-lg-12">
                         <div class="browse-all-cat">
-                            <a href="#" title="" class="style2">Load more listings</a>
+                            <a href="{{ route('browse.jobs') }}" target="_blank" title="" class="style2">Load more listings</a>
                         </div>
                     </div>
                 </div>
@@ -630,51 +379,23 @@
                         <!-- Heading -->
                         <div class="top-company-sec">
                             <div class="row" id="companies-carousel">
-                                <div class="col-lg-3">
-                                    <div class="top-compnay">
-                                        <img src="http://placehold.it/180x180" alt="" />
-                                        <h3><a href="#" title="">Symtech</a></h3>
-                                        <span>United States, Los Angeles</span>
-                                        <a href="#" title="">4 Open Positon</a>
+                                @foreach($companies as $company)
+                                    @php
+                                        $open_jobs = App\Job::where('deadline', '>=', date('Y-m-d'))
+                                            ->where('is_paused', '=', 0)
+                                            ->where('is_verified', '=', 1)
+                                            ->where('employer_id', $company->employer_id)
+                                            ->count();
+                                    @endphp
+                                    <div class="col-lg-6">
+                                        <div class="top-compnay">
+                                            <img src="{{ asset('storage/uploads/'.(($company->logo) ? $company->logo : 'default_user.png'))}}" alt="" />
+                                            <h3><a href="{{ route('public.employer.profile', $company->id) }}" target="_blank" title="">{{ $company->name }}</a></h3>
+                                            <span>{{ $company->city }} / {{ $company->country }}</span>
+                                            <a href="{{ route('public.employer.profile', $company->id) }}" target="_blank" title="">{{ ($open_jobs) ? $open_jobs : "No" }} Open Positon</a>
+                                        </div><!-- Top Company -->
                                     </div>
-                                    <!-- Top Company -->
-                                </div>
-                                <div class="col-lg-3">
-                                    <div class="top-compnay">
-                                        <img src="http://placehold.it/180x180" alt="" />
-                                        <h3><a href="#" title="">Symtech</a></h3>
-                                        <span>United States, Los Angeles</span>
-                                        <a href="#" title="">4 Open Positon</a>
-                                    </div>
-                                    <!-- Top Company -->
-                                </div>
-                                <div class="col-lg-3">
-                                    <div class="top-compnay">
-                                        <img src="http://placehold.it/180x180" alt="" />
-                                        <h3><a href="#" title="">Symtech</a></h3>
-                                        <span>United States, Los Angeles</span>
-                                        <a href="#" title="">4 Open Positon</a>
-                                    </div>
-                                    <!-- Top Company -->
-                                </div>
-                                <div class="col-lg-3">
-                                    <div class="top-compnay">
-                                        <img src="http://placehold.it/180x180" alt="" />
-                                        <h3><a href="#" title="">Symtech</a></h3>
-                                        <span>United States, Los Angeles</span>
-                                        <a href="#" title="">4 Open Positon</a>
-                                    </div>
-                                    <!-- Top Company -->
-                                </div>
-                                <div class="col-lg-3">
-                                    <div class="top-compnay">
-                                        <img src="http://placehold.it/180x180" alt="" />
-                                        <h3><a href="#" title="">Symtech</a></h3>
-                                        <span>United States, Los Angeles</span>
-                                        <a href="#" title="">4 Open Positon</a>
-                                    </div>
-                                    <!-- Top Company -->
-                                </div>
+                                @endforeach
                             </div>
                         </div>
                     </div>
@@ -690,7 +411,7 @@
                     <div class="col-lg-12">
                         <div class="simple-text">
                             <h3>Gat a question?</h3>
-                            <span>We're here to help. Check out our FAQs, send us an email or call us at 1 (800) 555-5555</span>
+                            <span>We're here to help. Check out our FAQs, send us an email or call us at +88 0196 9367214</span>
                         </div>
                     </div>
                 </div>
@@ -698,3 +419,47 @@
         </div>
     </section>
 @endsection
+
+@push('js')
+    <script>
+        var base_url = "{{ url('/') }}";
+        $(document).ready(function() {
+
+            $.ajax({
+                url: base_url+"/recent/jobs",
+                type: "post",
+                headers: {'X-CSRF-TOKEN': Laravel.csrfToken},
+                success: function(recentJob){
+                    $('#recent-jobs').html(recentJob);
+                }
+            });
+
+            $.ajax({
+                url: base_url+"/featured/jobs",
+                type: "post",
+                headers: {'X-CSRF-TOKEN': Laravel.csrfToken},
+                success: function(featuredJob){
+                    $('#featured-jobs').html(featuredJob);
+                }
+            });
+
+            $.ajax({
+                url: base_url+'/special/jobs',
+                type: 'post',
+                headers: {'X-CSRF-TOKEN': Laravel.csrfToken},
+                success: function(specialJobs){
+                    $('#special-jobs').html(specialJobs);
+                }
+            });
+
+        });
+
+
+        function viewJob(url){
+            window.open(
+                url.trim(),
+                '_blank'
+            );
+        }
+    </script>
+@endpush

@@ -16,13 +16,34 @@ Route::get('/', [
 	'uses'	=> 'UserController@index'
 ]);
 
+// job manupulate
+Route::post('/recent/jobs', [
+  'as'    => 'recent.jobs',
+  'uses'  => 'JobController@recentJobs'
+]);
 
-// for all users
+Route::post('/featured/jobs', [
+  'as'    => 'featured.jobs',
+  'uses'  => 'JobController@featuredJobs'
+]);
+
+Route::post('/special/jobs', [
+  'as'    => 'special.jobs',
+  'uses'  => 'JobController@specialJobs'
+]);
+
+Route::get('/browse/jobs', [
+  'as'    => 'browse.jobs',
+  'uses'  => 'JobController@browseJobs'
+]);
+
+
 Route::get('/job/{id}', [            
   'as'    => 'single.job',
   'uses'  => 'JobController@getSingleJob'
 ]);
 
+// Profile view for all
 Route::get('/public/employer/profile/{id}', [
   'as'    => 'public.employer.profile',
   'uses'  => 'EmployerController@getEmployerProfile'
