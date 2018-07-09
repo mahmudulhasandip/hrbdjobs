@@ -45,10 +45,74 @@
                                 <div class="share-bar">
                                     <span>Share</span><a href="#" title="" class="share-fb"><i class="fa fa-facebook"></i></a><a href="#" title="" class="share-twitter"><i class="fa fa-twitter"></i></a>
                                 </div>
+                                <div class="recent-jobs">
+                                    <h3>Recent Jobs</h3>
+                                    <div class="job-list-modern">
+                                        <div class="job-listings-sec no-border">
+                                        <div class="job-listing wtabs">
+                                            <div class="job-title-sec">
+                                                <div class="c-logo"> <img src="http://placehold.it/98x51" alt="" /> </div>
+                                                <h3><a href="#" title="">Web Designer / Developer</a></h3>
+                                                <span>Massimo Artemisis</span>
+                                                <div class="job-lctn"><i class="la la-map-marker"></i>Sacramento, California</div>
+                                            </div>
+                                            <div class="job-style-bx">
+                                                <span class="job-is ft">Full time</span>
+                                                <span class="fav-job"><i class="la la-heart-o"></i></span>
+                                                <i>5 months ago</i>
+                                            </div>
+                                        </div>
+                                        <div class="job-listing wtabs">
+                                            <div class="job-title-sec">
+                                                <div class="c-logo"> <img src="http://placehold.it/98x51" alt="" /> </div>
+                                                <h3><a href="#" title="">C Developer (Senior) C .Net</a></h3>
+                                                <span>Massimo Artemisis</span>
+                                                <div class="job-lctn"><i class="la la-map-marker"></i>Sacramento, California</div>
+                                            </div>
+                                            <div class="job-style-bx">
+                                                <span class="job-is pt ">Part time</span>
+                                                <span class="fav-job"><i class="la la-heart-o"></i></span>
+                                                <i>5 months ago</i>
+                                            </div>
+                                        </div><!-- Job -->
+                                        <div class="job-listing wtabs">
+                                            <div class="job-title-sec">
+                                                <div class="c-logo"> <img src="http://placehold.it/98x51" alt="" /> </div>
+                                                <h3><a href="#" title="">Regional Sales Manager South</a></h3>
+                                                <span>Massimo Artemisis</span>
+                                                <div class="job-lctn"><i class="la la-map-marker"></i>Sacramento, California</div>
+                                            </div>
+                                            <div class="job-style-bx">
+                                                <span class="job-is ft ">Full time</span>
+                                                <span class="fav-job"><i class="la la-heart-o"></i></span>
+                                                <i>5 months ago</i>
+                                            </div>
+                                        </div><!-- Job -->
+                                        <div class="job-listing wtabs">
+                                            <div class="job-title-sec">
+                                                <div class="c-logo"> <img src="http://placehold.it/98x51" alt="" /> </div>
+                                                <h3><a href="#" title="">Marketing Dairector</a></h3>
+                                                <span>Massimo Artemisis</span>
+                                                <div class="job-lctn"><i class="la la-map-marker"></i>Sacramento, California</div>
+                                            </div>
+                                            <div class="job-style-bx">
+                                                <span class="job-is ft ">Full time</span>
+                                                <span class="fav-job"><i class="la la-heart-o"></i></span>
+                                                <i>5 months ago</i>
+                                            </div>
+                                        </div><!-- Job -->
+                                    </div>
+                                    </div>
+                                </div>
                             </div>
                         </div>
                         <div class="col-lg-4 column">
-                            <div class="job-overview mt-250">
+                            <a class="apply-thisjob mt40" href="#" title=""><i class="la la-paper-plane"></i>Apply for job</a>
+                            {{-- <div class="apply-alternative">
+                                <a href="#" title=""><i class="la la-arrow-circle-o-right" style="margin-top: 15px;"></i> Follow Company</a>
+                                <span><i class="la la-heart-o"></i> Shortlist</span>
+                            </div> --}}
+                            <div class="job-overview mt-100">
                                 <h3 class="bold">Job Overview</h3>
                                 <ul>
                                     <li><i class="la la-calendar-o"></i><h3>Deadline</h3><span>{{ $job->deadline }}</span></li>
