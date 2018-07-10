@@ -46,7 +46,7 @@
 											<a href="{{ ($social_links && $social_links->linkedin_link) ? $social_links->linkedin_link : '#' }}" title="" target="blank" class="share-linkedin {{ ($social_links && $social_links->linkedin_link) ? '' : 'd-none' }}"><i class="fa fa-linkedin"></i></a>
 							 			</div>
 								 		<div class="emply-btns">
-											<a class="followus" href="#" title=""><i class="la la-paper-plane"></i> Follow us</a>
+											<a class="followus" href="{{ route('candidate.follow.company', $company_info->id) }}" title=""><i class="la la-paper-plane"></i> Follow us</a>
 								 		</div>
 				 					</div>  
 				 				</div>
@@ -63,13 +63,13 @@
 										 
 										 {{-- recent job posts --}}
 								 		<div class="recent-jobs">
-							 				<h3>Recent open jobs</h3>
+							 				<h3>Open Jobs</h3>
 							 				<div class="job-list-modern">
 											 	<div class="job-listings-sec no-border">
 													 @foreach($jobs as $job)
 													<div class="job-listing wtabs noimg">
 														<div class="job-title-sec">
-														<h3><a href="#" title="" target="_blank" onclick='window.open("{{ route('single.job', $job->id) }}");return false;'>{{ $job['title'] }}</a></h3>
+														<h3><a href="{{ route('single.job', $job->id) }}" title="" target="_blank" onclick='window.open("{{ route('single.job', $job->id) }}");return false;'>{{ $job['title'] }}</a></h3>
 															<span>{{ $job->employer->employerCompanyInfo['name'] }}</span>
 															<div class="job-lctn"><i class="la la-map-marker"></i>{{ $job['location'] }}</div>
 														</div>
@@ -109,7 +109,7 @@
 								 				<li class="{{ (!$company_info->website) ? 'd-none' : '' }}"><i class="la la-globe "></i><h3>Website</h3><span><a href="{{ $website }}">{{ $company_info->website }}</a></span></li>
 								 				<li class="{{ (!$company_info->since) ? 'd-none' : '' }}"><i class="la la-clock-o"></i><h3>Since</h3><span>{{ $company_info->since }}</span></li>
 								 				<li class="{{ (!$company_info->team_size) ? 'd-none' : '' }}"><i class="la la-users"></i><h3>Team Size</h3><span>{{ $company_info->team_size }}</span></li>
-								 				<li class=""><i class="la la-user"></i><h3>Followers</h3><span>15</span></li>
+								 				<li class=""><i class="la la-user"></i><h3>Followers</h3><span>{{ $company_info->employer->followEmployer->count() }}</span></li>
 								 			</ul>
 								 		</div><!-- Job Overview -->
 								 		

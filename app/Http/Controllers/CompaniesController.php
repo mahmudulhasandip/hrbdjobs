@@ -13,7 +13,7 @@ class CompaniesController extends Controller
 {
     public function getCompanyProfile($id) {
         $data['company_info'] = Employer_company_info::findOrFail($id);
-        $data['jobs'] = Job::where('employer_id', $data['company_info']->employer_id)->where('is_paused', 0)->where('is_drafted', 0)->get();
+        $data['jobs'] = Job::where('employer_id', $data['company_info']->employer_id)->where('is_verified', 1)->where('is_paused', 0)->where('is_drafted', 0)->orderBy('updated_at', 'desc')->get();
         $data['total_jobs'] = $data['jobs']->count();
         try{
             $data['social_links'] = Company_social_media::where('employer_company_info_id', $data['company_info']->id)->first();

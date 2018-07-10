@@ -390,9 +390,9 @@
                                     <div class="col-lg-6">
                                         <div class="top-compnay">
                                             <img src="{{ asset('storage/uploads/'.(($company->logo) ? $company->logo : 'default_user.png'))}}" alt="" />
-                                            <h3><a href="{{ route('public.employer.profile', $company->id) }}" target="_blank" title="">{{ $company->name }}</a></h3>
+                                            <h3><a href="{{ route('company.profile', $company->id) }}" target="_blank" title="">{{ $company->name }}</a></h3>
                                             <span>{{ $company->city }} / {{ $company->country }}</span>
-                                            <a href="{{ route('public.employer.profile', $company->id) }}" target="_blank" title="">{{ ($open_jobs) ? $open_jobs : "No" }} Open Positon</a>
+                                            <a href="{{ route('company.profile', $company->id) }}" target="_blank" title="">{{ ($open_jobs) ? $open_jobs : "No" }} Open Positon</a>
                                         </div><!-- Top Company -->
                                     </div>
                                 @endforeach

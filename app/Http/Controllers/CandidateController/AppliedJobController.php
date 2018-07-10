@@ -28,4 +28,18 @@ class AppliedJobController extends Controller
     	$job->save();
     	return $message;
     }
+
+    public function applyJob($id){
+        $job = Applied_job::where('job_id', $id)->where('candidate_id', Auth::guard('candidate')->user()->id)->first();
+        $message = "You have successfully Applied this Job";
+        if($job){
+            $message = "You already Applied this Job";
+            return redirect()->back()->with('status', $message);
+        }
+        $job = new Applied_job();
+        $job->candidate_id = Auth::guard('candidate')->user()->id;
+        $job->job_id = $id;
+        $job->save();
+        return redirect()->back()->with('status', $message);
+    }
 }

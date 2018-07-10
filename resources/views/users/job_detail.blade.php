@@ -2,6 +2,14 @@
 
 @section('title', 'HRBDJobs | Job Details')
 
+@push('css')
+<style>
+    .job-is.ft.fill, .job-list-modern .job-is.ft.fill, .apply-thisjob.ft.fill{
+        color: #fff !important;
+    }
+</style>
+@endpush
+
 @section('content')
 	<section class="overlape">
 		<div class="block no-padding">
@@ -48,66 +56,26 @@
                                 <div class="recent-jobs">
                                     <h3>Recent Jobs</h3>
                                     <div class="job-list-modern">
-                                        <div class="job-listings-sec no-border">
-                                        <div class="job-listing wtabs">
-                                            <div class="job-title-sec">
-                                                <div class="c-logo"> <img src="http://placehold.it/98x51" alt="" /> </div>
-                                                <h3><a href="#" title="">Web Designer / Developer</a></h3>
-                                                <span>Massimo Artemisis</span>
-                                                <div class="job-lctn"><i class="la la-map-marker"></i>Sacramento, California</div>
-                                            </div>
-                                            <div class="job-style-bx">
-                                                <span class="job-is ft">Full time</span>
-                                                <span class="fav-job"><i class="la la-heart-o"></i></span>
-                                                <i>5 months ago</i>
-                                            </div>
+                                        <div id="recent-jobs" class="job-listings-sec no-border">
+                                        
                                         </div>
-                                        <div class="job-listing wtabs">
-                                            <div class="job-title-sec">
-                                                <div class="c-logo"> <img src="http://placehold.it/98x51" alt="" /> </div>
-                                                <h3><a href="#" title="">C Developer (Senior) C .Net</a></h3>
-                                                <span>Massimo Artemisis</span>
-                                                <div class="job-lctn"><i class="la la-map-marker"></i>Sacramento, California</div>
-                                            </div>
-                                            <div class="job-style-bx">
-                                                <span class="job-is pt ">Part time</span>
-                                                <span class="fav-job"><i class="la la-heart-o"></i></span>
-                                                <i>5 months ago</i>
-                                            </div>
-                                        </div><!-- Job -->
-                                        <div class="job-listing wtabs">
-                                            <div class="job-title-sec">
-                                                <div class="c-logo"> <img src="http://placehold.it/98x51" alt="" /> </div>
-                                                <h3><a href="#" title="">Regional Sales Manager South</a></h3>
-                                                <span>Massimo Artemisis</span>
-                                                <div class="job-lctn"><i class="la la-map-marker"></i>Sacramento, California</div>
-                                            </div>
-                                            <div class="job-style-bx">
-                                                <span class="job-is ft ">Full time</span>
-                                                <span class="fav-job"><i class="la la-heart-o"></i></span>
-                                                <i>5 months ago</i>
-                                            </div>
-                                        </div><!-- Job -->
-                                        <div class="job-listing wtabs">
-                                            <div class="job-title-sec">
-                                                <div class="c-logo"> <img src="http://placehold.it/98x51" alt="" /> </div>
-                                                <h3><a href="#" title="">Marketing Dairector</a></h3>
-                                                <span>Massimo Artemisis</span>
-                                                <div class="job-lctn"><i class="la la-map-marker"></i>Sacramento, California</div>
-                                            </div>
-                                            <div class="job-style-bx">
-                                                <span class="job-is ft ">Full time</span>
-                                                <span class="fav-job"><i class="la la-heart-o"></i></span>
-                                                <i>5 months ago</i>
-                                            </div>
-                                        </div><!-- Job -->
-                                    </div>
                                     </div>
                                 </div>
                             </div>
                         </div>
                         <div class="col-lg-4 column">
-                            <a class="apply-thisjob mt40" href="#" title=""><i class="la la-paper-plane"></i>Apply for job</a>
+                            @if (Auth::guard('candidate'))
+                                @php
+                                    $applied_job = App\Applied_job::where('job_id', $job->id)->where('candidate_id', Auth::guard('candidate')->user()->id)->first();
+                                @endphp
+                                @if($applied_job)
+                                <a class="apply-thisjob ft fill mt40" href="javascript:void(0)" title=""><i class="la la-paper-plane"></i>Already Applied</a>
+                                @else
+                                    <a class="apply-thisjob mt40" href="{{ route('candidate.apply.job', $job->id) }}" title=""><i class="la la-paper-plane"></i>Apply for job</a>
+                                @endif
+                            @else
+                                
+                            @endif
                             {{-- <div class="apply-alternative">
                                 <a href="#" title=""><i class="la la-arrow-circle-o-right" style="margin-top: 15px;"></i> Follow Company</a>
                                 <span><i class="la la-heart-o"></i> Shortlist</span>
@@ -155,3 +123,27 @@
     </section>
     
 @endsection
+
+@push('js')
+    <script>
+        var base_url = "{{ url('/') }}";
+        $(document).ready(function() {
+
+            $.ajax({
+                url: base_url+"/recent/jobs",
+                type: "post",
+                headers: {'X-CSRF-TOKEN': Laravel.csrfToken},
+                success: function(recentJob){
+                    $('#recent-jobs').html(recentJob);
+                }
+            });
+        });
+
+        function viewJob(url){
+            window.open(
+                url.trim(),
+                '_blank'
+            );
+        }
+    </script>
+@endpush

@@ -26,6 +26,7 @@ class JobController extends Controller
                                 ->where('is_verified', '=', 1)
                                 ->where('is_paused', '=', 0)
                                 ->where('is_special', 0)
+                                ->where('is_drafted', 0)
                                 ->orderBy('updated_at', 'desc')
                                 ->limit(5)
                                 ->get();
@@ -64,6 +65,7 @@ class JobController extends Controller
                         ->where('jobs.is_verified', '=', 1)
                         ->where('jobs.is_paused', '=', 0)
                         ->where('jobs.is_special', '=', 0)
+                        ->where('jobs.is_drafted', '=', 0)
                         ->orderBy('jobs.updated_at', 'desc')
                         ->limit(8)
                         ->get();
@@ -97,6 +99,7 @@ class JobController extends Controller
                                 ->where('is_verified', '=', 1)
                                 ->where('is_paused', '=', 0)
                                 ->where('is_special', 1)
+                                ->where('is_drafted', 0)
                                 ->orderBy('updated_at', 'desc')
                                 ->limit(6)
                                 ->get();

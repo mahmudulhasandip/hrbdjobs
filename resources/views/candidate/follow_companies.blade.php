@@ -34,7 +34,7 @@
 					 			<div class="border-title"><h3>Followed Companies</h3></div>
 					 			@foreach($followCompanies as $follow)
 						 		<div id="follow-tab-{{ $follow->employer_id }}" class="job-listing wtabs">
-									<div class="job-title-sec newtab pointer" data-url="{{ route('public.employer.profile', $follow->employer->employerCompanyInfo->id) }}">
+									<div class="job-title-sec newtab pointer" data-url="{{ route('company.profile', $follow->employer->employerCompanyInfo->id) }}">
 										<div class="c-logo"> <img src="{{ ( $follow->employer->employerCompanyInfo->logo ) ? asset('storage/uploads/'.$follow->employer->employerCompanyInfo->logo) : asset('storage/uploads/company-avatar.png') }}" alt="" /> </div>
 										<h3><a href="javascript:void(0)" title="">{{ $follow->employer->employerCompanyInfo->name }}</a></h3>
                                         @php
