@@ -129,6 +129,23 @@ class JobController extends Controller
     }
 
     public function browseJobs(){
-        
+        $data['categories'] = DB::table('job_categories')
+                                ->leftJoin('jobs', 'jobs.job_category_id', '=', 'job_categories.id')
+                                ->select('job_categories.id')
+                                ->groupBy('job_categories.id')
+                                ->where('jobs.deadline', '>=', date('Y-m-d'))
+                                ->limit(8)
+                                ->get();
+        $data['live_jobs'] = Job::where('deadline', '>=', date('Y-m-d'))
+                            ->where('is_paused', '=', 0)
+                            ->where('is_verified', '=', 1)
+                            ->count();
+        $data['jobs'] = Job::where('jobs.deadline', '>=', date('Y-m-d'))
+                                ->where('is_verified', '=', 1)
+                                ->where('is_paused', '=', 0)
+                                ->where('is_drafted', 0)
+                                ->orderBy('updated_at', 'desc')
+                                ->paginate(3);
+        return view('users.browse_jobs', $data);
     }
 }

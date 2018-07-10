@@ -31,7 +31,7 @@
                     <div id="wall" class="col-lg-9 column">
                         <div class="padding-left">
                             <div class="manage-jobs-sec">
-                                <h3>Manage Applied Jobs</h3>
+                                <h3>Manage Applied Jobs (<i class="text-default">Total {{ $total }} jobs applied</i> )</h3>
                                 <table>
                                     <thead>
                                         <tr>

@@ -14261,7 +14261,9 @@ form.cv-upload {
 .ml-10{
     margin-left: 10px;
 }
-
+.mt-5{
+    margin-top: 5px !important;
+}
 .mt40{
     margin-top: 40px;
 }
@@ -14269,3 +14271,7 @@ form.cv-upload {
 .mt-250{
     margin-top: 250px;
 }
+.text-default{
+    color: #8b91dd !important;
+}
+

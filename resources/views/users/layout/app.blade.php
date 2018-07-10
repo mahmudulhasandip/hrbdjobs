@@ -3,6 +3,7 @@
 <head>
 	<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
 	<title>@yield('title')</title>
+	<meta name="csrf-token" content="{{ csrf_token() }}">
 	<meta name="viewport" content="width=device-width, initial-scale=1.0">
 	<meta name="description" content="">
 	<meta name="keywords" content="">
@@ -135,6 +136,10 @@
 <script src="/js/parallax.js" type="text/javascript"></script>
 <script src="/js/select-chosen.js" type="text/javascript"></script>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/izitoast/1.3.0/js/iziToast.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/pace/1.0.2/pace.js"></script>
+<script>
+    $(document).ajaxStart(function() { Pace.restart(); });
+</script>
 @stack('js')
 
 </body>

@@ -14,6 +14,9 @@ class AppliedJobController extends Controller
 {
     public function getAppliedJobs(){
     	$data['left_active'] = 'applied_jobs';
+        $data['total'] = Applied_job::where('candidate_id', Auth::guard('candidate')->user()->id)
+                                ->where('is_withdraw', 0)
+                                ->count();
     	$data['applied_jobs'] = Applied_job::orderBy('updated_at','desc')
     							->where('candidate_id', Auth::guard('candidate')->user()->id)
     							->where('is_withdraw', 0)

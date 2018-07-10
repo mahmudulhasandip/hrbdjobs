@@ -1,4 +1,4 @@
-@extends('employer.layout.app')
+@extends('users.layout.app')
 
 @section('title', 'HRBDJobs | Employer Comapany Profile')
 
