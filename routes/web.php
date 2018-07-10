@@ -56,10 +56,10 @@ Route::get('/company/{id}', [
 ]);
 
 // employer profile
-Route::get('/public/employer/profile/{id}', [
-  'as'    => 'public.employer.profile',
-  'uses'  => 'EmployerController@getEmployerProfile'
-]);
+// Route::get('/public/employer/profile/{id}', [
+//   'as'    => 'public.employer.profile',
+//   'uses'  => 'EmployerController@getEmployerProfile'
+// ]);
 
 // candidate profile
 Route::get('/public/candidate/profile/{id}', [

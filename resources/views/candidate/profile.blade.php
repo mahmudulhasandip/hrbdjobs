@@ -174,7 +174,7 @@
                                                 <div class="row">
                                                     @foreach($candidate->followEmployer as $follow)
                                                     <div class="col-lg-2 col-md-2 col-sm-3 col-xs-12">
-                                                        <a href="{{ route('public.employer.profile', $follow->employer_id) }}" target="_blank"><img src="{{ ( $follow->employer->employerCompanyInfo->logo ) ? asset('storage/uploads/'.$follow->employer->employerCompanyInfo->logo) : asset('storage/uploads/company-avatar.png') }}" /><span>{{ $follow->employer->employerCompanyInfo->name }}</span></a>
+                                                        <a href="{{ route('company.profile', $follow->employer->employerCompanyInfo->id) }}" target="_blank"><img src="{{ ( $follow->employer->employerCompanyInfo->logo ) ? asset('storage/uploads/'.$follow->employer->employerCompanyInfo->logo) : asset('storage/uploads/company-avatar.png') }}" /><span>{{ $follow->employer->employerCompanyInfo->name }}</span></a>
                                                     </div>
                                                     @endforeach
                                                 </div>

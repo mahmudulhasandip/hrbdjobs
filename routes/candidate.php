@@ -22,6 +22,7 @@ Route::post('/profile/certificate', 'CandidateController\ProfileController@getCe
 Route::post('/profile/edit/certificate', 'CandidateController\ProfileController@postUpdateCertificate')->name('update.profile.certificate');
 
 //
+Route::get('/applied/job/{id}', 'CandidateController\AppliedJobController@applyJob')->name('apply.job');
 Route::get('/applied/jobs', 'CandidateController\AppliedJobController@getAppliedJobs')->name('applied.jobs');
 Route::post('/applied/job/withdraw', 'CandidateController\AppliedJobController@postWithdrawAppliedJob')->name('applied.jobs.withdraw');
 
@@ -35,6 +36,7 @@ Route::post('/resume/upload', 'CandidateController\ResumeController@postUploadRe
 Route::get('/appropriate/job', 'CandidateController\AppropriateJobController@getAppropriateJob')->name('appropriate.job');
 
 //
+Route::get('/follow/company/{company_id}', 'CandidateController\FollowCompanyController@followCompany')->name('follow.company');
 Route::get('/follow/companies', 'CandidateController\FollowCompanyController@getFollowCompanies')->name('follow.companies');
 Route::post('/follow/company/status/change', 'CandidateController\FollowCompanyController@postFollowCompanyStatus')->name('follow.company.status');
 

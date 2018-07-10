@@ -25,10 +25,10 @@
         <div class="responsivemenu">
                 <ul>
                         <li class="">
-                            <a href="index.html" title="">Home</a>
+                            <a href="{{ url('/') }}" title="">Home</a>
                         </li>
                         <li class="">
-                            <a href="job_list_modern.html" title="">Browse Jobs</a>
+                            <a href="{{ route('browse.jobs') }}" title="">Browse Jobs</a>
                         </li>
                         <li class="">
                             <a href="about.html" title="">About</a>
@@ -57,10 +57,10 @@
             <nav>
                 <ul>
                     <li class="">
-                        <a href="index.html" title="">Home</a>
+                        <a href="{{ url('/') }}" title="">Home</a>
                     </li>
                     <li class="">
-                        <a href="job_list_modern.html" title="">Browse Jobs</a>
+                        <a href="{{ route('browse.jobs') }}" title="">Browse Jobs</a>
                     </li>
                     <li class="">
                         <a href="about.html" title="">About</a>

@@ -3,17 +3,15 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
-use Illuminate\Support\Facades\DB;
 
 use App\Candidate;
 use App\Job_category;
 use App\Job;
 use App\Employer_company_info;
 use App\Job_level;
+use App\Employer;
 
 use DB;
-use App\Employer;
-use App\Job;
 
 class JobController extends Controller
 {
@@ -29,6 +27,7 @@ class JobController extends Controller
                                 ->where('is_verified', '=', 1)
                                 ->where('is_paused', '=', 0)
                                 ->where('is_special', 0)
+                                ->where('is_drafted', 0)
                                 ->orderBy('updated_at', 'desc')
                                 ->limit(5)
                                 ->get();
@@ -67,6 +66,7 @@ class JobController extends Controller
                         ->where('jobs.is_verified', '=', 1)
                         ->where('jobs.is_paused', '=', 0)
                         ->where('jobs.is_special', '=', 0)
+                        ->where('jobs.is_drafted', '=', 0)
                         ->orderBy('jobs.updated_at', 'desc')
                         ->limit(8)
                         ->get();
@@ -100,6 +100,7 @@ class JobController extends Controller
                                 ->where('is_verified', '=', 1)
                                 ->where('is_paused', '=', 0)
                                 ->where('is_special', 1)
+                                ->where('is_drafted', 0)
                                 ->orderBy('updated_at', 'desc')
                                 ->limit(6)
                                 ->get();
