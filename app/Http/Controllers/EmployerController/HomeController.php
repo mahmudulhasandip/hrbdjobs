@@ -587,4 +587,5 @@ class HomeController extends Controller
         $data['employer_info'] = Employer::find(Auth::guard('employer')->user()->id);
         return view('employer.browse_resume', $data);                      
     }
+
 }

@@ -30,47 +30,61 @@
 				 	</aside>
 				 	<div class="col-lg-9 column mb-50">
 				 		<div class="padding-left">
-                            <div class="widget shortlist">
-                                <h3 class="sb-title open">Software Engineer</h3>
-                                <div class="tree_widget-sec">
-                                    <ul>
-                                        <li class="inner-child">
-                                            Mahmudul Hasan Dip
-											<span style="display:block;">2 years experience</span>
-											
-											<a href="#"><i class="la la-trash-o"></i></a>
-										</li>
-										<li class="inner-child">
-                                            Mahmudul Hasan Dip
-											<span style="display:block;">2 years experience</span>
-											
-											<a href="#"><i class="la la-trash-o"></i></a>
-                                        </li>
-                                    </ul>
+                            <div class="padding-left">
+								<div class="emply-resume-sec">
+                                    <h3>Resume</h3>
+                                    @foreach($applied_jobs as $job)
+									<div class="emply-resume-list">
+										<div class="emply-resume-thumb">
+											<img src="{{ asset('storage/uploads/'. (($job->candidate->dp) ? $job->candidate->dp : 'default_user.png')) }}" alt="Photo" />
+                                        </div>
+                                        
+										<div class="emply-resume-info">
+											<h3>
+												<a href="#" title="">{{ $job->candidate->fname }} {{ $job->candidate->lname }} <span class="text-blue">(Age: {{ date_diff(date_create(date('Y-m-d', strtotime($job->candidate->date_of_birth))), date_create(date('Y-m-d')))->format("%y years") }})</span></a>
+											</h3>
+											<span>
+                                                {{-- <i>{{ sizeof($job->candidate->candidateEducation) ? $job->candidate->candidateEducation->first()->institution_name : '-' }}</i> --}}
+                                                <i>{{ $job->candidate->candidateEducation->first()['institution_name'] }}</i>
+                                            </span>
+											<p>
+                                                <i class="la la-phone"></i>{{ $job->candidate->phone }}
+                                            </p>
+                                            <p>
+                                                <i class="la la-briefcase"></i>{{ $job->candidate->candidateSkill->first()['experience'] }} Year{{($job->candidate->candidateSkill->first()['experience'] > 1) ? 's' : '' }}
+                                            </p>
+										</div>
+										<div class="action-resume">
+											<div class="action-center">
+												<span>Action
+													<i class="la la-angle-down"></i>
+												</span>
+												<ul>
+													<li>
+														<a href="{{ route('employer.public.candidate.resume', $job->candidate->id) }}" target="_blank" title="">View CV</a>
+													</li>
+													<li>
+														<a href="{{ route('public.candidate.profile', $job->candidate->id) }}" target="_blank" title="">View Profile</a>
+													</li>
+													<li>
+														<a href="#" id="shortListCandidate" class="unshortlisted" data-jobId="{{ $job->id }}" title="">Add To Shortlist</a>
+													</li>
+												</ul>
+											</div>
+										</div>
+										<div class="del-resume">
+											<a href="#" title="Reject Candidate">
+												<i class="la la-times text-red"></i>
+											</a>
+										</div>
+                                    </div>
+                                    <!-- Emply List -->
+									@endforeach
+									<div class="pagination-laravel">
+									{{ $applied_jobs->links() }}
+								</div>
 								</div>
 							</div>
-							
-							<div class="widget shortlist">
-                                <h3 class="sb-title open">Software Engineer</h3>
-                                <div class="tree_widget-sec">
-                                    <ul>
-                                        <li class="inner-child">
-                                            Mahmudul Hasan Dip
-											<span style="display:block;">2 years experience</span>
-											
-											<a href="#"><i class="la la-trash-o"></i></a>
-										</li>
-										<li class="inner-child">
-                                            Mahmudul Hasan Dip
-											<span style="display:block;">2 years experience</span>
-											
-											<a href="#"><i class="la la-trash-o"></i></a>
-                                        </li>
-                                    </ul>
-								</div>
-								
-								
-                            </div>
 					 	</div>
 					</div>
 				 </div>
@@ -78,3 +92,37 @@
 		</div>
 	</section>
 @endsection
+
+@push('js')
+<script>
+    var base_url = "{{ url('/employer/') }}";
+    $('#shortListCandidate').click(function() {
+        var jobId = $(this).data('jobid');
+        if($(this).hasClass('unshortlisted')){
+			$(this).removeClass().addClass('shortlisted');
+            $(this).html('Remove from Shortlist');
+        }else if($(this).hasClass('shortlisted')){
+			$(this).removeClass().addClass('unshortlisted');
+			$(this).html('Add To Shortlist');
+        }
+        $.ajax({
+            url: base_url+"job/candidates/applied/shortListed/",
+            type: "post",
+            headers: {'X-CSRF-TOKEN': Laravel.csrfToken},
+            data:{job_id: jobId},
+            success: function(message){
+                iziToast.success({
+                    title: message,
+                    timeout: 2000,
+                    overlay: true,
+                    position: 'topRight',
+                });
+
+                
+                
+            }
+        });
+        
+    });
+</script>
+@endpush
