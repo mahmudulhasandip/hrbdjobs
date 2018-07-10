@@ -40,6 +40,9 @@ Route::post('/manage/job/feature_job', 'EmployerController\HomeController@featur
 Route::post('/get/job_cetegories', 'EmployerController\HomeController@getCategories')->name('getJobCetegories');
 Route::post('/get/job_designations', 'EmployerController\HomeController@getDesignations')->name('getJobDesignations');
 
+// applied candidates
+Route::get('job/candidates/applied/{id}', 'EmployerController\AppliedController@getAppliedCandidatesList')->name('applied.candidates.list');
+
 // employer profile update
 Route::get('/profile/edit', 'EmployerController\HomeController@getEditProfile')->name('profile.edit');
 Route::post('/profile/edit', 'EmployerController\HomeController@updateEmployerProfile')->name('update.employer.profile');
