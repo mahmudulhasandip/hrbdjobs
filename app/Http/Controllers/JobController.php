@@ -3,13 +3,12 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
-
 use App\Candidate;
 use App\Job_category;
 use App\Job;
+use App\Employer;
 use App\Employer_company_info;
 use App\Job_level;
-use App\Employer;
 
 use DB;
 

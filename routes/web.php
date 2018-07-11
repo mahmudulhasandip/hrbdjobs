@@ -67,10 +67,11 @@ Route::get('/public/candidate/profile/{id}', [
   'uses'  => 'UserController@getCandidateProfile'
 ]);
 
+
 // candidate resume
 Route::get('/download/candidate/resume/{id}', [
   'as'    => 'candidate.download.resume',
-  'uses'  => 'UserController@getCandidateResume'
+  'uses'  => 'UserController@getCandidateResumePDF'
 ]);
 
 

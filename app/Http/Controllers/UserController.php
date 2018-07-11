@@ -82,9 +82,10 @@ class UserController extends Controller
     	return view('users.candidate_profile')->with($data);
     }
 
-    public function getCandidateResume($id){
+    public function getCandidateResumePDF($id){
         $data['candidate'] = Candidate::find($id);
         $pdf = PDF::loadView('users.candidate_resume_pdf', $data);
         return $pdf->download('resume.pdf');   
     }
+
 }
