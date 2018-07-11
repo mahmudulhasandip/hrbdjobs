@@ -332,6 +332,7 @@ class HomeController extends Controller
                                 ->where('employer_packages.employer_id',  Auth::guard('employer')->user()->id)
                                 ->where('employer_packages.is_verified', 1)
                                 ->first();
+
         // $data['featured_job'] = Employer_package::where('employer_id', Auth::guard('employer')->user()->id)->where('featured_package_id', '!=', NULL)->where('expired_date', '>=', date("Y-m-d"))->first();
         return view('employer.manage_job', $data);
     }
@@ -576,11 +577,7 @@ class HomeController extends Controller
 
     }
 
-    public function getCandidateShortList(){
-        $data['left_active'] = 'shortlisted';
-        $data['employer_info'] = Employer::find(Auth::guard('employer')->user()->id);
-        return view('employer.shortlisted_job', $data);
-    }
+    
 
     public function getBrowseResume(){
         $data['left_active'] = 'browse_resume';

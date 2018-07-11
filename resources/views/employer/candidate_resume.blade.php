@@ -454,17 +454,17 @@
 
                                                                                         <td width="2%" align="center">:</td>
                                                                                         <td width="63%" align="left">
-                                                                                            {{ $candidate->candidateSkill->first()->jobLevel->name }}
+                                                                                            {{ sizeof($candidate->candidateSkill) ? $candidate->candidateSkill->first()->jobLevel->name : '' }}
                                                                                         </td>
                                                                                     </tr>
                                                                                 @endif
-                                                                            @if($candidate->candidateSkill)
+                                                                            @if(sizeof($candidate->candidateSkill))
                                                                                 <!--Preferred Job Category:-->
                                                                                 <tr class="HRBDNormalText03">
                                                                                     <td width="35%" align="left" style="padding-left:5px;">Preferred  Job Category</td>
                                                                                     <td width="2%" align="center">:</td>
                                                                                     <td width="63%" align="left">
-                                                                                        {{ $candidate->candidateSkill->first()->jobCategory->name }}
+                                                                                        {{ sizeof($candidate->candidateSkill) ? $candidate->candidateSkill->first()->jobCategory->name : '' }}
                                                                                     </td>
                                                                                 </tr>
 
@@ -473,7 +473,7 @@
                                                                                     <td width="35%" align="left" style="padding-left:5px;">Preferred  Job Designation</td>
                                                                                     <td width="2%" align="center">:</td>
                                                                                     <td width="63%" align="left">
-                                                                                        {{ $candidate->candidateSkill->first()->jobDesignation->name }}
+                                                                                        {{ sizeof($candidate->candidateSkill) ? $candidate->candidateSkill->first()->jobDesignation->name : '' }}
                                                                                     </td>
                                                                                 </tr>
                                                                             @endif

@@ -91,7 +91,7 @@ $(document).on('ready',function(){
     }
     });
 
-    $('.sb-title.open').next().slideDown();
+    $('.sb-title.open').next().slideUp();
     $('.sb-title.closed').next().slideUp();
     $('.sb-title').on('click', function(){
         $(this).next().slideToggle();

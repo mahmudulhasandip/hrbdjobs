@@ -29,63 +29,99 @@
 				 		
 				 	</aside>
 				 	<div class="col-lg-9 column mb-50">
-				 		<div class="padding-left">
-                            <div class="padding-left">
-								<div class="emply-resume-sec">
-                                    <h3>Resume</h3>
-                                    @foreach($applied_jobs as $job)
-									<div class="emply-resume-list">
-										<div class="emply-resume-thumb">
-											<img src="{{ asset('storage/uploads/'. (($job->candidate->dp) ? $job->candidate->dp : 'default_user.png')) }}" alt="Photo" />
-                                        </div>
-                                        
-										<div class="emply-resume-info">
-											<h3>
-												<a href="#" title="">{{ $job->candidate->fname }} {{ $job->candidate->lname }} <span class="text-blue">(Age: {{ date_diff(date_create(date('Y-m-d', strtotime($job->candidate->date_of_birth))), date_create(date('Y-m-d')))->format("%y years") }})</span></a>
-											</h3>
-											<span>
-                                                {{-- <i>{{ sizeof($job->candidate->candidateEducation) ? $job->candidate->candidateEducation->first()->institution_name : '-' }}</i> --}}
-                                                <i>{{ $job->candidate->candidateEducation->first()['institution_name'] }}</i>
-                                            </span>
-											<p>
-                                                <i class="la la-phone"></i>{{ $job->candidate->phone }}
-                                            </p>
-                                            <p>
-                                                <i class="la la-briefcase"></i>{{ $job->candidate->candidateSkill->first()['experience'] }} Year{{($job->candidate->candidateSkill->first()['experience'] > 1) ? 's' : '' }}
-                                            </p>
+						<div class="padding-left">
+							<div class="emply-resume-sec">
+								<!-- Tags Bar -->
+								<div class="filterbar mt-50">
+
+										<div class="sortby-sec">
+											<span>Sort by</span>
+											<select data-placeholder="Most Recent" class="chosen">
+												<option>Location</option>
+												<option>Dhaka</option>
+												<option>Rangpur</option>
+												<option>Khulna</option>
+											</select>
+											<select data-placeholder="20 Per Page" class="chosen">
+												<option>Institution</option>
+												<option>DU</option>
+												<option>UIU</option>
+												<option>AIUB</option>
+											</select>
+											<select data-placeholder="20 Per Page" class="chosen">
+												<option>Experience</option>
+												<option>1-2</option>
+												<option>3-5</option>
+												<option>6-10</option>
+											</select>
+											<select data-placeholder="20 Per Page" class="chosen">
+												<option>Education</option>
+												<option>B.Sc</option>
+												<option>MBA</option>
+												<option>PHD</option>
+											</select>
 										</div>
-										<div class="action-resume">
-											<div class="action-center">
-												<span>Action
-													<i class="la la-angle-down"></i>
-												</span>
-												<ul>
-													<li>
-														<a href="{{ route('employer.public.candidate.resume', $job->candidate->id) }}" target="_blank" title="">View CV</a>
-													</li>
-													<li>
-														<a href="{{ route('public.candidate.profile', $job->candidate->id) }}" target="_blank" title="">View Profile</a>
-													</li>
-													<li>
-														<a href="#" id="shortListCandidate" class="unshortlisted" data-jobId="{{ $job->id }}" title="">Add To Shortlist</a>
-													</li>
-												</ul>
-											</div>
+									</div>
+								
+								<h3>Applied Candidate's</h3>
+								
+								
+								@foreach($applied_jobs as $job)
+								<div class="emply-resume-list">
+									<div class="emply-resume-thumb">
+										<img src="{{ asset('storage/uploads/'. (($job->candidate->dp) ? $job->candidate->dp : 'default_user.png')) }}" alt="Photo" />
+									</div>
+									
+									<div class="emply-resume-info">
+										<h3>
+											<a href="{{ route('employer.public.candidate.resume', $job->candidate->id) }}" target="_blank" title="">{{ $job->candidate->fname }} {{ $job->candidate->lname }} <span class="text-blue">(Age: {{ date_diff(date_create(date('Y-m-d', strtotime($job->candidate->date_of_birth))), date_create(date('Y-m-d')))->format("%y years") }})</span></a>
+										</h3>
+										<span>
+											{{-- <i>{{ sizeof($job->candidate->candidateEducation) ? $job->candidate->candidateEducation->first()->institution_name : '-' }}</i> --}}
+											<i>{{ $job->candidate->candidateEducation->first()['institution_name'] }}</i>
+										</span>
+										<p>
+											<i class="la la-phone"></i>{{ $job->candidate->phone }}
+										</p>
+										<p>
+											<i class="la la-briefcase"></i>{{ $job->candidate->candidateSkill->first()['experience'] }} Year{{($job->candidate->candidateSkill->first()['experience'] > 1) ? 's' : '' }}
+										</p>
+									</div>
+									<div class="action-resume">
+										<div class="action-center">
+											<span>Action
+												<i class="la la-angle-down"></i>
+											</span>
+											<ul>
+												<li>
+													<a href="{{ route('employer.public.candidate.resume', $job->candidate->id) }}" target="_blank" title="">View CV</a>
+												</li>
+												<li>
+													<a href="{{ route('public.candidate.profile', $job->candidate->id) }}" target="_blank" title="">View Profile</a>
+												</li>
+												<li>
+												@if($job->is_short_listed)
+												<a href="javascript: ;" class="shortListCandidate shortlisted" data-jobId="{{ $job->job_id }}" data-candidateId="{{ $job->candidate_id }}" title="">Remove from Shortlist</a>
+												@else
+												<a href="javascript: ;" class="shortListCandidate unshortlisted" data-jobId="{{ $job->job_id }}" data-candidateId="{{ $job->candidate_id }}" title="">Add To Shortlist</a>
+												@endif
+												</li>
+											</ul>
 										</div>
-										<div class="del-resume">
-											<a href="#" title="Reject Candidate">
-												<i class="la la-times text-red"></i>
-											</a>
-										</div>
-                                    </div>
-                                    <!-- Emply List -->
-									@endforeach
-									<div class="pagination-laravel">
-									{{ $applied_jobs->links() }}
+									</div>
+									<div class="del-resume">
+										<a href="javascript;" class="reject_candidate" data-jobId="{{ $job->job_id }}" data-candidateId="{{ $job->candidate_id }}" title="Reject Candidate">
+											<i class="la la-times text-red"></i>
+										</a>
+									</div>
 								</div>
-								</div>
+								<!-- Emply List -->
+								@endforeach
+								<div class="pagination-laravel">
+								{{ $applied_jobs->links() }}
 							</div>
-					 	</div>
+							</div>
+						</div>
 					</div>
 				 </div>
 			</div>
@@ -96,8 +132,9 @@
 @push('js')
 <script>
     var base_url = "{{ url('/employer/') }}";
-    $('#shortListCandidate').click(function() {
-        var jobId = $(this).data('jobid');
+    $('.shortListCandidate').click(function() {
+        var candidateId = $(this).data('candidateid');
+		var jobId = $(this).data('jobid');
         if($(this).hasClass('unshortlisted')){
 			$(this).removeClass().addClass('shortlisted');
             $(this).html('Remove from Shortlist');
@@ -106,10 +143,10 @@
 			$(this).html('Add To Shortlist');
         }
         $.ajax({
-            url: base_url+"job/candidates/applied/shortListed/",
+            url: base_url+"/job/candidates/applied/shortListed/",
             type: "post",
             headers: {'X-CSRF-TOKEN': Laravel.csrfToken},
-            data:{job_id: jobId},
+            data:{candidate_id: candidateId, job_id: jobId},
             success: function(message){
                 iziToast.success({
                     title: message,
@@ -118,8 +155,29 @@
                     position: 'topRight',
                 });
 
-                
-                
+            
+            }
+        });
+        
+    });
+
+	$('.reject_candidate').click(function() {
+        var candidateId = $(this).data('candidateid');
+		var jobId = $(this).data('jobid');
+        $.ajax({
+            url: base_url+"/job/candidates/applied/reject/",
+            type: "post",
+            headers: {'X-CSRF-TOKEN': Laravel.csrfToken},
+            data:{candidate_id: candidateId, job_id: jobId},
+            success: function(message){
+                iziToast.error({
+                    title: message,
+                    timeout: 2000,
+                    overlay: true,
+                    position: 'topRight',
+                });
+
+            
             }
         });
         

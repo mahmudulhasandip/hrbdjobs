@@ -14280,3 +14280,20 @@ form.cv-upload {
 .action-center>ul>li a.shortlisted{
     color: #e54545;
 }
+
+
+.shortlist.widget .tree_widget-sec ul li a.title{
+    /* float: left;  */
+    width: 100%;
+    position: relative;
+    margin: -30px 0 0 0;
+    padding: 0 0 12px 0;
+}
+.shortlist.widget .tree_widget-sec ul li a.title:hover{
+    color: #e54545;
+}
+
+.mt-50{
+    margin-top: 50px;
+    margin-bottom: 0;
+}

@@ -69,7 +69,7 @@
 						 						</div>
 						 					</td>
 						 					<td>
-											 	<span class="applied-field"><a href="{{ route('employer.applied.candidates.list', $job->id) }}">3+ Applied</a></span>
+											 	<span class="applied-field"><a href="{{ route('employer.applied.candidates.list', $job->id) }}" target="_blank">{{ $job->appliedJob->count() }} Applied</a></span>
 						 					</td>
 						 					<td>
 						 						<span>{{ date("d M Y", strtotime($job->created_at)) }}</span><br />

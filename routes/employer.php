@@ -8,7 +8,7 @@ Route::get('/home', 'EmployerController\HomeController@dashboard')->name('home')
 
 Route::get('/company/profile', 'EmployerController\HomeController@getCompanyProfile')->name('company.profile');
 Route::get('/company/profile/edit', 'EmployerController\HomeController@getEditCompanyProfile')->name('company.profile.edit');
-Route::get('/shortlisted/candidate', 'EmployerController\HomeController@getCandidateShortList')->name('shortlisted.candidate');
+Route::get('/shortlisted/candidate', 'EmployerController\ShortlistedController@getCandidateShortList')->name('shortlisted.candidate');
 Route::get('/browse/candidate/resume', 'EmployerController\HomeController@getBrowseResume')->name('browse.candidate.resume');
 
 // update company profile
@@ -47,7 +47,8 @@ Route::get('/public/candidate/resume/{id}', [
     'uses'  => 'EmployerController\AppliedController@getCandidateResume'
   ]);
 
-Route::post('job/candidates/applied/shortListed/', 'EmployerController\AppliedController@shortListCandidate')->name('applied.candidates.shortList');
+Route::post('/job/candidates/applied/shortListed/', 'EmployerController\AppliedController@shortListCandidate')->name('applied.candidates.shortList');
+Route::post('/job/candidates/applied/reject/', 'EmployerController\AppliedController@rejectCandidate')->name('applied.candidates.reject');
 
 // employer profile update
 Route::get('/profile/edit', 'EmployerController\HomeController@getEditProfile')->name('profile.edit');
