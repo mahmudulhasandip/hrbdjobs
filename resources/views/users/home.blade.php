@@ -124,7 +124,7 @@
                     </div>
                     <div class="col-lg-12">
                         <div class="browse-all-cat">
-                            <a href="{{ route('browse.jobs') }}" target="_blank" title="">Browse All Categories</a>
+                            <a href="{{ url('/browse/jobs') }}" target="_blank" title="">Browse All Categories</a>
                         </div>
                     </div>
                 </div>
@@ -216,7 +216,7 @@
                                 </div>
                             </div>
                             <div class="browse-all-cat">
-                                <a href="{{ route('browse.jobs') }}" target="_blank" title="" class="style2">Load more listings</a>
+                                <a href="{{ url('/browse/jobs') }}" target="_blank" title="" class="style2">Load more listings</a>
                             </div>
                         </div>
                     </div>
@@ -354,7 +354,7 @@
                     </div>
                     <div class="col-lg-12">
                         <div class="browse-all-cat">
-                            <a href="{{ route('browse.jobs') }}" target="_blank" title="" class="style2">Load more listings</a>
+                            <a href="{{ url('/browse/jobs') }}" target="_blank" title="" class="style2">Load more listings</a>
                         </div>
                     </div>
                 </div>

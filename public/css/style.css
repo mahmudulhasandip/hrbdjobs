@@ -5603,6 +5603,10 @@ aside .subscribe_widget form button {
     user-select: none;
 }
 
+/*.simple-checkbox.scrollbar.specialism{
+    max-height: 232px !important;
+}*/
+
 .simple-checkbox.scrollbar {
     height: 232px;
 }
@@ -14280,7 +14284,6 @@ form.cv-upload {
 .action-center>ul>li a.shortlisted{
     color: #e54545;
 }
-
 
 .shortlist.widget .tree_widget-sec ul li a.title{
     /* float: left;  */

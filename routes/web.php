@@ -32,11 +32,12 @@ Route::post('/special/jobs', [
   'uses'  => 'JobController@specialJobs'
 ]);
 
-Route::get('/browse/jobs', [
-  'as'    => 'browse.jobs',
-  'uses'  => 'JobController@browseJobs'
-]);
+// Route::get('/browse/jobs', [
+//   'as'    => 'browse.jobs',
+//   'uses'  => 'BrowseJobController@index'
+// ]);
 
+Route::resource('browse/jobs', 'BrowseJobController');
 
 
 // for all users
