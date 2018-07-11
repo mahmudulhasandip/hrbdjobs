@@ -28,7 +28,7 @@
                             <a href="{{ url('/') }}" title="">Home</a>
                         </li>
                         <li class="">
-                            <a href="{{ route('browse.jobs') }}" title="">Browse Jobs</a>
+                            <a href="{{ url('/browse/jobs') }}" title="">Browse Jobs</a>
                         </li>
                         <li class="">
                             <a href="about.html" title="">About</a>
@@ -60,7 +60,7 @@
                         <a href="{{ url('/') }}" title="">Home</a>
                     </li>
                     <li class="">
-                        <a href="{{ route('browse.jobs') }}" title="">Browse Jobs</a>
+                        <a href="{{ url('/browse/jobs') }}" title="">Browse Jobs</a>
                     </li>
                     <li class="">
                         <a href="about.html" title="">About</a>

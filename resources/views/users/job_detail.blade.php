@@ -64,7 +64,7 @@
                             </div>
                         </div>
                         <div class="col-lg-4 column">
-                            @if (Auth::guard('candidate'))
+                            @if (Auth::guard('candidate')->user())
                                 @php
                                     $applied_job = App\Applied_job::where('job_id', $job->id)->where('candidate_id', Auth::guard('candidate')->user()->id)->first();
                                 @endphp
@@ -74,7 +74,7 @@
                                     <a class="apply-thisjob mt40" href="{{ route('candidate.apply.job', $job->id) }}" title=""><i class="la la-paper-plane"></i>Apply for job</a>
                                 @endif
                             @else
-                                
+                                <a class="apply-thisjob mt40" href="{{ route('candidate.apply.job', $job->id) }}" title=""><i class="la la-paper-plane"></i>Apply for job</a>
                             @endif
                             {{-- <div class="apply-alternative">
                                 <a href="#" title=""><i class="la la-arrow-circle-o-right" style="margin-top: 15px;"></i> Follow Company</a>

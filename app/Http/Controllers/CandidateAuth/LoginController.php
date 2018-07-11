@@ -6,6 +6,8 @@ use App\Http\Controllers\Controller;
 use Illuminate\Foundation\Auth\AuthenticatesUsers;
 use Illuminate\Support\Facades\Auth;
 use Hesto\MultiAuth\Traits\LogsoutGuard;
+use URL;
+use Session;
 
 class LoginController extends Controller
 {
@@ -48,6 +50,10 @@ class LoginController extends Controller
      */
     public function showLoginForm()
     {
+        if(URL::previous() != url('/')){
+            session()->put('backUrl', URL::previous());
+        }
+        
         return view('candidate.auth.login');
     }
 
@@ -58,6 +64,11 @@ class LoginController extends Controller
         request()->merge([$fieldName => $identity]);
         return $fieldName;
         // return 'email';
+    }
+
+    public function redirectPath()
+    {
+        return (session()->get('backUrl') &&  session()->get('backUrl') != url('/')) ? session()->get('backUrl') : $this->redirectTo;   
     }
 
     /**
