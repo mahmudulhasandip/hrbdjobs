@@ -1,137 +1,100 @@
-@extends('employer.layout.app')
-
-@section('title', 'HRBDJobs | Employer Shortlisted Candidate')
-
+@extends('employer.layout.app') 
+@section('title', 'HRBDJobs | Employer Shortlisted Candidate') 
 @section('content')
-	<section class="overlape">
-		<div class="block no-padding">
-			<div data-velocity="-.1" style="background: url(/images/top-bg.jpg) repeat scroll 50% 422.28px transparent;" class="parallax scrolly-invisible no-parallax"></div><!-- PARALLAX BACKGROUND IMAGE -->
-			<div class="container fluid">
-				<div class="row">
-					<div class="col-lg-12">
-						<div class="inner-header">
-							<h3>Welcome {{ Auth::user()->fname.' '. Auth::user()->lname}}</h3>
+<section class="overlape">
+	<div class="block no-padding">
+		<div data-velocity="-.1" style="background: url(/images/top-bg.jpg) repeat scroll 50% 422.28px transparent;" class="parallax scrolly-invisible no-parallax"></div>
+		<!-- PARALLAX BACKGROUND IMAGE -->
+		<div class="container fluid">
+			<div class="row">
+				<div class="col-lg-12">
+					<div class="inner-header">
+						<h3>Welcome {{ Auth::user()->fname.' '. Auth::user()->lname}}</h3>
+					</div>
+				</div>
+			</div>
+		</div>
+	</div>
+</section>
+
+<section>
+	<div class="block no-padding">
+		<div class="container">
+			<div class="row no-gape">
+				<aside class="col-lg-3 column border-right">
+					<div class="widget">
+					@include('employer.layout.sidebar')
+					</div>
+
+				</aside>
+				<div class="col-lg-9 column mb-50">
+					<div class="padding-left">
+						<div class="emply-resume-sec">
+							<!-- Tags Bar -->
+							<div class="filterbar mt-50">
+								<div class="sortby-sec">
+									<span>Sort by</span>
+									<select class="left filter location" >
+										<option value="">Location</option>
+										@foreach($locations as $location)
+										{{-- <option value="{{ $location->city }}">{{ $location->city }}</option> --}}
+										<option value="{{ ucfirst(trans($location->city)) }}">{{ ucfirst(trans($location->city)) }}</option>
+										@endforeach
+									</select>
+									<select class="left filter institution">
+										<option value="">Institution</option>
+										@foreach($institutes as $institute)
+										<option value="{{ $institute->institution_name }}">{{ $institute->institution_name }}</>
+										@endforeach
+									</select>
+									<select class="left filter experience">
+										<option value="">Experience</option>
+										@foreach($experiences as $experience)
+										<option value="{{ $experience->name }}">{{ $experience->name }}</option>
+										@endforeach
+									</select>
+								</div>
+							</div>
+
+							<h3>Applied Candidate's</h3>
+							<input type="hidden" value="{{ $job_id }}" id="job_id">
+
+							{{-- applied candidates list --}}
+							<div class="candidate_list">
+								
+								@include('employer.ajaxPartials.applied_candidates')
+							</div>
+
+							
 						</div>
 					</div>
 				</div>
 			</div>
 		</div>
-	</section>
-
-	<section>
-		<div class="block no-padding">
-			<div class="container">
-				 <div class="row no-gape">
-				 	<aside class="col-lg-3 column border-right">
-				 		<div class="widget">
-							@include('employer.layout.sidebar')
-				 		</div>
-				 		
-				 	</aside>
-				 	<div class="col-lg-9 column mb-50">
-						<div class="padding-left">
-							<div class="emply-resume-sec">
-								<!-- Tags Bar -->
-								<div class="filterbar mt-50">
-
-										<div class="sortby-sec">
-											<span>Sort by</span>
-											<select data-placeholder="Most Recent" class="chosen">
-												<option>Location</option>
-												<option>Dhaka</option>
-												<option>Rangpur</option>
-												<option>Khulna</option>
-											</select>
-											<select data-placeholder="20 Per Page" class="chosen">
-												<option>Institution</option>
-												<option>DU</option>
-												<option>UIU</option>
-												<option>AIUB</option>
-											</select>
-											<select data-placeholder="20 Per Page" class="chosen">
-												<option>Experience</option>
-												<option>1-2</option>
-												<option>3-5</option>
-												<option>6-10</option>
-											</select>
-											<select data-placeholder="20 Per Page" class="chosen">
-												<option>Education</option>
-												<option>B.Sc</option>
-												<option>MBA</option>
-												<option>PHD</option>
-											</select>
-										</div>
-									</div>
-								
-								<h3>Applied Candidate's</h3>
-								
-								
-								@foreach($applied_jobs as $job)
-								<div class="emply-resume-list">
-									<div class="emply-resume-thumb">
-										<img src="{{ asset('storage/uploads/'. (($job->candidate->dp) ? $job->candidate->dp : 'default_user.png')) }}" alt="Photo" />
-									</div>
-									
-									<div class="emply-resume-info">
-										<h3>
-											<a href="{{ route('employer.public.candidate.resume', $job->candidate->id) }}" target="_blank" title="">{{ $job->candidate->fname }} {{ $job->candidate->lname }} <span class="text-blue">(Age: {{ date_diff(date_create(date('Y-m-d', strtotime($job->candidate->date_of_birth))), date_create(date('Y-m-d')))->format("%y years") }})</span></a>
-										</h3>
-										<span>
-											{{-- <i>{{ sizeof($job->candidate->candidateEducation) ? $job->candidate->candidateEducation->first()->institution_name : '-' }}</i> --}}
-											<i>{{ $job->candidate->candidateEducation->first()['institution_name'] }}</i>
-										</span>
-										<p>
-											<i class="la la-phone"></i>{{ $job->candidate->phone }}
-										</p>
-										<p>
-											<i class="la la-briefcase"></i>{{ $job->candidate->candidateSkill->first()['experience'] }} Year{{($job->candidate->candidateSkill->first()['experience'] > 1) ? 's' : '' }}
-										</p>
-									</div>
-									<div class="action-resume">
-										<div class="action-center">
-											<span>Action
-												<i class="la la-angle-down"></i>
-											</span>
-											<ul>
-												<li>
-													<a href="{{ route('employer.public.candidate.resume', $job->candidate->id) }}" target="_blank" title="">View CV</a>
-												</li>
-												<li>
-													<a href="{{ route('public.candidate.profile', $job->candidate->id) }}" target="_blank" title="">View Profile</a>
-												</li>
-												<li>
-												@if($job->is_short_listed)
-												<a href="javascript: ;" class="shortListCandidate shortlisted" data-jobId="{{ $job->job_id }}" data-candidateId="{{ $job->candidate_id }}" title="">Remove from Shortlist</a>
-												@else
-												<a href="javascript: ;" class="shortListCandidate unshortlisted" data-jobId="{{ $job->job_id }}" data-candidateId="{{ $job->candidate_id }}" title="">Add To Shortlist</a>
-												@endif
-												</li>
-											</ul>
-										</div>
-									</div>
-									<div class="del-resume">
-										<a href="javascript;" class="reject_candidate" data-jobId="{{ $job->job_id }}" data-candidateId="{{ $job->candidate_id }}" title="Reject Candidate">
-											<i class="la la-times text-red"></i>
-										</a>
-									</div>
-								</div>
-								<!-- Emply List -->
-								@endforeach
-								<div class="pagination-laravel">
-								{{ $applied_jobs->links() }}
-							</div>
-							</div>
-						</div>
-					</div>
-				 </div>
-			</div>
-		</div>
-	</section>
+	</div>
+</section>
 @endsection
 
+
+@push('css')
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/jquery-nice-select/1.1.0/css/nice-select.min.css" />
+<style>
+	.nice-select{
+		clear: none;
+		margin-right: 5px;
+	}
+</style>
+@endpush
+
 @push('js')
+<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery-nice-select/1.1.0/js/jquery.nice-select.min.js"></script>
 <script>
-    var base_url = "{{ url('/employer/') }}";
+	$(document).ready(function() {
+		$('select').niceSelect();
+	});
+</script>
+<script>
+	var base_url = "{{ url('/employer/') }}";
     $('.shortListCandidate').click(function() {
         var candidateId = $(this).data('candidateid');
 		var jobId = $(this).data('jobid');
@@ -182,5 +145,85 @@
         });
         
     });
+
 </script>
+
+{{-- ajax pagination --}}
+<script>
+
+	$(document).ready(function(){
+		$(document).on('click', '.pagination .page-link',function(event){
+			event.preventDefault();
+			var myurl = $(this).attr('href');
+			getData(myurl);
+		});
+	});
+
+	function getData(myurl){
+		$.ajax({
+			url: myurl,
+			type: "get",
+			datatype: "html"
+		}).done(function(data){
+			$(".candidate_list").empty().html(data);
+			window.history.pushState('','', myurl);
+		}).fail(function(jqXHR, ajaxOptions, thrownError){
+			alert('No response from server');
+		});
+	}
+
+</script>
+
+{{-- ajax filter --}}
+<script>
+	var base_url = "{{ url('/employer/') }}";
+	// $(document).ready(function(){
+	// 	$(document).on('change', '.filter',function(event){
+	// 		event.preventDefault();
+	// 		$location = $('.filter.location').val();
+	// 		$institution = $('.filter.institution').val();
+	// 		$experience = $('.filter.experience').val();
+	// 		var job_id = $('#job_id').val();
+	// 		$.ajax({
+	// 			url: base_url+'/job/candidates/applied/filter/',
+	// 			type: "post",
+	// 			headers: {'X-CSRF-TOKEN': Laravel.csrfToken},
+	// 			data: {location: $location, institution: $institution, experience: $experience, job_id: job_id},
+	// 			datatype: "html"
+	// 		}).done(function(data){
+	// 			$(".candidate_list").empty().html(data);
+	// 			console.log(data);
+				
+	// 		}).fail(function(jqXHR, ajaxOptions, thrownError){
+	// 			alert('No response from server');
+	// 		});
+	// 	});
+	// });
+	
+
+	$(document).ready(function(){
+		$(document).on('change', '.filter',function(event){
+			event.preventDefault();
+			$location = $('.filter.location').val();
+			$institution = $('.filter.institution').val();
+			$experience = $('.filter.experience').val();
+			var job_id = $('#job_id').val();
+			$.ajax({
+				url: base_url+'/job/candidates/applied/filter/',
+				type: "post",
+				headers: {'X-CSRF-TOKEN': Laravel.csrfToken},
+				data: {location: $location, institution: $institution, experience: $experience, job_id: job_id},
+				datatype: "html"
+			}).done(function(data){
+				$(".candidate_list").empty().html(data);
+				console.log(data);
+				
+			}).fail(function(jqXHR, ajaxOptions, thrownError){
+				alert('No response from server');
+			});
+		});
+	});
+</script>
+
+
 @endpush
