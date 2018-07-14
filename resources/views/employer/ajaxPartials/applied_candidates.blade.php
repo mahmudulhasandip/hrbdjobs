@@ -52,5 +52,5 @@
 @endforeach
 
 <div class="pagination-laravel">
-    {{ $applied_jobs->links() }}
+    {{ $applied_jobs->appends(request()->query())->links() }}
 </div>

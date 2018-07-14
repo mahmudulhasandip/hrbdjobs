@@ -177,30 +177,7 @@
 {{-- ajax filter --}}
 <script>
 	var base_url = "{{ url('/employer/') }}";
-	// $(document).ready(function(){
-	// 	$(document).on('change', '.filter',function(event){
-	// 		event.preventDefault();
-	// 		$location = $('.filter.location').val();
-	// 		$institution = $('.filter.institution').val();
-	// 		$experience = $('.filter.experience').val();
-	// 		var job_id = $('#job_id').val();
-	// 		$.ajax({
-	// 			url: base_url+'/job/candidates/applied/filter/',
-	// 			type: "post",
-	// 			headers: {'X-CSRF-TOKEN': Laravel.csrfToken},
-	// 			data: {location: $location, institution: $institution, experience: $experience, job_id: job_id},
-	// 			datatype: "html"
-	// 		}).done(function(data){
-	// 			$(".candidate_list").empty().html(data);
-	// 			console.log(data);
-				
-	// 		}).fail(function(jqXHR, ajaxOptions, thrownError){
-	// 			alert('No response from server');
-	// 		});
-	// 	});
-	// });
 	
-
 	$(document).ready(function(){
 		$(document).on('change', '.filter',function(event){
 			event.preventDefault();
@@ -209,15 +186,13 @@
 			$experience = $('.filter.experience').val();
 			var job_id = $('#job_id').val();
 			$.ajax({
-				url: base_url+'/job/candidates/applied/filter/',
+				url: base_url+'/job/candidates/applied/'+job_id,
 				type: "post",
 				headers: {'X-CSRF-TOKEN': Laravel.csrfToken},
 				data: {location: $location, institution: $institution, experience: $experience, job_id: job_id},
 				datatype: "html"
 			}).done(function(data){
 				$(".candidate_list").empty().html(data);
-				console.log(data);
-				
 			}).fail(function(jqXHR, ajaxOptions, thrownError){
 				alert('No response from server');
 			});

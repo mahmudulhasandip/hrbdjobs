@@ -42,13 +42,13 @@ Route::post('/get/job_designations', 'EmployerController\HomeController@getDesig
 
 // applied candidates
 Route::get('job/candidates/applied/{id}', 'EmployerController\AppliedController@getAppliedCandidatesList')->name('applied.candidates.list');
+Route::post('/job/candidates/applied/{id}', 'EmployerController\AppliedController@filterAppliedCandidate')->name('filter.applied.candidates');
 Route::get('/public/candidate/resume/{id}', [
     'as'    => 'public.candidate.resume',
     'uses'  => 'EmployerController\AppliedController@getCandidateResume'
   ]);
 Route::post('/job/candidates/applied/shortListed/', 'EmployerController\AppliedController@shortListCandidate')->name('applied.candidates.shortList');
 Route::post('/job/candidates/applied/reject/', 'EmployerController\AppliedController@rejectCandidate')->name('applied.candidates.reject');
-Route::post('/job/candidates/applied/filter/', 'EmployerController\AppliedController@filterAppliedCandidate')->name('filter.applied.candidates');
 
 // employer profile update
 Route::get('/profile/edit', 'EmployerController\HomeController@getEditProfile')->name('profile.edit');

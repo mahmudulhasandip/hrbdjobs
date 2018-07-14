@@ -46,22 +46,38 @@ class AppliedController extends Controller
 
     public function filterAppliedCandidate(Request $request) {
         // $data['left_active'] = 'manage_job';
-        $location =  $request->input("location");
+        $location =  request("location");
         $institution =  $request->input("institution");
         $experience =  $request->input("experience");
         $job_id =  $request->input("job_id");
-        $jobs = Applied_job::where('job_id', $job_id)->where('is_withdraw', 0)->get();
-        if( $location != null){
-            
-            foreach($jobs as $job){
-                if($job->candidate->city == $location){
-                    $data['applied_jobs'] = $job->paginate(1);
-                }
-            }
-            
-        }
-        // return view('employer.ajaxPartials.applied_candidates', $data);
-        return $data['applied_jobs'];
+
+        $data['applied_jobs'] = Applied_job::where('job_id', $job_id)->where('is_withdraw', 0)
+                                            ->when($location, function ($query) use ($location){
+                                                $query->whereHas('candidate', function ($query) use ($location) {
+                                                    return $query->where('city', $location);
+                                                });
+                                            })
+                                            ->when($institution, function($query) use ($institution){
+                                                $query->whereHas('candidate', function($query) use ($institution) {
+                                                    $query->whereHas('candidateEducation', function($query) use ($institution){
+                                                        return $query->where('institution_name', $institution);
+                                                    });
+                                                });
+                                            })
+                                            ->when($experience, function($query) use ($experience){
+                                                $query->whereHas('candidate', function($query) use ($experience) {
+                                                    $query->whereHas('candidateSkill', function($query) use ($experience){
+                                                        return $query->where('experience', '>=', $experience);
+                                                    });
+                                                });
+                                            })
+                                            ->paginate(1);
+        
+                                            
+        // $data['applied_jobs']->appends(request()->query());
+
+        return view('employer.ajaxPartials.applied_candidates', $data);
+        // return $data['applied_jobs'];
     }
 
     public function getCandidateResume($id){

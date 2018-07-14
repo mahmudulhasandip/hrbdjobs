@@ -14300,3 +14300,7 @@ form.cv-upload {
     margin-top: 50px;
     margin-bottom: 0;
 }
+
+footer .block{
+    z-index: 0;
+}
