@@ -160,9 +160,17 @@
 	});
 
 	function getData(myurl){
+		var location = $('.filter.location').val();
+		var institution = $('.filter.institution').val();
+		var experience = $('.filter.experience').val();
+		var job_id = $('#job_id').val();
+
+
 		$.ajax({
 			url: myurl,
 			type: "get",
+			headers: {'X-CSRF-TOKEN': Laravel.csrfToken},
+			data: {location: location, institution: institution, experience: experience, job_id: job_id},
 			datatype: "html"
 		}).done(function(data){
 			$(".candidate_list").empty().html(data);
@@ -179,7 +187,7 @@
 	var base_url = "{{ url('/employer/') }}";
 	
 	$(document).ready(function(){
-		$(document).on('change', '.filter',function(event){
+		$(document).on('change', '.filter', function(event){
 			event.preventDefault();
 			$location = $('.filter.location').val();
 			$institution = $('.filter.institution').val();
