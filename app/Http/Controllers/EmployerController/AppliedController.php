@@ -44,26 +44,26 @@ class AppliedController extends Controller
             $job_id =  $request->input("job_id");
 
             $data['applied_jobs'] = Applied_job::where('job_id', $job_id)->where('is_withdraw', 0)
-                                            ->when($location, function ($query) use ($location){
-                                                $query->whereHas('candidate', function ($query) use ($location) {
-                                                    return $query->where('city', $location);
-                                                });
-                                            })
-                                            ->when($institution, function($query) use ($institution){
-                                                $query->whereHas('candidate', function($query) use ($institution) {
-                                                    $query->whereHas('candidateEducation', function($query) use ($institution){
-                                                        return $query->where('institution_name', $institution);
+                                                ->when($location, function ($query) use ($location){
+                                                    $query->whereHas('candidate', function ($query) use ($location) {
+                                                        return $query->where('city', $location);
                                                     });
-                                                });
-                                            })
-                                            ->when($experience, function($query) use ($experience){
-                                                $query->whereHas('candidate', function($query) use ($experience) {
-                                                    $query->whereHas('candidateSkill', function($query) use ($experience){
-                                                        return $query->where('experience', '>=', $experience);
+                                                })
+                                                ->when($institution, function($query) use ($institution){
+                                                    $query->whereHas('candidate', function($query) use ($institution) {
+                                                        $query->whereHas('candidateEducation', function($query) use ($institution){
+                                                            return $query->where('institution_name', $institution);
+                                                        });
                                                     });
-                                                });
-                                            })
-                                            ->paginate(1);
+                                                })
+                                                ->when($experience, function($query) use ($experience){
+                                                    $query->whereHas('candidate', function($query) use ($experience) {
+                                                        $query->whereHas('candidateSkill', function($query) use ($experience){
+                                                            return $query->where('experience', '>=', $experience);
+                                                        });
+                                                    });
+                                                })
+                                                ->paginate(1);
                                             
             return view('employer.ajaxPartials.applied_candidates', $data);
         }

@@ -57,4 +57,7 @@ Route::post('featured_packages', 'AdminController\FeaturedPackagesController@sto
 Route::get('skills', 'AdminController\SkillsController@index')->name('skills.show');
 Route::post('skills', 'AdminController\SkillsController@store')->name('skills.store');
 
-Route::get('country', 'AdminController\CountryController@index')->name('country.show');
+// Route::get('country', 'AdminController\CountryController@index')->name('country.show');
+
+// cv bank
+Route::get('cvbank', 'AdminController\CvbankController@index')->name('cvbank');
