@@ -55,7 +55,7 @@
 @import url('https://fonts.googleapis.com/css?family=Open+Sans:300i,400,400i,600,600i,700,700i,800,800i|Quicksand:300,400,500,700');
 /*=============== General Styling ===================*/
 
-/* http://meyerweb.com/eric/tools/css/reset/ 
+/* http://meyerweb.com/eric/tools/css/reset/
    v2.0 | 20110126
    License:none (public domain)
 */
@@ -1882,7 +1882,7 @@ label::after {
     margin-top: 3px;
 }
 
-.job-title-sec h3:hover{
+.job-title-sec h3:hover {
     color: #e54545;
     transition: all .15s ease;
     -webkit-transition: all .15s ease;
@@ -4711,8 +4711,6 @@ header.style5 .logo {
 .layer.color.green2::before {
     background-color: #26ae61;
 }
-
-
 
 /* Who am */
 
@@ -7629,13 +7627,13 @@ aside .widget.border:first-child {
     border-bottom: 1px solid #e8ecec;
 }
 
-.manage-jobs-sec>table tbody tr td:first-child{
+.manage-jobs-sec>table tbody tr td:first-child {
     position: relative;
     padding-left: 30px;
     padding-right: 5px;
 }
 
-.feature_icon{
+.feature_icon {
     position: absolute;
     top: 0;
     left: 0;
@@ -13872,40 +13870,46 @@ textarea {
     background-color: white;
 }
 
-.pf-field>input:read-only, .pf-field>textarea:read-only { 
+.pf-field>input:read-only,
+.pf-field>textarea:read-only {
     background-color: #e8ecec;
     cursor: no-drop;
 }
 
-.select2-container--default .select2-search--inline .select2-search__field{
+.select2-container--default .select2-search--inline .select2-search__field {
     width: 100% !important;
 }
 
 .preloader-wrapper {
     width: 100%;
     height: 100%;
-    background-color: rgba(0,0,0,.6);
+    background-color: rgba(0, 0, 0, .6);
     z-index: 11;
     position: relative;
 }
 
-.hidden{
+.hidden {
     display: none;
 }
 
-.margin_top_25{
+.margin_top_25 {
     margin-top: 25px;
     display: inline-block;
 }
-.text-green{
+
+.text-green {
     color: #26ae61 !important;
 }
 
-.text-white{
+.text-white {
     color: #222;
 }
 
-hr { background-color: #edeff7; height: 1px; border: 0; }
+hr {
+    background-color: #edeff7;
+    height: 1px;
+    border: 0;
+}
 
 /* pagination */
 
@@ -13991,7 +13995,9 @@ hr { background-color: #edeff7; height: 1px; border: 0; }
     color: #e54545;
 }
 
-.pointer {cursor: pointer;}
+.pointer {
+    cursor: pointer;
+}
 
 .job-style-bx>i.remove_shortlist {
     position: absolute;
@@ -14011,21 +14017,24 @@ hr { background-color: #edeff7; height: 1px; border: 0; }
     color: #888888;
 }
 
-.manage-jobs-sec>table tbody tr td:first-child{
+.manage-jobs-sec>table tbody tr td:first-child {
     width: 50%;
 }
-.manage-jobs-sec> table tbody tr td > .table-list-title>span{
+
+.manage-jobs-sec>table tbody tr td>.table-list-title>span {
     line-height: 20px;
 }
-.manage-jobs-sec> table tbody tr td > .table-list-title>span i{
+
+.manage-jobs-sec>table tbody tr td>.table-list-title>span i {
     line-height: 21px;
 }
 
-.margin-0{
+.margin-0 {
     margin: 0px !important;
 }
 
 /*cv upload*/
+
 form.cv-upload {
     width: 80%;
     height: 100%;
@@ -14038,7 +14047,6 @@ form.cv-upload {
     font-size: 80%;
     text-align: center;
     /*text-transform: uppercase;*/
-    
     padding: 1rem 2rem;
     border: 0;
 }
@@ -14112,11 +14120,11 @@ form.cv-upload {
     font-family: Open Sans;
 }
 
-.cv-upload label::before{
+.cv-upload label::before {
     border: none;
 }
 
-.p0{
+.p0 {
     padding: 0;
 }
 
@@ -14126,7 +14134,6 @@ form.cv-upload {
 
 /* view resume */
 
-
 #resume table {
     max-width: 100%;
     background-color: transparent;
@@ -14135,10 +14142,9 @@ form.cv-upload {
 
 #resume table td {
     margin: auto;
-    
 }
 
-#resume table td ul{
+#resume table td ul {
     list-style-type: disc;
     padding-left: 35px;
     margin-bottom: 10px;
@@ -14157,7 +14163,7 @@ form.cv-upload {
     vertical-align: middle;
 }
 
-.HRBDApplicantsName span{
+.HRBDApplicantsName span {
     background: #FFFFFF;
     font-size: 14px;
     font-family: Verdana, Geneva, sans-serif;
@@ -14168,7 +14174,7 @@ form.cv-upload {
     padding-bottom: 10px;
 }
 
-.HRBDApplicantsName table{
+.HRBDApplicantsName table {
     margin: 0 !important;
 }
 
@@ -14234,11 +14240,13 @@ form.cv-upload {
     padding-bottom: 4px;
     text-align: center;
 }
-.HRBDNormalText03 > .skill{
+
+.HRBDNormalText03>.skill {
     text-align: left;
     margin-top: 10px;
 }
-.HRBDNormalText03 > .skill >span{
+
+.HRBDNormalText03>.skill>span {
     display: inline-block;
     padding: 5px 10px;
     border: 1px solid #666;
@@ -14249,58 +14257,63 @@ form.cv-upload {
     color: #666;
 }
 
-
-.border-right-ash{
+.border-right-ash {
     border-right: 1px solid #666;
 }
-.border-top-ash{
+
+.border-top-ash {
     border-top: 1px solid #666;
 }
 
-.border-left-ash{
+.border-left-ash {
     border-left: 1px solid #666;
 }
-.border-bottom-ash{
+
+.border-bottom-ash {
     border-bottom: 1px solid #666;
 }
 
-.ml-10{
+.ml-10 {
     margin-left: 10px;
 }
-.mt-5{
+
+.mt-5 {
     margin-top: 5px !important;
 }
-.mt40{
+
+.mt40 {
     margin-top: 40px;
 }
 
-.mt-250{
+.mt-250 {
     margin-top: 250px;
 }
-.text-default{
+
+.text-default {
     color: #8b91dd !important;
 }
 
-.action-center>ul>li a.shortlisted{
+.action-center>ul>li a.shortlisted {
     color: #e54545;
 }
 
-.shortlist.widget .tree_widget-sec ul li a.title{
+.shortlist.widget .tree_widget-sec ul li a.title {
     /* float: left;  */
     width: 100%;
     position: relative;
     margin: -30px 0 0 0;
     padding: 0 0 12px 0;
 }
-.shortlist.widget .tree_widget-sec ul li a.title:hover{
+
+.shortlist.widget .tree_widget-sec ul li a.title:hover {
     color: #e54545;
 }
 
-.mt-50{
+.mt-50 {
     margin-top: 50px;
     margin-bottom: 0;
 }
 
-footer .block{
+footer .block {
     z-index: 0;
 }

@@ -1,5 +1,16 @@
-
 /* admin panel custom style */
-.modal .modal-content .modal-body table{
+
+.modal .modal-content .modal-body table {
     margin-bottom: 15px;
+}
+
+.mdl-data-table td,
+.mdl-data-table th {
+    padding: .75rem !important;
+    height: auto !important;
+}
+
+body.swal2-shown:not(.swal2-no-backdrop):not(.swal2-toast-shown),
+html.swal2-shown:not(.swal2-no-backdrop):not(.swal2-toast-shown) {
+    height: 100%;
 }

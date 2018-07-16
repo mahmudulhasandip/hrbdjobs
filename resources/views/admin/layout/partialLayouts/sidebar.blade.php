@@ -33,6 +33,19 @@
                 </a>
             </li>
 
+            <li class="m-menu__item {{ ($menu_active == 'industry') ? 'm-menu__item--active' : '' }}" aria-haspopup="true">
+                <a href="{{ route('admin.institute.list') }}" class="m-menu__link ">
+                    <i class="m-menu__link-icon la la-institution"></i>
+                    <span class="m-menu__link-title">
+                        <span class="m-menu__link-wrap">
+                            <span class="m-menu__link-text">
+                                Institute
+                            </span>
+                        </span>
+                    </span>
+                </a>
+            </li>
+
             <li class="m-menu__item {{ ($menu_active == 'job_designation') ? 'm-menu__item--active' : '' }}" aria-haspopup="true">
                 <a href="/admin/job_designation" class="m-menu__link ">
                     <i class="m-menu__link-icon la la-street-view"></i>
@@ -123,10 +136,11 @@
                 </a>
             </li>
 
-            
 
-            <li class="m-menu__item  m-menu__item--submenu {{ ($menu_active == 'employer_list') ? 'm-menu__item--active' : '' }}" aria-haspopup="true"  m-menu-submenu-toggle="hover">
-                <a  href="javascript:;" class="m-menu__link m-menu__toggle">
+
+            <li class="m-menu__item  m-menu__item--submenu {{ ($menu_active == 'employer_list') ? 'm-menu__item--active' : '' }}" aria-haspopup="true"
+                m-menu-submenu-toggle="hover">
+                <a href="javascript:;" class="m-menu__link m-menu__toggle">
                     <i class="m-menu__link-icon la la-users"></i>
                     <span class="m-menu__link-text">
                         Employer
@@ -136,8 +150,8 @@
                 <div class="m-menu__submenu ">
                     <span class="m-menu__arrow"></span>
                     <ul class="m-menu__subnav">
-                        <li class="m-menu__item {{ ($menu_active == 'employer_list') ? 'm-menu__item--active' : '' }}" aria-haspopup="true" >
-                            <a  href="/admin/employer/list" class="m-menu__link ">
+                        <li class="m-menu__item {{ ($menu_active == 'employer_list') ? 'm-menu__item--active' : '' }}" aria-haspopup="true">
+                            <a href="/admin/employer/list" class="m-menu__link ">
                                 <i class="m-menu__link-bullet m-menu__link-bullet--dot">
                                     <span></span>
                                 </i>
@@ -147,8 +161,8 @@
                             </a>
                         </li>
 
-                        <li class="m-menu__item {{ ($menu_active == 'employer_package_list') ? 'm-menu__item--active' : '' }}" aria-haspopup="true" >
-                            <a  href="/admin/employer/package/list" class="m-menu__link ">
+                        <li class="m-menu__item {{ ($menu_active == 'employer_package_list') ? 'm-menu__item--active' : '' }}" aria-haspopup="true">
+                            <a href="/admin/employer/package/list" class="m-menu__link ">
                                 <i class="m-menu__link-bullet m-menu__link-bullet--dot">
                                     <span></span>
                                 </i>
@@ -157,8 +171,8 @@
                                 </span>
                             </a>
                         </li>
-                        <li class="m-menu__item {{ ($menu_active == 'employer_payment_history') ? 'm-menu__item--active' : '' }}" aria-haspopup="true" >
-                            <a  href="/admin/employer/payment/history" class="m-menu__link ">
+                        <li class="m-menu__item {{ ($menu_active == 'employer_payment_history') ? 'm-menu__item--active' : '' }}" aria-haspopup="true">
+                            <a href="/admin/employer/payment/history" class="m-menu__link ">
                                 <i class="m-menu__link-bullet m-menu__link-bullet--dot">
                                     <span></span>
                                 </i>
@@ -197,15 +211,14 @@
                 </a>
             </li>
 
-            {{-- menu headline --}}
-            {{-- <li class="m-menu__section">
+            {{-- menu headline --}} {{--
+            <li class="m-menu__section">
                 <h4 class="m-menu__section-text">
                     Components
                 </h4>
                 <i class="m-menu__section-icon flaticon-more-v3"></i>
-            </li> --}}
-            {{-- end menu headline --}}
-            
+            </li> --}} {{-- end menu headline --}}
+
         </ul>
     </div>
     <!-- END: Aside Menu -->

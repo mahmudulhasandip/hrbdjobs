@@ -61,3 +61,9 @@ Route::post('skills', 'AdminController\SkillsController@store')->name('skills.st
 
 // cv bank
 Route::get('cvbank', 'AdminController\CvbankController@index')->name('cvbank');
+
+
+// Institute
+Route::get('institute/list', 'AdminController\InstituteController@index')->Name('institute.list');
+Route::post('institute/store', 'AdminController\InstituteController@store')->Name('institution.store');
+Route::get('institute/delete/{id}', 'AdminController\InstituteController@delete')->Name('institution.delete');
