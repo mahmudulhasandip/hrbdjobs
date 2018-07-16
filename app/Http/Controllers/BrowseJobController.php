@@ -21,18 +21,241 @@ class BrowseJobController extends Controller
      */
     public function index(Request $request)
     {
-        // if($request->input('page')){
-        //     return $request->input('page');
-        // }
+        $city = "";
+        $gender = 0;
+        $experience = 1000;
+        $keyword = "";
+        $job_levels = [];
+        $cat = [];
+        $per_page = 10;
+        $order_by = 'desc';
+        $sorted_by = 'recent';
+        $sorted_type = 'updated_at';
 
-        // dd($request->input('cat'));
+        if ($request->session()->has('per_page')) {
+            $per_page = $request->session()->get('per_page');
+        }
 
-        $data['jobs'] = Job::where('jobs.deadline', '>=', date('Y-m-d'))
+        if ($request->session()->has('order_by')) {
+            // sorted by title 
+            // TO DO
+            $sorted_by = $request->session()->get('order_by');
+            if($sorted_by == 'recent'){
+                $order_by = 'desc';
+            }else if($sorted_by == 'asc'){
+                $order_by = 'asc';
+            }else if($sorted_by == 'desc'){
+                $order_by = 'desc';
+            }else if($sorted_by == 'title-a-z'){
+                $sorted_type = 'title';
+                $order_by = 'asc';
+            }else if($sorted_by == 'title-z-a'){
+                $sorted_type = 'title';
+                $order_by = 'desc';
+            }
+        }
+
+        $data['city_search'] = 0;
+        $data['gender'] = 0;
+        $data['experience_search'] = 1000;
+        $data['keyword'] = '';
+        $data['search_job_levels'] = [];
+        $data['search_cat'] = [];
+
+        if($request->input('city')){
+            $city = $request->input('city');
+            $data['city'] = $request->input('city');
+        }
+        if($request->input('gender')){
+            $gender = $request->input('gender');
+            $data['gender'] = $request->input('gender');
+        }
+
+        if($request->input('experience')){
+            $experience = $request->input('experience');
+            $data['experience'] = $request->input('experience');
+        }
+
+        if($request->input('keyword')){
+            $keyword = $request->input('keyword');
+            $keyword = str_replace('+', ' ', $keyword);
+            $data['keyword'] = $request->input('keyword');
+        }
+
+        if($request->input('job_level')){
+            $job_levels = $request->input('job_level');
+            $data['search_job_levels'] = $job_levels;
+        }
+
+        if($request->input('cat')){
+            $cat = $request->input('cat');
+            $data['search_cat'] = $request->input('cat');
+        }
+
+        if(sizeof($cat) > 0 && sizeof($job_levels) > 0 && $keyword && $city){
+            $data['jobs'] = Job::where('deadline', '>=', date('Y-m-d'))
+                                ->where('location', 'like', '%'.$city.'%')
+                                ->whereIn('job_level_id',  $job_levels)
+                                ->whereIn('job_category_id', $cat)
+                                ->where('gender',  $gender)
+                                ->where('experience', '<=', $experience)
+                                ->where('title', 'like', '%'.$keyword.'%')
+                                ->orWhere('description', 'like',  '%'.$keyword.'%')
+                                ->orWhere('qualification', 'like',  '%'.$keyword.'%')
+                                ->orWhere('location', 'like',  '%'.$keyword.'%')
                                 ->where('is_verified', '=', 1)
                                 ->where('is_paused', '=', 0)
                                 ->where('is_drafted', 0)
-                                ->orderBy('updated_at', 'desc')
+                                ->orderBy($sorted_type, $order_by)
+                                ->paginate($per_page);
+        }else if(sizeof($cat) > 0 && $keyword && $city){
+            $data['jobs'] = Job::where('deadline', '>=', date('Y-m-d'))
+                                ->where('location', 'like', '%'.$city.'%')
+                                ->whereIn('job_category_id', $cat)
+                                ->where('gender',  $gender)
+                                ->where('experience', '<=', $experience)
+                                ->where('title', 'like', '%'.$keyword.'%')
+                                ->orWhere('description', 'like',  '%'.$keyword.'%')
+                                ->orWhere('qualification', 'like',  '%'.$keyword.'%')
+                                ->orWhere('location', 'like',  '%'.$keyword.'%')
+                                ->where('is_verified', '=', 1)
+                                ->where('is_paused', '=', 0)
+                                ->where('is_drafted', 0)
+                                ->orderBy($sorted_type, $order_by)
+                                ->paginate($per_page);
+        }else if(sizeof($job_levels) > 0 && $keyword && $city){
+            $data['jobs'] = Job::where('deadline', '>=', date('Y-m-d'))
+                                ->where('location', 'like', '%'.$city.'%')
+                                ->whereIn('job_level_id',  $job_levels)
+                                ->where('gender',  $gender)
+                                ->where('experience', '<=', $experience)
+                                ->where('title', 'like', '%'.$keyword.'%')
+                                ->orWhere('description', 'like',  '%'.$keyword.'%')
+                                ->orWhere('qualification', 'like',  '%'.$keyword.'%')
+                                ->orWhere('location', 'like',  '%'.$keyword.'%')
+                                ->where('is_verified', '=', 1)
+                                ->where('is_paused', '=', 0)
+                                ->where('is_drafted', 0)
+                                ->orderBy($sorted_type, $order_by)
                                 ->paginate(5);
+        }else if(sizeof($cat) > 0 && $keyword){
+            $data['jobs'] = Job::where('deadline', '>=', date('Y-m-d'))
+                                ->whereIn('job_category_id', $cat)
+                                ->where('gender',  $gender)
+                                ->where('experience', '<=', $experience)
+                                ->where('title', 'like', '%'.$keyword.'%')
+                                ->orWhere('description', 'like',  '%'.$keyword.'%')
+                                ->orWhere('qualification', 'like',  '%'.$keyword.'%')
+                                ->orWhere('location', 'like',  '%'.$keyword.'%')
+                                ->where('is_verified', '=', 1)
+                                ->where('is_paused', '=', 0)
+                                ->where('is_drafted', 0)
+                                ->orderBy($sorted_type, $order_by)
+                                ->paginate($per_page);
+        }else if(sizeof($cat) > 0 && $city){
+            $data['jobs'] = Job::where('deadline', '>=', date('Y-m-d'))
+                                ->where('location', 'like', '%'.$city.'%')
+                                ->whereIn('job_category_id', $cat)
+                                ->where('gender',  $gender)
+                                ->where('experience', '<=', $experience)
+                                ->where('is_verified', '=', 1)
+                                ->where('is_paused', '=', 0)
+                                ->where('is_drafted', 0)
+                                ->orderBy($sorted_type, $order_by)
+                                ->paginate($per_page);
+        }else if(sizeof($job_levels) > 0 && $keyword){
+            $data['jobs'] = Job::where('deadline', '>=', date('Y-m-d'))
+                                ->whereIn('job_level_id',  $job_levels)
+                                ->where('gender',  $gender)
+                                ->where('experience', '<=', $experience)
+                                ->where('title', 'like', '%'.$keyword.'%')
+                                ->orWhere('description', 'like',  '%'.$keyword.'%')
+                                ->orWhere('qualification', 'like',  '%'.$keyword.'%')
+                                ->orWhere('location', 'like',  '%'.$keyword.'%')
+                                ->where('is_verified', '=', 1)
+                                ->where('is_paused', '=', 0)
+                                ->where('is_drafted', 0)
+                                ->orderBy($sorted_type, $order_by)
+                                ->paginate($per_page);
+        }else if(sizeof($job_levels) > 0 && $city){
+            $data['jobs'] = Job::where('deadline', '>=', date('Y-m-d'))
+                                ->where('location', 'like', '%'.$city.'%')
+                                ->whereIn('job_level_id',  $job_levels)
+                                ->where('gender',  $gender)
+                                ->where('experience', '<=', $experience)
+                                ->where('is_verified', '=', 1)
+                                ->where('is_paused', '=', 0)
+                                ->where('is_drafted', 0)
+                                ->orderBy($sorted_type, $order_by)
+                                ->paginate($per_page);
+        }else if(sizeof($cat) > 0){
+            $data['jobs'] = Job::where('deadline', '>=', date('Y-m-d'))
+                                ->whereIn('job_category_id', $cat)
+                                ->where('gender',  $gender)
+                                ->where('experience', '<=', $experience)
+                                ->where('is_verified', '=', 1)
+                                ->where('is_paused', '=', 0)
+                                ->where('is_drafted', 0)
+                                ->orderBy($sorted_type, $order_by)
+                                ->paginate($per_page);
+        }else if(sizeof($job_levels) > 0){
+            $data['jobs'] = Job::where('deadline', '>=', date('Y-m-d'))
+                                ->whereIn('job_level_id',  $job_levels)
+                                ->where('gender',  $gender)
+                                ->where('experience', '<=', $experience)
+                                ->where('is_verified', '=', 1)
+                                ->where('is_paused', '=', 0)
+                                ->where('is_drafted', 0)
+                                ->orderBy($sorted_type, $order_by)
+                                ->paginate($per_page);
+        }else if(sizeof($cat) > 0 && sizeof($job_levels) > 0){
+            $data['jobs'] = Job::where('deadline', '>=', date('Y-m-d'))
+                                ->whereIn('job_level_id',  $job_levels)
+                                ->whereIn('job_category_id', $cat)
+                                ->where('gender',  $gender)
+                                ->where('experience', '<=', $experience)
+                                ->where('is_verified', '=', 1)
+                                ->where('is_paused', '=', 0)
+                                ->where('is_drafted', 0)
+                                ->orderBy($sorted_type, $order_by)
+                                ->paginate($per_page);
+        }else if($keyword){
+            $data['jobs'] = Job::where('deadline', '>=', date('Y-m-d'))
+                                ->where('gender',  $gender)
+                                ->where('experience', '<=', $experience)
+                                ->where('title', 'like', '%'.$keyword.'%')
+                                ->orWhere('description', 'like',  '%'.$keyword.'%')
+                                ->orWhere('qualification', 'like',  '%'.$keyword.'%')
+                                ->orWhere('location', 'like',  '%'.$keyword.'%')
+                                ->where('is_verified', '=', 1)
+                                ->where('is_paused', '=', 0)
+                                ->where('is_drafted', 0)
+                                ->orderBy($sorted_type, $order_by)
+                                ->paginate($per_page);
+        }else if($city){
+            $data['jobs'] = Job::where('deadline', '>=', date('Y-m-d'))
+                                ->where('location', 'like', '%'.$city.'%')
+                                ->where('gender',  $gender)
+                                ->where('experience', '<=', $experience)
+                                ->where('is_verified', '=', 1)
+                                ->where('is_paused', '=', 0)
+                                ->where('is_drafted', 0)
+                                ->orderBy($sorted_type, $order_by)
+                                ->paginate($per_page);
+        }else{
+            $data['jobs'] = Job::where('deadline', '>=', date('Y-m-d'))
+                                ->where('gender',  $gender)
+                                ->where('experience', '<=', $experience)
+                                ->where('is_verified', '=', 1)
+                                ->where('is_paused', '=', 0)
+                                ->where('is_drafted', 0)
+                                ->orderBy($sorted_type, $order_by)
+                                ->paginate($per_page);
+        }
+
+        $data['sorted_by'] = $sorted_by;
+        $data['per_page'] = $per_page;
+
         if ($request->ajax()) {
             return view('users.load', $data)->render();  
         }
@@ -155,4 +378,15 @@ class BrowseJobController extends Controller
     {
         //
     }
+
+    public function postSortedBy(Request $request){
+        $request->session()->put('order_by', $request->input('sort_by'));
+        return 'success';
+    }
+
+    public function postPerPage(Request $request){
+        $request->session()->put('per_page', $request->input('per_page'));
+        return 'success';
+    }
+
 }

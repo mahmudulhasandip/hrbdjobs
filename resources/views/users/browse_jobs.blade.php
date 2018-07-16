@@ -1,6 +1,6 @@
 @extends('users.layout.app')
 
-@section('title', 'HRBDJobs | Employer Comapany Profile')
+@section('title', 'HRBDJobs | Job List')
 
 @push('css')
 <link rel="stylesheet" type="text/css" href="/css/preloader.css" />
@@ -32,13 +32,17 @@
 				 		<div class="widget">
 				 			<div class="search_widget_job">
 				 				<div class="field_w_search">
-				 					<input type="text" placeholder="Search Keywords" />
-				 					<i class="la la-search"></i>
+				 					<form id="keyword">
+				 						<input id="keyvalue" type="text" value="{{ $keyword }}" placeholder="Search Keywords" />
+				 						<i class="la la-search"></i>
+				 					</form>
+				 					
 				 				</div><!-- Search Widget -->
 								<div class="pf-field">
-									<select id="city" class="select2">
+									<select id="city" class="chosen">
+										<option {{ $city_search == 0 ? "selected":'' }} value="0">All</option>
 										@foreach($cities as $city)
-											<option value="{{ $city->city }}">{{ $city->city }}</option>
+											<option {{ $city_search == $city->city ? "selected":'' }} value="{{ $city->city }}">{{ $city->city }}</option>
 										@endforeach
 									</select>
 								</div>
@@ -59,7 +63,7 @@
 				                                ->where('job_level_id', $level->id)
 				                                ->count();
 			 						@endphp
-									<p class="flchek"><input type="checkbox" class="job_level" value="{{ $level->id }}" name="job_level[]" id="33r"><label for="33r">{{ $job_level->name }} ({{ $total_level }})</label></p>
+									<p class="flchek"><input type="checkbox" {{ in_array($job_level->id, $search_job_levels) ? 'checked': '' }} class="job_level" value="{{ $level->id }}" name="job_level[]" id="33r"><label for="33r">{{ $job_level->name }} ({{ $total_level }})</label></p>
 								@endforeach
 				 			</div>
 				 		</div>
@@ -79,7 +83,7 @@
 					                        $is_special = 0;
 				 						@endphp
 				 						@if($category->is_special == 0)
-											<p><input type="checkbox" class="category" value="{{ $category->id }}" name="category[]" id="{{ $category->id }}"><label for="{{ $category->id }}">{{ $category->name }} ({{ $total }})</label></p>
+											<p><input type="checkbox" {{ in_array($category->id, $search_cat) ? 'checked': '' }} class="category" value="{{ $category->id }}" name="category[]" id="{{ $category->id }}"><label for="{{ $category->id }}">{{ $category->name }} ({{ $total }})</label></p>
 										@else
 											@if($is_special == 0)
 												@php 
@@ -87,7 +91,7 @@
 												@endphp
 												<p><strong>Special Category</strong></p>
 											@endif
-											<p><input type="checkbox" class="category" value="{{ $category->id }}" name="category[]" id="{{ $category->id }}"><label for="{{ $category->id }}">{{ $category->name }} ({{ $total }})</label></p>
+											<p><input type="checkbox" {{ in_array($category->id, $search_cat) ? 'checked': '' }} class="category" value="{{ $category->id }}" name="category[]" id="{{ $category->id }}"><label for="{{ $category->id }}">{{ $category->name }} ({{ $total }})</label></p>
 										@endif
 									@endforeach
 				 				</div>
@@ -100,29 +104,29 @@
 				 				
 								<div class="pf-field">
 									<select id="experience" class="chosen">
-										<option value="-1">All</option>
-										<option value="0">Negotiable</option>
+										<option {{ ($experience_search && $experience_search == 1000) ? 'selected': '' }} value="1000">All</option>
+										<option {{ ($experience_search && $experience_search == 0) ? 'selected': '' }} value="0">Negotiable</option>
 										@foreach($experiences as $job_ex)
-											<option value="{{ $job_ex->experience }}">{{ $job_ex->experience }}</option>
+											<option {{ ($experience_search && $experience_search == $job_ex->experience) ? 'selected': '' }} value="{{ $job_ex->experience }}">{{ $job_ex->experience }}</option>
 										@endforeach
 									</select>
 								</div>
-									
-				 				
 				 			</div>
 				 		</div>
 				 		<div class="widget">
 				 			<h3 class="sb-title closed">Gender</h3>
 				 			<div class="specialism_widget">
-				 				<div class="simple-checkbox">
-				 					<p><input type="checkbox" value="0" name="gender[]" id="12" checked><label for="12">All</label></p>
-									<p><input type="checkbox" value="1" name="gender[]" id="13"><label for="13">Male</label></p>
-									<p><input type="checkbox" value="2" name="gender[]" id="14"><label for="14">Female</label></p>
-									<p><input type="checkbox" value="3" name="gender[]" id="15"><label for="15">Others</label></p>
-				 				</div>
+								<div class="pf-field">
+									<select id="gender" class="chosen">
+										<option {{ ($gender && $gender == 0) ? 'selected': '' }} value="0">All</option>
+										<option {{ ($gender && $gender == 1) ? 'selected': '' }} value="1">Male</option>
+										<option {{ ($gender && $gender == 2) ? 'selected': '' }} value="2">Female</option>
+										<option {{ ($gender && $gender == 3) ? 'selected': '' }} value="3">Others</option>
+									</select>
+								</div>
 				 			</div>
 				 		</div>
-				 		<div class="widget">
+				 		{{-- <div class="widget">
 				 			<h3 class="sb-title closed">Industry</h3>
 				 			<div class="specialism_widget">
 				 				<div class="simple-checkbox">
@@ -130,13 +134,13 @@
 				 					@php
 				 						$industry = App\Industry::where('id', '=', $ind->id)->first();
 				 					@endphp
-									<p><input type="checkbox" value="{{ $industry->id }}" name="industry[]" id="16"><label for="16">{{ $industry->name }}</label></p>
+									<p><input type="checkbox" value="{{ $industry->id }}" class="industry" name="industry[]" id="16"><label for="16">{{ $industry->name }}</label></p>
 									@endforeach
 				 				</div>
 				 			</div>
-				 		</div>
+				 		</div> --}}
 				 		<div class="banner_widget">
-							<a href="#" title=""><img src="images/ad.png" alt="photo" style="margin-top: 20px;" /></a>
+							<a href="#" title=""><img src="{{ asset('/images/ad.png') }}" alt="photo" style="margin-top: 20px;" /></a>
 					   </div>
 				 	</aside>
 				 	<div class="col-lg-8 column">
@@ -146,14 +150,16 @@
 					 			<div class="sortby-sec">
 					 				<span>Sort by</span>
 					 				<select id="sort_by" data-placeholder="Most Recent" class="chosen">
-										<option value="recent">Most Recent</option>
-										<option value="asc">A-Z</option>
-										<option value="desc">Z-A</option>
+										<option {{ $sorted_by == 'recent' ? 'selected':'' }} value="recent">Most Recent</option>
+										<option {{ $sorted_by == 'asc' ? 'selected':'' }} value="asc">A-Z</option>
+										<option {{ $sorted_by == 'desc' ? 'selected':'' }} value="desc">Z-A</option>
+										<option {{ $sorted_by == 'title-a-z' ? 'selected':'' }} value="title-a-z">Title A-Z</option>
+										<option {{ $sorted_by == 'title-z-a' ? 'selected':'' }} value="title-z-a">Title Z-A</option>
 									</select>
 									<select id="per_page" data-placeholder="10 Per Page" class="chosen">
-										<option value="10">10 Per Page</option>
-										<option value="20">20 Per Page</option>
-										<option value="30">30 Per Page</option>
+										<option {{ $per_page == 10 ? 'selected':'' }} value="10">10 Per Page</option>
+										<option {{ $per_page == 20 ? 'selected':'' }} value="20">20 Per Page</option>
+										<option {{ $per_page == 30 ? 'selected':'' }} value="30">30 Per Page</option>
 									</select>
 					 			</div>
 					 			<h5>{{ $live_jobs }} Jobs & Vacancies</h5>
@@ -178,17 +184,7 @@
 
 @push('js')
 <script src="/js/jquery.scrollbar.min.js" type="text/javascript"></script>
-<script src="https://code.jquery.com/ui/1.12.1/jquery-ui.js"></script>
-<script src="https://cdnjs.cloudflare.com/ajax/libs/select2/4.0.6-rc.0/js/select2.min.js"></script>
-<script src="/js/preloader.js" type="text/javascript"></script>
 <script>
-	$(document).ready(function() {
-		$('.select2').select2({
-			tags: true,
-			tokenSeparators: [',', ' '],
-  			allowClear: true
-		});
-	});
 	$('.newtab').click(function() {
         window.open(
             $(this).data('url'),
@@ -205,6 +201,7 @@
 
 </script>
 <script type="text/javascript">
+	var base_url = "{{ url('/') }}";
 	$(function() {
 	    $('body').on('click', '.pagination a', function(e) {
 	        e.preventDefault();
@@ -217,6 +214,31 @@
 	    });
 
 	    function getJobs(url) {
+	    	console.log("test = " + url);
+	    	if(url.indexOf("?") != -1){
+	    		var param = url.split('?');
+	    		if(param.length == 1){
+	    			url = param[0];
+	    		}else{
+	    			if(param[1][0] == '&'){
+		    			param[1][0] = '';
+		    		}
+		    		
+		    		var newParam = '';
+		    		for(let i = 0; i< param[1].length; i++){
+		    			if(i < param[1].length-1){
+		    				if(param[1][i] == '&' && param[1][i+1] == '&'){
+			    				continue;
+			    			}
+		    			}
+		    			newParam += param[1][i];
+		    		}
+
+		    		url = param[0]+'?'+ newParam;
+		    		console.log(url);
+	    		}
+	    		
+	    	}
 	        $.ajax({
 	            url : url  
 	        }).done(function (data) {
@@ -226,22 +248,49 @@
 	            // setTimeout(function(){host.hide();}, 1000);
 	            
 	        }).fail(function () {
-	            alert('Articles could not be loaded.');
+	            alert('Jobs could not be loaded.');
 	        });
 	    }
 
 	    $('#city').on('change', function(e){
-	    	
+		 	var main_url = window.location.href;
+			if(main_url.search('page=') != -1){
+				var page_no = main_url.split('page=')[1][0];
+				main_url = main_url.replace('page='+page_no, '');
+			}
+
+			if(main_url.search('city=') != -1){
+				var city = main_url.split('city=')[1];
+				if(city.search('&') != -1){
+					var index = city.indexOf('&');
+					var city = city.slice(0, index+1);
+				}
+				main_url = main_url.replace('city='+city, '');
+			}
+			
+			if(main_url.indexOf("?") == -1){
+				main_url = main_url+"?city="+$(this).val();
+			}else{
+				if(main_url.split("?")[1].length > 0){
+					main_url = main_url+"&city="+$(this).val();
+				}else{
+					main_url = main_url+"city="+$(this).val();
+				}
+				
+			}
+			
+			getJobs(main_url);
+	    	window.history.pushState("", "", main_url);  	
 	    });
 
 	    $('.job_level').click(function(e) {
 	    	if ($(this).is(':checked')){
 	    		var main_url = window.location.href;
-	    		var page_no = main_url.split('page=')[0];
-	    		if(main_url.split('page=')[1] && main_url.split('page=')[1] == '&'){
-	    			page_no += ''+ main_url.split('page=')[1] == '&'
+	    		if(main_url.search('page=') != -1){
+	    			var page_no = main_url.split('page=')[1][0];
+	    			main_url = main_url.replace('page='+page_no, '');
 	    		}
-	    		main_url = main_url.replace('page='+page_no, '');
+	    		
 	    		if(main_url.indexOf("?") == -1){
 	    			main_url = main_url+"?job_level[]="+$(this).val();
 	    		}else{
@@ -257,30 +306,50 @@
 	        	window.history.pushState("", "", main_url);
 	    	}else{
 	    		var main_url = window.location.href;
-	    		main_url = main_url.replace('page=', '');
-	    		main_url = main_url.replace('\\?'+'job_level[]='+$(this).val(), '');
-	    		main_url = main_url.replace("&"+'job_level[]='+$(this).val(), '');
-	    		main_url = main_url.replace('job_level[]='+$(this).val(), '');
-	    		getJobs(main_url);
-	        	window.history.pushState("", "", main_url);
+	    		var param = main_url.split('?');
+	    		if(param[1].search('page=') != -1){
+	    			var page = param[1].split('page=')[1][0];
+		    		var amp = param[1].split('page=')[1][1] == '&' ? '&': '';
+		    		param[1] = param[1].replace('page='+page+amp, '');
+	    		}
+	    		
+	    		main_url = param[0]+'?'+param[1];
+	    		var main_url_decode = decodeURIComponent(main_url);
+
+	    		var allLevel = (main_url_decode.split('?')[1]).split("&");
+	    		var myparam = "";
+	    		for(let i = 0; i<allLevel.length; i++){
+	    			if(!(allLevel[i].startsWith("job_level") && allLevel[i].endsWith($(this).val()))){
+	    				if(i == allLevel.length-1){
+	    					myparam += allLevel[i];
+	    				}else{
+	    					myparam += allLevel[i]+"&";
+	    				}
+	    				
+	    			}
+	    		}
+	    		main_url_decode = main_url_decode.split('?')[0]+'?'+myparam;
+	    		console.log(main_url_decode);
+	    		getJobs(main_url_decode);
+	        	window.history.pushState("", "", main_url_decode);
 	    	}
 	    });
 
 	    $('.category').click(function(e) {
 	    	if ($(this).is(':checked')){
 	    		var main_url = window.location.href;
-	    		var page_no = main_url.split('page=')[0];
-	    		if(main_url.split('page=')[1] && main_url.split('page=')[1] == '&'){
-	    			page_no += ''+ main_url.split('page=')[1] == '&'
+	    		if(main_url.search('page=') != -1){
+	    			var page_no = main_url.split('page=')[1][0];
+	    			main_url = main_url.replace('page='+page_no, '');
 	    		}
-	    		main_url = main_url.replace('page='+page_no, '');
+	    		
 	    		if(main_url.indexOf("?") == -1){
 	    			main_url = main_url+"?cat[]="+$(this).val();
 	    		}else{
 	    			if(main_url.split("?")[1].length > 0){
 	    				main_url = main_url+"&cat[]="+$(this).val();
 	    			}else{
-	    				main_url = main_url+"job_level[]="+$(this).val();
+	    				main_url = main_url+"cat[]="+$(this).val();
 	    			}
 	    			
 	    		}
@@ -289,13 +358,209 @@
 	        	window.history.pushState("", "", main_url);
 	    	}else{
 	    		var main_url = window.location.href;
-	    		main_url = main_url.replace('page=', '');
-	    		main_url = main_url.replace('\\?'+'cat[]='+$(this).val(), '');
-	    		main_url = main_url.replace("&"+'cat[]='+$(this).val(), '');
-	    		main_url = main_url.replace('cat[]='+$(this).val(), '');
+	    		var param = main_url.split('?');
+	    		if(param[1].search('page=') != -1){
+	    			var page = param[1].split('page=')[1][0];
+		    		var amp = param[1].split('page=')[1][1] == '&' ? '&': '';
+		    		param[1] = param[1].replace('page='+page+amp, '');
+	    		}
+	    		
+	    		main_url = param[0]+'?'+param[1];
+	    		var main_url_decode = decodeURIComponent(main_url);
+
+	    		var allcat = (main_url_decode.split('?')[1]).split("&");
+	    		var myparam = "";
+	    		for(let i = 0; i<allcat.length; i++){
+	    			if(!(allcat[i].startsWith("cat") && allcat[i].endsWith($(this).val()))){
+	    				if(i == allcat.length-1){
+	    					myparam += allcat[i];
+	    				}else{
+	    					myparam += allcat[i]+"&";
+	    				}
+	    				
+	    			}
+	    		}
+	    		main_url_decode = main_url_decode.split('?')[0]+'?'+myparam;
+	    		console.log(main_url_decode);
+	    		getJobs(main_url_decode);
+	        	window.history.pushState("", "", main_url_decode);
+	    	}
+	    });
+
+	    $('.industry').click(function(e) {
+	    	if ($(this).is(':checked')){
+	    		var main_url = window.location.href;
+	    		if(main_url.search('page=') != -1){
+	    			var page_no = main_url.split('page=')[1][0];
+	    			main_url = main_url.replace('page='+page_no, '');
+	    		}
+	    		
+	    		if(main_url.indexOf("?") == -1){
+	    			main_url = main_url+"?industry[]="+$(this).val();
+	    		}else{
+	    			if(main_url.split("?")[1].length > 0){
+	    				main_url = main_url+"&industry[]="+$(this).val();
+	    			}else{
+	    				main_url = main_url+"industry[]="+$(this).val();
+	    			}
+	    			
+	    		}
+	    		
 	    		getJobs(main_url);
 	        	window.history.pushState("", "", main_url);
+	    	}else{
+	    		var main_url = window.location.href;
+	    		var param = main_url.split('?');
+	    		if(param[1].search('page=') != -1){
+	    			var page = param[1].split('page=')[1][0];
+		    		var amp = param[1].split('page=')[1][1] == '&' ? '&': '';
+		    		param[1] = param[1].replace('page='+page+amp, '');
+	    		}
+	    		
+	    		main_url = param[0]+'?'+param[1];
+	    		var main_url_decode = decodeURIComponent(main_url);
+
+	    		var allInd = (main_url_decode.split('?')[1]).split("&");
+	    		var myparam = "";
+	    		for(let i = 0; i<allInd.length; i++){
+	    			if(!(allInd[i].startsWith("industry") && allInd[i].endsWith($(this).val()))){
+	    				if(i == allInd.length-1){
+	    					myparam += allInd[i];
+	    				}else{
+	    					myparam += allInd[i]+"&";
+	    				}
+	    				
+	    			}
+	    		}
+	    		main_url_decode = main_url_decode.split('?')[0]+'?'+myparam;
+	    		console.log(main_url_decode);
+	    		getJobs(main_url_decode);
+	        	window.history.pushState("", "", main_url_decode);
 	    	}
+	    });
+
+	    $('#gender').on('change', function(e){
+		 	var main_url = window.location.href;
+			if(main_url.search('page=') != -1){
+				var page_no = main_url.split('page=')[1][0];
+				main_url = main_url.replace('page='+page_no, '');
+			}
+
+			if(main_url.search('gender=') != -1){
+				var gender = main_url.split('gender=')[1];
+				if(city.search('&') != -1){
+					var index = gender.indexOf('&');
+					var gender = gender.slice(0, index+1);
+				}
+				main_url = main_url.replace('gender='+gender, '');
+			}
+			
+			if(main_url.indexOf("?") == -1){
+				main_url = main_url+"?gender="+$(this).val();
+			}else{
+				if(main_url.split("?")[1].length > 0){
+					main_url = main_url+"&gender="+$(this).val();
+				}else{
+					main_url = main_url+"gender="+$(this).val();
+				}
+				
+			}
+			
+			getJobs(main_url);
+	    	window.history.pushState("", "", main_url);  	
+	    });
+
+	  	$('#experience').on('change', function(e){
+		 	var main_url = window.location.href;
+			if(main_url.search('page=') != -1){
+				var page_no = main_url.split('page=')[1][0];
+				main_url = main_url.replace('page='+page_no, '');
+			}
+
+			if(main_url.search('experience=') != -1){
+				var experience = main_url.split('experience=')[1];
+				if(experience.search('&') != -1){
+					var index = experience.indexOf('&');
+					var experience = experience.slice(0, index+1);
+				}
+				main_url = main_url.replace('experience='+experience, '');
+			}
+			
+			if(main_url.indexOf("?") == -1){
+				main_url = main_url+"?experience="+$(this).val();
+			}else{
+				if(main_url.split("?")[1].length > 0){
+					main_url = main_url+"&experience="+$(this).val();
+				}else{
+					main_url = main_url+"experience="+$(this).val();
+				}
+				
+			}
+			
+			getJobs(main_url);
+	    	window.history.pushState("", "", main_url);  	
+	    });
+
+	    $('#keyword').on('submit', function(e){
+	    	e.preventDefault();
+	    	var search_val = $('#keyvalue').val();
+	    	search_val = search_val.replace(' ', '+');
+	    	var main_url = window.location.href;
+			if(main_url.search('page=') != -1){
+				var page_no = main_url.split('page=')[1][0];
+				main_url = main_url.replace('page='+page_no, '');
+			}
+
+			if(main_url.search('keyword=') != -1){
+				var keyword = main_url.split('keyword=')[1];
+				console.log("Keyword = "+ keyword);
+				if(keyword.search('&') != -1){
+					var index = keyword.indexOf('&');
+					var keyword = keyword.slice(0, index+1);
+					console.log("JKKK = "+city);
+				}
+				main_url = main_url.replace('keyword='+keyword, '');
+			}
+			
+			if(main_url.indexOf("?") == -1){
+				main_url = main_url+"?keyword="+search_val;
+			}else{
+				if(main_url.split("?")[1].length > 0){
+					main_url = main_url+"&keyword="+search_val;
+				}else{
+					main_url = main_url+"keyword="+search_val;
+				}
+				
+			}
+			
+			getJobs(main_url);
+	    	window.history.pushState("", "", main_url);
+	    });
+
+	    $('#sort_by').on('change', function(e){
+	    	$.ajax({
+				url: base_url+"/session/sorted_by",
+				type: "post",
+				headers: {'X-CSRF-TOKEN': Laravel.csrfToken},
+				data: {sort_by: $('#sort_by').val()},
+				success: function(message){
+					var main_url = window.location.href;
+					getJobs(main_url);
+				}
+			});
+	    });
+
+	    $('#per_page').on('change', function(e){
+	    	$.ajax({
+				url: base_url+"/session/per_page",
+				type: "post",
+				headers: {'X-CSRF-TOKEN': Laravel.csrfToken},
+				data: {per_page: $('#per_page').val()},
+				success: function(message){
+					var main_url = window.location.href;
+					getJobs(main_url);
+				}
+			});
 	    });
 
 	});

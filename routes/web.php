@@ -32,6 +32,16 @@ Route::post('/special/jobs', [
   'uses'  => 'JobController@specialJobs'
 ]);
 
+Route::post('/session/sorted_by', [
+  'as'    => 'session.sort_by',
+  'uses'  => 'BrowseJobController@postSortedBy'
+]);
+
+Route::post('/session/per_page', [
+  'as'    => 'session.per_page',
+  'uses'  => 'BrowseJobController@postPerPage'
+]);
+
 // Route::get('/browse/jobs', [
 //   'as'    => 'browse.jobs',
 //   'uses'  => 'BrowseJobController@index'

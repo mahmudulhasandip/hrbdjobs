@@ -18,22 +18,21 @@
                                 <div class="job-search">
                                     <h3>The Easiest Way to Get Your New Job</h3>
                                     <span>Find Jobs, Employment & Career Opportunities</span>
-                                    <form>
+                                    <form action="{{ url('/browse/jobs') }}" method="get">
                                         <div class="row">
                                             <div class="col-lg-7 col-md-5 col-sm-5 col-xs-12">
                                                 <div class="job-field">
-                                                    <input type="text" placeholder="Job title, keywords or company name" />
+                                                    <input name="keyword" type="text" placeholder="Job title, keywords or company name" />
                                                     <i class="la la-keyboard-o"></i>
                                                 </div>
                                             </div>
                                             <div class="col-lg-4 col-md-5 col-sm-5 col-xs-12">
                                                 <div class="job-field">
-                                                    <select data-placeholder="City, province or region" class="chosen-city">
-                                                    <option>Istanbul</option>
-                                                    <option>New York</option>
-                                                    <option>London</option>
-                                                    <option>Russia</option>
-                                                </select>
+                                                    <select  name="city" data-placeholder="City, province or region" class="chosen-city">
+                                                        @foreach($cities as $city)
+                                                        <option value="{{ $city->city }}">{{ $city->city }}</option>
+                                                        @endforeach
+                                                    </select>
                                                     <i class="la la-map-marker"></i>
                                                 </div>
                                             </div>
@@ -44,7 +43,7 @@
                                     </form>
                                     <div class="or-browser">
                                         <span>Or browse job offers by </span>
-                                        <a href="#" title="">category</a>
+                                        <a href="{{ url('/browse/jobs') }}" title="">category</a>
                                     </div>
                                 </div>
                             </div>
@@ -84,7 +83,7 @@
                                 @endphp
                                 <div class="col-lg-3 col-md-3 col-sm-6">
                                     <div class="p-category">
-                                        <a href="#" title="">
+                                        <a href="{{ url('/browse/jobs')}}?cat[]={{ $category->id }}" title="">
                                             <i class="{{ $category->icon }}"></i>
                                             <span>{{ $category->name }}</span>
                                             <p>({{ $live_category_job }} open positions)</p>
@@ -110,7 +109,7 @@
                                 @endphp
                                 <div class="col-lg-3 col-md-3 col-sm-6">
                                     <div class="p-category">
-                                        <a href="#" title="">
+                                        <a href="{{ url('/browse/jobs')}}?cat[]={{ $category->id }}" title="">
                                             <i class="{{ $category->icon }}"></i>
                                             <span>{{ $category->name }}</span>
                                             <p>({{ $live_category_job }} open positions)</p>
@@ -291,7 +290,7 @@
                                 @endphp
                                 <div class="col-lg-3 col-md-3 col-sm-6">
                                     <div class="p-category">
-                                        <a href="#" title="">
+                                        <a href="{{ url('/browse/jobs')}}?cat[]={{ $category->id }}" title="">
                                             <i class="{{ $category->icon }}"></i>
                                             <span>{{ $category->name }}</span>
                                             <p>({{ $live_category_job }} open positions)</p>
@@ -317,7 +316,7 @@
                                 @endphp
                                 <div class="col-lg-3 col-md-3 col-sm-6">
                                     <div class="p-category">
-                                        <a href="#" title="">
+                                        <a href="{{ url('/browse/jobs')}}?cat[]={{ $category->id }}" title="">
                                             <i class="{{ $category->icon }}"></i>
                                             <span>{{ $category->name }}</span>
                                             <p>({{ $live_category_job }} open positions)</p>

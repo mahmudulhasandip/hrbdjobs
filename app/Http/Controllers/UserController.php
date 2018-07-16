@@ -70,6 +70,15 @@ class UserController extends Controller
                             ->inRandomOrder()
                             ->limit(8)
                             ->get();
+        $data['cities'] = DB::table('employers')
+                            ->join('jobs', 'jobs.employer_id', '=', 'employers.id')
+                            ->join('employer_company_infos', 'employer_company_infos.employer_id', '=', 'employers.id')
+                            ->where('jobs.deadline', '>=', date('Y-m-d'))
+                            ->where('jobs.is_paused', '=', 0)
+                            ->where('jobs.is_verified', '=', 1)
+                            ->select('employer_company_infos.city')
+                            ->groupBy('employer_company_infos.city')
+                            ->get();
 
 
         return view('users.home')->with($data);

@@ -24,5 +24,5 @@
 	@endforeach
 </div>
 <div class="margin-50 pagination-laravel">
-	{{ $jobs->appends(htmlspecialchars($_GET))->links() }}
+	{{ $jobs->appends($_GET)->links() }}
 </div>
