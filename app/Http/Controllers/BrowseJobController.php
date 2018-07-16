@@ -25,6 +25,8 @@ class BrowseJobController extends Controller
         //     return $request->input('page');
         // }
 
+        // dd($request->input('cat'));
+
         $data['jobs'] = Job::where('jobs.deadline', '>=', date('Y-m-d'))
                                 ->where('is_verified', '=', 1)
                                 ->where('is_paused', '=', 0)

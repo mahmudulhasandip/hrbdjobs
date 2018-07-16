@@ -47,7 +47,7 @@
 				 		</div>
 				 		
 				 		<div class="widget">
-				 			<h3 class="sb-title open">Job Type</h3>
+				 			<h3 class="sb-title closed">Job Type</h3>
 				 			<div class="type_widget">
 				 				@foreach($job_levels as $level)
 				 					@php 
@@ -59,12 +59,12 @@
 				                                ->where('job_level_id', $level->id)
 				                                ->count();
 			 						@endphp
-								<p class="flchek"><input type="checkbox" value="{{ $level->id }}" name="job_level[]" id="33r"><label for="33r">{{ $job_level->name }} ({{ $total_level }})</label></p>
+									<p class="flchek"><input type="checkbox" class="job_level" value="{{ $level->id }}" name="job_level[]" id="33r"><label for="33r">{{ $job_level->name }} ({{ $total_level }})</label></p>
 								@endforeach
 				 			</div>
 				 		</div>
 				 		<div class="widget">
-				 			<h3 class="sb-title open">Specialism</h3>
+				 			<h3 class="sb-title active">Specialism</h3>
 				 			<div class="specialism_widget">
 				 				<div class="simple-checkbox scrollbar specialism">
 				 					@foreach($categories as $cat)
@@ -79,7 +79,7 @@
 					                        $is_special = 0;
 				 						@endphp
 				 						@if($category->is_special == 0)
-											<p><input type="checkbox" value="{{ $category->id }}" name="category[]" id="{{ $category->id }}"><label for="{{ $category->id }}">{{ $category->name }} ({{ $total }})</label></p>
+											<p><input type="checkbox" class="category" value="{{ $category->id }}" name="category[]" id="{{ $category->id }}"><label for="{{ $category->id }}">{{ $category->name }} ({{ $total }})</label></p>
 										@else
 											@if($is_special == 0)
 												@php 
@@ -87,7 +87,7 @@
 												@endphp
 												<p><strong>Special Category</strong></p>
 											@endif
-											<p><input type="checkbox" value="{{ $category->id }}" name="category[]" id="{{ $category->id }}"><label for="{{ $category->id }}">{{ $category->name }} ({{ $total }})</label></p>
+											<p><input type="checkbox" class="category" value="{{ $category->id }}" name="category[]" id="{{ $category->id }}"><label for="{{ $category->id }}">{{ $category->name }} ({{ $total }})</label></p>
 										@endif
 									@endforeach
 				 				</div>
@@ -229,6 +229,75 @@
 	            alert('Articles could not be loaded.');
 	        });
 	    }
+
+	    $('#city').on('change', function(e){
+	    	
+	    });
+
+	    $('.job_level').click(function(e) {
+	    	if ($(this).is(':checked')){
+	    		var main_url = window.location.href;
+	    		var page_no = main_url.split('page=')[0];
+	    		if(main_url.split('page=')[1] && main_url.split('page=')[1] == '&'){
+	    			page_no += ''+ main_url.split('page=')[1] == '&'
+	    		}
+	    		main_url = main_url.replace('page='+page_no, '');
+	    		if(main_url.indexOf("?") == -1){
+	    			main_url = main_url+"?job_level[]="+$(this).val();
+	    		}else{
+	    			if(main_url.split("?")[1].length > 0){
+	    				main_url = main_url+"&job_level[]="+$(this).val();
+	    			}else{
+	    				main_url = main_url+"job_level[]="+$(this).val();
+	    			}
+	    			
+	    		}
+	    		
+	    		getJobs(main_url);
+	        	window.history.pushState("", "", main_url);
+	    	}else{
+	    		var main_url = window.location.href;
+	    		main_url = main_url.replace('page=', '');
+	    		main_url = main_url.replace('\\?'+'job_level[]='+$(this).val(), '');
+	    		main_url = main_url.replace("&"+'job_level[]='+$(this).val(), '');
+	    		main_url = main_url.replace('job_level[]='+$(this).val(), '');
+	    		getJobs(main_url);
+	        	window.history.pushState("", "", main_url);
+	    	}
+	    });
+
+	    $('.category').click(function(e) {
+	    	if ($(this).is(':checked')){
+	    		var main_url = window.location.href;
+	    		var page_no = main_url.split('page=')[0];
+	    		if(main_url.split('page=')[1] && main_url.split('page=')[1] == '&'){
+	    			page_no += ''+ main_url.split('page=')[1] == '&'
+	    		}
+	    		main_url = main_url.replace('page='+page_no, '');
+	    		if(main_url.indexOf("?") == -1){
+	    			main_url = main_url+"?cat[]="+$(this).val();
+	    		}else{
+	    			if(main_url.split("?")[1].length > 0){
+	    				main_url = main_url+"&cat[]="+$(this).val();
+	    			}else{
+	    				main_url = main_url+"job_level[]="+$(this).val();
+	    			}
+	    			
+	    		}
+	    		
+	    		getJobs(main_url);
+	        	window.history.pushState("", "", main_url);
+	    	}else{
+	    		var main_url = window.location.href;
+	    		main_url = main_url.replace('page=', '');
+	    		main_url = main_url.replace('\\?'+'cat[]='+$(this).val(), '');
+	    		main_url = main_url.replace("&"+'cat[]='+$(this).val(), '');
+	    		main_url = main_url.replace('cat[]='+$(this).val(), '');
+	    		getJobs(main_url);
+	        	window.history.pushState("", "", main_url);
+	    	}
+	    });
+
 	});
 
 </script>
