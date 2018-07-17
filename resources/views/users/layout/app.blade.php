@@ -54,31 +54,31 @@
 	<div class="account-popup">
 		<span class="close-popup"><i class="la la-close"></i></span>
 		<h3>User Login</h3>
-		<span>Click To Login With Demo User</span>
+		<span>Click To Login With User</span>
 		<div class="select-user">
-			<span>Candidate</span>
-			<span>Employer</span>
+			<span id="candidate-login" class="active">Candidate</span>
+			<span id="employer-login">Employer</span>
 		</div>
-		<form>
+		<form id="popup-login" method="post">
+			@csrf
 			<div class="cfield">
-				<input type="text" placeholder="Username" />
+				<input type="text" placeholder="Username" name="username"/>
 				<i class="la la-user"></i>
 			</div>
 			<div class="cfield">
-				<input type="password" placeholder="********" />
+				<input type="password" placeholder="********" name="password" />
 				<i class="la la-key"></i>
 			</div>
 			<p class="remember-label">
-				<input type="checkbox" name="cb" id="cb1"><label for="cb1">Remember me</label>
+				<input type="checkbox" name="remember" id="cb1"><label for="cb1">Remember me</label>
 			</p>
-			<a href="#" title="">Forgot Password?</a>
+			<a href="{{ url('/candidate/password/reset') }}" id="forget-password" title="">Forgot Password?</a>
 			<button type="submit">Login</button>
 		</form>
 		<div class="extra-login">
 			<span>Or</span>
-			<div class="login-social">
-				<a class="fb-login" href="#" title=""><i class="fa fa-facebook"></i></a>
-				<a class="tw-login" href="#" title=""><i class="fa fa-twitter"></i></a>
+			<div class="login-social mb-50">
+				<a class="google-login" href="{{ route('candidate.login.gmail') }}" title=""><i class="fa fa-google"></i></a>
 			</div>
 		</div>
 	</div>
@@ -88,44 +88,23 @@
 	<div class="account-popup">
 		<span class="close-popup"><i class="la la-close"></i></span>
 		<h3>Sign Up</h3>
-		<div class="select-user">
-			<span>Candidate</span>
-			<span>Employer</span>
-		</div>
-		<form>
-			<div class="cfield">
-				<input type="text" placeholder="Username" />
-				<i class="la la-user"></i>
-			</div>
-			<div class="cfield">
-				<input type="password" placeholder="********" />
-				<i class="la la-key"></i>
-			</div>
-			<div class="cfield">
-				<input type="text" placeholder="Email" />
-				<i class="la la-envelope-o"></i>
-			</div>
-			<div class="dropdown-field">
-				<select data-placeholder="Please Select Specialism" class="chosen">
-					<option>Web Development</option>
-					<option>Web Designing</option>
-					<option>Art & Culture</option>
-					<option>Reading & Writing</option>
-				</select>
-			</div>
-			<div class="cfield">
-				<input type="text" placeholder="Phone Number" />
-				<i class="la la-phone"></i>
-			</div>
-			<button type="submit">Signup</button>
-		</form>
-		<div class="extra-login">
-			<span>Or</span>
-			<div class="login-social">
-				<a class="fb-login" href="#" title=""><i class="fa fa-facebook"></i></a>
-				<a class="tw-login" href="#" title=""><i class="fa fa-twitter"></i></a>
+		<!-- Candidate Signup -->
+		<div class="card">
+			<div class="container">
+				<h4 class="text-left text-blue bold"><b>As Candidate</b></h4> 
+				<p class="text-left">Create your account to manage your profile</p> 
+				<a href="{{ route('candidate.register') }}" title="" class="signup">Create Account</a>
 			</div>
 		</div>
+
+		<!-- Employer signup -->
+		<div class="card">
+				<div class="container">
+					<h4 class="text-left text-red bold"><b>As Employer</b></h4> 
+					<p class="text-left">Create your account to manage your profile</p> 
+					<a href="{{ route('employer.register') }}" title="" class="signup red">Create Account</a>
+				</div>
+			</div>
 	</div>
 </div><!-- SIGNUP POPUP -->
 
@@ -140,6 +119,31 @@
 <script src="https://cdnjs.cloudflare.com/ajax/libs/pace/1.0.2/pace.js"></script>
 <script>
     $(document).ajaxStart(function() { Pace.restart(); });
+</script>
+<script>
+	var candidateLogin = "{{ url('/candidate/login') }}";
+	var employerLogin = "{{ url('/employer/login') }}";
+
+	var candidateForgetPassword = "{{ url('/candidate/password/reset') }}";
+	var employerForgetPassword = "{{ url('/employer/password/reset') }}";
+
+	$('#popup-login').on('submit', function(e){
+		if($('#candidate-login').hasClass('active')){
+			$('#popup-login').attr('action', candidateLogin);
+		}else if($('#employer-login').hasClass('active')){
+			$('#popup-login').attr('action', employerLogin);
+		}
+		$('#popup-login').submit();
+		e.preventDefault();
+	});
+
+	$('#candidate-login').on('click', function(e){
+		$('#forget-password').attr('href', candidateForgetPassword);
+	});
+
+	$('#employer-login').on('click', function(e){
+		$('#forget-password').attr('href', employerForgetPassword);
+	});
 </script>
 @stack('js')
 

@@ -1,47 +1,69 @@
-@extends('employer.layout.auth')
+@extends('employer.layout.app')
 
-<!-- Main Content -->
+@section('title', 'HRBD Jobs | Reset Password')
+
 @section('content')
-<div class="container">
-    <div class="row">
-        <div class="col-md-8 col-md-offset-2">
-            <div class="panel panel-default">
-                <div class="panel-heading">Reset Password</div>
-                <div class="panel-body">
-                    @if (session('status'))
-                        <div class="alert alert-success">
-                            {{ session('status') }}
+
+<section>
+    <div class="block no-padding  gray">
+        <div class="container">
+            <div class="row">
+                <div class="col-lg-12">
+                    <div class="inner2">
+                        <div class="inner-title2">
+                            <h3>Reset Password</h3>
+                            <span></span>
                         </div>
-                    @endif
-
-                    <form class="form-horizontal" role="form" method="POST" action="{{ url('/employer/password/email') }}">
-                        {{ csrf_field() }}
-
-                        <div class="form-group{{ $errors->has('email') ? ' has-error' : '' }}">
-                            <label for="email" class="col-md-4 control-label">E-Mail Address</label>
-
-                            <div class="col-md-6">
-                                <input id="email" type="email" class="form-control" name="email" value="{{ old('email') }}">
-
-                                @if ($errors->has('email'))
-                                    <span class="help-block">
-                                        <strong>{{ $errors->first('email') }}</strong>
-                                    </span>
-                                @endif
-                            </div>
+                        <div class="page-breacrumbs">
+                            <ul class="breadcrumbs">
+                                <li><a href="#" title="">Home</a></li>
+                                <li><a href="#" title="">Pages</a></li>
+                                <li><a href="#" title="">Reset Password</a></li>
+                            </ul>
                         </div>
-
-                        <div class="form-group">
-                            <div class="col-md-6 col-md-offset-4">
-                                <button type="submit" class="btn btn-primary">
-                                    Send Password Reset Link
-                                </button>
-                            </div>
-                        </div>
-                    </form>
+                    </div>
                 </div>
             </div>
         </div>
     </div>
-</div>
+</section>
+
+<section>
+    <div class="block remove-bottom">
+        <div class="container">
+            <div class="row">
+                <div class="col-lg-12">
+                    <div class="account-popup-area signin-popup-box static">
+                        <div class="account-popup">
+                            @if (session('status'))
+                                <div class="alert alert-success">
+                                    {{ session('status') }}
+                                </div>
+                            @endif
+
+                            <form role="form" method="POST" action="{{ url('/employer/password/email') }}">
+                                {{ csrf_field() }}
+
+                                <div class="cfield {{ $errors->has('email') ? ' has-error' : '' }}">
+                                    <input id="email" type="email" class="form-control" name="email" value="{{ old('email') }}" placeholder="E-Mail address">
+                                    <i class="la la-envelope"></i>
+                                    @if ($errors->has('email'))
+                                        <span class="help-block">
+                                            <strong>{{ $errors->first('email') }}</strong>
+                                        </span>
+                                    @endif
+                                </div>
+                                <button type="submit">Send Password Reset Link</button>
+                                
+                            </form>
+                        </div>
+                    </div><!-- LOGIN POPUP -->
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+
+
+
 @endsection

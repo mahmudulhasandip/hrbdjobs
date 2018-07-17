@@ -65,7 +65,7 @@ class Handler extends ExceptionHandler
                         $login = 'employer.login';
                         break;
                     default:
-                        $login = 'login';
+                        $login = 'candidate.login';
                         break;
                 }
 
