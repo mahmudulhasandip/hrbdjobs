@@ -29,7 +29,17 @@ class InstituteController extends Controller
     public function delete($id) {
         $institute = Institute_name::findOrFail($id);
         $institute->delete();
+        $msg = 'Institute has been deleted!';
 
-        return redirece()->back()->with('status', 'Institute Deleted');
+        return $msg;
+    }
+
+    public function update(Request $request){
+        $id = $request->input('institute_id');
+        $institute = Institute_name::findOrFail($id);
+        $institute->name = $request->input('name');
+        $institute->save();
+        $msg = 'Institute name updated.';
+        return redirect()->route('admin.institute.list')->with('status', $msg);
     }
 }

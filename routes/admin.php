@@ -67,3 +67,4 @@ Route::get('cvbank', 'AdminController\CvbankController@index')->name('cvbank');
 Route::get('institute/list', 'AdminController\InstituteController@index')->Name('institute.list');
 Route::post('institute/store', 'AdminController\InstituteController@store')->Name('institution.store');
 Route::get('institute/delete/{id}', 'AdminController\InstituteController@delete')->Name('institution.delete');
+Route::post('institute/update/', 'AdminController\InstituteController@update')->Name('institution.update');

@@ -79,10 +79,10 @@
                         </td>
                         <td>
                             <span style="overflow: visible; position: relative; width: 110px;">
-                                <a href="#" class="m-portlet__nav-link btn m-btn m-btn--hover-accent m-btn--icon m-btn--icon-only m-btn--pill" title="Edit details">
+                                <a href="javascript: void(0);" class="m-portlet__nav-link btn m-btn m-btn--hover-accent m-btn--icon m-btn--icon-only m-btn--pill" title="Edit details" data-toggle="modal" data-target="#m_modal_4" data-institute='{{ $institute }}'>
                                     <i class="la la-edit"></i>
                                 </a>
-                                <a href="#" data-id='{{ $institute->id }}' class="m-portlet__nav-link btn m-btn m-btn--hover-danger m-btn--icon m-btn--icon-only m-btn--pill delete" title="Delete">
+                                <a href="javascript: void(0);" data-id='{{ $institute->id }}' class="m-portlet__nav-link btn m-btn m-btn--hover-danger m-btn--icon m-btn--icon-only m-btn--pill delete" title="Delete">
                                     <i class="la la-trash"></i>
                                 </a>
                             </span>
@@ -93,13 +93,56 @@
             </table>
             <!--end: Datatable -->
         </div>
+
+        <!--begin::Modal-->
+        <div class="modal fade" id="m_modal_4" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+            <div class="modal-dialog modal-lg" role="document">
+                <div class="modal-content">
+                    <div class="modal-header">
+                        <h5 class="modal-title" id="exampleModalLabel">
+                            New message
+                        </h5>
+                        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                            <span aria-hidden="true">
+                                &times;
+                            </span>
+                        </button>
+                    </div>
+                    <div class="modal-body">
+                        <form method="POST" action="{{ route('admin.institution.update') }}">
+                            @csrf
+                            <input type="hidden" name="institute_id" id="institute_id">
+                            <div class="form-group">
+                                <label for="name" class="form-control-label">
+                                    Institution name:
+                                </label>
+                                <input type="text" class="form-control" id="name" name="name">
+                            </div>
+                            <div class="modal-footer">
+                                <button type="button" class="btn btn-secondary" data-dismiss="modal">
+                                    Close
+                                </button>
+                                <button type="submit" class="btn btn-primary">
+                                    Send message
+                                </button>
+                            </div>
+                        </form>
+                    </div>
+
+                </div>
+            </div>
+        </div>
+        <!--end::Modal-->
+
     </div>
 </div>
 @endsection
- @push('css')
+
+
+@push('css')
 <link rel="stylesheet" href="https://cdn.datatables.net/1.10.18/css/dataTables.bootstrap4.min.css">
 <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/material-design-lite/1.1.0/material.min.css">
-<link rel="stylesheet" href="https://cdn.datatables.net/1.10.19/css/dataTables.material.min.css">
+{{--  <link rel="stylesheet" href="https://cdn.datatables.net/1.10.19/css/dataTables.material.min.css">  --}}
 @endpush
 
 
@@ -108,7 +151,7 @@
 
 <script src="https://cdn.datatables.net/1.10.18/js/jquery.dataTables.min.js"></script>
 <script src="https://cdn.datatables.net/1.10.18/js/dataTables.bootstrap4.min.js"></script>
-{{-- <script src="https://cdn.datatables.net/1.10.19/js/dataTables.material.min.js"></script> --}}
+{{--  <script src="https://cdn.datatables.net/1.10.19/js/dataTables.material.min.js"></script>  --}}
 
 <script>
     var box = $('.m-portlet__body');
@@ -134,20 +177,72 @@ $('#html_table').DataTable( {
 
 </script>
 
+{{-- edit institute name --}}
+<script>
+    $(document).ready(function() {
+        $('#m_modal_4').on('show.bs.modal', (event) => {
+            var modal = $(this);
+            var button = $(event.relatedTarget); // Button that triggered the modal
+            var institute = button.data('institute'); // Extract info from data-* attributes
+            modal.find('#name').val(institute.name);
+            modal.find('#institute_id').val(institute.id);
+        })
+    });
+</script>
+
+{{-- ajax Delete --}}
 <script>
     jQuery(document).ready(function () {
+        var base_url = '{{ url("/admin/") }}'
+
         $(document).on('click', '.delete', function(){
-            $(this).data('id');
+            var id = $(this).data('id');
             swal({
-                title: "Good job!",
-                text: "You clicked the button!",
+                title: "Are you sure?",
+                text: "You clicked the delete button!",
                 icon: "success",
-                confirmButtonText: "<span><i class='la la-headphones'></i><span>I am game!</span></span>",
+                confirmButtonText: "<span><i class='la la-bullhorn'></i><span>Yes Delete!</span></span>",
                 confirmButtonClass: "btn btn-danger m-btn m-btn--pill m-btn--air m-btn--icon",
                 showCancelButton: !0,
-                cancelButtonText: "<span><i class='la la-thumbs-down'></i><span>No, thanks</span></span>",
+                cancelButtonText: "<span><i class='la la-thumbs-down'></i><span>Cancel</span></span>",
                 cancelButtonClass: "btn btn-secondary m-btn m-btn--pill m-btn--icon"
-            });
+            }).then((result) => {
+                if(result.value){
+
+                    // delete institute
+                    $.ajax({
+                        url: base_url+'/institute/delete/'+id,
+                        headers: {'X-CSRF-TOKEN' : Laravel.csrfToken},
+                    }).done((data) => {
+
+                        swal({
+                            position: 'top-end',
+                            type: 'success',
+                            title: data,
+                            showConfirmButton: false,
+                            timer: 1500
+                        })
+
+                        $(this).closest('tr').delay(1500).fadeOut(1000, () => {
+                            $(this).closest('tr').remove();
+                        });
+
+                    }).fail((jqXHR, ajaxOptions, thrownError, textStatus) => {
+                        console.log(jqXHR);
+                        console.log(ajaxOptions);
+                        console.log(thrownError);
+                        console.log(textStatus);
+                        swal({
+                            position: 'top-end',
+                            type: 'error',
+                            title: 'Server Error!'+textStatus,
+                            showConfirmButton: false,
+                            timer: 1500
+                        })
+                    })
+
+                }
+            })
         });
     });
 </script>

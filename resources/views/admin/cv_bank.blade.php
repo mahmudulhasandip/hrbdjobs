@@ -1,5 +1,5 @@
 
-@extends('admin.layout.admin') 
+@extends('admin.layout.admin')
 
 @section('content')
 @include('admin.layout.partialLayouts.alert')
@@ -27,7 +27,7 @@
             </div>
         </div>
         <div class="m-portlet__body">
-            
+
 
             {{-- Add Industry --}}
             <div class="m-form m-form--label-align-right  m--margin-bottom-30">
@@ -52,7 +52,7 @@
                     </div>
                 </div>
             </div>
-            <table class="m-datatable" id="html_table" width="100%">
+            <table class="mdl-data-table table table-striped table-bordered" id="html_table" width="100%">
                 <thead>
 
                     <tr>
@@ -82,8 +82,8 @@
                             {{ $cv->fname }}
                         </td>
                         <td>
-                            <span style="overflow: visible; position: relative; width: 110px;">			
-                                <a href="#" class="m-portlet__nav-link btn m-btn m-btn--hover-accent m-btn--icon m-btn--icon-only m-btn--pill" title="Edit details">							
+                            <span style="overflow: visible; position: relative; width: 110px;">
+                                <a href="#" class="m-portlet__nav-link btn m-btn m-btn--hover-accent m-btn--icon m-btn--icon-only m-btn--pill" title="Edit details">
                                     <i class="la la-edit"></i>
                                 </a>
                                 <a href="#" class="m-portlet__nav-link btn m-btn m-btn--hover-danger m-btn--icon m-btn--icon-only m-btn--pill" title="Delete">
@@ -100,10 +100,19 @@
     </div>
 </div>
 @endsection
+
+@push('css')
+<link rel="stylesheet" href="https://cdn.datatables.net/1.10.18/css/dataTables.bootstrap4.min.css">
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/material-design-lite/1.1.0/material.min.css">
+@endpush
+
+
 @push('js')
 
 <!--begin::Page Resources -->
-<script src="/admin/demo/default/custom/components/datatables/base/html-table.js" type="text/javascript"></script>
+{{--  <script src="/admin/demo/default/custom/components/datatables/base/html-table.js" type="text/javascript"></script>  --}}
+<script src="https://cdn.datatables.net/1.10.18/js/jquery.dataTables.min.js"></script>
+<script src="https://cdn.datatables.net/1.10.18/js/dataTables.bootstrap4.min.js"></script>
 
 <script>
     var box = $('.m-portlet__body');
@@ -112,12 +121,21 @@
         box.toggleClass('d-none');
 
     });
+</script>
 
-    
+<script>
+
+$('#html_table').DataTable( {
+    columnDefs: [
+        {
+            targets: [ 0, 1, 2 ],
+            className: 'mdl-data-table__cell--non-numeric'
+        }
+    ],
+    responsive: true
+});
 
 </script>
-<!--end::Page Resources -->
-
 
 
 @endpush

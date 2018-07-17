@@ -33,7 +33,7 @@
                 </a>
             </li>
 
-            <li class="m-menu__item {{ ($menu_active == 'industry') ? 'm-menu__item--active' : '' }}" aria-haspopup="true">
+            <li class="m-menu__item {{ ($menu_active == 'institute') ? 'm-menu__item--active' : '' }}" aria-haspopup="true">
                 <a href="{{ route('admin.institute.list') }}" class="m-menu__link ">
                     <i class="m-menu__link-icon la la-institution"></i>
                     <span class="m-menu__link-title">
