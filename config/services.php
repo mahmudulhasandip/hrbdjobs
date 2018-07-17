@@ -35,4 +35,9 @@ return [
         'secret' => env('STRIPE_SECRET'),
     ],
 
+    'google' => [
+        'client_id' => env('85527225243-taeld03040cp6nte5p7vu1b2pnuf6dcc.apps.googleusercontent.com'),         // Your google Client ID
+        'client_secret' => env('jRtXGCMMXdj9Gg2KrWpO-eGq'), // Your GitHub Client Secret
+        'redirect' => 'http://hrbdjobs.com/',
+    ],
 ];

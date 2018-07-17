@@ -42,15 +42,7 @@ Route::post('/session/per_page', [
   'uses'  => 'BrowseJobController@postPerPage'
 ]);
 
-// Route::get('/browse/jobs', [
-//   'as'    => 'browse.jobs',
-//   'uses'  => 'BrowseJobController@index'
-// ]);
-
 Route::resource('browse/jobs', 'BrowseJobController');
-
-
-// for all users
 
 // single job view
 Route::get('/job/{id}', [            
@@ -58,19 +50,11 @@ Route::get('/job/{id}', [
   'uses'  => 'JobController@getSingleJob'
 ]);
 
-// Profile view for all
-
 // Company Info
 Route::get('/company/{id}', [            
   'as'    => 'company.profile',
   'uses'  => 'CompaniesController@getCompanyProfile'
 ]);
-
-// employer profile
-// Route::get('/public/employer/profile/{id}', [
-//   'as'    => 'public.employer.profile',
-//   'uses'  => 'EmployerController@getEmployerProfile'
-// ]);
 
 // candidate profile
 Route::get('/public/candidate/profile/{id}', [
@@ -83,6 +67,17 @@ Route::get('/public/candidate/profile/{id}', [
 Route::get('/download/candidate/resume/{id}', [
   'as'    => 'candidate.download.resume',
   'uses'  => 'UserController@getCandidateResumePDF'
+]);
+
+// about and contact page
+Route::get('about-us', [
+  'as'    => 'about.us',
+  'uses'  => 'UserController@getAboutUs'
+]);
+
+Route::get('contact-us', [
+  'as'    => 'contact.us',
+  'uses'  => 'UserController@getContactUs'
 ]);
 
 
@@ -138,6 +133,7 @@ Route::middleware(['employer'])->group(function () {
 
 Route::group(['prefix' => 'candidate'], function () {
   Route::get('/login', 'CandidateAuth\LoginController@showLoginForm')->name('candidate.login');
+  Route::get('/login/gmail', 'CandidateAuth\LoginController@loginWithGmail')->name('candidate.login.gmail');
   Route::post('/login', 'CandidateAuth\LoginController@login');
   Route::post('/logout', 'CandidateAuth\LoginController@logout')->name('candidate.logout');
 

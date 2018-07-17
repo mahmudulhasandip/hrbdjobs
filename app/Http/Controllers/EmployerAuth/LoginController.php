@@ -7,6 +7,7 @@ use Illuminate\Foundation\Auth\AuthenticatesUsers;
 use Illuminate\Support\Facades\Auth;
 use Hesto\MultiAuth\Traits\LogsoutGuard;
 use Illuminate\Http\Request;
+use Illuminate\Validation\ValidationException;
 
 class LoginController extends Controller
 {
@@ -72,6 +73,12 @@ class LoginController extends Controller
         }
         return redirect()->intended($this->redirectPath());
     }
+
+    protected function sendFailedLoginResponse(Request $request)
+    {
+        return redirect('/employer/login')->withErrors(['status' => "Username and password doesn't match"])->withInput();
+    }
+
 
     /**
      * Get the guard to be used during authentication.

@@ -15,6 +15,7 @@ use PDF;
 class UserController extends Controller
 {
     public function index(){
+        $data['page'] = 'home';
         $data['title'] = "HrbdJobs";
         $data['categories'] = DB::table('job_categories')
                                 ->leftJoin('jobs', 'jobs.job_category_id', '=', 'job_categories.id')
@@ -85,6 +86,7 @@ class UserController extends Controller
     }
 
     public function getCandidateProfile($id){
+        $data['page'] = 'candidate_profile';
     	$data['candidate'] = Candidate::find($id);
     	if(!$data['candidate'])
     		return redirect()->route('users.home')->with('error', 'Candidate not found');
@@ -92,9 +94,20 @@ class UserController extends Controller
     }
 
     public function getCandidateResumePDF($id){
+        $data['page'] = 'pdf';
         $data['candidate'] = Candidate::find($id);
         $pdf = PDF::loadView('users.candidate_resume_pdf', $data);
         return $pdf->download('resume.pdf');   
+    }
+
+    public function getAboutUs(){
+        $data['page'] = 'about_us';
+        return view('users.about_us')->with($data);
+    }
+
+     public function getContactUs(){
+        $data['page'] = 'contact_us';
+        return view('users.contact_us')->with($data);
     }
 
 }

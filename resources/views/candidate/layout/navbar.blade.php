@@ -1,6 +1,6 @@
 <div class="responsive-header">
     <div class="responsive-menubar">
-        <div class="res-logo"><a href="index.html" title=""><img src="http://placehold.it/178x40" alt="" /></a></div>
+        <div class="res-logo"><a href="{{ url('/') }}" title=""><img src="/images/logo-2.png" alt="" /></a></div>
         <div class="menu-resaction">
             <div class="res-openmenu">
                 <img src="/images/icon.png" alt="" /> Menu
@@ -10,7 +10,9 @@
             </div>
         </div>
     </div>
+
     <div class="responsive-opensec">
+        @if (Auth::guest())
         <div class="btn-extars">
             <a href="#" title="" class="post-job-btn"><i class="la la-plus"></i>Post Jobs</a>
             <ul class="account-btns">
@@ -18,25 +20,26 @@
                 <li class="signin-popup"><a title=""><i class="la la-external-link-square"></i> Login</a></li>
             </ul>
         </div><!-- Btn Extras -->
-        <form class="res-search">
-            <input type="text" placeholder="Job title, keywords or company name" />
+        @endif
+        <form action="{{ url('/browse/jobs') }}" method="get" class="res-search">
+            <input type="text" name="keyword" placeholder="Job title, keywords or company name" />
             <button type="submit"><i class="la la-search"></i></button>
         </form>
         <div class="responsivemenu">
                 <ul>
-                        <li class="">
-                            <a href="{{ url('/') }}" title="">Home</a>
-                        </li>
-                        <li class="">
-                            <a href="job_list_modern.html" title="">Browse Jobs</a>
-                        </li>
-                        <li class="">
-                            <a href="about.html" title="">About</a>
-                        </li>
-                        <li class="">
-                            <a href="contact.html" title="">Contact</a>
-                        </li>
-                    </ul>
+                    <li class="">
+                        <a href="{{ url('/') }}" title="">Home</a>
+                    </li>
+                    <li class="">
+                        <a href="{{ url('browse/jobs') }}" title="">Browse Jobs</a>
+                    </li>
+                    <li class="">
+                        <a href="{{ route('about.us') }}" title="">About</a>
+                    </li>
+                    <li class="">
+                        <a href="{{ route('contact.us') }}" title="">Contact</a>
+                    </li>
+                </ul>
         </div>
     </div>
 </div>
@@ -92,13 +95,13 @@
                         <a href="{{ url('/') }}" title="">Home</a>
                     </li>
                     <li class="">
-                        <a href="job_list_modern.html" title="">Browse Jobs</a>
+                        <a href="{{ url('browse/jobs') }}" title="">Browse Jobs</a>
                     </li>
                     <li class="">
-                        <a href="about.html" title="">About</a>
+                        <a href="{{ route('about.us') }}" title="">About</a>
                     </li>
                     <li class="">
-                        <a href="contact.html" title="">Contact</a>
+                        <a href="{{ route('contact.us') }}" title="">Contact</a>
                     </li>
                 </ul>
             </nav><!-- Menus -->

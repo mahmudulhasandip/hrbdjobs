@@ -15,6 +15,7 @@ use DB;
 class JobController extends Controller
 {
     public function getSingleJob($id){
+        $data['page'] = 'single_job';
         $data['job'] = Job::find($id);
         $data['employer_info'] = Employer::where('id', $data['job']->employer_id)->first();
         $data['company_info'] = DB::table('employer_company_infos')->where('employer_id', $data['employer_info']->id)->first();

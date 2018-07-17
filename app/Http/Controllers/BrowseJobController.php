@@ -309,7 +309,7 @@ class BrowseJobController extends Controller
                                 ->select('industries.id')
                                 ->groupBy('industries.id')
                                 ->get();
-
+        $data['page'] = 'browse_jobs';
         return view('users.browse_jobs', $data);
     }
 

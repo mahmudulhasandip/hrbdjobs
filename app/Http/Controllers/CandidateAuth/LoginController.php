@@ -6,8 +6,11 @@ use App\Http\Controllers\Controller;
 use Illuminate\Foundation\Auth\AuthenticatesUsers;
 use Illuminate\Support\Facades\Auth;
 use Hesto\MultiAuth\Traits\LogsoutGuard;
+use Illuminate\Http\Request;
+use Illuminate\Validation\ValidationException;
 use URL;
 use Session;
+use Socialite;
 
 class LoginController extends Controller
 {
@@ -32,6 +35,7 @@ class LoginController extends Controller
      * @var string
      */
     public $redirectTo = '/candidate/home';
+    public $loginPath = '/candidate/login';
 
     /**
      * Create a new controller instance.
@@ -66,6 +70,11 @@ class LoginController extends Controller
         // return 'email';
     }
 
+    protected function sendFailedLoginResponse(Request $request)
+    {
+        return redirect('/candidate/login')->withErrors(['status' => "Username and password doesn't match"])->withInput();
+    }
+
     public function redirectPath()
     {
         return (session()->get('backUrl') &&  session()->get('backUrl') != url('/')) ? session()->get('backUrl') : $this->redirectTo;   
@@ -76,8 +85,15 @@ class LoginController extends Controller
      *
      * @return \Illuminate\Contracts\Auth\StatefulGuard
      */
+
+    public function loginWithGmail(){
+        return Socialite::driver('google')->redirect();
+    }
+
     protected function guard()
     {
         return Auth::guard('candidate');
     }
+
+
 }
