@@ -139,10 +139,12 @@
 
 	$('#candidate-login').on('click', function(e){
 		$('#forget-password').attr('href', candidateForgetPassword);
+		$('.extra-login').show();
 	});
 
 	$('#employer-login').on('click', function(e){
 		$('#forget-password').attr('href', employerForgetPassword);
+		$('.extra-login').hide();
 	});
 </script>
 @stack('js')

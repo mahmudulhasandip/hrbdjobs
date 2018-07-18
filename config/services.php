@@ -36,8 +36,8 @@ return [
     ],
 
     'google' => [
-        'client_id' => env('85527225243-taeld03040cp6nte5p7vu1b2pnuf6dcc.apps.googleusercontent.com'),         // Your google Client ID
-        'client_secret' => env('jRtXGCMMXdj9Gg2KrWpO-eGq'), // Your GitHub Client Secret
-        'redirect' => 'http://hrbdjobs.com/',
+        'client_id' => env('GOOGLE_CLIENT_ID','85527225243-qibi0psioti2mvfkr0njaaqd0bnih5db.apps.googleusercontent.com'),         // Your google Client ID
+        'client_secret' => env('GOOGLE_CLIENT_SECRET','sYdXqUF4bKlcmMAo290OHzYh'), // Your google Client Secret
+        'redirect' => 'http://new.hrbdjobs.com/candidate/login/gmail/callback',
     ],
 ];

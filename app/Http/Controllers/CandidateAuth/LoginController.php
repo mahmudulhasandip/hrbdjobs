@@ -11,6 +11,10 @@ use Illuminate\Validation\ValidationException;
 use URL;
 use Session;
 use Socialite;
+use App\Candidate;
+use Mail;
+use Illuminate\Mail\Mailer;
+use App\Mail\GoogleAuthEmail;
 
 class LoginController extends Controller
 {
@@ -86,8 +90,52 @@ class LoginController extends Controller
      * @return \Illuminate\Contracts\Auth\StatefulGuard
      */
 
-    public function loginWithGmail(){
+    public function redirectToProvider()
+    {
+        if(URL::previous() != url('/')){
+            session()->put('backUrl', URL::previous());
+        }
         return Socialite::driver('google')->redirect();
+    }
+
+    public function handleProviderCallback()
+    {
+        $user = Socialite::driver('google')->stateless()->user();
+        
+        $email = $user->email;
+        $info = $user->user;
+        if($this->checkEmail($email)){
+            $candidate = Candidate::where('email', $email)->first();
+            $this->guard()->login($candidate);
+            return redirect($this->redirectPath());
+        }
+        
+        $fname = $info['name']['givenName'];
+        $lname = $info['name']['familyName'];
+        $username = explode("@",$email)[0];
+        $password = substr(md5(microtime()),rand(0,26),5);
+        
+        $candidate = new Candidate();
+        $candidate->fname = $fname;
+        $candidate->lname = $lname;
+        $candidate->username = $username;
+        $candidate->email = $email;
+        $candidate->password = bcrypt($password);
+        $candidate->verified = 1;
+        $candidate->save();
+        
+        $user = new Candidate();
+        $user->username = $username;
+        $user->password = $password;
+
+        Mail::to($email)->send(new GoogleAuthEmail($user));
+        $this->guard()->login($candidate);
+        return redirect($this->redirectPath());
+    }
+    
+    public function checkEmail($email){
+        $email = Candidate::where('email', $email)->first();
+        return ($email) ? 1 : 0;
     }
 
     protected function guard()

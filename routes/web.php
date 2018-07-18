@@ -133,7 +133,8 @@ Route::middleware(['employer'])->group(function () {
 
 Route::group(['prefix' => 'candidate'], function () {
   Route::get('/login', 'CandidateAuth\LoginController@showLoginForm')->name('candidate.login');
-  Route::get('/login/gmail', 'CandidateAuth\LoginController@loginWithGmail')->name('candidate.login.gmail');
+  Route::get('/login/gmail', 'CandidateAuth\LoginController@redirectToProvider')->name('candidate.login.gmail');
+  Route::get('/login/gmail/callback', 'CandidateAuth\LoginController@handleProviderCallback')->name('candidate.login.gmail.callback');
   Route::post('/login', 'CandidateAuth\LoginController@login');
   Route::post('/logout', 'CandidateAuth\LoginController@logout')->name('candidate.logout');
 
