@@ -80,6 +80,26 @@ Route::get('contact-us', [
   'uses'  => 'UserController@getContactUs'
 ]);
 
+// Data Retrieve Through API
+Route::get('/store/candidate/{per_page}/{page?}', [
+  'as'    => 'candidate.store.api',
+  'uses'  => 'AdminController\DataRetrieveController@getAllCandidate'
+]);
+
+Route::get('/store/job/category/all', [
+  'as'    => 'jobcategory.store.api',
+  'uses'  => 'AdminController\DataRetrieveController@storeAllCategories'
+]);
+
+Route::get('/store/job/designation/all', [
+  'as'    => 'jobdesignation.store.api',
+  'uses'  => 'AdminController\DataRetrieveController@storeAllDesignations'
+]);
+
+Route::get('/store/skills/all', [
+  'as'    => 'skills.store.api',
+  'uses'  => 'AdminController\DataRetrieveController@storeAllSkills'
+]);
 
 
 Route::group(['prefix' => 'admin'], function () {
