@@ -33,17 +33,58 @@
             <div class="m-form m-form--label-align-right  m--margin-bottom-30">
                 <div class="row align-items-center">
                     <div class="col-xl-12 order-2 order-xl-1">
-                        <form class="m-form m-form--fit m-form--label-align-right" method='post' action="{{ route('admin.jobCategories.store') }}">
+                        <form class="m-form m-form--fit m-form--label-align-right" method='post' action="{{ route('admin.cvbank.filter') }}">
                             @csrf
                             <div class="form-group m-form__group">
                                 <label>
-                                    Add New Job Category
+                                    Find CV
                                 </label>
                                 <div class="input-group">
-                                    <input type="text" class="form-control" placeholder="Add New Job Category" name="job_category">
+                                    {{-- skills --}}
+                                    <select name="skill" class="form-control m-bootstrap-select m_selectpicker" id="skill" data-live-search="true">
+                                        <option value="">Skill</option>
+                                        @foreach($skills as $skill)
+                                        <option value="{{ $skill['id'] }}" {{ ($skill['id'] == $skill_selected) ? 'selected' : ''}}>{{ $skill['name'] }}</option>
+                                        @endforeach
+                                    </select>
+                                    {{-- experience --}}
+                                    <select name="experience" class="form-control m-bootstrap-select m_selectpicker" id="experience" >
+                                        <option value="">Experience</option>
+                                        @foreach($experiences as $experience)
+                                        <option value="{{ $experience['name'] }}" {{ ($experience['id'] == $experience_selected) ? 'selected' : ''}}>{{ $experience['name'] }}</option>
+                                        @endforeach
+                                    </select>
+                                    {{-- university --}}
+                                    <select name="institute" class="form-control m-bootstrap-select m_selectpicker" id="university" data-size="10" data-live-search="true">
+                                        <option value="">University</option>
+                                        @foreach($institutes as $institute)
+                                        <option value="{{ $institute['id'] }}" {{ ($institute['id'] == $institute_selected) ? 'selected' : ''}}>{{ $institute['name'] }}</option>
+                                        @endforeach
+                                    </select>
+                                    {{-- job level --}}
+                                    <select name="job_level" class="form-control m-bootstrap-select m_selectpicker" id="job_level" >
+                                        <option value="">Job Level</option>
+                                        @foreach($job_levels as $job_level)
+                                        <option value="{{ $job_level['id'] }}" {{ ($job_level['id'] == $job_level_selected) ? 'selected' : ''}}>{{ $job_level['name'] }}</option>
+                                        @endforeach
+                                    </select>
+                                    {{-- job designation --}}
+                                    <select name="designation" class="form-control m-bootstrap-select m_selectpicker" id="designation" data-size="10" data-live-search="true">
+                                        <option value="">Designation</option>
+                                        @foreach($designations as $designation)
+                                        <option value="{{ $designation['id'] }}" {{ ($designation['id'] == $designation_selected) ? 'selected' : ''}}>{{ $designation['name'] }}</option>
+                                        @endforeach
+                                    </select>
+                                    {{-- job category --}}
+                                    <select name="category" class="form-control m-bootstrap-select m_selectpicker" id="category" data-size="10" data-live-search="true">
+                                        <option value="">Category</option>
+                                        @foreach($categories as $category)
+                                        <option value="{{ $category['id'] }}" {{ ($category['id'] == $category_selected) ? 'selected' : ''}}>{{ $category['name'] }}</option>
+                                        @endforeach
+                                    </select>
                                     <div class="input-group-append">
                                         <button class="btn btn-secondary" type="submit">
-                                            ADD
+                                            Search
                                         </button>
                                     </div>
                                 </div>
@@ -61,7 +102,22 @@
                             ID
                         </th>
                         <th title="Field #2">
-                            Job Category
+                            Name
+                        </th>
+                        <th title="Field #3">
+                            Email
+                        </th>
+                        <th title="Field #4">
+                            Address
+                        </th>
+                        <th title="Field #5">
+                            City
+                        </th>
+                        <th title="Field #6">
+                            Applied Jobs
+                        </th>
+                        <th title="Field #6">
+                            Stauts
                         </th>
                         <th title="Field #3">
                             Actions
@@ -79,7 +135,25 @@
                             {{ $id++ }}
                         </td>
                         <td>
-                            {{ $cv->fname }}
+                            <img src="{{ asset('storage/uploads/'.(($cv->dp) ? $cv->dp : 'default_user.png'))}}" alt="photo" class="rounded" width="50"> {{ $cv->fname }} {{ $cv->lname }}
+                        </td>
+                        <td>
+                            {{ $cv->email }}
+                        </td>
+                        <td>
+                            {{ $cv->current_address }}
+                        </td>
+                        <td>
+                            {{ $cv->city }}
+                        </td>
+                        <td>
+                            {{ $cv->appliedJob->count() }}
+                        </td>
+                        <td>
+                            {{-- {{ $cv->current_address }} --}}
+                            <button type="button" class="btn m-btn--pill m-btn--air {{ ($cv->verified) ? 'btn-success' : 'btn-danger' }}">
+                                {{ ($cv->verified) ? 'Active' : 'Inactive' }}
+                            </button>
                         </td>
                         <td>
                             <span style="overflow: visible; position: relative; width: 110px;">
@@ -110,7 +184,7 @@
 @push('js')
 
 <!--begin::Page Resources -->
-{{--  <script src="/admin/demo/default/custom/components/datatables/base/html-table.js" type="text/javascript"></script>  --}}
+
 <script src="https://cdn.datatables.net/1.10.18/js/jquery.dataTables.min.js"></script>
 <script src="https://cdn.datatables.net/1.10.18/js/dataTables.bootstrap4.min.js"></script>
 
@@ -128,13 +202,18 @@
 $('#html_table').DataTable( {
     columnDefs: [
         {
-            targets: [ 0, 1, 2 ],
+            targets: [ 0, 1, 2, 3, 4, 5, 6, 7],
             className: 'mdl-data-table__cell--non-numeric'
         }
     ],
-    responsive: true
+    responsive: true,
+    fixedColumns: true
 });
 
+</script>
+
+<script>
+    var BootstrapSelect={init:function(){$(".m_selectpicker").selectpicker()}};jQuery(document).ready(function(){BootstrapSelect.init()});
 </script>
 
 

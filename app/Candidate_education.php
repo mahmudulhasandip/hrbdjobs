@@ -9,4 +9,8 @@ class Candidate_education extends Model
     public function candidate(){
         return $this->belongsTo('App\Candidate');
     }
+
+    public function candidateInstitute(){
+        return $this->hasOne('App\Institute_name', 'institute_id', 'id');
+    }
 }
