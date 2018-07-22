@@ -141,7 +141,7 @@
             <li class="m-menu__item  m-menu__item--submenu {{ ($menu_active == 'employer_list') ? 'm-menu__item--active' : '' }}" aria-haspopup="true"
                 m-menu-submenu-toggle="hover">
                 <a href="javascript:;" class="m-menu__link m-menu__toggle">
-                    <i class="m-menu__link-icon la la-users"></i>
+                    <i class="m-menu__link-icon la la-user"></i>
                     <span class="m-menu__link-text">
                         Employer
                     </span>
@@ -185,6 +185,33 @@
                 </div>
             </li>
 
+            <li class="m-menu__item   m-menu__item--submenu {{ ($menu_active == 'cvbank') ? 'm-menu__item--active' : '' }}" aria-haspopup="true" m-menu-submenu-toggle="hover">
+                <a href="javascript:;" class="m-menu__link m-menu__toggle">
+                    <i class="m-menu__link-icon la la-users"></i>
+                    <span class="m-menu__link-text">
+                        Candidate
+                    </span>
+                    <i class="m-menu__ver-arrow la la-angle-right"></i>
+                </a>
+                <div class="m-menu__submenu ">
+                    <span class="m-menu__arrow"></span>
+                    <ul class="m-menu__subnav">
+                        <li class="m-menu__item {{ ($menu_active == 'employer_list') ? 'm-menu__item--active' : '' }}" aria-haspopup="true">
+                            <a href="{{ route('admin.cvbank') }}" class="m-menu__link ">
+                                <i class="m-menu__link-bullet m-menu__link-bullet--dot">
+                                    <span></span>
+                                </i>
+                                <span class="m-menu__link-text">
+                                    CV Bank
+                                </span>
+                            </a>
+                        </li>
+
+
+                    </ul>
+                </div>
+            </li>
+
             <li class="m-menu__item {{ ($menu_active == 'job_post_list') ? 'm-menu__item--active' : '' }}" aria-haspopup="true">
                 <a href="/admin/job/post/list" class="m-menu__link ">
                     <i class="m-menu__link-icon la la-newspaper-o"></i>
@@ -198,18 +225,7 @@
                 </a>
             </li>
 
-            <li class="m-menu__item {{ ($menu_active == 'cvbank') ? 'm-menu__item--active' : '' }}" aria-haspopup="true">
-                <a href="{{ route('admin.cvbank') }}" class="m-menu__link ">
-                    <i class="m-menu__link-icon la la-pencil-square"></i>
-                    <span class="m-menu__link-title">
-                        <span class="m-menu__link-wrap">
-                            <span class="m-menu__link-text">
-                                CV Bank
-                            </span>
-                        </span>
-                    </span>
-                </a>
-            </li>
+
 
             {{-- menu headline --}} {{--
             <li class="m-menu__section">

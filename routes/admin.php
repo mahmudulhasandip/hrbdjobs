@@ -61,7 +61,8 @@ Route::post('skills', 'AdminController\SkillsController@store')->name('skills.st
 
 // cv bank
 Route::get('cvbank', 'AdminController\CvbankController@index')->name('cvbank');
-Route::post('cvbank/filter', 'AdminController\CvbankController@filterCv')->name('cvbank.filter');
+Route::post('cvbank', 'AdminController\CvbankController@filterCv')->name('cvbank.filter');
+Route::get('candidate/edit/{id}', 'AdminController\CvbankController@candidateEdit')->name('candidate.edit');
 
 
 // Institute

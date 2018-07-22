@@ -21,7 +21,7 @@
             <div class="m-portlet__head-caption">
                 <div class="m-portlet__head-title">
                     <h3 class="m-portlet__head-text">
-                        CV List
+                        Candidates List
                     </h3>
                 </div>
             </div>
@@ -37,9 +37,15 @@
                             @csrf
                             <div class="form-group m-form__group">
                                 <label>
-                                    Find CV
+                                    Find Candidates
                                 </label>
                                 <div class="input-group">
+                                    {{-- Active/block --}}
+                                    <select name="status" class="form-control m-bootstrap-select m_selectpicker" id="status" >
+                                        <option value="321" {{ ($status_selected == 321) ? 'selected' : ''}}>All</option>
+                                        <option value="1" {{ ($status_selected == 1) ? 'selected' : ''}}>Active</option>
+                                        <option value="0" {{ ($status_selected == 0) ? 'selected' : ''}}>Blocked</option>
+                                    </select>
                                     {{-- skills --}}
                                     <select name="skill" class="form-control m-bootstrap-select m_selectpicker" id="skill" data-live-search="true">
                                         <option value="">Skill</option>
@@ -116,10 +122,13 @@
                         <th title="Field #6">
                             Applied Jobs
                         </th>
-                        <th title="Field #6">
+                        <th title="Field #7">
+                            CV
+                        </th>
+                        <th title="Field #8">
                             Stauts
                         </th>
-                        <th title="Field #3">
+                        <th title="Field #9">
                             Actions
                         </th>
                     </tr>
@@ -147,17 +156,35 @@
                             {{ $cv->city }}
                         </td>
                         <td>
-                            {{ $cv->appliedJob->count() }}
+                            <span class="m-nav__link-badge">
+                                <span class="m-badge m-badge--success m-badge--wide">
+                                    {{ $cv->appliedJob->count() }}
+                                </span>
+                            </span>
                         </td>
                         <td>
-                            {{-- {{ $cv->current_address }} --}}
-                            <button type="button" class="btn m-btn--pill m-btn--air {{ ($cv->verified) ? 'btn-success' : 'btn-danger' }}">
-                                {{ ($cv->verified) ? 'Active' : 'Inactive' }}
-                            </button>
+                            <a href="{{ route('public.candidate.profile', $cv->id) }}" target="_blank" class="btn btn-outline-success m-btn m-btn--icon m-btn--pill m-btn--air">
+                                <span>
+                                    <i class="la la-file-pdf-o"></i>
+                                    <span>
+                                        CV
+                                    </span>
+                                </span>
+                            </a>
+                        </td>
+                        <td>
+                            <a href="#" class="btn {{ ($cv->verified) ? 'btn-outline-success' : 'btn-outline-danger' }}  m-btn m-btn--icon m-btn--pill m-btn--air">
+                                <span>
+                                    <i class="la la-{{ ($cv->verified) ? 'check-circle' : 'times-circle-o' }}"></i>
+                                    <span>
+                                        {{ ($cv->verified) ? 'Active' : 'Blocked' }}
+                                    </span>
+                                </span>
+                            </a>
                         </td>
                         <td>
                             <span style="overflow: visible; position: relative; width: 110px;">
-                                <a href="#" class="m-portlet__nav-link btn m-btn m-btn--hover-accent m-btn--icon m-btn--icon-only m-btn--pill" title="Edit details">
+                                <a href="{{ route('admin.candidate.edit', $cv->id) }}" target="_blank" class="m-portlet__nav-link btn m-btn m-btn--hover-accent m-btn--icon m-btn--icon-only m-btn--pill" title="Edit details">
                                     <i class="la la-edit"></i>
                                 </a>
                                 <a href="#" class="m-portlet__nav-link btn m-btn m-btn--hover-danger m-btn--icon m-btn--icon-only m-btn--pill" title="Delete">

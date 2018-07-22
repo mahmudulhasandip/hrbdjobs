@@ -13,15 +13,16 @@ use App\Job_designation;
 use App\Job_category;
 use App\Institute_name;
 use App\Skill;
+use App\Country;
 
 class CvbankController extends Controller
 {
+    // get all candidate list
     public function index() {
         $data['menu_active'] = 'cvbank';
-        $data['cvs'] = Candidate::all()->where('verified', 1);
-                                // ->when($test, function($query){
-                                //     return $query->where('verified', 0);
-                                // });
+
+        $data['cvs'] = Candidate::all();
+
         $data['skills'] = Skill::all();
         $data['experiences'] = Job_experience::all();
         $data['job_levels'] = Job_level::all();
@@ -29,6 +30,7 @@ class CvbankController extends Controller
         $data['categories'] = Job_category::all();
         $data['institutes'] = Institute_name::all();
 
+        $data['status_selected'] = '321';
         $data['skill_selected'] = '';
         $data['experience_selected'] = '';
         $data['job_level_selected'] = '';
@@ -39,6 +41,7 @@ class CvbankController extends Controller
         return view('admin.cv_bank', $data);
     }
 
+    // filter candidate
     public function filterCv(Request $request){
         $data['menu_active'] = 'cvbank';
         $data['skills'] = Skill::all();
@@ -48,7 +51,7 @@ class CvbankController extends Controller
         $data['categories'] = Job_category::all();
         $data['institutes'] = Institute_name::all();
 
-
+        $status = $request->input('status');
         $skill = $request->input('skill');
         $experience = $request->input('experience');
         $job_level = $request->input('job_level');
@@ -56,6 +59,7 @@ class CvbankController extends Controller
         $category = $request->input('category');
         $institute = $request->input('institute');
 
+        $data['status_selected'] = $status;
         $data['skill_selected'] = $skill;
         $data['experience_selected'] = $experience;
         $data['job_level_selected'] = $job_level;
@@ -64,7 +68,9 @@ class CvbankController extends Controller
         $data['institute_selected'] = $institute;
 
 
-        $data['cvs'] = Candidate::where('verified', 1)
+        $data['cvs'] = Candidate::when($status != 321, function($query) use ($status){
+                                    $query->where('verified', $status);
+                                })
                                 ->when($institute, function($query) use ($institute) {
                                     $query->whereHas('candidateEducation', function($query) use ($institute){
                                         return $query->where('institute_name_id', $institute);
@@ -99,5 +105,14 @@ class CvbankController extends Controller
 
         return view('admin.cv_bank', $data);
 
+    }
+
+
+    // edit candidate
+    public function candidateEdit($id){
+        $data['menu_active'] = 'cvbank';
+        $data['candidate'] = Candidate::findOrfail($id);
+        $data['countries'] = Country::all();
+        return view('admin.candidate_edit', $data);
     }
 }
