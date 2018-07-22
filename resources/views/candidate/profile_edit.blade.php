@@ -1,5 +1,5 @@
-@extends('candidate.layout.app') 
-@section('title', 'HRBDJobs | Candidate Dashboard') 
+@extends('candidate.layout.app')
+@section('title', 'HRBDJobs | Candidate Dashboard')
 
 @push('css')
 <link rel="stylesheet" type="text/css" href="/css/preloader.css" />
@@ -62,28 +62,28 @@
 								<li>
 									<div class="content__wrapper">
 										<div id="education_view" class="profile-form-edit">
-											
+
 										</div>
 									</div>
 								</li>
 								<li>
 									<div class="content__wrapper">
 										<div id="training_view" class="profile-form-edit">
-											
+
 										</div>
 									</div>
 								</li>
 								<li>
 									<div class="content__wrapper">
 										<div id="experience_view" class="profile-form-edit">
-											
+
 										</div>
 									</div>
 								</li>
 								<li>
 									<div class="content__wrapper">
 										<div id="certificate_view" class="profile-form-edit">
-											
+
 										</div>
 									</div>
 								</li>
@@ -174,7 +174,7 @@
 		    output(
 		      '<strong>' + encodeURI(file.name) + '</strong>'
 		    );
-		    
+
 		    // var fileType = file.type;
 		    // console.log(fileType);
 		    var imageName = file.name;
@@ -225,56 +225,56 @@
 	ekUpload();
 
 	$(document).ready(function(){
-		
+
 		// Variables
 		var clickedTab = $(".tabs > .active");
 		var tabWrapper = $(".tab__content");
 		var activeTab = tabWrapper.find(".active");
 		var activeTabHeight = activeTab.outerHeight();
-		
+
 		// Show tab on page load
 		activeTab.show();
-		
+
 		// Set height of wrapper on page load
 		tabWrapper.height(activeTabHeight);
-	
+
 		$(".tabs > li").on("click", function() {
-			
+
 			// Remove class from active tab
 			$(".tabs > li").removeClass("active");
-			
+
 			// Add class active to clicked tab
 			$(this).addClass("active");
-			
+
 			// Update clickedTab variable
 			clickedTab = $(".tabs .active");
-			
+
 			// fade out active tab
 			activeTab.fadeOut(250, function() {
-				
+
 				// Remove active class all tabs
 				$(".tab__content > li").removeClass("active");
-				
+
 				// Get index of clicked tab
 				var clickedTabIndex = clickedTab.index();
 
 				// Add class active to corresponding tab
 				$(".tab__content > li").eq(clickedTabIndex).addClass("active");
-				
+
 				// update new active tab
 				activeTab = $(".tab__content > .active");
-				
+
 				// Update variable
 				activeTabHeight = activeTab.outerHeight();
-				
+
 				// Animate height of wrapper to new tab height
 				tabWrapper.stop().delay(50).animate({
 					height: activeTabHeight
 				}, 500, function() {
-					
+
 					// Fade in active tab
 					activeTab.delay(50).fadeIn(250);
-					
+
 				});
 			});
 		});
@@ -357,8 +357,8 @@
 				}
 			});
 		});
-			
-			
+
+
 	});
 
 	function makeBox(name){

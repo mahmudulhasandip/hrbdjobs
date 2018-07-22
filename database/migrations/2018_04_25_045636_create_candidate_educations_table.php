@@ -21,11 +21,11 @@ class CreateCandidateEducationsTable extends Migration
             $table->decimal('gpa', 5, 2);
             $table->decimal('out_of', 5, 2);
             $table->string('group_majar')->nullable();
-            $table->integer('institute_id')->unsigned();
+            $table->integer('institute_name_id')->unsigned();
             $table->integer('passing_year');
             $table->string('achievement')->nullable();
             $table->foreign('candidate_id')->references('id')->on('candidates')->onDelete('cascade');
-            $table->foreign('institute_id')->references('id')->on('institute_names')->onDelete('cascade');
+            $table->foreign('institute_name_id')->references('id')->on('institute_names')->onDelete('cascade');
             $table->timestamps();
         });
     }
