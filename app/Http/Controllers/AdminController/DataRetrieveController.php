@@ -8,6 +8,7 @@ use App\Job_category;
 use App\Job_designation;
 use App\Skill;
 use App\Candidate;
+use App\Candidate_education;
 
 class DataRetrieveController extends Controller
 {
@@ -45,6 +46,18 @@ class DataRetrieveController extends Controller
     		$candidate->about_me = $seeker['career_objective'];
     		$candidate->save();
 
+    		// add 
+    		$url2 = 'https://hrbdjobs.com/api/job_seekers/academic/'.$candidate->id;
+    		$academics = json_decode(file_get_contents($url2), 1);
+    		foreach($academics as $academic){
+    			$education = new Candidate_education();
+    			$education->candidate_id = $academic['id'];
+    			$education->level_of_education = $academic['degree_level'];
+    			$education->degree_title = $academic['degree_title'];
+    			$education->group_majar = $academic['major'];
+    			//$education->institute_id = $academic['institude'];
+    			$education->passing_year = $academic['completion_year'];
+    		}
     	}
     }
 
