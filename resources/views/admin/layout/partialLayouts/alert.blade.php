@@ -9,4 +9,13 @@
     </script>
 
     @endpush
+
+@elseif (session('error'))
+    @push('js')
+
+    <script>
+        toastr.error('{{ session('error') }}');
+    </script>
+
+    @endpush
 @endif

@@ -2,7 +2,7 @@
 @extends('admin.layout.admin')
 
 @section('content')
-@include('admin.layout.partialLayouts.alert')
+{{-- @include('admin.layout.partialLayouts.alert') --}}
 <!-- BEGIN: Subheader -->
 <div class="m-subheader ">
     <div class="d-flex align-items-center">
@@ -114,10 +114,10 @@
                             Email
                         </th>
                         <th title="Field #4">
-                            Address
+                            City
                         </th>
                         <th title="Field #5">
-                            City
+                            Country
                         </th>
                         <th title="Field #6">
                             Applied Jobs
@@ -150,10 +150,10 @@
                             {{ $cv->email }}
                         </td>
                         <td>
-                            {{ $cv->current_address }}
+                            {{ $cv->city }}
                         </td>
                         <td>
-                            {{ $cv->city }}
+                            {{ $cv->country }}
                         </td>
                         <td>
                             <span class="m-nav__link-badge">
@@ -173,7 +173,7 @@
                             </a>
                         </td>
                         <td>
-                            <a href="#" class="btn {{ ($cv->verified) ? 'btn-outline-success' : 'btn-outline-danger' }}  m-btn m-btn--icon m-btn--pill m-btn--air">
+                            <a href="{{ route('admin.candidate.status', $cv->id) }}" class="btn {{ ($cv->verified) ? 'btn-outline-success' : 'btn-outline-danger' }}  m-btn m-btn--icon m-btn--pill m-btn--air">
                                 <span>
                                     <i class="la la-{{ ($cv->verified) ? 'check-circle' : 'times-circle-o' }}"></i>
                                     <span>
@@ -186,9 +186,6 @@
                             <span style="overflow: visible; position: relative; width: 110px;">
                                 <a href="{{ route('admin.candidate.edit', $cv->id) }}" target="_blank" class="m-portlet__nav-link btn m-btn m-btn--hover-accent m-btn--icon m-btn--icon-only m-btn--pill" title="Edit details">
                                     <i class="la la-edit"></i>
-                                </a>
-                                <a href="#" class="m-portlet__nav-link btn m-btn m-btn--hover-danger m-btn--icon m-btn--icon-only m-btn--pill" title="Delete">
-                                    <i class="la la-trash"></i>
                                 </a>
                             </span>
                         </td>

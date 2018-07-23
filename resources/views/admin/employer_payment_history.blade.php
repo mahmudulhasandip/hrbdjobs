@@ -1,4 +1,8 @@
-@extends('admin.layout.admin') @section('content') @include('admin.layout.partialLayouts.alert')
+@extends('admin.layout.admin')
+
+@section('content')
+
+{{-- @include('admin.layout.partialLayouts.alert') --}}
 <!-- BEGIN: Subheader -->
 <div class="m-subheader ">
     <div class="d-flex align-items-center">
@@ -109,11 +113,11 @@
                         $id = 0;
                     @endphp
                     @foreach($payments as $payment)
-                    @php 
+                    @php
                         $id++;
                     @endphp
                     <tr>
-                        
+
                         <td>
                             {{ $id }}
                         </td>
@@ -135,7 +139,7 @@
                         <td>
                             {{ $payment->transaction_id }}
                         </td>
-                        
+
                     </tr>
                     @endforeach
                 </tbody>
@@ -146,7 +150,7 @@
 </div>
 
 
-@endsection 
+@endsection
 
 @push('css')
 <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/izitoast/1.3.0/css/iziToast.min.css" />
@@ -181,7 +185,7 @@
                     return '<span style="color: #8b91dd">' + e.TXID + "</span>"
                 }
             }],
-            
+
             }), $("#m_form_status").on("change", function () {
                 e.search($(this).val().toLowerCase(), "Status")
             }), $("#m_form_status, #m_form_type").selectpicker()

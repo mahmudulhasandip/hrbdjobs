@@ -1,4 +1,8 @@
-@extends('admin.layout.admin') @section('content') @include('admin.layout.partialLayouts.alert')
+@extends('admin.layout.admin')
+
+@section('content')
+
+{{-- @include('admin.layout.partialLayouts.alert') --}}
 <!-- BEGIN: Subheader -->
 <div class="m-subheader ">
     <div class="d-flex align-items-center">
@@ -46,7 +50,7 @@
                                         </label>
                                     </div>
                                     <div class="m-form__control">
-                                        <select class="form-control m-bootstrap-select" id="m_form_status">
+                                        <select class="form-control m-bootstrap-select m_selectpicker" id="m_form_status">
                                             <option value="">
                                                 All
                                             </option>
@@ -62,7 +66,7 @@
                                 <div class="d-md-none m--margin-bottom-10"></div>
                             </div>
 
-                            <div class="col-md-4">
+                            {{-- <div class="col-md-4">
                                 <div class="m-input-icon m-input-icon--left">
                                     <input type="text" class="form-control m-input" placeholder="Search..." id="generalSearch">
                                     <span class="m-input-icon__icon m-input-icon__icon--left">
@@ -71,14 +75,14 @@
                                         </span>
                                     </span>
                                 </div>
-                            </div>
+                            </div> --}}
                         </div>
                     </div>
                 </div>
             </div>
             <!--end: Search Form -->
 
-            <table class="m-datatable" id="scrolling_horizontal" width="100%">
+            <table class="mdl-data-table table table-striped table-bordered" id="html_table" width="100%">
                 <thead>
                     <tr>
                         <th title="Field #1">
@@ -121,11 +125,11 @@
                         $id = 0;
                     @endphp
                     @foreach($employers as $employer)
-                    @php 
+                    @php
                         $id++;
                     @endphp
                     <tr>
-                        
+
                         <td>
                             {{ $id }}
                         </td>
@@ -234,51 +238,52 @@
                     </tr>
                 </table>
             </div>
-            
+
         </div>
     </div>
 </div>
-@endsection 
+@endsection
 
 @push('css')
-<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/izitoast/1.3.0/css/iziToast.min.css" />
+<link rel="stylesheet" href="https://cdn.datatables.net/1.10.18/css/dataTables.bootstrap4.min.css">
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/material-design-lite/1.1.0/material.min.css">
 @endpush
-
 
 
 @push('js')
 
 <!--begin::Page Resources -->
-<script src="https://cdnjs.cloudflare.com/ajax/libs/izitoast/1.3.0/js/iziToast.min.js"></script>
+
+<script src="https://cdn.datatables.net/1.10.18/js/jquery.dataTables.min.js"></script>
+<script src="https://cdn.datatables.net/1.10.18/js/dataTables.bootstrap4.min.js"></script>
+
+<script>
+
+$('#html_table').DataTable( {
+    columnDefs: [
+        {
+            targets: [ 0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10],
+            className: 'mdl-data-table__cell--non-numeric'
+        }
+    ],
+    responsive: true,
+    fixedColumns: true
+});
+
+$("#m_form_status").on('change', function(){
+    $('#html_table').DataTable().search(this.value).draw();
+})
+
+
+</script>
+
+<script>
+    var BootstrapSelect={init:function(){$(".m_selectpicker").selectpicker()}};jQuery(document).ready(function(){BootstrapSelect.init()});
+</script>
+
 
 <script type="text/javascript">
-    // delete employer
-	// $('#deleteEmp').on('click', function(e){
-	// 	e.preventDefault();
-	// 	iziToast.show({
-	// 	theme: 'dark',
-	// 	icon: 'la la-trash-o',
-	// 	title: 'Are you sure?',
-	// 	message: '',
-	// 	position: 'center',
-	// 	progressBar: true,
-	// 	overlay: true,
-	// 	progressBarColor: '#e54545',
-	// 	buttons: [
-	// 		['<button>Delete</button>', function (instance, toast) {
-	// 			$('#delete-form').submit();
-	// 		}, true], 
-	// 		['<button>Close</button>', function (instance, toast) {
-	// 			instance.hide({
-	// 				transitionOut: 'fadeOutUp',
-	// 				onClosing: function(instance, toast, closedBy){
-	// 					console.info('closedBy: ' + closedBy); 
-	// 				}
-	// 			}, toast, 'buttonName');
-	// 		}]
-	// 	],
-	// 	});
-    // });
+
 
 
     $(document).ready(function() {
@@ -300,7 +305,7 @@
 </script>
 
 
-<script>
+{{-- <script>
     var DatatableHtmlTableDemo = {
     init: function () {
         var e;
@@ -313,7 +318,7 @@
             search: {
                 input: $("#generalSearch")
             },
-            
+
             }), $("#m_form_status").on("change", function () {
                 e.search($(this).val().toLowerCase(), "Status")
             }), $("#m_form_status, #m_form_type").selectpicker()
@@ -322,6 +327,6 @@
     jQuery(document).ready(function () {
         DatatableHtmlTableDemo.init();
     });
-</script>
+</script> --}}
 
 @endpush

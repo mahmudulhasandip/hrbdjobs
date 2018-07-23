@@ -1,4 +1,8 @@
-@extends('admin.layout.admin') @section('content') @include('admin.layout.partialLayouts.alert')
+@extends('admin.layout.admin')
+
+@section('content')
+
+{{-- @include('admin.layout.partialLayouts.alert') --}}
 <!-- BEGIN: Subheader -->
 <div class="m-subheader ">
     <div class="d-flex align-items-center">
@@ -112,11 +116,11 @@
                         $id = 0;
                     @endphp
                     @foreach($packages as $package)
-                    @php 
+                    @php
                         $id++;
                     @endphp
                     <tr>
-                        
+
                         <td>
                             {{ $id }}
                         </td>
@@ -146,7 +150,7 @@
                                 <i class="la la-eye"></i>
                             </a>
                         </td>
-                        
+
                     </tr>
                     @endforeach
                 </tbody>
@@ -191,14 +195,14 @@
                             <td style="font-weight: bold; width: 150px;">Transaction ID:</td>
                             <td class="text-danger" id="transaction_id"></td>
                         </tr>
-                        
+
                     </table>
                 </div>
-                
+
             </div>
         </div>
     </div>
-@endsection 
+@endsection
 
 @push('css')
 <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/izitoast/1.3.0/css/iziToast.min.css" />
@@ -223,7 +227,7 @@
             var jobPackageId = recipient.job_package_id;
             var featurePackageId = recipient.featured_package_id;
 
-            
+
             $.ajax({
 				url: base_url+"/employer/package/payment/",
 				type: "post",
@@ -238,10 +242,10 @@
                     modal.find('#discount').text(payment.discount);
                     modal.find('#transaction_type').text(payment.transaction_type);
                     modal.find('#transaction_id').text(payment.transaction_id);
-                    
+
 				}
 			});
-            
+
         });
     });
 </script>
@@ -260,7 +264,7 @@
             search: {
                 input: $("#generalSearch")
             },
-            
+
             }), $("#m_form_status").on("change", function () {
                 e.search($(this).val().toLowerCase(), "Status")
             }), $("#m_form_status, #m_form_type").selectpicker()

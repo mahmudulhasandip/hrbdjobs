@@ -63,6 +63,8 @@ Route::post('skills', 'AdminController\SkillsController@store')->name('skills.st
 Route::get('cvbank', 'AdminController\CvbankController@index')->name('cvbank');
 Route::post('cvbank', 'AdminController\CvbankController@filterCv')->name('cvbank.filter');
 Route::get('candidate/edit/{id}', 'AdminController\CvbankController@candidateEdit')->name('candidate.edit');
+Route::post('candidate/edit/update', 'AdminController\CvbankController@candidateUpdate')->name('candidate.update');
+Route::get('candidate/status/{id}', 'AdminController\CvbankController@candidateStatus')->name('candidate.status');
 
 
 // Institute

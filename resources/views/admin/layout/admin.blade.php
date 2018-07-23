@@ -25,7 +25,7 @@
     <link href="/admin/demo/default/base/style.bundle.css" rel="stylesheet" type="text/css" />
     <link href="/admin/custom/style.css" rel="stylesheet" type="text/css" />
     <!--end::Base Styles -->
-    
+
     @stack('css')
 
     <!-- Scripts -->
@@ -47,26 +47,31 @@
 		</script>
 	<!--end::Web font -->
 </head>
-<body class="m-page--fluid m--skin- m-content--skin-light2 m-header--fixed m-header--fixed-mobile m-aside-left--enabled m-aside-left--skin-dark m-aside-left--offcanvas m-footer--push m-aside--offcanvas-default" >  
-    
+<body class="m-page--fluid m--skin- m-content--skin-light2 m-header--fixed m-header--fixed-mobile m-aside-left--enabled m-aside-left--skin-dark m-aside-left--offcanvas m-footer--push m-aside--offcanvas-default" >
+
     <!-- begin:: Page -->
 	<div class="m-grid m-grid--hor m-grid--root m-page">
 
-        
+
         @include('admin.layout.partialLayouts.header')
 
         <!-- begin::Body -->
         <div class="m-grid__item m-grid__item--fluid m-grid m-grid--ver-desktop m-grid--desktop m-body">
 
-            
+
+
+            {{-- sidebar --}}
             @include('admin.layout.partialLayouts.sidebar')
 
-            <div class="m-grid__item m-grid__item--fluid m-wrapper">    
+            {{-- Alert notification --}}
+            @include('admin.layout.partialLayouts.alert')
+
+            <div class="m-grid__item m-grid__item--fluid m-wrapper">
                 @yield('content')
             </div>
         </div>
         <!-- end::Body -->
-        
+
         @include('admin.layout.partialLayouts.footer')
 
 	</div>
@@ -77,12 +82,12 @@
         <i class="la la-arrow-up"></i>
     </div>
     <!-- end::Scroll Top -->
-    
+
     <!--begin::Base Scripts -->
     <script src="/admin/vendors/base/vendors.bundle.js" type="text/javascript"></script>
     <script src="/admin/demo/default/base/scripts.bundle.js" type="text/javascript"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/toastr.js/2.1.4/toastr.min.js"></script>
-    <!--end::Base Scripts -->   
+    <!--end::Base Scripts -->
     <!--begin::Page Resources -->
     <script src="/admin/demo/default/custom/header/actions.js" type="text/javascript"></script>
     @stack('js')

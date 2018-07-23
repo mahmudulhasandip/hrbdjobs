@@ -115,4 +115,48 @@ class CvbankController extends Controller
         $data['countries'] = Country::all();
         return view('admin.candidate_edit', $data);
     }
+
+    // update candidate information
+    public function candidateUpdate(Request $request){
+        $input = $request->except('_token');
+        $candidate = Candidate::findOrFail($input['id']);
+
+        $candidate->fname = $input['fname'];
+        $candidate->lname = $input['lname'];
+        $candidate->gender = $input['gender'];
+        $candidate->city = $input['city'];
+        $candidate->country = $input['country'];
+        $candidate->current_address = $input['current_address'];
+        $candidate->permanent_address = $input['permanent_address'];
+        $candidate->nationality = $input['nationality'];
+        $candidate->nid_passport = $input['nid_passport'];
+        $candidate->marital_status = $input['marital_status'];
+        $candidate->father_name = $input['father_name'];
+        $candidate->mother_name = $input['mother_name'];
+        $candidate->spouse_name = $input['spouse_name'];
+        $candidate->website = $input['website'];
+        $candidate->linkedin = $input['linkedin'];
+
+        $candidate->save($input);
+        return redirect()->back()->with('status', 'Successfully updated.');
+    }
+
+    // block or active candidate
+    public function candidateStatus($id){
+        $candidate = Candidate::findOrFail($id);
+
+        if($candidate->verified){
+            $candidate->verified = 0;
+            $status = 'error';
+            $msg = 'Candidate Blocked.';
+        }else{
+            $candidate->verified = 1;
+            $status = 'status';
+            $msg = 'Candidate Active.';
+        }
+
+        $candidate->save();
+
+        return redirect()->back()->with($status, $msg);
+    }
 }

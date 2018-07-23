@@ -1,8 +1,8 @@
 
-@extends('admin.layout.admin') 
+@extends('admin.layout.admin')
 
 @section('content')
-@include('admin.layout.partialLayouts.alert')
+{{-- @include('admin.layout.partialLayouts.alert') --}}
 <!-- BEGIN: Subheader -->
 <div class="m-subheader ">
     <div class="d-flex align-items-center">
@@ -35,7 +35,7 @@
             </div>
         </div>
         <div class="m-portlet__body">
-            
+
 
             {{-- Add Industry --}}
             <div class="m-form m-form--label-align-right  m--margin-bottom-30">
@@ -137,8 +137,8 @@
                             {{ $featured_package->duration }}
                         </td>
                         <td>
-                            <span style="overflow: visible; position: relative; width: 110px;">			
-                                <a href="#" class="m-portlet__nav-link btn m-btn m-btn--hover-accent m-btn--icon m-btn--icon-only m-btn--pill" title="Edit details">							
+                            <span style="overflow: visible; position: relative; width: 110px;">
+                                <a href="#" class="m-portlet__nav-link btn m-btn m-btn--hover-accent m-btn--icon m-btn--icon-only m-btn--pill" title="Edit details">
                                     <i class="la la-edit"></i>
                                 </a>
                                 <a href="#" class="m-portlet__nav-link btn m-btn m-btn--hover-danger m-btn--icon m-btn--icon-only m-btn--pill" title="Delete">
@@ -168,7 +168,7 @@
 
     });
 
-    
+
 
 </script>
 <!--end::Page Resources -->

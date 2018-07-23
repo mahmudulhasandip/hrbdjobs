@@ -1,6 +1,9 @@
 @extends('admin.layout.admin')
+
 @section('content')
-    @include('admin.layout.partialLayouts.alert')
+
+{{-- @include('admin.layout.partialLayouts.alert') --}}
+
 <!-- BEGIN: Subheader -->
 <div class="m-subheader ">
     <div class="d-flex align-items-center">
