@@ -65,6 +65,9 @@ Route::post('cvbank', 'AdminController\CvbankController@filterCv')->name('cvbank
 Route::get('candidate/edit/{id}', 'AdminController\CvbankController@candidateEdit')->name('candidate.edit');
 Route::post('candidate/edit/update', 'AdminController\CvbankController@candidateUpdate')->name('candidate.update');
 Route::get('candidate/status/{id}', 'AdminController\CvbankController@candidateStatus')->name('candidate.status');
+Route::get('candidate/datatable', 'AdminController\CvbankController@candidateDatatable')->name('candidate.datatable');
+Route::get('candidate/applied/job/count/{candidate_id}', 'AdminController\CvbankController@appliedJobCout')->name('applied.job.count');
+
 
 
 // Institute

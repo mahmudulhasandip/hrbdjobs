@@ -134,7 +134,7 @@
                     </tr>
                 </thead>
                 <tbody>
-                    @php
+                    {{-- @php
                     $id= 1;
                     @endphp
 
@@ -190,7 +190,7 @@
                             </span>
                         </td>
                     </tr>
-                    @endforeach
+                    @endforeach --}}
                 </tbody>
             </table>
             <!--end: Datatable -->
@@ -222,17 +222,55 @@
 </script>
 
 <script>
+function runDataTable(){
+    $('#html_table').DataTable( {
+        processing: true,
+        serverSide: true,
+        ajax: '{{ route('admin.candidate.datatable') }}',
+        columns: [
+            { data: 'id' },
+            {
+                "data": null ,
+                "render" : function ( data, type, candidate ) {
+                                return candidate['fname']+' '+candidate['lname'];
+                            }
+            },
+            { data: 'email', name: 'email' },
+            { data: 'city', name: 'city' },
+            { data: 'country', name: 'country' },
+            {
+                "data": null ,
+                "render" : function ( data, type, candidate ) {
+                        return candidate['applied'];
+                                // get applied jobs
+                                // var totalApplied = 0;
+                                // $.ajax({
+                                //     async : false,
+                                //     url: "{{ url('/admin/candidate/applied/job/count/') }}"+"/"+candidate['id'],
+                                //     success: function(total){
+                                //         totalApplied =  total;
+                                //     }
 
-$('#html_table').DataTable( {
-    columnDefs: [
-        {
-            targets: [ 0, 1, 2, 3, 4, 5, 6, 7],
-            className: 'mdl-data-table__cell--non-numeric'
-        }
-    ],
-    responsive: true,
-    fixedColumns: true
-});
+                                // });
+
+                                // return totalApplied;
+                                // var custom_url = "{{ route('admin.cvbank') }}";
+                                // return '<a class="btn btn-success" href="'+custom_url+'">blabla</a>';
+                            }
+            },
+        ],
+        columnDefs: [
+            {
+                targets: [ 0, 1, 2],
+                className: 'mdl-data-table__cell--non-numeric'
+            }
+        ],
+        responsive: true,
+        fixedColumns: true
+    });
+}
+ runDataTable();
+
 
 </script>
 

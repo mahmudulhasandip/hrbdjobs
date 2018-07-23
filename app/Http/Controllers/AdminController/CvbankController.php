@@ -14,6 +14,10 @@ use App\Job_category;
 use App\Institute_name;
 use App\Skill;
 use App\Country;
+use App\Applied_job;
+
+use DataTables;
+use DB;
 
 class CvbankController extends Controller
 {
@@ -103,7 +107,10 @@ class CvbankController extends Controller
                                 })
                                 ->get();
 
-        return view('admin.cv_bank', $data);
+        // return view('admin.cv_bank', $data);
+
+        // return DataTables::of($data['cvs'])->make();
+        return view('admin.cv_bank')->with($data);
 
     }
 
@@ -158,5 +165,23 @@ class CvbankController extends Controller
         $candidate->save();
 
         return redirect()->back()->with($status, $msg);
+    }
+
+    // candidate datatable
+    public function candidateDatatable(){
+        // $candidate = Candidate::all();
+        $candidate = DB::table('candidates')
+            ->leftJoin('applied_jobs', 'applied_jobs.candidate_id', '=', 'candidates.id')
+            ->select(array('candidates.*', DB::raw('COUNT(applied_jobs.id) as applied')))
+            ->groupBy('candidates.id')
+            ->get();
+        //SELECT candidates.*, COUNT(applied_jobs.id) FROM `candidates` LEFT JOIN applied_jobs ON applied_jobs.candidate_id = candidates.id GROUP BY(candidates.id)
+        return DataTables::of($candidate)->make();
+    }
+
+    public function appliedJobCout($candidate_id){
+        // return Applied_job::where('candidate_id', $candidate_id)->where('is_withdraw', 0)->count();
+        return rand(10,100);
+
     }
 }
