@@ -54,9 +54,9 @@
                                     <span>Share</span><a href="#" title="" class="share-fb"><i class="fa fa-facebook"></i></a><a href="#" title="" class="share-twitter"><i class="fa fa-twitter"></i></a>
                                 </div>
                                 <div class="recent-jobs">
-                                    <h3>Recent Jobs</h3>
+                                    <h3>Similar Jobs</h3>
                                     <div class="job-list-modern">
-                                        <div id="recent-jobs" class="job-listings-sec no-border">
+                                        <div id="similar-jobs" class="job-listings-sec no-border">
                                         
                                         </div>
                                     </div>
@@ -111,11 +111,41 @@
                                         @endphp
                                     </span></li>
                                     <li><i class="la la-thumb-tack"></i><h3>Career Level</h3><span>{{ $job->jobLevel->name }}</span></li>
+                                    @if($job->jobCategory)
                                     <li><i class="la la-puzzle-piece"></i><h3>Job Category</h3><span>{{ $job->jobCategory->name }}</span></li>
+                                    @endif
                                     <li><i class="la la-shield"></i><h3>Experience</h3><span>{{ $job->experience }} Year(s)</span></li>
+                                    @if($job->jobDesignation)
+                                    <li><i class="la la-shield"></i><h3>Job Designation</h3><span>{{ $job->jobDesignation->name }}</span></li>
+                                    @endif
                                     <li><i class="la la-map"></i><h3>Location</h3><span>{{ $job->location }}</span></li>
                                 </ul>
                             </div><!-- Job Overview -->
+                            @if(sizeof($job->jobSkill) > 0)
+                                <div class="job-overview">
+                                    <h3>Required Skills</h3>
+                                    <div class="skills">
+                                            @foreach($job->jobSkill as $job_skill)
+                                                <span>{{ $job_skill->skill->name }}</span>
+                                            @endforeach
+                                    </div>
+                                </div>
+                            @endif
+                            <a class="apply-thisjob mt40" target="_blank" href="{{ route('company.profile', $company_info->id) }}" title=""><i class="la la-building-o"></i>View Company</a>
+
+                            @if (Auth::guard('candidate')->user())
+                                @php
+                                    $favJob = App\Favourite_job::where('job_id', $job->id)->where('candidate_id', Auth::guard('candidate')->user()->id)->where('status', 1)->first();
+                                @endphp
+                                @if($favJob)
+                                    <a href="javascript:void(0)" data-jobId="{{ $job->id }}" class="short-listed apply-thisjob mt40"><i class="fa fa-bookmark fa-2x"></i>Make it Unshorted</a>
+                                @else
+                                    <a href="javascript:void(0)" data-jobId="{{ $job->id }}" class="short-listed apply-thisjob mt40"><i class="la la-bookmark la-2x"></i>Make it Shortlisted</a>
+                                @endif
+                            @else
+                                <a href="{{ route('candidate.shortlisted.job') }}" class="apply-thisjob mt40"><i class="la la-bookmark la-2x"></i>Make it Shortlisted</a>
+                            @endif
+
                         </div>
                 </div>
             </div>
@@ -130,11 +160,12 @@
         $(document).ready(function() {
 
             $.ajax({
-                url: base_url+"/recent/jobs",
+                url: base_url+"/similar/jobs/",
                 type: "post",
                 headers: {'X-CSRF-TOKEN': Laravel.csrfToken},
-                success: function(recentJob){
-                    $('#recent-jobs').html(recentJob);
+                data:{id: "{{ $job->id }}"},
+                success: function(similarJob){
+                    $('#similar-jobs').html(similarJob);
                 }
             });
         });
@@ -146,4 +177,34 @@
             );
         }
     </script>
+
+    <script>
+    var can_base_url = "{{ url('/candidate/') }}";
+    $('.short-listed').click(function() {
+        var jobId = $(this).data('jobid');
+        if($(this).children().hasClass('fa')){
+            $(this).children().removeClass().addClass('la la-bookmark la-2x');
+        }else if($(this).children().hasClass('la')){
+            $(this).children().removeClass().addClass('fa fa-bookmark fa-2x');
+        }
+        $.ajax({
+            url: can_base_url+"/shortlisted/job/create",
+            type: "post",
+            headers: {'X-CSRF-TOKEN': Laravel.csrfToken},
+            data:{job_id: jobId},
+            success: function(message){
+                iziToast.success({
+                    title: message,
+                    timeout: 2000,
+                    overlay: true,
+                    position: 'topRight',
+                });
+
+                
+                
+            }
+        });
+        
+    });
+</script>
 @endpush

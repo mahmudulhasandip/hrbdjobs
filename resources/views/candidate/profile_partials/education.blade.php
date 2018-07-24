@@ -14,7 +14,19 @@
 								<div class="col-lg-6">
 									<span class="pf-title">Level Of Education</span>
 									<div class="pf-field">
-										<input type="text" name="level_of_education[]" value="{{ $eduction->level_of_education }}" />
+										<select name="level_of_education[]" data-placeholder="Allow In Search" class="chosen">
+											<option value="JSC/JDC" {{ $eduction->level_of_education == 'JSC/JDC' ? 'selected':'' }}>JSC/JDC</option>
+											<option value="SSC/Dakhil/Equivalent" {{ $eduction->level_of_education == 'SSC/Dakhil' ? 'selected':'' }}>SSC/Dakhil</option>
+											<option value="O Level" {{ $eduction->level_of_education == 'O Level' ? 'selected':'' }}>O Level</option>
+											<option value="A Level" {{ $eduction->level_of_education == 'A Level' ? 'selected':'' }}>A Level</option>
+											<option value="HSC/Alim/Equivalent" {{ $eduction->level_of_education == 'HSC/Alim/Equivalent' ? 'selected':'' }}>HSC/Alim/Equivalent</option>
+											<option value="Diploma" {{ $eduction->level_of_education == 'Diploma' ? 'selected':'' }}>Diploma</option>
+											<option value="Bachelors Degrees" {{ $eduction->level_of_education == 'Bachelors Degrees' ? 'selected':'' }}>Bachelors Degrees</option>
+											<option value="Masters Degrees" {{ $eduction->level_of_education == 'Masters Degrees' ? 'selected':'' }}>Masters Degrees</option>
+											<option value="PhD Degrees" {{ $eduction->level_of_education == 'PhD Degrees' ? 'selected':'' }}>PhD Degrees</option>
+											<option value="Others" {{ $eduction->level_of_education == 'Others' ? 'selected':'' }}>Other Degrees</option>
+
+										</select>
 									</div>
 								</div>
 
@@ -36,7 +48,12 @@
 								<div class="col-lg-6">
 									<span class="pf-title">Institution Name</span>
 									<div class="pf-field">
-										<input type="text" name="institution_name[]" value="{{ $eduction->institution_name }}"/>
+										<select class="req-skill"  name="institute_ids[]">
+											@foreach($institutes as $institute)
+											<option value="{{ $institute->id }}"  {{ ($institute->id == $eduction->institute_name_id) ? 'selected':'' }}>{{ $institute->name }}</option>
+											@endforeach
+										</select>
+										{{-- <input type="text" name="institute_ids[]" value="{{ $eduction->candidateInstitute->name }}"/> --}}
 									</div>
 								</div>
 
@@ -96,7 +113,19 @@
 				<div class="col-lg-6">
 					<span class="pf-title">Level Of Education</span>
 					<div class="pf-field">
-						<input type="text" name="level_of_education[]" required/>
+						<select name="level_of_education[]" data-placeholder="Allow In Search" class="chosen">
+							<option value="JSC/JDC">JSC/JDC</option>
+							<option value="SSC/Dakhil/Equivalent">SSC/Dakhil</option>
+							<option value="O Level">O Level</option>
+							<option value="A Level" >A Level</option>
+							<option value="HSC/Alim/Equivalent">HSC/Alim/Equivalent</option>
+							<option value="Diploma">Diploma</option>
+							<option value="Bachelors Degrees">Bachelors Degrees</option>
+							<option value="Masters Degrees">Masters Degrees</option>
+							<option value="PhD Degrees">PhD Degrees</option>
+							<option value="Others">Other Degrees</option>
+
+						</select>
 					</div>
 				</div>
 
@@ -117,7 +146,12 @@
 				<div class="col-lg-6">
 					<span class="pf-title">Institution Name</span>
 					<div class="pf-field">
-						<input type="text" name="institution_name[]" required/>
+						<select class="req-skill"  name="institute_ids[]">
+							<option value="">Enter Institution Name</option>
+							@foreach($institutes as $institute)
+							<option value="{{ $institute->id }}">{{ $institute->name }}</option>
+							@endforeach
+						</select>
 					</div>
 				</div>
 
@@ -171,7 +205,19 @@
 		<div class="col-lg-6">
 			<span class="pf-title">Level Of Education</span>
 			<div class="pf-field">
-				<input type="text" name="level_of_education[]" />
+				<select name="level_of_education[]" data-placeholder="Allow In Search" class="custom-chosen">
+					<option value="JSC/JDC">JSC/JDC</option>
+					<option value="SSC/Dakhil/Equivalent">SSC/Dakhil</option>
+					<option value="O Level">O Level</option>
+					<option value="A Level" >A Level</option>
+					<option value="HSC/Alim/Equivalent">HSC/Alim/Equivalent</option>
+					<option value="Diploma">Diploma</option>
+					<option value="Bachelors Degrees">Bachelors Degrees</option>
+					<option value="Masters Degrees">Masters Degrees</option>
+					<option value="PhD Degrees">PhD Degrees</option>
+					<option value="Others">Other Degrees</option>
+
+				</select>
 			</div>
 		</div>
 
@@ -192,7 +238,11 @@
 		<div class="col-lg-6">
 			<span class="pf-title">Institution Name</span>
 			<div class="pf-field">
-				<input type="text" name="institution_name[]"/>
+				<select class="custom-select2"  name="institute_ids[]">
+					@foreach($institutes as $institute)
+					<option value="{{ $institute->id }}">{{ $institute->name }}</option>
+					@endforeach
+				</select>
 			</div>
 		</div>
 

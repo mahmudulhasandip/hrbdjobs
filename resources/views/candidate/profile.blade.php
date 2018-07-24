@@ -76,17 +76,19 @@
                                         <p>{{ $candidate->about_me }}</p>
                                         <div class="edu-history-sec" id="education">
                                             <h2>Education</h2>
+                                            @if(sizeof($candidate->candidateEducation))
                                             @foreach($candidate->candidateEducation as $education)
                                             <div class="edu-history">
                                                 <i class="la la-graduation-cap"></i>
                                                 <div class="edu-hisinfo">
                                                     <h3>{{ $education->level_of_education }} - {{ $education->passing_year }}</h3>
                                                     <i>{{ $education->degree_title }} - {{ $education->gpa.' out of '.$education->out_of }}</i> 
-                                                    <span>{{ $education->institution_name }} <i>{{ $education->group_majar }}</i></span>
+                                                    <span>{{ $education->candidateInstitute->name }} <i>{{ $education->group_majar }}</i></span>
                                                     <p>{{ $education->achievement }}</p>
                                                 </div>
                                             </div>
                                             @endforeach
+                                            @endif
                                         </div>
                                         <div class="edu-history-sec" id="experience">
                                             <h2>Work & Experience</h2>
@@ -189,10 +191,12 @@
                                         <ul>
                                             <!-- <li><i class="la la-money"></i><h3>Offerd Salary</h3><span>£15,000 - £20,000</span></li> -->
                                             <li><i class="la la-mars-double"></i><h3>Gender</h3><span>{{ $candidate->gender }}</span></li>
-                                            <li><i class="la la-thumb-tack"></i><h3>Career Level</h3><span>{{ $candidate->candidateSkill->first()->jobLevel->name }}</span></li>
-                                            <li><i class="la la-puzzle-piece"></i><h3>Industry</h3><span>{{ $candidate->candidateSkill->first()->jobCategory->name }}</span></li>
-                                            <li><i class="la la-bomb"></i><h3>Designation</h3><span>{{ $candidate->candidateSkill->first()->jobDesignation->name }}</span></li>
-                                            <li><i class="la la-shield"></i><h3>Experience</h3><span>{{ $candidate->candidateSkill->first()->experience }} Years</span></li>
+                                            @if(sizeof($candidate->candidateSkill))
+                                                <li><i class="la la-thumb-tack"></i><h3>Career Level</h3><span>{{ $candidate->candidateSkill->first()->jobLevel->name }}</span></li>
+                                                <li><i class="la la-puzzle-piece"></i><h3>Industry</h3><span>{{ $candidate->candidateSkill->first()->jobCategory->name }}</span></li>
+                                                <li><i class="la la-bomb"></i><h3>Designation</h3><span>{{ $candidate->candidateSkill->first()->jobDesignation->name }}</span></li>
+                                                <li><i class="la la-shield"></i><h3>Experience</h3><span>{{ $candidate->candidateSkill->first()->experience }} Years</span></li>
+                                            @endif
                                             @if(sizeof($candidate->candidateEducation))
                                             <li><i class="la la-graduation-cap "></i><h3>Qualification</h3><span>{{ $candidate->candidateEducation[sizeof($candidate->candidateEducation)-1]->degree_title }}</span></li>
                                             @endif

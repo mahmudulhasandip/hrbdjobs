@@ -4,7 +4,7 @@
 @push('css')
 <link rel="stylesheet" type="text/css" href="/css/preloader.css" />
 <link rel="stylesheet" href="//code.jquery.com/ui/1.12.1/themes/base/jquery-ui.css">
-<link href="https://cdnjs.cloudflare.com/ajax/libs/select2/4.0.6-rc.0/css/select2.min.css" rel="stylesheet" />
+<link href="//cdnjs.cloudflare.com/ajax/libs/select2/4.0.0/css/select2.min.css" rel="stylesheet" />
 @endpush
 
 @section('content')
@@ -99,18 +99,19 @@
 
 @push('js')
 <script src="https://code.jquery.com/ui/1.12.1/jquery-ui.js"></script>
-<script src="https://cdnjs.cloudflare.com/ajax/libs/select2/4.0.6-rc.0/js/select2.min.js"></script>
+<script src="//cdnjs.cloudflare.com/ajax/libs/select2/4.0.0/js/select2.min.js"></script>
 <script src="/js/preloader.js" type="text/javascript"></script>
 <script>
 	var base_url = "{{ url('/candidate/') }}";
 	$(function(){
 	    $( ".datepicker" ).datepicker();
+	    // $('body').on('DOMNodeInserted', 'select', function () {
+	    //     $('.req-skill').select2();
+	    // });
 	});
 
 	$(document).ready(function() {
 		$('.req-skill').select2({
-			placeholder: 'Maximum 10 skills',
-			maximumSelectionLength: 10,
 			tags: true,
 			tokenSeparators: [',', ' '],
   			allowClear: true
@@ -290,8 +291,6 @@
 					$(".chosen").chosen();
 					$( ".datepicker" ).datepicker();
 					$('.req-skill').select2({
-						placeholder: 'Maximum 10 skills',
-						maximumSelectionLength: 10,
 						tags: true,
 						tokenSeparators: [',', ' '],
 			  			allowClear: true
@@ -309,6 +308,12 @@
 				headers: {'X-CSRF-TOKEN': Laravel.csrfToken},
 				success: function(education){
 					$('#education_view').html(education);
+					$(".chosen").chosen();
+					$('.req-skill').select2({
+						tags: true,
+						tokenSeparators: [',', ' '],
+			  			allowClear: true
+					});
 					setTimeout(function(){host.hide();}, 1000);
 				}
 			});
@@ -323,7 +328,6 @@
 				success: function(education){
 					$('#training_view').html(education);
 					$(".chosen").chosen();
-
 					setTimeout(function(){host.hide();}, 1000);
 				}
 			});
@@ -362,10 +366,18 @@
 	});
 
 	function makeBox(name){
-		$('#make_clone_box_'+name).append($('#make_clone_'+name).html());
+		var ranClassForChosen= Math.random().toString(36).substring(7);
+		var ranClassForSelect= Math.random().toString(36).substring(7);
+		var formFild = $('#make_clone_'+name).html();
+		formFild = formFild.replace('class="custom-chosen"', 'class="'+ranClassForChosen+'"');
+		formFild = formFild.replace('class="custom-select2"', 'class="'+ranClassForSelect+'"');
+		$('#make_clone_box_'+name).append(formFild);
 		$(".hasDatepicker").removeClass("hasDatepicker");
 		$(".datepicker").datepicker("destroy");
 		$(".datepicker").datepicker();
+
+		$("."+ranClassForChosen).chosen();
+		$('.'+ranClassForSelect).select2();
 	}
 
 </script>

@@ -14317,3 +14317,31 @@ form.cv-upload {
 footer .block {
     z-index: 0;
 }
+
+.select2-container{
+    float: left;
+    border: 2px solid #e8ecec;
+    -webkit-border-radius: 8px;
+    -moz-border-radius: 8px;
+    -ms-border-radius: 8px;
+    -o-border-radius: 8px;
+    border-radius: 8px;
+    padding: 12px 15px 12px 15px;
+    background: #ffffff;
+    font-family: Open Sans;
+    font-size: 13px;
+    color: #101010;
+    line-height: 24px;
+}
+
+.select2-container--default .select2-selection--single, .select2-container--default .select2-selection--multiple{
+    border: none;
+}
+
+.select2-selection__clear{
+    display: none;
+}
+
+.select2-search--dropdown{
+    border-top: 1px solid #e8ecec;
+}
