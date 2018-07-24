@@ -33,8 +33,8 @@
             <div class="m-form m-form--label-align-right  m--margin-bottom-30">
                 <div class="row align-items-center">
                     <div class="col-xl-12 order-2 order-xl-1">
-                        <form class="m-form m-form--fit m-form--label-align-right" method='post' action="{{ route('admin.cvbank.filter') }}">
-                            @csrf
+                        {{-- <form class="m-form m-form--fit m-form--label-align-right" method='post' action="{{ route('admin.cvbank.filter') }}"> --}}
+                            {{-- @csrf --}}
                             <div class="form-group m-form__group">
                                 <label>
                                     Find Candidates
@@ -61,7 +61,7 @@
                                         @endforeach
                                     </select>
                                     {{-- university --}}
-                                    <select name="institute" class="form-control m-bootstrap-select m_selectpicker" id="university" data-size="10" data-live-search="true">
+                                    <select name="institute" class="form-control m-bootstrap-select m_selectpicker" id="institute" data-size="10" data-live-search="true">
                                         <option value="">University</option>
                                         @foreach($institutes as $institute)
                                         <option value="{{ $institute['id'] }}" {{ ($institute['id'] == $institute_selected) ? 'selected' : ''}}>{{ $institute['name'] }}</option>
@@ -88,14 +88,14 @@
                                         <option value="{{ $category['id'] }}" {{ ($category['id'] == $category_selected) ? 'selected' : ''}}>{{ $category['name'] }}</option>
                                         @endforeach
                                     </select>
-                                    <div class="input-group-append">
+                                    {{-- <div class="input-group-append">
                                         <button class="btn btn-secondary" type="submit">
                                             Search
                                         </button>
-                                    </div>
+                                    </div> --}}
                                 </div>
                             </div>
-                        </form>
+                        {{-- </form> --}}
                     </div>
                 </div>
             </div>
@@ -223,16 +223,38 @@
 
 <script>
 function runDataTable(){
-    $('#html_table').DataTable( {
+    var status = $('#status').val();
+    var skill = $('#skill').val();
+    var experience = $('#experience').val();
+    var institute = $('#institute').val();
+    var job_level = $('#job_level').val();
+    var designation = $('#designation').val();
+    var category = $('#category').val();
+
+
+    var table = $('#html_table').DataTable( {
         processing: true,
         serverSide: true,
-        ajax: '{{ route('admin.candidate.datatable') }}',
+        ajax: {
+            url: '{{ route('admin.candidate.datatable') }}',
+            data: {
+                    status: status,
+                    skill: skill,
+                    experience: experience,
+                    institute: institute,
+                    job_level: job_level,
+                    designation: designation,
+                    category: category,
+                }
+            },
+        // deferRender: true,
         columns: [
             { data: 'id' },
             {
                 "data": null ,
                 "render" : function ( data, type, candidate ) {
-                                return candidate['fname']+' '+candidate['lname'];
+                                var img = (candidate['dp']) ? candidate['dp']: "default_user.png";
+                                return '<img src="{{ asset('storage/uploads/')}}/'+img+'" alt="photo" class="rounded" width="50">'+' '+candidate['fname']+' '+candidate['lname'];
                             }
             },
             { data: 'email', name: 'email' },
@@ -241,36 +263,59 @@ function runDataTable(){
             {
                 "data": null ,
                 "render" : function ( data, type, candidate ) {
-                        return candidate['applied'];
-                                // get applied jobs
-                                // var totalApplied = 0;
-                                // $.ajax({
-                                //     async : false,
-                                //     url: "{{ url('/admin/candidate/applied/job/count/') }}"+"/"+candidate['id'],
-                                //     success: function(total){
-                                //         totalApplied =  total;
-                                //     }
+                        // return candidate['applied'];
+                        return '<span class="m-nav__link-badge"><span class="m-badge m-badge--success m-badge--wide">'+candidate['applied']+'</span></span>';
 
-                                // });
-
-                                // return totalApplied;
-                                // var custom_url = "{{ route('admin.cvbank') }}";
-                                // return '<a class="btn btn-success" href="'+custom_url+'">blabla</a>';
                             }
             },
+            {
+                "data": null,
+                "render": (data, type, candidate) => {
+                    var id = candidate['id'];
+                    var route = '{{ url("/public/candidate/profile/") }}/'+id;
+                    return '<a href="'+route+'" target="_blank" class="btn btn-outline-success m-btn m-btn--icon m-btn--pill m-btn--air"><span><i class="la la-file-pdf-o"></i><span>CV</span></span></a>';
+                }
+            },
+            {
+                "data": null,
+                "render": (data, type, candidate) => {
+                    var id = candidate['id'];
+                    var btn_class = (candidate['verified']) ? 'btn-outline-success' : 'btn-outline-danger';
+                    var icon_class = (candidate['verified']) ? 'check-circle' : 'times-circle-o';
+                    var text = (candidate['verified']) ? 'Active': 'Blocked';
+                    return '<a href="{{ url('/admin/candidate/status/') }}/'+id+'" class="btn '+btn_class+' m-btn m-btn--icon m-btn--pill m-btn--air"><span><i class="la la-'+icon_class+'"></i><span>'+text+'</span></span></a>';
+                }
+            },
+            {
+                "data": null,
+                "render": (data, type, candidate) => {
+                    var id = candidate['id'];
+                    return '<span style="overflow: visible; position: relative; width: 110px;"><a href="{{ url('/admin/candidate/edit/')}}/'+id+'" target="_blank" class="m-portlet__nav-link btn m-btn m-btn--hover-accent m-btn--icon m-btn--icon-only m-btn--pill" title="Edit details"><i class="la la-edit"></i></a></span>';
+                }
+            }
         ],
         columnDefs: [
             {
-                targets: [ 0, 1, 2],
-                className: 'mdl-data-table__cell--non-numeric'
+                targets: 1,
+                className: 'mdl-data-table__cell--non-numeric text-left'
+            },
+            {
+                targets: [ 0, 2, 3, 4, 5],
+                className: 'mdl-data-table__cell--non-numeric text-center'
             }
         ],
         responsive: true,
+        destroy: true,
         fixedColumns: true
     });
-}
- runDataTable();
+};
 
+runDataTable();
+
+
+$('#status, #skill, #experience, #institute, #job_level, #designation, #category').on('change', function(){
+    runDataTable();
+});
 
 </script>
 

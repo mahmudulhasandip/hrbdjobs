@@ -168,20 +168,64 @@ class CvbankController extends Controller
     }
 
     // candidate datatable
-    public function candidateDatatable(){
-        // $candidate = Candidate::all();
-        $candidate = DB::table('candidates')
-            ->leftJoin('applied_jobs', 'applied_jobs.candidate_id', '=', 'candidates.id')
-            ->select(array('candidates.*', DB::raw('COUNT(applied_jobs.id) as applied')))
-            ->groupBy('candidates.id')
-            ->get();
+    public function candidateDatatable(Request $request){
+        $status = $request['status'];
+        $skill = $request['skill'];
+        $experience = $request['experience'];
+        $institute = $request['institute'];
+        $job_level = $request['job_level'];
+        $designation = $request['designation'];
+        $category = $request['category'];
+        $candidate = Candidate::applied()
+                                ->when($status != 321, function($query) use ($status){
+                                    $query->where('verified', $status);
+                                })
+                                ->when($institute, function($query) use ($institute) {
+                                    $query->whereHas('candidateEducation', function($query) use ($institute){
+                                        return $query->where('institute_name_id', $institute);
+                                    });
+                                })
+                                ->when($experience, function($query) use ($experience){
+                                    $query->whereHas('candidateSkill', function($query) use ($experience) {
+                                        return $query->where('experience', '>=', $experience);
+                                    });
+                                })
+                                ->when($job_level, function($query) use ($job_level){
+                                    $query->whereHas('candidateSkill', function($query) use ($job_level) {
+                                        return $query->where('job_level', $job_level);
+                                    });
+                                })
+                                ->when($designation, function($query) use ($designation){
+                                    $query->whereHas('candidateSkill', function($query) use ($designation) {
+                                        return $query->where('designation_id', $designation);
+                                    });
+                                })
+                                ->when($category, function($query) use ($category){
+                                    $query->whereHas('candidateSkill', function($query) use ($category) {
+                                        return $query->where('category_id', $category);
+                                    });
+                                })
+                                ->when($skill, function($query) use ($skill){
+                                    $query->whereHas('candidateSkill', function($query) use ($skill) {
+                                        return $query->where('expertise_area', $skill);
+                                    });
+                                })
+                                ->get();
+
+        // $candidate = DB::table('candidates')
+        //     ->leftJoin('applied_jobs', 'applied_jobs.candidate_id', '=', 'candidates.id')
+        //     ->select(array('candidates.*', DB::raw('COUNT(applied_jobs.id) as applied')))
+        //     ->groupBy('candidates.id')
+        //     ->get();
         //SELECT candidates.*, COUNT(applied_jobs.id) FROM `candidates` LEFT JOIN applied_jobs ON applied_jobs.candidate_id = candidates.id GROUP BY(candidates.id)
+
+
         return DataTables::of($candidate)->make();
     }
 
-    public function appliedJobCout($candidate_id){
-        // return Applied_job::where('candidate_id', $candidate_id)->where('is_withdraw', 0)->count();
-        return rand(10,100);
+    // public function appliedJobCout($candidate_id){
+    //     // return Applied_job::where('candidate_id', $candidate_id)->where('is_withdraw', 0)->count();
+    //     return rand(10,100);
 
-    }
+    // }
 }

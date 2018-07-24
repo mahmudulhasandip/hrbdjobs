@@ -5,6 +5,7 @@ namespace App;
 use App\Notifications\CandidateResetPassword;
 use Illuminate\Notifications\Notifiable;
 use Illuminate\Foundation\Auth\User as Authenticatable;
+use DB;
 
 class Candidate extends Authenticatable
 {
@@ -85,5 +86,15 @@ class Candidate extends Authenticatable
 
     public function verifyCandidate(){
         return $this->hasOne('App\VerifyCandidate', 'user_id', 'id');
+    }
+
+
+
+
+    //
+
+    public function scopeApplied($query)
+    {
+        return $query->leftJoin('applied_jobs', 'applied_jobs.candidate_id', '=', 'candidates.id')->select(array('candidates.*', DB::raw('COUNT(applied_jobs.id) as applied')))->groupBy('candidates.id');
     }
 }

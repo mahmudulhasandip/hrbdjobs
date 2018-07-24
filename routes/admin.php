@@ -66,7 +66,7 @@ Route::get('candidate/edit/{id}', 'AdminController\CvbankController@candidateEdi
 Route::post('candidate/edit/update', 'AdminController\CvbankController@candidateUpdate')->name('candidate.update');
 Route::get('candidate/status/{id}', 'AdminController\CvbankController@candidateStatus')->name('candidate.status');
 Route::get('candidate/datatable', 'AdminController\CvbankController@candidateDatatable')->name('candidate.datatable');
-Route::get('candidate/applied/job/count/{candidate_id}', 'AdminController\CvbankController@appliedJobCout')->name('applied.job.count');
+// Route::get('candidate/applied/job/count/{candidate_id}', 'AdminController\CvbankController@appliedJobCout')->name('applied.job.count');
 
 
 
