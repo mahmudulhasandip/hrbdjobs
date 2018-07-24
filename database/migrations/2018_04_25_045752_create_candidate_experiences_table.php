@@ -17,7 +17,7 @@ class CreateCandidateExperiencesTable extends Migration
             $table->increments('id')->unsigned()->unique();
             $table->integer('candidate_id')->unsigned();
             $table->string('company_name');
-            $table->string('responsibility')->nullable(); 
+            $table->text('responsibility')->nullable(); 
             $table->integer('candidate_designation')->unsigned();
             $table->string('company_designation')->nullable();
             $table->date('start_date')->nullable();

@@ -12,7 +12,8 @@ class Skill extends Model
     ];
     
     public function jobSkill(){
-        return $this->hasOne('App\Job_skill', 'skill', 'id');
+    	// return $this->belongsTo('App\Job_skill');
+        return $this->hasOne('App\Job_skill', 'skill_id', 'id');
     }
 
     public function candidateSkill(){

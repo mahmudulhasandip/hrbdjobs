@@ -51,7 +51,7 @@
 				 		</div>
 				 		
 				 		<div class="widget">
-				 			<h3 class="sb-title closed">Job Type</h3>
+				 			<h3 class="sb-title {{ sizeof($job_levels) > 0 ? 'active':'closed' }}">Job Type</h3>
 				 			<div class="type_widget">
 				 				@foreach($job_levels as $level)
 				 					@php 
@@ -68,7 +68,7 @@
 				 			</div>
 				 		</div>
 				 		<div class="widget">
-				 			<h3 class="sb-title active">Specialism</h3>
+				 			<h3 class="sb-title {{ sizeof($categories) > 0 ? 'active':'closed' }}">Specialism</h3>
 				 			<div class="specialism_widget">
 				 				<div class="simple-checkbox scrollbar specialism">
 				 					@foreach($categories as $cat)

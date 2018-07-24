@@ -15,6 +15,7 @@ use App\Job_experience;
 use App\Job_level;
 use App\Country;
 use App\Skill;
+use App\Institute_name;
 
 use App\Candidate_education;
 use App\Candidate_training;
@@ -45,6 +46,7 @@ class ProfileController extends Controller
 
     public function getEducation(Request $request){
         $data['candidateEducations'] = Candidate_education::where('candidate_id', Auth::guard('candidate')->user()->id)->get();
+        $data['institutes'] = Institute_name::all();
         return view('candidate.profile_partials.education', $data);
     }
 
@@ -58,9 +60,10 @@ class ProfileController extends Controller
         $gpa = $request->input('gpa');
         $out_of = $request->input('out_of');
         $group_majar = $request->input('group_majar');
-        $institution_name = $request->input('institution_name');
+        $institutions = $request->input('institute_ids');
         $passing_year = $request->input('passing_year');
         $achievement = $request->input('achievement');
+
         if(sizeof($level_of_education)){
             for($i = 0; $i < sizeof($level_of_education); $i++){
                 $education = new Candidate_education();
@@ -70,7 +73,16 @@ class ProfileController extends Controller
                 $education->gpa = $gpa[$i];
                 $education->out_of = $out_of[$i];
                 $education->group_majar = $group_majar[$i];
-                $education->institution_name = $institution_name[$i];
+                /// TO DO
+                if(Institute_name::where('id', $institutions[$i])->first()){
+                    $education->institute_name_id = $institutions[$i];
+                }else{
+                    $institute = new Institute_name();
+                    $institute->name = $institutions[$i];
+                    $institute->verified = 0;
+                    $institute->save();
+                    $education->institute_name_id = $institute->id;
+                }
                 $education->passing_year = $passing_year[$i];
                 $education->achievement = $achievement[$i];
                 $education->save();

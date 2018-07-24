@@ -137,10 +137,18 @@
                             {{ $job->title }}
                         </td>
                         <td>
+                            @if($job->jobCategory)
                             {{ $job->jobCategory->name }}
+                            @else
+                            -
+                            @endif
                         </td>
                         <td>
+                            @if($job->jobDesignation)
                             {{ $job->jobDesignation->name }}
+                            @else
+                            -
+                            @endif
                         </td>
                         <td>
                             {{ $job->jobLevel->name }}

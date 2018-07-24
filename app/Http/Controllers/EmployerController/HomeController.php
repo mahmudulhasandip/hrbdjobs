@@ -211,7 +211,7 @@ class HomeController extends Controller
             for($i=0; $i < sizeof($request->input('skill')); $i++){
                 $jobSkill = new Job_skill();
                 $jobSkill->job_id = $postJob->id;
-                $jobSkill->skill = $request->input('skill')[$i];
+                $jobSkill->skill_id = $request->input('skill')[$i];
                 $jobSkill->save();
             }
         }

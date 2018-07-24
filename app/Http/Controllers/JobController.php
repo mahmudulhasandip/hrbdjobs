@@ -22,6 +22,39 @@ class JobController extends Controller
         return view('users.job_detail', $data);
     }
 
+    function  similarJobs(Request $request){
+        $exist_job = Job::where('id', $request->input('id'))->first();
+        $similar_jobs = Job::where('jobs.deadline', '>=', date('Y-m-d'))
+                                ->where('job_category_id', $exist_job->job_category_id)
+                                ->where('is_verified', '=', 1)
+                                ->where('is_paused', '=', 0)
+                                ->where('is_special', 0)
+                                ->where('is_drafted', 0)
+                                ->orderBy('updated_at', 'desc')
+                                ->limit(5)
+                                ->get();
+        $data = '';
+        foreach($similar_jobs as $job){
+            $logo = ( $job->employer->employerCompanyInfo["logo"] ) ? asset("storage/uploads/".$job->employer->employerCompanyInfo["logo"]) : asset("storage/uploads/company-avatar.png");
+
+            $single_job = route('single.job', $job->id);
+
+            $data .= '<div class="job-listing wtabs">
+                        <div class="job-title-sec pointer newtab" onclick="viewJob(\''.$single_job.'\')">
+                            <div class="c-logo"> <img src="'.$logo.'" alt="" /> </div>
+                            <h3><a href="'.$single_job.'" target="_blank" title="">'.$job->title.'</a></h3>
+                            <span>'.$job->employer->employerCompanyInfo["name"].'</span>
+                            <div class="job-lctn"><i class="la la-map-marker"></i>'.$job->employer->employerCompanyInfo["city"].", ". $job->employer->employerCompanyInfo["country"].'</div>
+                        </div>
+                        <div class="job-style-bx">
+                            <span class="job-is ft fill">'.$job->jobLevel->name.'</span>
+                            <i class="text-danger remove_shortlist pointer"><i class="la la-clock-o"></i> '.date("M d, Y", strtotime($job->deadline)).'</i>
+                        </div>
+                    </div>';
+        }
+        return $data;
+    }
+
     function recentJobs(Request $request){
         $recent_jobs = Job::where('jobs.deadline', '>=', date('Y-m-d'))
                                 ->where('is_verified', '=', 1)

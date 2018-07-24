@@ -22,6 +22,11 @@ Route::post('/recent/jobs', [
   'uses'  => 'JobController@recentJobs'
 ]);
 
+Route::post('/similar/jobs/{id}', [
+  'as'    => 'similar.jobs',
+  'uses'  => 'JobController@similarJobs'
+]);
+
 Route::post('/featured/jobs', [
   'as'    => 'featured.jobs',
   'uses'  => 'JobController@featuredJobs'
@@ -80,7 +85,7 @@ Route::get('contact-us', [
   'uses'  => 'UserController@getContactUs'
 ]);
 
-// Data Retrieve Through API
+#################################### Data Retrieve Through API
 Route::get('/store/candidate/{per_page}/{page?}', [
   'as'    => 'candidate.store.api',
   'uses'  => 'AdminController\DataRetrieveController@getAllCandidate'
@@ -101,6 +106,32 @@ Route::get('/store/skills/all', [
   'uses'  => 'AdminController\DataRetrieveController@storeAllSkills'
 ]);
 
+Route::get('/store/industries/all', [
+  'as'    => 'industry.store.api',
+  'uses'  => 'AdminController\DataRetrieveController@storeIndustries'
+]);
+
+Route::get('/store/resumes/all', [
+  'as'    => 'resumes.store.api',
+  'uses'  => 'AdminController\DataRetrieveController@storeResume'
+]);
+
+// employers retrieve
+Route::get('/store/employers/all/{pphp er_page}/{page?}', [
+  'as'    => 'employers.store.api',
+  'uses'  => 'AdminController\DataRetrieveController@storeEmployers'
+]);
+
+Route::get('/store/jobs/{per_page}/{page?}', [
+  'as'    => 'jobs.store.api',
+  'uses'  => 'AdminController\DataRetrieveController@storeJobs'
+]);
+
+################### Get Country From API ###################### 
+// Route::get('/country', [
+//   'as'  => 'country',
+//   'uses'  => 'AdminController\CountryController@storeCountryFromAPI'
+// ]);
 
 Route::group(['prefix' => 'admin'], function () {
   Route::get('/login', 'AdminAuth\LoginController@showLoginForm')->name('admin.login');

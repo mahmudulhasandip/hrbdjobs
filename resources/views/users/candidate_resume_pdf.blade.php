@@ -380,7 +380,7 @@
                                 </td>
                                 <!--Institute:-->
                                 <td width="25%" class="border-right-ash border-top-ash">
-                                    {{ $education->institution_name }}
+                                    {{ $education->candidateInstitute->name }}
                                 </td>
                                 <!--Result:-->
                                 <td width="12.5%" class="border-right-ash border-top-ash">CGPA:{{ $education->gpa }}<br>out of {{ $education->out_of }}
@@ -549,7 +549,7 @@
                                 </td>
                             </tr>
                         @endif
-                    @if($candidate->candidateSkill)
+                    @if(sizeof($candidate->candidateSkill))
                         <!--Preferred Job Category:-->
                         <tr class="HRBDNormalText03">
                             <td width="35%" align="left" style="padding-left:5px;">Preferred  Job Category</td>

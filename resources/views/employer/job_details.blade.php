@@ -79,7 +79,12 @@
                                         @endphp
                                     </span></li>
                                     <li><i class="la la-thumb-tack"></i><h3>Career Level</h3><span>{{ $job->jobLevel->name }}</span></li>
+                                    @if($job->jobCategory)
                                     <li><i class="la la-puzzle-piece"></i><h3>Job Category</h3><span>{{ $job->jobCategory->name }}</span></li>
+                                    @endif
+                                    @if($job->jobDesignation)
+                                    <li><i class="la la-puzzle-piece"></i><h3>Job Designation</h3><span>{{ $job->jobDesignation->name }}</span></li>
+                                    @endif
                                     <li><i class="la la-shield"></i><h3>Experience</h3><span>{{ $job->experience }} Year(s)</span></li>
                                     <li><i class="la la-map"></i><h3>Location</h3><span>{{ $job->location }}</span></li>
                                 </ul>

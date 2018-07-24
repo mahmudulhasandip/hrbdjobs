@@ -162,7 +162,7 @@
 		<div class="col-md-6">
 			<span class="pf-title">Candidate Designation</span>
 			<div class="pf-field">
-				<select name="candidate_designation[]" data-placeholder="Please Select Specialism" class="chosen">
+				<select name="candidate_designation[]" data-placeholder="Please Select Specialism" class="custom-chosen">
 					@foreach($jobDesignations as $jobDesignation)
 					<option value="{{ $jobDesignation->id }}" >{{ $jobDesignation->name }}</option>
 					@endforeach

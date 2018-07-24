@@ -11,6 +11,6 @@ class Candidate_education extends Model
     }
 
     public function candidateInstitute(){
-        return $this->hasOne('App\Institute_name', 'institute_id', 'id');
+        return $this->hasOne('App\Institute_name', 'id', 'institute_name_id');
     }
 }

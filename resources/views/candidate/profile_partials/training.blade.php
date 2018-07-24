@@ -177,7 +177,7 @@
 		<div class="col-lg-6">
 			<span class="pf-title">Country</span>
 			<div class="pf-field">
-				<select name="country[]" class="chosen">
+				<select name="country[]" class="custom-chosen">
 					@foreach($countries as $country)
 						<option value="{{ $country->name }}" {{ ($country->name == 'Bangladesh') ? 'selected':''}}>{{ $country->name }}</option>
 					@endforeach
