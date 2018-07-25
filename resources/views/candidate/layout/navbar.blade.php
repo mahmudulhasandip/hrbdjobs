@@ -12,15 +12,32 @@
     </div>
 
     <div class="responsive-opensec">
-        @if (Auth::guest())
+        {{-- @if (Auth::guest()) --}}
         <div class="btn-extars">
-            <a href="#" title="" class="post-job-btn"><i class="la la-plus"></i>Post Jobs</a>
-            <ul class="account-btns">
-                <li class="signup-popup"><a title=""><i class="la la-key"></i> Sign Up</a></li>
-                <li class="signin-popup"><a title=""><i class="la la-external-link-square"></i> Login</a></li>
-            </ul>
+            @if(Auth::guard('candidate')->user())
+               <a href="{{ route('candidate.home') }}" title="">
+                    <div class="btns-profiles-sec">
+                        <span><img src="{{ asset('storage/uploads/'.((Auth::guard('candidate')->user()->dp) ? Auth::guard('candidate')->user()->dp : 'default_user.png'))}}">{{ Auth::guard('candidate')->user()->fname }}</span>
+                    </div>
+                </a>
+            @endif
+            @if(Auth::guard('employer')->user())
+                <a href="{{ route('employer.new.job') }}" title="" class="post-job-btn"><i class="la la-plus"></i>Post Jobs</a>
+                <a href="{{ route('employer.home') }}" title="" >
+                    <div class="btns-profiles-sec">
+                        <span><img src="{{ asset('storage/uploads/'.((Auth::guard('employer')->user()->employerCompanyInfo->logo) ? Auth::guard('employer')->user()->employerCompanyInfo->logo : 'default_user.png'))}}">{{ Auth::guard('employer')->user()->fname }}</span>
+                    </div>
+                </a>
+            @endif
+            @if(!Auth::guard('employer')->user() && !Auth::guard('candidate')->user())
+                <a href="{{ route('employer.new.job') }}" title="" class="post-job-btn"><i class="la la-plus"></i>Post Jobs</a>
+                <ul class="account-btns">
+                    <li class="signup-popup"><a title=""><i class="la la-key"></i> Sign Up</a></li>
+                    <li class="signin-popup"><a title=""><i class="la la-external-link-square"></i> Login</a></li>
+                </ul>
+            @endif
         </div><!-- Btn Extras -->
-        @endif
+        {{-- @endif --}}
         <form action="{{ url('/browse/jobs') }}" method="get" class="res-search">
             <input type="text" name="keyword" placeholder="Job title, keywords or company name" />
             <button type="submit"><i class="la la-search"></i></button>
@@ -39,16 +56,25 @@
                     <li class="">
                         <a href="{{ route('contact.us') }}" title="">Contact</a>
                     </li>
+                    @if(Auth::guard('candidate')->user())
+                    <li class="">
+                        <a href="{{ route('candidate.logout') }}"
+                                onclick="event.preventDefault();
+                                            document.getElementById('logout-form').submit();">
+                                            Log Out
+                        </a>
+                    </li>
+                    @endif
                 </ul>
         </div>
     </div>
 </div>
 
-@if (Auth::guest())
+{{-- @if (Auth::guest())
 <header class="stick-top forsticky white">
-@else
+@else --}}
 <header class="stick-top forsticky">
-@endif
+{{-- @endif --}}
 {{--  --}}
     <div class="menu-sec">
         <div class="container">
@@ -58,7 +84,7 @@
             @if (Auth::guest())
             <div class="btn-extars">
                 <a href="{{ route('employer.new.job') }}" title="" class="post-job-btn"><i class="la la-plus"></i>Post Jobs</a>
-                
+
                 <ul class="account-btns">
                     <li class="signup-popup"><a href="{{ route('candidate.register') }}" title=""><i class="la la-key"></i> Sign Up</a></li>
                     <li class="signin-popup"><a href="{{ route('candidate.login') }}" title=""><i class="la la-external-link-square"></i> Login</a></li>
