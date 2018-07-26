@@ -7,7 +7,7 @@
         <li class="inner-child {{ ($left_active == 'profile')? 'active':'' }}">
             <a href="#" title="" class="main-a"><i class="la la-file-text"></i>My Profile</a>
             <ul>
-                <li><a href="{{ route('candidate.profile') }}" title="">View Profile</a></li>
+                <li><a href="{{ route('candidate.profile') }}" title="" target="_blank">View Profile</a></li>
                 <li><a href="{{ route('candidate.profile.edit') }}" title="">Edit Profile</a></li>
             </ul>
         </li>

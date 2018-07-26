@@ -18,7 +18,7 @@
                         <span><img src="{{ asset('storage/uploads/'.((Auth::guard('candidate')->user()->dp) ? Auth::guard('candidate')->user()->dp : 'default_user.png'))}}">{{ Auth::guard('candidate')->user()->fname }}</span>
                     </div>
                 </a>
-            @endif   
+            @endif
             @if(Auth::guard('employer')->user())
                 <a href="{{ route('employer.new.job') }}" title="" class="post-job-btn"><i class="la la-plus"></i>Post Jobs</a>
                 <a href="{{ route('employer.home') }}" title="" >
@@ -58,11 +58,11 @@
     </div>
 </div>
 
-@if ($page == 'home')
+{{-- @if ($page == 'home') --}}
 <header class="stick-top forsticky">
-@else
+{{-- @else
 <header class="stick-top forsticky white sticky">
-@endif
+@endif --}}
     <div class="menu-sec">
         <div class="container">
             <div class="logo">
@@ -80,7 +80,7 @@
                         padding: 3px 10px;
                     }
                 }
-                    
+
             </style>
             @endif
             <div class="btn-extars">
@@ -90,7 +90,7 @@
                             <span><img src="{{ asset('storage/uploads/'.((Auth::guard('candidate')->user()->dp) ? Auth::guard('candidate')->user()->dp : 'default_user.png'))}}">{{ Auth::guard('candidate')->user()->fname }}</span>
                         </div>
                     </a>
-                @endif   
+                @endif
                 @if(Auth::guard('employer')->user())
                     <a href="{{ route('employer.new.job') }}" title="" class="post-job-btn"><i class="la la-plus"></i>Post Jobs</a>
                     <a href="{{ route('employer.home') }}" title="" >
