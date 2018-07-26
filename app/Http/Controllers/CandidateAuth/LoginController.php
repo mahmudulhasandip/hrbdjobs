@@ -58,6 +58,10 @@ class LoginController extends Controller
      */
     public function showLoginForm()
     {
+        if(Auth::guard('employer')){
+            return redirect('/employer/home')->withErrors(['status' => "You are already loggen in as Employer"]);
+        }
+
         if(URL::previous() != url('/')){
             session()->put('backUrl', URL::previous());
         }
