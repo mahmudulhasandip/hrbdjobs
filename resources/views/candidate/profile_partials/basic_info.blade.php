@@ -141,7 +141,7 @@
 		<div class="col-lg-6">
 			<span class="pf-title">Spouse Name</span>
 			<div class="pf-field">
-				<input type="text" name="spouse_name" value="{{ $candidate->spouse_name }}" placeholder="Your Mother Name" />
+				<input type="text" name="spouse_name" value="{{ $candidate->spouse_name }}" placeholder="Your Spouse Name" />
 			</div>
 		</div>
 
@@ -213,18 +213,18 @@
 				</select>
 			</div>
 		</div>
-		
+
 		<div class="col-lg-12">
 			<span class="pf-title">Expertise Area</span>
 			<div class="pf-field no-margin">
-				@php 
+				@php
 					$canSkills = array();
 					if(sizeof($candidateSkills)){
 						foreach ($candidateSkills as $skill) {
 							$canSkills[] = $skill->expertise_area;
 						}
 					}
-					
+
 				@endphp
 
 				<select multiple="multiple" class="req-skill"  name="expertise_area[]">
@@ -234,7 +234,7 @@
 				</select>
 			</div>
 		</div>
-		
+
 		<div class="col-lg-12">
 			<button type="submit">Update</button>
 		</div>

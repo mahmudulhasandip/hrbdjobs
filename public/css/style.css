@@ -7420,7 +7420,7 @@ aside .widget.border:first-child {
 .pf-field>textarea {
     float: left;
     width: 100%;
-    border: 2px solid #e8ecec;
+    border: 1px solid #e8ecec;
     -webkit-border-radius: 8px;
     -moz-border-radius: 8px;
     -ms-border-radius: 8px;
@@ -7434,6 +7434,18 @@ aside .widget.border:first-child {
     line-height: 24px;
 }
 
+.pf-field>input:hover,
+.pf-field>textarea:hover,
+.pf-field>textarea:hover {
+    border-color: #454cad;
+}
+
+.pf-field>input:focus,
+.pf-field>textarea:focus,
+.pf-field>textarea:focus {
+    border-color: #454cad;
+}
+
 .pf-field>textarea {
     color: #888888;
     padding: 20px 20px;
@@ -7442,7 +7454,7 @@ aside .widget.border:first-child {
 .profile-form-edit>form button {
     float: right;
     background: #ffffff;
-    border: 2px solid #e54545;
+    border: 1px solid #e54545;
     color: #202020;
     font-family: Open Sans;
     font-size: 15px;
@@ -7555,7 +7567,7 @@ aside .widget.border:first-child {
 .contact-edit>form button {
     float: right;
     background: #ffffff;
-    border: 2px solid #e54545;
+    border: 1px solid #e54545;
     color: #202020;
     font-family: Open Sans;
     font-size: 15px;
@@ -13520,7 +13532,7 @@ header.style4 .account-btns>li a,
     text-align: center;
     background: #fff;
     border-radius: 7px;
-    border: 3px solid #eee;
+    border: 1px solid #eee;
     transition: all .2s ease;
     -webkit-user-select: none;
     -moz-user-select: none;
@@ -14318,9 +14330,9 @@ footer .block {
     z-index: 0;
 }
 
-.select2-container{
+.select2-container {
     float: left;
-    border: 2px solid #e8ecec;
+    border: 1px solid #e8ecec;
     -webkit-border-radius: 8px;
     -moz-border-radius: 8px;
     -ms-border-radius: 8px;
@@ -14334,14 +14346,19 @@ footer .block {
     line-height: 24px;
 }
 
-.select2-container--default .select2-selection--single, .select2-container--default .select2-selection--multiple{
+.select2-container--default .select2-selection--single,
+.select2-container--default .select2-selection--multiple {
     border: none;
 }
 
-.select2-selection__clear{
+.select2-selection__clear {
     display: none;
 }
 
-.select2-search--dropdown{
+.select2-search--dropdown {
     border-top: 1px solid #e8ecec;
+}
+
+.chosen-container-single .chosen-single {
+    border: 1px solid #e8ecec;
 }

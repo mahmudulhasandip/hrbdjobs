@@ -23,12 +23,13 @@
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/izitoast/1.3.0/css/iziToast.min.css" />
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/pace/1.0.2/themes/red/pace-theme-flash.min.css" />
     <link rel="stylesheet" href="/css/chosen.css">
+    {{-- <link rel="stylesheet" href="https://unpkg.com/bootstrap-material-design@4.1.1/dist/css/bootstrap-material-design.min.css"> --}}
     @stack('css')
 	<link rel="stylesheet" type="text/css" href="/css/style.css" />
 	<link rel="stylesheet" type="text/css" href="/css/responsive.css" />
-    <link rel="stylesheet" type="text/css" href="/css/colors/colors.css" /> 
-    
-    
+    <link rel="stylesheet" type="text/css" href="/css/colors/colors.css" />
+
+
  <!-- Scripts -->
     <script>
         window.Laravel = <?php echo json_encode([
@@ -98,8 +99,8 @@
         <!-- Candidate Signup -->
         <div class="card">
             <div class="container">
-                <h4 class="text-left text-blue bold"><b>As Candidate</b></h4> 
-                <p class="text-left">Create your account to manage your profile</p> 
+                <h4 class="text-left text-blue bold"><b>As Candidate</b></h4>
+                <p class="text-left">Create your account to manage your profile</p>
                 <a href="{{ route('candidate.register') }}" title="" class="signup">Create Account</a>
             </div>
         </div>
@@ -107,8 +108,8 @@
         <!-- Employer signup -->
         <div class="card">
                 <div class="container">
-                    <h4 class="text-left text-red bold"><b>As Employer</b></h4> 
-                    <p class="text-left">Create your account to manage your profile</p> 
+                    <h4 class="text-left text-red bold"><b>As Employer</b></h4>
+                    <p class="text-left">Create your account to manage your profile</p>
                     <a href="{{ route('employer.register') }}" title="" class="signup red">Create Account</a>
                 </div>
             </div>
@@ -127,6 +128,9 @@
 <script src="https://cdnjs.cloudflare.com/ajax/libs/izitoast/1.3.0/js/iziToast.min.js"></script>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/pace/1.0.2/pace.js"></script>
 <script src="/js/select-chosen.js" type="text/javascript"></script>
+{{-- <script src="https://unpkg.com/popper.js@1.12.6/dist/umd/popper.js" integrity="sha384-fA23ZRQ3G/J53mElWqVJEGJzU0sTs+SvzG8fXVWP+kJQ1lwFAOkcUOysnlKJC33U" crossorigin="anonymous"></script>
+<script src="https://unpkg.com/bootstrap-material-design@4.1.1/dist/js/bootstrap-material-design.js" integrity="sha384-CauSuKpEqAFajSpkdjv3z9t8E7RlpJ1UP0lKM/+NdtSarroVKu069AlsRPKkFBz9" crossorigin="anonymous"></script>
+<script>$(document).ready(function() { $('body').bootstrapMaterialDesign(); });</script> --}}
 <script>
     $(document).ajaxStart(function() { Pace.restart(); });
 </script>

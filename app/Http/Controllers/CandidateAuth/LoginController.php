@@ -59,13 +59,16 @@ class LoginController extends Controller
     public function showLoginForm()
     {
         if(Auth::guard('employer')){
-            return redirect('/employer/home')->withErrors(['status' => "You are already loggen in as Employer"]);
+            return redirect()->route('employer.home')->with(['error' => "You are already loggen in as Employer"]);
         }
+        // if(Auth::guard('employer')){
+        //     return redirect('/employer/home')->withErrors(['status' => "You are already loggen in as Employer"]);
+        // }
 
         if(URL::previous() != url('/')){
             session()->put('backUrl', URL::previous());
         }
-        
+
         return view('candidate.auth.login');
     }
 
@@ -85,7 +88,7 @@ class LoginController extends Controller
 
     public function redirectPath()
     {
-        return (session()->get('backUrl') &&  session()->get('backUrl') != url('/')) ? session()->get('backUrl') : $this->redirectTo;   
+        return (session()->get('backUrl') &&  session()->get('backUrl') != url('/')) ? session()->get('backUrl') : $this->redirectTo;
     }
 
     /**
@@ -105,7 +108,7 @@ class LoginController extends Controller
     public function handleProviderCallback()
     {
         $user = Socialite::driver('google')->stateless()->user();
-        
+
         $email = $user->email;
         $info = $user->user;
         if($this->checkEmail($email)){
@@ -113,12 +116,12 @@ class LoginController extends Controller
             $this->guard()->login($candidate);
             return redirect($this->redirectPath());
         }
-        
+
         $fname = $info['name']['givenName'];
         $lname = $info['name']['familyName'];
         $username = explode("@",$email)[0];
         $password = substr(md5(microtime()),rand(0,26),5);
-        
+
         $candidate = new Candidate();
         $candidate->fname = $fname;
         $candidate->lname = $lname;
@@ -127,7 +130,7 @@ class LoginController extends Controller
         $candidate->password = bcrypt($password);
         $candidate->verified = 1;
         $candidate->save();
-        
+
         $user = new Candidate();
         $user->username = $username;
         $user->password = $password;
@@ -136,7 +139,7 @@ class LoginController extends Controller
         $this->guard()->login($candidate);
         return redirect($this->redirectPath());
     }
-    
+
     public function checkEmail($email){
         $email = Candidate::where('email', $email)->first();
         return ($email) ? 1 : 0;

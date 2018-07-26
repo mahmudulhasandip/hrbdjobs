@@ -9,6 +9,7 @@
             <ul>
                 <li><a href="{{ route('candidate.profile') }}" title="" target="_blank">View Profile</a></li>
                 <li><a href="{{ route('candidate.profile.edit') }}" title="">Edit Profile</a></li>
+                <li><a href="{{ route('candidate.change.password') }}" title="">Change Password</a></li>
             </ul>
         </li>
         <li class="inner-child  {{ ($left_active == 'applied_jobs')? 'active':'' }}">

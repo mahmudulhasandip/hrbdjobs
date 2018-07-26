@@ -11,7 +11,7 @@
         </div>
     </div>
     <div class="responsive-opensec">
-        
+
         <div class="btn-extars">
             <a href="{{ route('employer.new.job') }}" title="" class="post-job-btn"><i class="la la-plus"></i>Post Jobs</a>
             @if (Auth::guest())
@@ -25,7 +25,7 @@
             </ul>
             @endif
         </div><!-- Btn Extras -->
-        
+
         <form action="{{ url('/browse/jobs') }}" method="get" class="res-search">
             <input type="text" name="keyword" placeholder="Job title, keywords or company name" />
             <button type="submit"><i class="la la-search"></i></button>
@@ -49,21 +49,21 @@
     </div>
 </div>
 
-@if (Auth::guest())
+{{-- @if (Auth::guest()) --}}
 <header class="stick-top forsticky white">
-@else
+{{-- @else
 <header class="stick-top forsticky">
-@endif
+@endif --}}
 {{--  --}}
     <div class="menu-sec">
         <div class="container">
             <div class="logo">
-                <a href="{{ url('/') }}" title=""><img class="hidesticky" src="/images/logo.png" alt="" /><img class="showsticky" src="/images/logo-2.png" alt="" /></a>
+                <a href="{{ url('/') }}" title=""><img class="hidesticky" src="/images/logo-2.png" alt="" /><img class="showsticky" src="/images/logo-2.png" alt="" /></a>
             </div><!-- Logo -->
             @if (Auth::guest())
             <div class="btn-extars">
                 <a href="{{ route('employer.new.job') }}" title="" class="post-job-btn"><i class="la la-plus"></i>Post Jobs</a>
-                
+
                 <ul class="account-btns">
                     <li class="signup-popup"><a href="{{ route('employer.register') }}" title=""><i class="la la-key"></i> Sign Up</a></li>
                     <li class="signin-popup"><a href="{{ route('employer.login') }}" title=""><i class="la la-external-link-square"></i> Login</a></li>

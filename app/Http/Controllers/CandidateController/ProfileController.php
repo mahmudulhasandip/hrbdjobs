@@ -7,6 +7,9 @@ use App\Http\Controllers\Controller;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Storage;
 
+use Validator;
+use Hash;
+
 use App\Candidate;
 use App\Candidate_skill;
 use App\Job_category;
@@ -40,7 +43,7 @@ class ProfileController extends Controller
         $data['jobDesignations'] = Job_designation::get();
         $data['jobExperiences'] = Job_experience::get();
     	$data['jobLevels'] = Job_level::get();
-        
+
      	return view('candidate.profile_edit', $data);
     }
 
@@ -170,7 +173,7 @@ class ProfileController extends Controller
     public function postUpdateExperience(Request $request){
         // delete candidate all experiences
         Candidate_experience::where('candidate_id', Auth::guard('candidate')->user()->id)->delete();
-       
+
         $company_name = array_filter($request->input('company_name'));
         $responsibility = $request->input('responsibility');
         $candidate_designation = $request->input('candidate_designation');
@@ -239,7 +242,7 @@ class ProfileController extends Controller
     public function postUpdateCertificate(Request $request){
         // delete candidate all training
         Candidate_professional_certificate::where('candidate_id', Auth::guard('candidate')->user()->id)->delete();
-        
+
         $certification = array_filter($request->input('certification'));
         $institution_name = $request->input('institution_name');
         $location = $request->input('location');
@@ -262,5 +265,41 @@ class ProfileController extends Controller
 
 
         return redirect()->route('candidate.profile.edit')->with('status', 'Your Professional Certificate successfully Updated.');
+    }
+
+
+    // change Password
+    public function changePassword(){
+        $data['left_active'] = 'profile';
+        return view('candidate.change_password')->with($data);
+    }
+
+    public function updatePassword(Request $request){
+        $validator = Validator::make($request->all(),[
+            'password' => 'required|string|min:6|confirmed'
+        ]);
+
+        if ($validator->fails()) {
+            return redirect()->back()->withErrors($validator)->withInput();
+        }
+
+        $candidatePass = Candidate::find(Auth::guard('candidate')->user()->id);
+        if(!empty($request->input('old_password')))
+        {
+
+            if($request->input('password') === $request->input('password_confirmation')) {
+                $test = Hash::check($request->input('old_password'), $candidatePass->password);
+                if(Hash::check($request->input('old_password'), $candidatePass->password)){
+
+                    $candidatePass->password = bcrypt($request->input('password'));
+                    $candidatePass->save();
+                    return redirect()->back()->with('status', 'Your password successfully Changed.');
+                }
+                return redirect()->back()->with('error', 'Password dose not match !!')->withInput();
+            }
+            return redirect()->back()->with('error', 'Retype Password dose not match !!')->withInput();
+
+        }
+        return redirect()->back()->with('error', 'Old password is empty')->withInput();
     }
 }

@@ -9,6 +9,11 @@ Route::get('/profile/edit', 'CandidateController\ProfileController@getEditProfil
 Route::post('/profile/basic/info', 'CandidateController\ProfileController@getBasicInfo');
 Route::post('/profile/edit/basic', 'CandidateController\ProfileController@postUpdateBasicInfo')->name('update.profile.basic');
 
+// change password
+Route::get('/profile/change/password/', 'CandidateController\ProfileController@changePassword')->name('change.password');
+Route::post('/profile/change/password/', 'CandidateController\ProfileController@updatePassword')->name('update.password');
+
+
 Route::post('/profile/education', 'CandidateController\ProfileController@getEducation');
 Route::post('/profile/edit/education', 'CandidateController\ProfileController@postUpdateEducation')->name('update.profile.education');
 
