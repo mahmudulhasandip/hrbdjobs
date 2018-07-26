@@ -21,7 +21,7 @@ class AppropriateJobController extends Controller
 
     	$data['jobs'] = DB::table('jobs')
     					->join('candidate_skills', 'candidate_skills.category_id', '=', 'jobs.job_category_id')
-    					->join('job_skills', 'job_skills.skill', '=', 'candidate_skills.expertise_area')
+    					->join('job_skills', 'job_skills.skill_id', '=', 'candidate_skills.expertise_area')
     					->where('candidate_skills.experience', '>=', 'jobs.experience')
     					->orWhere('candidate_skills.designation_id', '=', 'jobs.job_designation_id')
     					->orWhere('candidate_skills.job_level', '=', 'jobs.job_level_id')
