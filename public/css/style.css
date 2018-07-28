@@ -1861,6 +1861,7 @@ label::after {
 .c-logo {
     float: left;
     width: 150px;
+    min-height: 65px;
     padding: 0 10px;
     text-align: center;
 }
@@ -5775,7 +5776,8 @@ aside .widget.border:first-child {
 .job-thumb img {
     float: left;
     width: 100%;
-    border: 2px solid #e8ecec;
+    margin-top: 25px;
+    /* border: 2px solid #e8ecec; */
     -webkit-border-radius: 8px;
     -moz-border-radius: 8px;
     -ms-border-radius: 8px;
@@ -6554,6 +6556,7 @@ aside .widget.border:first-child {
     float: left;
     width: 100%;
     padding-left: 67px;
+    padding-right: 10px;
 }
 
 .job-wide-devider .job-overview>ul>li i {
@@ -7624,7 +7627,7 @@ aside .widget.border:first-child {
     float: left;
     width: calc(100% - 30px);
     margin-top: 50px;
-    margin-bottom: 60px;
+    margin-bottom: 15px;
     margin-left: 30px
 }
 
@@ -7775,6 +7778,7 @@ aside .widget.border:first-child {
 .btns-profiles-sec {
     float: right;
     position: relative;
+    margin-left: 20px;
 }
 
 .btns-profiles-sec>span {
@@ -14361,4 +14365,8 @@ footer .block {
 
 .chosen-container-single .chosen-single {
     border: 1px solid #e8ecec;
+}
+
+.m50 {
+    margin: 50px 0;
 }

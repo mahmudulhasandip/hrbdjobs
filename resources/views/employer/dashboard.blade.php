@@ -26,7 +26,7 @@
 				 		<div class="widget">
 				 			@include('employer.layout.sidebar')
 				 		</div>
-				 		
+
 				 	</aside>
 				 	<div class="col-lg-9 column">
 				 		<div class="padding-left">
@@ -36,14 +36,14 @@
 									<div class="row no-gape">
 										<div class="col-lg-4 col-md-4 col-sm-12">
 											<div class="p-category">
-												<a href="{{ route('employer.company.profile') }}" title="">
+												<a href="{{ route('employer.company.profile') }}" title="" target="_blank">
 													<i class="la la-briefcase"></i>
 													<span>Company Details</span>
 													<p>Show Details</p>
 												</a>
 											</div>
 										</div>
-										
+
 										<div class="col-lg-4 col-md-4 col-sm-12">
 											<div class="p-category">
 												<a href="{{ route('employer.new.job') }}" title="">
@@ -76,15 +76,15 @@
 											</div>
 										</div>
 										<div class="col-lg-4 col-md-4 col-sm-12">
-											<div class="p-category follow-companies-popup">
-												<a href="candidates_shortlisted.html" title="">
+											<div class="p-category">
+												<a href="{{ route('employer.shortlisted.candidate') }}" title="">
                                                     <i class="la la-heart-o"></i>
 													<span>Shorlisted Candidates</span>
-													<p>56 Candidates</p>
+													<p>{{ $shortListed }} Candidate{{ $shortListed>1 ? 's' : '' }}</p>
 												</a>
 											</div>
 										</div>
-										<div class="col-lg-4 col-md-4 col-sm-12">
+										{{-- <div class="col-lg-4 col-md-4 col-sm-12">
 											<div class="p-category view-resume-list">
 												<a href="resume_database.html" title="">
                                                     <i class="la la-eye"></i>
@@ -92,8 +92,8 @@
 													<p>View</p>
 												</a>
 											</div>
-										</div>
-										
+										</div> --}}
+
 									</div>
 								</div>
 					 		</div>

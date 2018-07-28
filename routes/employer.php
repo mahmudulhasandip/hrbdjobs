@@ -3,13 +3,12 @@
 Route::get('/home', 'EmployerController\HomeController@dashboard')->name('home');
 
 // Route::get('/drafted/job', 'EmployerController\HomeController@getDraftedJob')->name('drafted.job');
-
 // Route::get('/profile', 'EmployerController\HomeController@getProfile')->name('profile');
 
 Route::get('/company/profile', 'EmployerController\HomeController@getCompanyProfile')->name('company.profile');
 Route::get('/company/profile/edit', 'EmployerController\HomeController@getEditCompanyProfile')->name('company.profile.edit');
 Route::get('/shortlisted/candidate', 'EmployerController\ShortlistedController@getCandidateShortList')->name('shortlisted.candidate');
-Route::get('/browse/candidate/resume', 'EmployerController\HomeController@getBrowseResume')->name('browse.candidate.resume');
+// Route::get('/browse/candidate/resume', 'EmployerController\HomeController@getBrowseResume')->name('browse.candidate.resume');
 
 // update company profile
 Route::post('/company/profile/edit', 'EmployerController\HomeController@updateProfile')->name('update.profile');

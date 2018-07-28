@@ -26,7 +26,7 @@
 				 		<div class="widget">
 							@include('employer.layout.sidebar')
 				 		</div>
-				 		
+
 				 	</aside>
 				 	<div class="col-lg-9 column">
 				 		<div class="padding-left">
@@ -108,7 +108,11 @@
 										</tr>
 										@endforeach
 						 			</tbody>
-						 		</table>
+								 </table>
+								 <div class="pagination-laravel m50">
+									 {{ $allJobs->links() }}
+								 </div>
+
 					 		</div>
 					 	</div>
 					</div>
@@ -149,7 +153,7 @@
 		],
 		});
 	});
-	
+
 
 	// Feature Job Post
 	$('#feature_job').on('click', function(e){

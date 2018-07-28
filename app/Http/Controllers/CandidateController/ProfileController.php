@@ -286,9 +286,8 @@ class ProfileController extends Controller
         $candidatePass = Candidate::find(Auth::guard('candidate')->user()->id);
         if(!empty($request->input('old_password')))
         {
-
-            if($request->input('password') === $request->input('password_confirmation')) {
-                $test = Hash::check($request->input('old_password'), $candidatePass->password);
+                if($request->input('password') === $request->input('password_confirmation')) {
+                    $test = Hash::check($request->input('old_password'), $candidatePass->password);
                 if(Hash::check($request->input('old_password'), $candidatePass->password)){
 
                     $candidatePass->password = bcrypt($request->input('password'));

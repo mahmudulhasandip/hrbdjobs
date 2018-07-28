@@ -29,6 +29,7 @@ use App\Featured_package;
 use App\Employer_package;
 use App\Payment_history;
 use App\Employer;
+use App\Short_listed_resume;
 
 
 
@@ -38,7 +39,8 @@ class HomeController extends Controller
     public function dashboard(){
         $data['left_active'] = 'dashboard';
         $data['employer_info'] = Employer::find(Auth::guard('employer')->user()->id);
-        $data['jobCount'] = Job::all()->count();
+        $data['jobCount'] = Job::where('employer_id', Auth::guard('employer')->user()->id)->count();
+        $data['shortListed'] = Short_listed_resume::groupBy('employer_id')->select(DB::raw('count(*) as shortListed'))->count();
         return view('employer.dashboard', $data);
     }
 
@@ -155,13 +157,13 @@ class HomeController extends Controller
                 'deadline'              => 'required',
                 'location'              => 'required'
             ]);
-    
+
             if ($validator->fails()) {
                 return redirect()->route('employer.new.job')->withErrors($validator)->withInput();
             }
         }
 
-        
+
         if($request['job_id']){
             $postJob = Job::where('employer_id', Auth::guard('employer')->user()->id)->where('id', $request['job_id'])->first();
         }else{
@@ -201,7 +203,7 @@ class HomeController extends Controller
             $postJob->is_drafted = 0;
             $postJob->save();
         }
-        
+
 
         if($request->input('skill')){
             // if already exists job skills
@@ -215,13 +217,13 @@ class HomeController extends Controller
                 $jobSkill->save();
             }
         }
-        
+
         if($request['draft']){
             return redirect()->route('employer.draft.job');
         }else{
             return redirect()->route('employer.manage.job');
         }
-        
+
     }
 
     public function editJobForm($id) {
@@ -240,7 +242,7 @@ class HomeController extends Controller
         $data['job_experiences'] = Job_experience::all();
         $data['skills'] = Skill::all();
         return view('employer.edit_job', $data);
-    }   
+    }
 
     public function deleteJob($id) {
         $postedJob = Job::where('employer_id', Auth::guard('employer')->user()->id)->where('id', $id)->first();
@@ -275,32 +277,32 @@ class HomeController extends Controller
         $data['job_experiences'] = Job_experience::all();
         $data['skills'] = Skill::all();
         return view('employer.post_new_job', $data);
-        
+
     }
 
     function getCategories(Request $request){
         $id = $request->id;
         $is_special = $request->is_special;
-        
+
         if($is_special){
             $job_categories = Job_category::where('is_special', $is_special)->get();
         }else{
             $job_categories = Job_category::where('is_special', $is_special)->get();
         }
-        
+
         $data = '<option value="" >Job Category</option>';
         foreach($job_categories as $job_category){
 
             $data .= '<option value="'. $job_category->id .'" >'. $job_category->name .'</option>';
         }
         return $data;
-        
+
     }
 
     function getDesignations(Request $request){
         $id = $request->id;
         $is_special = $request->is_special;
-        
+
         if($is_special){
             $job_designations = Job_designation::where('is_special', $is_special)->get();
         }else{
@@ -313,13 +315,13 @@ class HomeController extends Controller
         }
         return $data;
     }
-    
+
 
     // Manage job
     public function getManageJob(){
         $data['left_active'] = 'manage_job';
         $data['employer_info'] = Employer::find(Auth::guard('employer')->user()->id);
-        $data['allJobs'] = Job::where('employer_id', Auth::guard('employer')->user()->id)->where('is_drafted', 0)->get();
+        $data['allJobs'] = Job::where('employer_id', Auth::guard('employer')->user()->id)->where('is_drafted', 0)->paginate(10);
         $data['totalJobs'] = Job::where('employer_id', Auth::guard('employer')->user()->id)->count();
         $data['activeJobs'] = Job::where('is_verified', 1)->count();
         $data['featured_job']= DB::table('employer_packages')
@@ -350,7 +352,7 @@ class HomeController extends Controller
     public function featureJob(Request $request){
         $job = Job::where('employer_id', Auth::guard('employer')->user()->id)->findOrFail($request->JobId);
         $feature_package = Employer_package::where('employer_id', Auth::guard('employer')->user()->id)->findOrFail($request->featureJobId);
-        
+
         $feature_package->remain_amount = $feature_package->remain_amount - 1;
         $job->is_featured = 1;
         $feature_package->save();
@@ -413,14 +415,14 @@ class HomeController extends Controller
         $employerInfo->address = $request->input('address');
         $employerInfo->save();
 
-        
+
         return redirect()->route('employer.home')->with('status', 'Your profile successfully updated.');
     }
 
     // employer change Password
     public function updateEmployerPassword(Request $request) {
         $data['left_active'] = 'profile';
-        
+
         // $this->validate($request, [
         //     'new_password' => 'required|string|min:6|confirmed'
         //     ]);
@@ -428,7 +430,7 @@ class HomeController extends Controller
         $validator = Validator::make($request->all(),[
             'password' => 'required|string|min:6|confirmed'
         ]);
-        
+
         if ($validator->fails()) {
             return redirect()->back()->withErrors($validator)->withInput();
         }
@@ -436,11 +438,11 @@ class HomeController extends Controller
         $employerPass = Employer::find(Auth::guard('employer')->user()->id);
         if(!empty($request->input('old_password')))
         {
-            
+
             if($request->input('password') === $request->input('password_confirmation')) {
                 $test = Hash::check($request->input('old_password'), $employerPass->password);
                 if(Hash::check($request->input('old_password'), $employerPass->password)){
-                    
+
                     $employerPass->password = bcrypt($request->input('password'));
                     $employerPass->save();
                     return redirect()->route('employer.home')->with('status', 'Your password successfully Changed.');
@@ -448,7 +450,7 @@ class HomeController extends Controller
                 return redirect()->back()->with('error', 'Password dose not match !!')->withInput();
             }
             return redirect()->back()->with('error', 'Retype Password dose not match !!')->withInput();
-            
+
         }
         return redirect()->back()->with('error', 'Old password is empty')->withInput();
     }
@@ -467,14 +469,14 @@ class HomeController extends Controller
                                 ->where('employer_packages.employer_id',  Auth::guard('employer')->user()->id)
                                 ->where('employer_packages.is_verified', 1)
                                 ->first();
-        
+
         try{
             $data['social_links'] = Company_social_media::where('employer_company_info_id', $data['company_info']->id)->first();
         }catch(ModelNotFoundException $ex){
             $data['social_links'] = new Company_social_media();
         }
-         
-        $data['jobs'] = Job::where('employer_id', Auth::guard('employer')->user()->id)->where('is_paused', 0)->where('is_drafted', 0)->get();
+
+        $data['jobs'] = Job::where('employer_id', Auth::guard('employer')->user()->id)->where('is_paused', 0)->where('is_drafted', 0)->where('deadline', '>=', date("Y-m-d"))->get();
         $data['total_jobs'] = $data['jobs']->count();
         $data['company_industries'] = Company_industry::where('employer_company_info_id', $data['company_info']->id)->get();
         return view('employer.comapny_profile', $data);
@@ -509,7 +511,7 @@ class HomeController extends Controller
         }catch(ModelNotFoundException $ex){
             $data['social_links'] = new Company_social_media();
         }
-        
+
         return view('employer.edit_company_profile', $data);
     }
 
@@ -517,7 +519,7 @@ class HomeController extends Controller
     // employer profile update
     public function updateProfile(Request $request){
         // $this->validator($request->all())->validate();
-        
+
         $employerCompanyInfo = Employer_company_info::where('employer_id', Auth::user()->id)->firstOrFail();
         $employerCompanyInfo->name = $request->input('name');
         $employerCompanyInfo->phone = $request->input('contact_phone');
@@ -530,7 +532,7 @@ class HomeController extends Controller
         $employerCompanyInfo->city = $request->input('city');
         $employerCompanyInfo->country = $request->input('country');
         $employerCompanyInfo->website = $request->input('website');
-        
+
         // delete & upload images
         if($request->hasFile('logo')){
             if($employerCompanyInfo->logo){
@@ -544,7 +546,7 @@ class HomeController extends Controller
             );
             $employerCompanyInfo->logo = $filename;
         }
-        
+
         $employerCompanyInfo->save();
 
         $companyIndustry = Company_industry::where('employer_company_info_id', $employerCompanyInfo->id)->get()->each->delete();
@@ -577,12 +579,12 @@ class HomeController extends Controller
 
     }
 
-    
+
 
     public function getBrowseResume(){
         $data['left_active'] = 'browse_resume';
         $data['employer_info'] = Employer::find(Auth::guard('employer')->user()->id);
-        return view('employer.browse_resume', $data);                      
+        return view('employer.browse_resume', $data);
     }
 
 }

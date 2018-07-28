@@ -14,7 +14,7 @@ class ShortlistedController extends Controller
     public function getCandidateShortList(){
         $data['left_active'] = 'shortlisted';
         $data['employer_info'] = Employer::find(Auth::guard('employer')->user()->id);
-        $data['jobs'] = Job::where('employer_id', Auth::guard('employer')->user()->id)->get();
+        $data['jobs'] = Job::where('employer_id', Auth::guard('employer')->user()->id)->paginate(10);
         return view('employer.shortlisted_job', $data);
     }
 }

@@ -1,7 +1,7 @@
 
 <div class="job-listings-sec">
 	@foreach($jobs as $job)
-		@php 
+		@php
 			$single_job = route('single.job', $job->id);
 		@endphp
 		<div class="job-listing wtabs">
@@ -10,7 +10,7 @@
 				<h3><a href="#" title="">{{ $job->title }}</a></h3>
 				<span>{{ $job->employer->employerCompanyInfo['name'] }}</span>
 				<div class="job-lctn"><i class="la la-map-marker"></i>{{ $job->employer->employerCompanyInfo['city'] }} / {{ $job->employer->employerCompanyInfo['country'] }}</div>
-				
+
 			</div>
 			<div class="job-style-bx">
 				<span class="job-is ft">Full time</span>
@@ -23,6 +23,6 @@
 		{{-- <a href="{{ action('BrowseJobController@show', [$job->id]) }}">{{$job->title }}</a> --}}
 	@endforeach
 </div>
-<div class="margin-50 pagination-laravel">
+<div class="pagination-laravel m50">
 	{{ $jobs->appends($_GET)->links() }}
 </div>

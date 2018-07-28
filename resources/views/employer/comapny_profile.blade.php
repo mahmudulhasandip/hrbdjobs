@@ -59,20 +59,21 @@
 											</form>
 											@endif
 								 		</div>
-				 					</div>  
+				 					</div>
 				 				</div>
 				 			</div>
 				 			<div class="job-wide-devider">
 							 	<div class="row">
-							 		<div class="col-lg-8 column">	
+							 		<div class="col-lg-8 column">
 										 	{{-- company about details  --}}
 							 			<div class="job-details">
-											 <h3>About Company</h3>
-											 {{-- company about details  --}}
-							 				{!! $company_info->description !!}
-										 </div>
-										 
-										 {{-- recent job posts --}}
+											<h3>About Company</h3>
+											{{-- company about details  --}}
+											{!! $company_info->description !!}
+										</div>
+
+										{{-- recent job posts --}}
+
 								 		<div class="recent-jobs">
 							 				<h3>Recent open jobs</h3>
 							 				<div class="job-list-modern">
@@ -93,9 +94,9 @@
 													<!-- Job -->
 												</div>
 											 </div>
-							 			</div>
+										 </div>
 									 </div>
-									 
+
 									 {{-- right information table --}}
 							 		<div class="col-lg-4 column">
 							 			<div class="job-overview">
@@ -123,7 +124,7 @@
 								 				<li class=""><i class="la la-user"></i><h3>Followers</h3><span>15</span></li>
 								 			</ul>
 								 		</div><!-- Job Overview -->
-								 		
+
 							 		</div>
 							 	</div>
 							 </div>
