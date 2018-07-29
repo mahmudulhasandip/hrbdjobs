@@ -23,6 +23,7 @@
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/izitoast/1.3.0/css/iziToast.min.css" />
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/pace/1.0.2/themes/red/pace-theme-flash.min.css" />
     <link rel="stylesheet" href="/css/chosen.css">
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/css/bootstrap.min.css">
     {{-- <link rel="stylesheet" href="https://unpkg.com/bootstrap-material-design@4.1.1/dist/css/bootstrap-material-design.min.css"> --}}
     @stack('css')
 	<link rel="stylesheet" type="text/css" href="/css/style.css" />
@@ -38,6 +39,7 @@
     </script>
 </head>
 <body id="app">
+
 
 {{--  <div class="page-loading">
 	<img src="/images/loader.gif" alt="" />
@@ -92,6 +94,7 @@
     </div>
 </div><!-- LOGIN POPUP -->
 
+
 <div class="account-popup-area signup-popup-box">
     <div class="account-popup">
         <span class="close-popup"><i class="la la-close"></i></span>
@@ -119,6 +122,8 @@
 @endif
 
 <script src="/js/jquery.min.js" type="text/javascript"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.3/umd/popper.min.js" ></script>
+<script src="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/js/bootstrap.min.js" ></script>
 <script src="/js/modernizr.js" type="text/javascript"></script>
 <script src="/js/script.js" type="text/javascript"></script>
 <script src="/js/wow.min.js" type="text/javascript"></script>

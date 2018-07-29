@@ -4,6 +4,9 @@
 
 @push('css')
 <link href="https://cdnjs.cloudflare.com/ajax/libs/select2/4.0.6-rc.0/css/select2.min.css" rel="stylesheet" />
+<link href="{{ asset('css/smartwizard4/smart_wizard.css') }}" rel="stylesheet" type="text/css" />
+<link href="{{ asset('css/smartwizard4/smart_wizard_theme_arrows.css') }}" rel="stylesheet" type="text/css" />
+<link href="{{ asset('css/select2-bootstrap4-theme.css') }}" rel="stylesheet" type="text/css" />
 {{-- <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-datepicker/1.8.0/css/bootstrap-datepicker.min.css" />
  --}}
  <link rel="stylesheet" href="//code.jquery.com/ui/1.12.1/themes/base/jquery-ui.css">
@@ -33,13 +36,192 @@
 				 		<div class="widget">
 							@include('employer.layout.sidebar')
 				 		</div>
-				 		
+
 				 	</aside>
 				 	<div class="col-lg-9 column">
 				 		<div class="padding-left">
 					 		<div class="profile-title">
 					 			<h3>Post a New Job</h3>
-					 		</div>
+							 </div>
+							 <form method="POST" role="form" id="newjob" data-toggle="validator" action="{{ route('employer.new.post.job') }}" class="needs-validation" novalidate>
+								 @csrf
+								<div id="smartwizard">
+									<ul>
+										<li><a href="#step-1">Besic </a></li>
+										<li><a href="#step-2">Salary </a></li>
+										<li><a href="#step-3">Educational </a></li>
+										<li><a href="#step-4">Experience</a></li>
+										<li><a href="#step-5">Personal </a></li>
+									</ul>
+
+									<div>
+										<div id="step-1" class="" role="form" data-toggle="validator">
+
+											<div id="form-step-1" >
+											<div class="form-group row">
+												<label for="title" class="col-sm-2 col-form-label">Title:</label>
+												<div class="col-sm-10">
+													<input type="text" class="form-control" id="title" placeholder="Title" name="title" required>
+													<div class="invalid-feedback">
+														Please provide a valid Title.
+													</div>
+												</div>
+											</div>
+											</div>
+
+											<div class="form-group row">
+												<div class="input-group mb-3">
+													<label for="title" class="col-sm-2 col-form-label">Vacancy:</label>
+
+													<div class="input-group-prepend">
+														<div class="input-group-text">
+															<div class="custom-control custom-checkbox">
+																<input type="checkbox" class="custom-control-input" id="vacancy">
+																<label class="custom-control-label" for="vacancy">N/A</label>
+															</div>
+														</div>
+													</div>
+													<input type="number" class="form-control" placeholder="">
+												</div>
+											</div>
+
+											<div class="form-group row">
+												<label for="title" class="col-sm-2 col-form-label"></label>
+												<div class="custom-control custom-checkbox" style="margin-left: 15px;">
+													<input type="checkbox" class="custom-control-input" id="specialjob">
+													<label class="custom-control-label" for="specialjob">Special Job</label>
+												</div>
+											</div>
+
+											<div class="form-group row">
+												<label for="title" class="col-sm-2 col-form-label">Job Category:</label>
+												<div class="col-sm-10">
+													<select class="js-example-basic-single" name="state">
+														<option value="AL">Alabama</option>
+														<option value="WY">Wyoming</option>
+													</select>
+												</div>
+											</div>
+
+											<div class="form-group row">
+												<label for="title" class="col-sm-2 col-form-label">Job Designation:</label>
+												<div class="col-sm-10">
+													<select class="js-example-basic-single" name="state">
+														<option value="AL">Alabama</option>
+														<option value="WY">Wyoming</option>
+													</select>
+												</div>
+											</div>
+
+											<div class="form-group row">
+												<label for="title" class="col-sm-2 col-form-label">Job status:</label>
+												<div class="col-sm-10">
+													<select class="js-example-basic-single" name="state">
+														<option value="AL">Alabama</option>
+														<option value="WY">Wyoming</option>
+													</select>
+												</div>
+											</div>
+
+											<div class="form-group row">
+												<label for="title" class="col-sm-2 col-form-label">Job Level:</label>
+												<div class="col-sm-10">
+													<select class="js-example-basic-single" name="state">
+														<option value="AL">Alabama</option>
+														<option value="WY">Wyoming</option>
+													</select>
+												</div>
+											</div>
+
+											<div class="form-group row">
+												<label for="title" class="col-sm-2 col-form-label">Deadline:</label>
+												<div class="col-sm-10">
+													<input type="text" class="form-control" id="datepicker" autocomplete="off" placeholder="Deadline" name="title">
+													<div class="invalid-feedback">
+														Please provide a valid date.
+													</div>
+												</div>
+											</div>
+
+											<div class="form-group row">
+												<label for="title" class="col-sm-2 col-form-label">Qualification:</label>
+												<div class="col-sm-10">
+													<input type="text" class="form-control" placeholder="Qualification" name="title">
+													<div class="invalid-feedback">
+														Please provide a valid qualification.
+													</div>
+												</div>
+											</div>
+
+											<div class="form-group row">
+												<label for="title" class="col-sm-2 col-form-label">Description:</label>
+												<div class="col-sm-10">
+													<textarea class="form-control" placeholder="Description" rows="3" name="title"></textarea>
+													<div class="invalid-feedback">
+														Please provide a valid description.
+													</div>
+												</div>
+											</div>
+
+											<div class="form-group row">
+												<label for="exampleFormControlSelect1" class="col-sm-2 col-form-label">Location Type:</label>
+												<div class="col-sm-10">
+													<select class="form-control" id="loc_type">
+														<option>Select</option>
+														<option value="0">Inside Bangladesh</option>
+														<option value="1">Outside Bangladesh</option>
+													</select>
+												</div>
+											</div>
+
+											<div class="form-group row">
+												<label for="location" class="col-sm-2 col-form-label">Location:</label>
+												<div class="col-sm-10">
+													<textarea class="form-control" id="loc" placeholder="Location" name="title"></textarea>
+													<small class="form-text text-muted">Insert job location</small>
+													<div class="invalid-feedback">
+														Incorrect
+													</div>
+												</div>
+											</div>
+
+											<div class="form-group row">
+												<label for="photo" class="col-sm-2 col-form-label"></label>
+												<div class="custom-control custom-checkbox" style="margin-left: 15px;">
+													<input type="checkbox" class="custom-control-input" id="photo">
+													<label class="custom-control-label" for="photo">Photograph Enclosed</label>
+												</div>
+											</div>
+
+											<div class="form-group row">
+												<label for="title" class="col-sm-2 col-form-label">Other Benefit:</label>
+												<div class="col-sm-10">
+													<select class="js-example-basic-single" multiple="multiple" name="state" >
+														<option value="AL">Alabama</option>
+														<option value="WY">Wyoming</option>
+													</select>
+												</div>
+											</div>
+
+
+
+										</div>
+										<div id="step-2" class="">
+											Step Content
+										</div>
+										<div id="step-3" class="">
+											Step Content
+										</div>
+										<div id="step-4" class="">
+											Step Content
+										</div>
+										<div id="step-5" class="">
+											Step Content
+										</div>
+
+									</div>
+								</div>
+							</form>
 					 		<div class="profile-form-edit">
 								 <form method="POST" action="{{ route('employer.new.post.job') }}">
 									@csrf
@@ -53,7 +235,7 @@
 												@if ($errors->has('title'))
 													<span class="help-block">
 														{{ $errors->first('title') }}
-													</span> 
+													</span>
 												@endif
 					 						</div>
 										 </div>
@@ -66,7 +248,7 @@
 													@if ($errors->has('is_special'))
 														<span class="help-block">
 															{{ $errors->first('is_special') }}
-														</span> 
+														</span>
 													@endif
 												</div>
 											</div>
@@ -80,11 +262,11 @@
 												@if ($errors->has('description'))
 													<span class="help-block">
 														{{ $errors->first('description') }}
-													</span> 
+													</span>
 												@endif
 					 						</div>
 										 </div>
-										 
+
 										 {{-- job categories --}}
 					 					<div class="col-lg-6">
 					 						<span class="pf-title">Job Categories</span>
@@ -98,11 +280,11 @@
 												@if ($errors->has('job_category_id'))
 													<span class="help-block">
 														{{ $errors->first('job_category_id') }}
-													</span> 
+													</span>
 												@endif
 					 						</div>
 										 </div>
-										 
+
 										 {{-- job designation --}}
 					 					<div class="col-lg-6">
 					 						<span class="pf-title">Job Designation</span>
@@ -116,11 +298,11 @@
 												@if ($errors->has('job_designation_id'))
 													<span class="help-block">
 														{{ $errors->first('job_designation_id') }}
-													</span> 
+													</span>
 												@endif
 					 						</div>
 										 </div>
-										 
+
 										 {{-- job level --}}
 					 					<div class="col-lg-6">
 					 						<span class="pf-title">Job Level</span>
@@ -134,11 +316,11 @@
 												@if ($errors->has('job_level_id'))
 													<span class="help-block">
 														{{ $errors->first('job_level_id') }}
-													</span> 
+													</span>
 												@endif
 					 						</div>
 										 </div>
-										 
+
 										 {{-- experience --}}
 					 					<div class="col-lg-6">
 					 						<span class="pf-title">Experience</span>
@@ -152,11 +334,11 @@
 												@if ($errors->has('experience'))
 													<span class="help-block">
 														{{ $errors->first('experience') }}
-													</span> 
+													</span>
 												@endif
 					 						</div>
 										 </div>
-										 
+
 										 {{-- minimum salary --}}
 					 					<div class="col-lg-3">
 											<span class="pf-title">Min Salary</span>
@@ -165,7 +347,7 @@
 												@if ($errors->has('salary_min'))
 													<span class="help-block">
 														{{ $errors->first('salary_min') }}
-													</span> 
+													</span>
 												@endif
 											</div>
 										</div>
@@ -178,7 +360,7 @@
 												@if ($errors->has('salary_max'))
 													<span class="help-block">
 														{{ $errors->first('salary_max') }}
-													</span> 
+													</span>
 												@endif
 											</div>
 										</div>
@@ -192,7 +374,7 @@
 													@if ($errors->has('is_negotiable'))
 														<span class="help-block">
 															{{ $errors->first('is_negotiable') }}
-														</span> 
+														</span>
 													@endif
 												</div>
 											</div>
@@ -206,7 +388,7 @@
 												@if ($errors->has('vacancy'))
 													<span class="help-block">
 														{{ $errors->first('vacancy') }}
-													</span> 
+													</span>
 												@endif
 											</div>
 										</div>
@@ -224,11 +406,11 @@
 												@if ($errors->has('gender'))
 													<span class="help-block">
 														{{ $errors->first('gender') }}
-													</span> 
+													</span>
 												@endif
 					 						</div>
 										 </div>
-										 
+
 										 {{-- Qualification --}}
 					 					<div class="col-lg-6">
 					 						<span class="pf-title">Qualification</span>
@@ -237,11 +419,11 @@
 												@if ($errors->has('qualification'))
 													<span class="help-block">
 														{{ $errors->first('qualification') }}
-													</span> 
+													</span>
 												@endif
 					 						</div>
 										 </div>
-										 
+
 										 {{-- deadline --}}
 					 					<div class="col-lg-3">
 					 						<span class="pf-title">Application Deadline Date</span>
@@ -250,16 +432,16 @@
 												@if ($errors->has('deadline'))
 													<span class="help-block">
 														{{ $errors->first('deadline') }}
-													</span> 
+													</span>
 												@endif
 					 						</div>
 										 </div>
-										 
+
 										 {{-- Skills --}}
 					 					<div class="col-lg-12">
 					 						<span class="pf-title">Skill Requirments</span>
 					 						<div class="pf-field">
-												@php 
+												@php
 
 
 													$draftSkills = array();
@@ -268,8 +450,8 @@
 															$draftSkills[] = $draftSkill->skill;
 														}
 													}
-													
-													
+
+
 												@endphp
 												<select multiple="multiple" class="req-skill"  name="skill[]">
 													<option value="">Skill Requirments</option>
@@ -277,15 +459,15 @@
 													<option value="{{ $skill->id }}"  @if(old("skill") && (in_array($skill->id, old("skill")))){{ "selected" }}@elseif( $draft && in_array($skill->id, $draftSkills )){{ 'selected' }}@endif>{{ $skill->name }}</option>
 													@endforeach
 												</select>
-												
+
 												@if ($errors->has('skill'))
 													<span class="help-block">
 														{{ $errors->first('skill') }}
-													</span> 
+													</span>
 												@endif
 											</div>
 										 </div>
-										 
+
 										 {{-- location --}}
 					 					<div class="col-lg-12">
 					 						<span class="pf-title">Location</span>
@@ -294,11 +476,11 @@
 												@if ($errors->has('location'))
 													<span class="help-block">
 														{{ $errors->first('location') }}
-													</span> 
+													</span>
 												@endif
 					 						</div>
 										 </div>
-										 
+
 										 {{-- buttons --}}
 										 <div class="col-lg-12">
 											<button type="submit" name="draft" value="draft" class="draft">Draft</button>
@@ -307,7 +489,7 @@
 					 				</div>
 					 			</form>
 					 		</div>
-					 		
+
 					 	</div>
 					</div>
 				 </div>
@@ -321,6 +503,8 @@
 <script src="{{ asset('js/tinymce/tinymce.min.js') }}"></script>
 {{-- <script src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-datepicker/1.8.0/js/bootstrap-datepicker.min.js"></script> --}}
 <script src="https://code.jquery.com/ui/1.12.1/jquery-ui.js"></script>
+<script type="text/javascript" src="{{ asset('js/smartwizard4/jquery.smartWizard.min.js')}}"></script>
+<script type="text/javascript" src="https://cdnjs.com/libraries/1000hz-bootstrap-validator"></script>
 
 <script>
 	$(document).ready(function() {
@@ -357,11 +541,8 @@
  </script>
 
  <script>
-
-	
-
 	$(document).ready(function(){
-		
+
 		if($('input[type="checkbox"][name="is_negotiable"]').val() == 1 ){
 			$('.salary').attr('disabled', true);
 			$('#negotiable').val(1);
@@ -394,11 +575,11 @@
 				var job_id = '{{ $draft["id"] }}';
 			}
 			var job_id = '{{ $draft["id"] }}';
-			
+
 			if(this.checked) {
 				$('#special_job').attr('checked', true);
 				$('#special_job').val(1);
-				
+
 				var is_special = 1;
 				$.ajax({
 					url: base_url+'/get/job_cetegories',
@@ -450,13 +631,24 @@
 			}
 		});
 	})
-	 
+
  </script>
 
- {{-- ajax codes --}}
+{{-- custom --}}
  <script>
-	 
-	 
+
+$(document).ready(function(){
+	$('#loc_type').on('change', function(){
+		if($('#loc_type').val() == '0'){
+			$('#loc').val('Anywhere in Bangladesh');
+		}
+		if($('#loc_type').val() == '1'){
+			$('#loc').val('');
+		}
+	});
+});
+
+
 
  </script>
 
@@ -468,5 +660,54 @@
 	    $( "#datepicker" ).datepicker();
 	});
  </script>
+
+<script type="text/javascript">
+$(document).ready(function(){
+	$('.js-example-basic-single').select2({
+		theme: 'bootstrap4',
+	});
+	$('#smartwizard').smartWizard({
+		theme: 'arrows',
+		transitionEffect: 'fade', // Effect on navigation, none/slide/fade
+		transitionSpeed: '400'
+	});
+});
+
+$("#smartwizard").on("leaveStep", function(e, anchorObject, stepNumber, stepDirection) {
+	var elmForm = $("#step-" + stepNumber);
+	// stepDirection === 'forward' :- this condition allows to do the form validation
+	// only on forward navigation, that makes easy navigation on backwards still do the validation when going next
+	if(stepDirection === 'forward' && elmForm){
+		elmForm.validator();
+		var elmErr = elmForm.children('.has-error');
+		if(elmErr && elmErr.length > 0){
+			// Form validation failed
+			return false;
+		}
+	}
+	return true;
+});
+</script>
+
+<script>
+// Example starter JavaScript for disabling form submissions if there are invalid fields
+(function() {
+  'use strict';
+  window.addEventListener('load', function() {
+    // Fetch all the forms we want to apply custom Bootstrap validation styles to
+    var forms = document.getElementsByClassName('needs-validation');
+    // Loop over them and prevent submission
+    var validation = Array.prototype.filter.call(forms, function(form) {
+      form.addEventListener('submit', function(event) {
+        if (form.checkValidity() === false) {
+          event.preventDefault();
+          event.stopPropagation();
+        }
+        form.classList.add('was-validated');
+      }, false);
+    });
+  }, false);
+})();
+</script>
 
 @endpush

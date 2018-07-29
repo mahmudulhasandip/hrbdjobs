@@ -14370,3 +14370,67 @@ footer .block {
 .m50 {
     margin: 50px 0;
 }
+
+#smartwizard .nav.nav-tabs>li a {
+    float: none;
+    margin-top: 0;
+}
+
+.sw-main {
+    margin-top: 50px;
+    border: none;
+}
+
+.sw-theme-arrows>ul.step-anchor {
+    width: 100%;
+    background: transparent;
+    border-bottom: none;
+}
+
+.sw-container label {
+    padding: 0 0 5px;
+}
+
+.sw-container label::before {
+    border: none !important;
+}
+
+.sw-container .input-group {
+    margin: 0 16px 0 20px;
+}
+
+.sw-container .form-text {
+    display: block;
+    margin-top: .25rem;
+    font-size: 11px;
+}
+
+.select2-container {
+    float: none;
+    border: none;
+    padding: 0;
+}
+
+input[type="text"],
+input[type="password"],
+input[type="email"],
+textarea {
+    background: none;
+    border: 1px solid #ced4da;
+}
+
+.sw-theme-arrows .step-content {
+    padding: 50px 100px;
+}
+
+.input-group input[type="checkbox"],
+input[type="radio"] {
+    position: relative;
+    opacity: 1;
+    z-index: 0;
+    margin: 0 5px 0 0;
+}
+
+.form-text {
+    font-size: 11px;
+}
