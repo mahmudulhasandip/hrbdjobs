@@ -18,6 +18,8 @@
 	<link rel="stylesheet" type="text/css" href="/css/bootstrap-grid.css" />
 	<link rel="stylesheet" href="/css/icons.css">
     <link rel="stylesheet" href="/css/animate.min.css">
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/css/bootstrap.min.css">
+
     {{-- <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/toastr.js/2.1.4/toastr.min.css" /> --}}
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/izitoast/1.3.0/css/iziToast.min.css" />
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/pace/1.0.2/themes/red/pace-theme-flash.min.css" />
@@ -25,9 +27,9 @@
     @stack('css')
 	<link rel="stylesheet" type="text/css" href="/css/style.css" />
 	<link rel="stylesheet" type="text/css" href="/css/responsive.css" />
-    <link rel="stylesheet" type="text/css" href="/css/colors/colors.css" /> 
-    
-    
+    <link rel="stylesheet" type="text/css" href="/css/colors/colors.css" />
+
+
  <!-- Scripts -->
     <script>
         window.Laravel = <?php echo json_encode([
@@ -98,8 +100,8 @@
         <!-- Candidate Signup -->
         <div class="card">
             <div class="container">
-                <h4 class="text-left text-blue bold"><b>As Candidate</b></h4> 
-                <p class="text-left">Create your account to manage your profile</p> 
+                <h4 class="text-left text-blue bold"><b>As Candidate</b></h4>
+                <p class="text-left">Create your account to manage your profile</p>
                 <a href="{{ route('candidate.register') }}" title="" class="signup">Create Account</a>
             </div>
         </div>
@@ -107,8 +109,8 @@
         <!-- Employer signup -->
         <div class="card">
                 <div class="container">
-                    <h4 class="text-left text-red bold"><b>As Employer</b></h4> 
-                    <p class="text-left">Create your account to manage your profile</p> 
+                    <h4 class="text-left text-red bold"><b>As Employer</b></h4>
+                    <p class="text-left">Create your account to manage your profile</p>
                     <a href="{{ route('employer.register') }}" title="" class="signup red">Create Account</a>
                 </div>
             </div>
@@ -118,6 +120,8 @@
 @endif
 
 <script src="/js/jquery.min.js" type="text/javascript"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.3/umd/popper.min.js" ></script>
+<script src="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/js/bootstrap.min.js" ></script>
 <script src="/js/modernizr.js" type="text/javascript"></script>
 <script src="/js/script.js" type="text/javascript"></script>
 <script src="/js/wow.min.js" type="text/javascript"></script>
