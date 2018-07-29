@@ -117,7 +117,7 @@ Route::get('/store/resumes/all', [
 ]);
 
 // employers retrieve
-Route::get('/store/employers/all/{pphp er_page}/{page?}', [
+Route::get('/store/employers/all/{per_page}/{page?}', [
   'as'    => 'employers.store.api',
   'uses'  => 'AdminController\DataRetrieveController@storeEmployers'
 ]);

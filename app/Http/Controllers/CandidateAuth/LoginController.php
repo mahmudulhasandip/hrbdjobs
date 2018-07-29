@@ -58,7 +58,7 @@ class LoginController extends Controller
      */
     public function showLoginForm()
     {
-        if(Auth::guard('employer')){
+        if(Auth::guard('employer')->user()){
             return redirect()->route('employer.home')->with(['error' => "You are already loggen in as Employer"]);
         }
         // if(Auth::guard('employer')){

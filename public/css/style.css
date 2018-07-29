@@ -14326,8 +14326,8 @@ form.cv-upload {
 }
 
 .mt-50 {
-    margin-top: 50px;
-    margin-bottom: 0;
+    margin-top: 50px !important;
+    margin-bottom: 0 !important;
 }
 
 footer .block {
@@ -14368,5 +14368,12 @@ footer .block {
 }
 
 .m50 {
-    margin: 50px 0;
+    margin: 50px 0 !important;
+}
+.mr-left-30{
+    margin-left: 30px !important;
+}
+
+.mr-left-10{
+    margin-left: 10px !important;
 }

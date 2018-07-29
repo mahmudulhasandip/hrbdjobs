@@ -8,7 +8,7 @@ use App\Job_category;
 use App\Job;
 use App\Employer;
 use App\Employer_company_info;
-use App\Job_level;
+use App\Job_status;
 
 use DB;
 
@@ -25,7 +25,7 @@ class BrowseJobController extends Controller
         $gender = 0;
         $experience = 1000;
         $keyword = "";
-        $job_levels = [];
+        $job_statuses = [];
         $cat = [];
         $per_page = 10;
         $order_by = 'desc';
@@ -55,16 +55,17 @@ class BrowseJobController extends Controller
             }
         }
 
-        $data['city_search'] = 0;
+        $data['city_search'] = "0";
         $data['gender'] = 0;
         $data['experience_search'] = 1000;
         $data['keyword'] = '';
-        $data['search_job_levels'] = [];
+        $data['search_job_status'] = [];
         $data['search_cat'] = [];
 
         if($request->input('city')){
             $city = $request->input('city');
             $data['city'] = $request->input('city');
+            $data['city_search'] = $data['city'];
         }
         if($request->input('gender')){
             $gender = $request->input('gender');
@@ -82,9 +83,9 @@ class BrowseJobController extends Controller
             $data['keyword'] = $request->input('keyword');
         }
 
-        if($request->input('job_level')){
-            $job_levels = $request->input('job_level');
-            $data['search_job_levels'] = $job_levels;
+        if($request->input('job_status')){
+            $job_statuses = $request->input('job_status');
+            $data['search_job_status'] = $job_statuses;
         }
 
         if($request->input('cat')){
@@ -92,13 +93,13 @@ class BrowseJobController extends Controller
             $data['search_cat'] = $request->input('cat');
         }
 
-        if(sizeof($cat) > 0 && sizeof($job_levels) > 0 && $keyword && $city){
+        if(sizeof($cat) > 0 && sizeof($job_statuses) > 0 && $keyword && $city){
             $data['jobs'] = Job::where('deadline', '>=', date('Y-m-d'))
                                 ->where('location', 'like', '%'.$city.'%')
-                                ->whereIn('job_level_id',  $job_levels)
+                                ->whereIn('job_status_id',  $job_statuses)
                                 ->whereIn('job_category_id', $cat)
                                 ->where('gender',  $gender)
-                                ->where('experience', '<=', $experience)
+                                // ->where('experience', '<=', $experience)
                                 ->where('title', 'like', '%'.$keyword.'%')
                                 ->orWhere('description', 'like',  '%'.$keyword.'%')
                                 ->orWhere('qualification', 'like',  '%'.$keyword.'%')
@@ -113,7 +114,7 @@ class BrowseJobController extends Controller
                                 ->where('location', 'like', '%'.$city.'%')
                                 ->whereIn('job_category_id', $cat)
                                 ->where('gender',  $gender)
-                                ->where('experience', '<=', $experience)
+                                // ->where('experience', '<=', $experience)
                                 ->where('title', 'like', '%'.$keyword.'%')
                                 ->orWhere('description', 'like',  '%'.$keyword.'%')
                                 ->orWhere('qualification', 'like',  '%'.$keyword.'%')
@@ -123,12 +124,12 @@ class BrowseJobController extends Controller
                                 ->where('is_drafted', 0)
                                 ->orderBy($sorted_type, $order_by)
                                 ->paginate($per_page);
-        }else if(sizeof($job_levels) > 0 && $keyword && $city){
+        }else if(sizeof($job_statuses) > 0 && $keyword && $city){
             $data['jobs'] = Job::where('deadline', '>=', date('Y-m-d'))
                                 ->where('location', 'like', '%'.$city.'%')
-                                ->whereIn('job_level_id',  $job_levels)
+                                ->whereIn('job_status_id',  $job_statuses)
                                 ->where('gender',  $gender)
-                                ->where('experience', '<=', $experience)
+                                // ->where('experience', '<=', $experience)
                                 ->where('title', 'like', '%'.$keyword.'%')
                                 ->orWhere('description', 'like',  '%'.$keyword.'%')
                                 ->orWhere('qualification', 'like',  '%'.$keyword.'%')
@@ -142,7 +143,7 @@ class BrowseJobController extends Controller
             $data['jobs'] = Job::where('deadline', '>=', date('Y-m-d'))
                                 ->whereIn('job_category_id', $cat)
                                 ->where('gender',  $gender)
-                                ->where('experience', '<=', $experience)
+                                // ->where('experience', '<=', $experience)
                                 ->where('title', 'like', '%'.$keyword.'%')
                                 ->orWhere('description', 'like',  '%'.$keyword.'%')
                                 ->orWhere('qualification', 'like',  '%'.$keyword.'%')
@@ -157,17 +158,17 @@ class BrowseJobController extends Controller
                                 ->where('location', 'like', '%'.$city.'%')
                                 ->whereIn('job_category_id', $cat)
                                 ->where('gender',  $gender)
-                                ->where('experience', '<=', $experience)
+                                // ->where('experience', '<=', $experience)
                                 ->where('is_verified', '=', 1)
                                 ->where('is_paused', '=', 0)
                                 ->where('is_drafted', 0)
                                 ->orderBy($sorted_type, $order_by)
                                 ->paginate($per_page);
-        }else if(sizeof($job_levels) > 0 && $keyword){
+        }else if(sizeof($job_statuses) > 0 && $keyword){
             $data['jobs'] = Job::where('deadline', '>=', date('Y-m-d'))
-                                ->whereIn('job_level_id',  $job_levels)
+                                ->whereIn('job_status_id',  $job_statuses)
                                 ->where('gender',  $gender)
-                                ->where('experience', '<=', $experience)
+                                // ->where('experience', '<=', $experience)
                                 ->where('title', 'like', '%'.$keyword.'%')
                                 ->orWhere('description', 'like',  '%'.$keyword.'%')
                                 ->orWhere('qualification', 'like',  '%'.$keyword.'%')
@@ -177,12 +178,12 @@ class BrowseJobController extends Controller
                                 ->where('is_drafted', 0)
                                 ->orderBy($sorted_type, $order_by)
                                 ->paginate($per_page);
-        }else if(sizeof($job_levels) > 0 && $city){
+        }else if(sizeof($job_statuses) > 0 && $city){
             $data['jobs'] = Job::where('deadline', '>=', date('Y-m-d'))
                                 ->where('location', 'like', '%'.$city.'%')
-                                ->whereIn('job_level_id',  $job_levels)
+                                ->whereIn('job_status_id',  $job_statuses)
                                 ->where('gender',  $gender)
-                                ->where('experience', '<=', $experience)
+                                // ->where('experience', '<=', $experience)
                                 ->where('is_verified', '=', 1)
                                 ->where('is_paused', '=', 0)
                                 ->where('is_drafted', 0)
@@ -192,28 +193,28 @@ class BrowseJobController extends Controller
             $data['jobs'] = Job::where('deadline', '>=', date('Y-m-d'))
                                 ->whereIn('job_category_id', $cat)
                                 ->where('gender',  $gender)
-                                ->where('experience', '<=', $experience)
+                                // ->where('experience', '<=', $experience)
                                 ->where('is_verified', '=', 1)
                                 ->where('is_paused', '=', 0)
                                 ->where('is_drafted', 0)
                                 ->orderBy($sorted_type, $order_by)
                                 ->paginate($per_page);
-        }else if(sizeof($job_levels) > 0){
+        }else if(sizeof($job_statuses) > 0){
             $data['jobs'] = Job::where('deadline', '>=', date('Y-m-d'))
-                                ->whereIn('job_level_id',  $job_levels)
+                                ->whereIn('job_status_id',  $job_statuses)
                                 ->where('gender',  $gender)
-                                ->where('experience', '<=', $experience)
+                                // ->where('experience', '<=', $experience)
                                 ->where('is_verified', '=', 1)
                                 ->where('is_paused', '=', 0)
                                 ->where('is_drafted', 0)
                                 ->orderBy($sorted_type, $order_by)
                                 ->paginate($per_page);
-        }else if(sizeof($cat) > 0 && sizeof($job_levels) > 0){
+        }else if(sizeof($cat) > 0 && sizeof($job_statuses) > 0){
             $data['jobs'] = Job::where('deadline', '>=', date('Y-m-d'))
-                                ->whereIn('job_level_id',  $job_levels)
+                                ->whereIn('job_status_id',  $job_statuses)
                                 ->whereIn('job_category_id', $cat)
                                 ->where('gender',  $gender)
-                                ->where('experience', '<=', $experience)
+                                // ->where('experience', '<=', $experience)
                                 ->where('is_verified', '=', 1)
                                 ->where('is_paused', '=', 0)
                                 ->where('is_drafted', 0)
@@ -222,7 +223,7 @@ class BrowseJobController extends Controller
         }else if($keyword){
             $data['jobs'] = Job::where('deadline', '>=', date('Y-m-d'))
                                 ->where('gender',  $gender)
-                                ->where('experience', '<=', $experience)
+                                // ->where('experience', '<=', $experience)
                                 ->where('title', 'like', '%'.$keyword.'%')
                                 ->orWhere('description', 'like',  '%'.$keyword.'%')
                                 ->orWhere('qualification', 'like',  '%'.$keyword.'%')
@@ -236,7 +237,7 @@ class BrowseJobController extends Controller
             $data['jobs'] = Job::where('deadline', '>=', date('Y-m-d'))
                                 ->where('location', 'like', '%'.$city.'%')
                                 ->where('gender',  $gender)
-                                ->where('experience', '<=', $experience)
+                                // ->where('experience', '<=', $experience)
                                 ->where('is_verified', '=', 1)
                                 ->where('is_paused', '=', 0)
                                 ->where('is_drafted', 0)
@@ -245,7 +246,7 @@ class BrowseJobController extends Controller
         }else{
             $data['jobs'] = Job::where('deadline', '>=', date('Y-m-d'))
                                 ->where('gender',  $gender)
-                                ->where('experience', '<=', $experience)
+                                // ->where('experience', '<=', $experience)
                                 ->where('is_verified', '=', 1)
                                 ->where('is_paused', '=', 0)
                                 ->where('is_drafted', 0)
@@ -270,10 +271,10 @@ class BrowseJobController extends Controller
                                 ->where('jobs.deadline', '>=', date('Y-m-d'))
                                 ->orderBy('jobs.is_special', 'asc')
                                 ->get();
-        $data['job_levels'] = DB::table('job_levels')
-                                ->join('jobs', 'jobs.job_level_id', '=', 'job_levels.id')
-                                ->select('job_levels.id')
-                                ->groupBy('job_levels.id')
+        $data['job_statuses'] = DB::table('job_statuses')
+                                ->join('jobs', 'jobs.job_status_id', '=', 'job_statuses.id')
+                                ->select('job_statuses.id')
+                                ->groupBy('job_statuses.id')
                                 ->where('jobs.is_verified', '=', 1)
                                 ->where('jobs.is_paused', '=', 0)
                                 ->where('jobs.is_drafted', 0)
@@ -295,13 +296,8 @@ class BrowseJobController extends Controller
                             ->where('is_verified', '=', 1)
                             ->count();
 
-        $data['experiences'] = DB::table('jobs')
-                                ->select('experience')
-                                ->groupBy('experience')
-                                ->where('is_verified', '=', 1)
-                                ->where('is_paused', '=', 0)
-                                ->where('is_drafted', 0)
-                                ->where('deadline', '>=', date('Y-m-d'))
+        $data['experiences'] = DB::table('job_experiences')
+                                ->select('name as experience')
                                 ->get();
         ############## TO DO
         $data['industries'] = DB::table('company_industries')

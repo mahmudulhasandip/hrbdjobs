@@ -20,6 +20,8 @@ use App\Employer;
 use App\Employer_company_info;
 use App\Company_industry;
 use App\Job;
+use App\Job_experience_requirement;
+use App\Job_status;
 
 
 class DataRetrieveController extends Controller
@@ -272,16 +274,10 @@ class DataRetrieveController extends Controller
 	    		$job->title = $posted_job['job_title'];
 	    		$job->description = $posted_job['job_description'];
 
-	    		if(ucfirst($posted_job['experience']) == 'Fresh' || ucfirst($posted_job['experience']) == 'Fresher'){
-	    			$job->experience = 0;
-	    		}else{
-	    			$job->experience = $posted_job['experience'];
-	    		}
-
 	    		$job->is_negotiable = 1;
 	    		$job->vacancy = $posted_job['vacancies'];
 	    		$job->qualification = $posted_job['qualification'];
-	    		$job->job_level_id = Job_level::where('name', ucwords(str_replace("+", " ", $posted_job['job_mode'])))->first()->id;
+	    		$job->job_status_id = Job_status::where('name', ucwords(str_replace("+", " ", $posted_job['job_mode'])))->first()->id;
 	    		if($posted_job['is_featured'] == 'yes'){
 	    			$job->is_featured = 1;
 	    		}
@@ -302,11 +298,22 @@ class DataRetrieveController extends Controller
 		    			if($skill){
 		    				$job_skill = new Job_skill();
 		    				$job_skill->job_id = $job->id;
-		    				$job_skill->skill = $skill->id;
+		    				$job_skill->skill_id = $skill->id;
 		    				$job_skill->save();
 		    			}
 		    		}
 	    		}
+
+	    		$exper = new Job_experience_requirement();
+	    		$exper->job_id = $job->id;
+	    		if(ucfirst($posted_job['experience']) == 'Fresh' || ucfirst($posted_job['experience']) == 'Fresher'){
+	    			$exper->min_experience = 0;
+	    			$exper->max_experience = 0;
+	    		}else{
+	    			$exper->min_experience = $posted_job['experience'];
+	    			$exper->max_experience = $posted_job['experience'];
+	    		}
+	    		$exper->save();
     		}
     		
     	}

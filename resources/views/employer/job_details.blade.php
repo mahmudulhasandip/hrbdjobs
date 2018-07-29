@@ -24,6 +24,7 @@
                 <div class="row">
                         <div class="col-lg-8 column">
                             <div class="job-single-sec">
+                                @if(!$job->hide_company_info)
                                 <div class="job-single-head">
                                     <div class="job-thumb"> <img src="{{ asset('storage/uploads/'.(($company_info->logo) == '' ? 'company-avatar.png' : $company_info->logo) )}}" alt="" /> </div>
                                     <div class="job-head-info">
@@ -31,9 +32,12 @@
                                         <span><i class="la la-map-marker"></i>{{ $job->location }}</span>
                                         <p><i class="la la-unlink"></i> <a target="blank" href="{{(substr( $company_info->website, 0, 4 ) === 'http') ? $company_info->website : 'http://'.$company_info->website}}">{{ $company_info->website }}</a></p>
                                         <p><i class="la la-phone"></i> {{ $company_info->phone }}</p>
+                                        @if($company_info->email)
                                         <p><i class="la la-envelope-o"></i> {{ $company_info->email }}</p>
+                                        @endif
                                     </div>
                                 </div><!-- Job Head -->
+                                @endif
                                 <div class="job-details">
                                     <h1 class="bold">Job Description</h1>
                                     <h3>Vacancy</h3>
@@ -41,17 +45,49 @@
                                     <h3>Qualification</h3>
                                     <p>{{ $job->qualification }}</p>
                                     {!! $job->description !!}
+
+                                    @if($job->educationalRequirement)
+                                        <h5 class="mt-50">Preferred Institution</h5>
+                                        <p>{{ $job->educationalRequirement->preferred_university }}</p>
+                                        @if($job->educationalRequirement->others)
+                                            <p>Other Info: {{ $job->educationalRequirement->others }}</p>
+                                        @endif
+                                    @endif
+
+                                    @if($job->experiencelRequirement)
+                                        <h5 class="mt-50">Experience</h5>
+                                        @if($job->experiencelRequirement->min_experience == $job->experiencelRequirement->min_experience)
+                                            <p>{{ $job->experiencelRequirement->min_experience == '0' ? 'N/A': 'At least '.$job->experiencelRequirement->min_experience.' Year(s)' }}</p>
+                                        @else
+                                            <p>{{ $job->experiencelRequirement->min_experience }} - {{ $job->experiencelRequirement->min_experience }} years</p>
+                                        @endif
+                                        @if($job->experiencelRequirement->is_fresher_apply)
+                                            <p>Fresher also can apply</p>
+                                        @endif
+                                        @if($job->experiencelRequirement->area_of_experience)
+                                            <p>{{ $job->experiencelRequirement->area_of_experience }}</p>
+                                        @endif
+
+                                        @if($job->experiencelRequirement->area_of_business)
+                                            <p>{{ $job->experiencelRequirement->area_of_business }}</p>
+                                        @endif
+                                    @endif
+
+                                    @if($job->is_photograph_enclosed)
+                                    <p class="m50 text-center"><strong><span class="text-danger">*Photograph</span> must be enclosed with the resume.</strong></p>
+                                    @endif
                                 </div>
-                                <div class="share-bar">
+                                {{-- <div class="share-bar">
                                     <span>Share</span><a href="#" title="" class="share-fb"><i class="fa fa-facebook"></i></a><a href="#" title="" class="share-twitter"><i class="fa fa-twitter"></i></a>
-                                </div>
+                                </div> --}}
                             </div>
                         </div>
                         <div class="col-lg-4 column">
-                            <div class="job-overview mt-250">
+                            <div class="job-overview">
                                 <h3 class="bold">Job Overview</h3>
                                 <ul>
                                     <li><i class="la la-calendar-o"></i><h3>Deadline</h3><span>{{ $job->deadline }}</span></li>
+                                    @if($job->is_salary_visible)
                                     <li><i class="la la-money"></i><h3>Offerd Salary</h3>
                                         <span>
                                             @if($job->is_negotiable)
@@ -62,6 +98,7 @@
                                             
                                         </span>
                                     </li>
+                                    @endif
                                     <li><i class="la la-mars-double"></i><h3>Gender</h3><span>
                                         @php
                                         if( $job->gender == 0){
@@ -78,17 +115,43 @@
 
                                         @endphp
                                     </span></li>
+                                    @if($job->age_min > 0 && $job->age_max > 0)
+                                        <li><i class="la la-users"></i><h3>Age</h3><span>{{ $job->age_min }} - {{ $job->age_max }} years</span></li>
+                                    @elseif($job->age_min == 0 && $job->age_max > 0)
+                                        <li><i class="la la-users"></i><h3>Age</h3><span>At most {{ $job->age_max }} years</span></li>
+                                    @elseif($job->age_min > 0 && $job->age_max == 0)
+                                        <li><i class="la la-users"></i><h3>Age</h3><span>At least {{ $job->age_min }} years</span></li>
+                                    @else
+                                        <li><i class="la la-users"></i><h3>Age</h3><span>Any users can apply</span></li>
+                                    @endif
+                                    @if($job->jobLevel)
                                     <li><i class="la la-thumb-tack"></i><h3>Career Level</h3><span>{{ $job->jobLevel->name }}</span></li>
+                                    @endif
+
+                                    @if($job->jobStatus)
+                                    <li><i class="la la-thumb-tack"></i><h3>Career Status</h3><span>{{ $job->jobStatus->name }}</span></li>
+                                    @endif
                                     @if($job->jobCategory)
                                     <li><i class="la la-puzzle-piece"></i><h3>Job Category</h3><span>{{ $job->jobCategory->name }}</span></li>
                                     @endif
                                     @if($job->jobDesignation)
                                     <li><i class="la la-puzzle-piece"></i><h3>Job Designation</h3><span>{{ $job->jobDesignation->name }}</span></li>
                                     @endif
-                                    <li><i class="la la-shield"></i><h3>Experience</h3><span>{{ $job->experience }} Year(s)</span></li>
+                                    <li><i class="la la-location-arrow"></i><h3>Job Location</h3><span>{{ $job->location_type == '0' ? 'In Bangladesh': 'Outside bangladesh' }}</span></li>
                                     <li><i class="la la-map"></i><h3>Location</h3><span>{{ $job->location }}</span></li>
                                 </ul>
                             </div><!-- Job Overview -->
+
+                            @if(sizeof($job->jobSkill) > 0)
+                                <div class="job-overview">
+                                    <h3>Required Skills</h3>
+                                    <div class="skills">
+                                            @foreach($job->jobSkill as $job_skill)
+                                                <span>{{ $job_skill->skill->name }}</span>
+                                            @endforeach
+                                    </div>
+                                </div>
+                            @endif
                         </div>
                 </div>
             </div>

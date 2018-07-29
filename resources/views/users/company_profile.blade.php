@@ -45,9 +45,11 @@
 											<a href="{{ ($social_links && $social_links->twitter_link) ? $social_links->twitter_link : '#' }}" title="" target="blank" class="share-twitter {{ ($social_links && $social_links->twitter_link) ? '' : 'd-none' }}"><i class="fa fa-twitter"></i></a>
 											<a href="{{ ($social_links && $social_links->linkedin_link) ? $social_links->linkedin_link : '#' }}" title="" target="blank" class="share-linkedin {{ ($social_links && $social_links->linkedin_link) ? '' : 'd-none' }}"><i class="fa fa-linkedin"></i></a>
 							 			</div>
+							 			@if($company_info->id != Auth::guard('employer')->user()->employerCompanyInfo->id)
 								 		<div class="emply-btns">
 											<a class="followus" href="{{ route('candidate.follow.company', $company_info->id) }}" title=""><i class="la la-paper-plane"></i> Follow us</a>
 								 		</div>
+								 		@endif
 				 					</div>  
 				 				</div>
 				 			</div>
@@ -74,7 +76,7 @@
 															<div class="job-lctn"><i class="la la-map-marker"></i>{{ $job['location'] }}</div>
 														</div>
 														<div class="job-style-bx">
-															<span class="job-is ft">{{ $job->jobLevel->name }}</span>
+															<span class="job-is ft">{{ $job->jobStatus->name }}</span>
 															<i>{{ $job->created_at->diffForHumans() }}</i>
 														</div>
 													</div>

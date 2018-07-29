@@ -40,9 +40,16 @@
 				 				</div><!-- Search Widget -->
 								<div class="pf-field">
 									<select id="city" class="chosen">
-										<option {{ $city_search == 0 ? "selected":'' }} value="0">All</option>
+										<option {{ $city_search == 0 ? 'selected':'' }} value="0">All</option>
 										@foreach($cities as $city)
-											<option {{ $city_search == $city->city ? "selected":'' }} value="{{ $city->city }}">{{ $city->city }}</option>
+											@php
+												$selected = '';
+												if($city->city === $city_search)
+												{
+													$selected = "Selected";
+												}	
+											@endphp
+											<option value="{{ $city->city }}" {{ $selected }}> {{ $city->city }}</option>
 										@endforeach
 									</select>
 								</div>
@@ -51,19 +58,19 @@
 				 		</div>
 				 		
 				 		<div class="widget">
-				 			<h3 class="sb-title {{ sizeof($job_levels) > 0 ? 'active':'closed' }}">Job Type</h3>
+				 			<h3 class="sb-title {{ sizeof($job_statuses) > 0 ? 'active':'closed' }}">Job Type</h3>
 				 			<div class="type_widget">
-				 				@foreach($job_levels as $level)
+				 				@foreach($job_statuses as $status)
 				 					@php 
-			 							$job_level = App\Job_level::where('id', '=', $level->id)->first();
-			 							$total_level = App\Job::where('jobs.deadline', '>=', date('Y-m-d'))
+			 							$job_status = App\Job_status::where('id', '=', $status->id)->first();
+			 							$total_jobs = App\Job::where('jobs.deadline', '>=', date('Y-m-d'))
 				                                ->where('is_verified', '=', 1)
 				                                ->where('is_paused', '=', 0)
 				                                ->where('is_drafted', 0)
-				                                ->where('job_level_id', $level->id)
+				                                ->where('job_status_id', $status->id)
 				                                ->count();
 			 						@endphp
-									<p class="flchek"><input type="checkbox" {{ in_array($job_level->id, $search_job_levels) ? 'checked': '' }} class="job_level" value="{{ $level->id }}" name="job_level[]" id="33r"><label for="33r">{{ $job_level->name }} ({{ $total_level }})</label></p>
+									<p class="flchek"><input type="checkbox" {{ in_array($job_status->id, $search_job_status) ? 'checked': '' }} class="job_status" value="{{ $status->id }}" name="job_status[]" id="33r"><label for="33r">{{ $job_status->name }} ({{ $total_jobs }})</label></p>
 								@endforeach
 				 			</div>
 				 		</div>
@@ -105,9 +112,11 @@
 								<div class="pf-field">
 									<select id="experience" class="chosen">
 										<option {{ ($experience_search && $experience_search == 1000) ? 'selected': '' }} value="1000">All</option>
-										<option {{ ($experience_search && $experience_search == 0) ? 'selected': '' }} value="0">Negotiable</option>
+										<option {{ ($experience_search && $experience_search == 0) ? 'selected': '' }} value="0">Fresher</option>
 										@foreach($experiences as $job_ex)
+											@if($job_ex->experience != 'Fresher')
 											<option {{ ($experience_search && $experience_search == $job_ex->experience) ? 'selected': '' }} value="{{ $job_ex->experience }}">{{ $job_ex->experience }}</option>
+											@endif
 										@endforeach
 									</select>
 								</div>
@@ -283,7 +292,7 @@
 	    	window.history.pushState("", "", main_url);  	
 	    });
 
-	    $('.job_level').click(function(e) {
+	    $('.job_status').click(function(e) {
 	    	if ($(this).is(':checked')){
 	    		var main_url = window.location.href;
 	    		if(main_url.search('page=') != -1){
@@ -292,12 +301,12 @@
 	    		}
 	    		
 	    		if(main_url.indexOf("?") == -1){
-	    			main_url = main_url+"?job_level[]="+$(this).val();
+	    			main_url = main_url+"?job_status[]="+$(this).val();
 	    		}else{
 	    			if(main_url.split("?")[1].length > 0){
-	    				main_url = main_url+"&job_level[]="+$(this).val();
+	    				main_url = main_url+"&job_status[]="+$(this).val();
 	    			}else{
-	    				main_url = main_url+"job_level[]="+$(this).val();
+	    				main_url = main_url+"job_status[]="+$(this).val();
 	    			}
 	    			
 	    		}
@@ -316,14 +325,14 @@
 	    		main_url = param[0]+'?'+param[1];
 	    		var main_url_decode = decodeURIComponent(main_url);
 
-	    		var allLevel = (main_url_decode.split('?')[1]).split("&");
+	    		var allStatus = (main_url_decode.split('?')[1]).split("&");
 	    		var myparam = "";
-	    		for(let i = 0; i<allLevel.length; i++){
-	    			if(!(allLevel[i].startsWith("job_level") && allLevel[i].endsWith($(this).val()))){
-	    				if(i == allLevel.length-1){
-	    					myparam += allLevel[i];
+	    		for(let i = 0; i<allStatus.length; i++){
+	    			if(!(allStatus[i].startsWith("job_status") && allStatus[i].endsWith($(this).val()))){
+	    				if(i == allStatus.length-1){
+	    					myparam += allStatus[i];
 	    				}else{
-	    					myparam += allLevel[i]+"&";
+	    					myparam += allStatus[i]+"&";
 	    				}
 	    				
 	    			}
@@ -440,7 +449,7 @@
 	    });
 
 	    $('#gender').on('change', function(e){
-		 	var main_url = window.location.href;
+	    	var main_url = window.location.href;
 			if(main_url.search('page=') != -1){
 				var page_no = main_url.split('page=')[1][0];
 				main_url = main_url.replace('page='+page_no, '');
@@ -448,7 +457,7 @@
 
 			if(main_url.search('gender=') != -1){
 				var gender = main_url.split('gender=')[1];
-				if(city.search('&') != -1){
+				if(gender.search('&') != -1){
 					var index = gender.indexOf('&');
 					var gender = gender.slice(0, index+1);
 				}

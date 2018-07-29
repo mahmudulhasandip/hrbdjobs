@@ -33,6 +33,10 @@ class Job extends Model
         return $this->hasOne('App\Job_level', 'id', 'job_level_id');
     }
 
+    public function jobStatus(){
+        return $this->hasOne('App\Job_status', 'id', 'job_status_id');
+    }
+
     // public function jobExperience(){
     //     return $this->hasOne('App\Job_experience', 'id', 'experience_id');
     // }
@@ -59,5 +63,13 @@ class Job extends Model
 
     public function shortListedResume(){
         return $this->hasMany('App\Short_listed_resume', 'job_id', 'id');
+    }
+
+    public function educationalRequirement(){
+        return $this->hasOne('App\Job_educational_requirement', 'job_id', 'id');
+    }
+
+    public function experiencelRequirement(){
+        return $this->hasOne('App\Job_experience_requirement', 'job_id', 'id');
     }
 }
