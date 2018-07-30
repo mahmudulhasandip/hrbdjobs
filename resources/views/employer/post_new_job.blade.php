@@ -55,6 +55,9 @@
 									</ul>
 
 									<div>
+
+
+										{{-- besic info --}}
 										<div id="step-1" class="" role="form" data-toggle="validator">
 
 											<div id="form-step-1" >
@@ -206,15 +209,38 @@
 
 
 										</div>
+
+
+
+										{{-- salary Info --}}
 										<div id="step-2" class="">
-											Step Content
+
+											<div class="form-group row">
+												<label for="salary_min" class="col-sm-2 col-form-label">Min Salay:</label>
+												<div class="col-sm-10">
+													<input  type=number step=any class="form-control" placeholder="Min. Salary" name="salary_min">
+													<div class="invalid-feedback">
+														Please provide a valid qualification.
+													</div>
+												</div>
+											</div>
+
 										</div>
+
+
+										{{-- Educational Info --}}
 										<div id="step-3" class="">
 											Step Content
 										</div>
+
+
+										{{-- Experience Info --}}
 										<div id="step-4" class="">
 											Step Content
 										</div>
+
+
+										{{-- Personal Info --}}
 										<div id="step-5" class="">
 											Step Content
 										</div>
@@ -504,7 +530,7 @@
 {{-- <script src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-datepicker/1.8.0/js/bootstrap-datepicker.min.js"></script> --}}
 <script src="https://code.jquery.com/ui/1.12.1/jquery-ui.js"></script>
 <script type="text/javascript" src="{{ asset('js/smartwizard4/jquery.smartWizard.min.js')}}"></script>
-<script type="text/javascript" src="https://cdnjs.com/libraries/1000hz-bootstrap-validator"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/1000hz-bootstrap-validator/0.11.5/validator.min.js"></script>
 
 <script>
 	$(document).ready(function() {
@@ -634,6 +660,10 @@
 
  </script>
 
+
+
+
+
 {{-- custom --}}
  <script>
 
@@ -647,10 +677,11 @@ $(document).ready(function(){
 		}
 	});
 });
-
-
-
  </script>
+
+
+
+
 
  <script>
 	 // $("#datepicker input").datepicker({
@@ -660,6 +691,10 @@ $(document).ready(function(){
 	    $( "#datepicker" ).datepicker();
 	});
  </script>
+
+
+
+
 
 <script type="text/javascript">
 $(document).ready(function(){
@@ -678,7 +713,7 @@ $("#smartwizard").on("leaveStep", function(e, anchorObject, stepNumber, stepDire
 	// stepDirection === 'forward' :- this condition allows to do the form validation
 	// only on forward navigation, that makes easy navigation on backwards still do the validation when going next
 	if(stepDirection === 'forward' && elmForm){
-		elmForm.validator();
+		elmForm.validator('validate');
 		var elmErr = elmForm.children('.has-error');
 		if(elmErr && elmErr.length > 0){
 			// Form validation failed
@@ -688,6 +723,10 @@ $("#smartwizard").on("leaveStep", function(e, anchorObject, stepNumber, stepDire
 	return true;
 });
 </script>
+
+
+
+
 
 <script>
 // Example starter JavaScript for disabling form submissions if there are invalid fields
