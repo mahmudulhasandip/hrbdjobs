@@ -57,7 +57,7 @@
 									<div>
 										<div id="step-1" class="" role="form" data-toggle="validator">
 
-											<div id="form-step-1" >
+											<div id="form-step-0" role="form" data-toggle="validator">
 											<div class="form-group row">
 												<label for="title" class="col-sm-2 col-form-label">Title:</label>
 												<div class="col-sm-10">
@@ -207,7 +207,14 @@
 
 										</div>
 										<div id="step-2" class="">
-											Step Content
+											<h2>Your Name</h2>
+						                    <div id="form-step-1" role="form" data-toggle="validator">
+						                        <div class="form-group">
+						                            <label for="name">Name:</label>
+						                            <input type="text" class="form-control" name="name" id="email" placeholder="Write your name" required>
+						                            <div class="help-block with-errors"></div>
+						                        </div>
+						                    </div>
 										</div>
 										<div id="step-3" class="">
 											Step Content
@@ -498,13 +505,21 @@
 	</section>
 @endsection
 
+
+@push('js-version')
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.1/jquery.min.js"></script>
+@endpush
+
 @push('js')
 <script src="https://cdnjs.cloudflare.com/ajax/libs/select2/4.0.6-rc.0/js/select2.min.js"></script>
 <script src="{{ asset('js/tinymce/tinymce.min.js') }}"></script>
-{{-- <script src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-datepicker/1.8.0/js/bootstrap-datepicker.min.js"></script> --}}
-<script src="https://code.jquery.com/ui/1.12.1/jquery-ui.js"></script>
+
+<script src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-datepicker/1.8.0/js/bootstrap-datepicker.min.js"></script>
+{{-- <script src="https://code.jquery.com/ui/1.12.1/jquery-ui.js"></script> --}}
+
+<script src="https://cdnjs.cloudflare.com/ajax/libs/1000hz-bootstrap-validator/0.11.5/validator.min.js"></script>
 <script type="text/javascript" src="{{ asset('js/smartwizard4/jquery.smartWizard.min.js')}}"></script>
-<script type="text/javascript" src="https://cdnjs.com/libraries/1000hz-bootstrap-validator"></script>
+
 
 <script>
 	$(document).ready(function() {
@@ -666,27 +681,40 @@ $(document).ready(function(){
 	$('.js-example-basic-single').select2({
 		theme: 'bootstrap4',
 	});
-	$('#smartwizard').smartWizard({
-		theme: 'arrows',
-		transitionEffect: 'fade', // Effect on navigation, none/slide/fade
-		transitionSpeed: '400'
-	});
+
 });
 
-$("#smartwizard").on("leaveStep", function(e, anchorObject, stepNumber, stepDirection) {
-	var elmForm = $("#step-" + stepNumber);
-	// stepDirection === 'forward' :- this condition allows to do the form validation
-	// only on forward navigation, that makes easy navigation on backwards still do the validation when going next
-	if(stepDirection === 'forward' && elmForm){
-		elmForm.validator();
-		var elmErr = elmForm.children('.has-error');
-		if(elmErr && elmErr.length > 0){
-			// Form validation failed
-			return false;
-		}
-	}
-	return true;
-});
+$(document).ready(function(){    
+        // Smart Wizard
+        $('#smartwizard').smartWizard({
+                theme: 'arrows',
+                transitionEffect:'fade',
+                transitionEffect: 'fade',
+                transitionSpeed: '400'
+             });
+        $("#smartwizard").on("leaveStep", function(e, anchorObject, stepNumber, stepDirection) {
+            var elmForm = $("#form-step-" + stepNumber);
+            // stepDirection === 'forward' :- this condition allows to do the form validation
+            // only on forward navigation, that makes easy navigation on backwards still do the validation when going next
+            if(stepDirection === 'forward' && elmForm){
+                elmForm.validator('validate');
+                var elmErr = elmForm.children('.has-error');
+                if(elmErr && elmErr.length > 0){
+                    // Form validation failed
+                    return false;
+                }
+            }
+            return true;
+        });
+        // $("#smartwizard").on("showStep", function(e, anchorObject, stepNumber, stepDirection) {
+        //     // Enable finish button only on last step
+        //     if(stepNumber == 3){
+        //         $('.btn-finish').removeClass('disabled');
+        //     }else{
+        //         $('.btn-finish').addClass('disabled');
+        //     }
+        // });
+    });
 </script>
 
 <script>
