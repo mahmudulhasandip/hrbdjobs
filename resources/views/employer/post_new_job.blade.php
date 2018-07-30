@@ -55,18 +55,21 @@
 									</ul>
 
 									<div>
-										<div id="step-1" class="" role="form" data-toggle="validator">
 
-											<div id="form-step-0" role="form" data-toggle="validator">
-											<div class="form-group row">
-												<label for="title" class="col-sm-2 col-form-label">Title:</label>
-												<div class="col-sm-10">
-													<input type="text" class="form-control" id="title" placeholder="Title" name="title" required>
-													<div class="invalid-feedback">
-														Please provide a valid Title.
+
+										{{-- besic info --}}
+										<div id="step-1" class="" >
+
+											<div id="form-step-0" >
+												<div class="form-group row">
+													<label for="title" class="col-sm-2 col-form-label">Title:</label>
+													<div class="col-sm-10">
+														<input type="text" class="form-control" id="title" placeholder="Title" name="title" required>
+														<div class="invalid-feedback">
+															Please provide a valid Title.
+														</div>
 													</div>
 												</div>
-											</div>
 											</div>
 
 											<div class="form-group row">
@@ -178,7 +181,7 @@
 												<label for="location" class="col-sm-2 col-form-label">Location:</label>
 												<div class="col-sm-10">
 													<textarea class="form-control" id="loc" placeholder="Location" name="title"></textarea>
-													<small class="form-text text-muted">Insert job location</small>
+													<small class="form-text text-muted"><i class="la la-info-circle 2x"></i> Insert job location</small>
 													<div class="invalid-feedback">
 														Incorrect
 													</div>
@@ -203,27 +206,205 @@
 												</div>
 											</div>
 
-
+											<div class="form-group row">
+												<label for="hide_company_info" class="col-sm-2 col-form-label"></label>
+												<div class="custom-control custom-checkbox" style="margin-left: 15px;">
+													<input type="checkbox" class="custom-control-input" id="hide_company_info">
+													<label class="custom-control-label" for="hide_company_info">Hide Company Info</label>
+													<small class="form-text text-muted"><i class="la la-info-circle 2x"></i> Hide your company info from candidates.</small>
+												</div>
+											</div>
 
 										</div>
+
+
+
+										{{-- salary Info --}}
 										<div id="step-2" class="">
-											<h2>Your Name</h2>
-						                    <div id="form-step-1" role="form" data-toggle="validator">
-						                        <div class="form-group">
-						                            <label for="name">Name:</label>
-						                            <input type="text" class="form-control" name="name" id="email" placeholder="Write your name" required>
-						                            <div class="help-block with-errors"></div>
-						                        </div>
-						                    </div>
+
+											{{-- min salary --}}
+											<div class="form-group row">
+												<label for="salary_min" class="col-sm-2 col-form-label">Min Salay:</label>
+												<div class="col-sm-10">
+													<input  type=number step=any class="form-control" placeholder="Min. Salary" name="salary_min">
+													<div class="invalid-feedback">
+														Please provide a valid input.
+													</div>
+												</div>
+											</div>
+
+											{{-- max salary --}}
+											<div class="form-group row">
+												<label for="salary_max" class="col-sm-2 col-form-label">Max Salay:</label>
+												<div class="col-sm-10">
+													<input  type=number step=any class="form-control" placeholder="Max. Salary" name="salary_max">
+													<div class="invalid-feedback">
+														Please provide a valid input.
+													</div>
+												</div>
+											</div>
+
+											{{-- salary type --}}
+											<div class="form-group row">
+												<label for="salary type" class="col-sm-2 col-form-label">Salary Type:</label>
+												<div class="col-sm-10">
+													<select class="form-control" id="" required>
+														<option>Select</option>
+														<option value="Weekly">Weekly</option>
+														<option value="Monthly">Monthly</option>
+														<option value="Yearly">Yearly</option>
+													</select>
+												</div>
+											</div>
+
+											{{-- is negotialbe --}}
+											<div class="form-group row">
+												<label for="negotialbe" class="col-sm-2 col-form-label"></label>
+												<div class="custom-control custom-checkbox" style="margin-left: 15px;">
+													<input type="checkbox" class="custom-control-input" id="negotialbe">
+													<label class="custom-control-label" for="negotialbe"> Negotiable</label>
+												</div>
+											</div>
+
+											{{-- hide salary --}}
+											<div class="form-group row">
+												<label for="hide_salary" class="col-sm-2 col-form-label"></label>
+												<div class="custom-control custom-checkbox" style="margin-left: 15px;">
+													<input type="checkbox" class="custom-control-input" id="hide_salary">
+													<label class="custom-control-label" for="hide_salary"> Hide Salary</label>
+													<small class="form-text text-muted">Salary range helps to match candidate properly but you can hide form candidate.</small>
+												</div>
+											</div>
+
 										</div>
+
+
+										{{-- Educational Info --}}
 										<div id="step-3" class="">
-											Step Content
+
+											{{-- preferred university --}}
+											<div class="form-group row">
+												<label for="preferred_uni" class="col-sm-2 col-form-label">Preferred University:</label>
+												<div class="col-sm-10">
+													<input type="text" class="form-control" id="datepicker" autocomplete="off" placeholder="Preferred University" name="preferred_uni">
+													<div class="invalid-feedback">
+														Please provide a valid university.
+													</div>
+												</div>
+											</div>
+
+											{{-- others --}}
+											<div class="form-group row">
+												<label for="other_uni" class="col-sm-2 col-form-label">Others:</label>
+												<div class="col-sm-10">
+													<input type="text" class="form-control" id="datepicker" autocomplete="off" placeholder="Others" name="other_uni">
+													<div class="invalid-feedback">
+														Please provide a valid input.
+													</div>
+												</div>
+											</div>
+
 										</div>
+
+
+										{{-- Experience Info --}}
 										<div id="step-4" class="">
-											Step Content
+
+											{{-- min experience --}}
+											<div class="form-group row">
+												<label for="experience_min" class="col-sm-2 col-form-label">Min Experience:</label>
+												<div class="col-sm-10">
+													<input  type=number step=any class="form-control" placeholder="Min. Salary" name="experience_min">
+													<div class="invalid-feedback">
+														Please provide a valid input.
+													</div>
+												</div>
+											</div>
+
+											{{-- max experience --}}
+											<div class="form-group row">
+												<label for="experience_max" class="col-sm-2 col-form-label">Max Experience:</label>
+												<div class="col-sm-10">
+													<input  type=number step=any class="form-control" placeholder="Max. Salary" name="experience_max">
+													<div class="invalid-feedback">
+														Please provide a valid input.
+													</div>
+												</div>
+											</div>
+
+											{{-- fresher apply --}}
+											<div class="form-group row">
+												<label for="fresher" class="col-sm-2 col-form-label"></label>
+												<div class="custom-control custom-checkbox" style="margin-left: 15px;">
+													<input type="checkbox" class="custom-control-input" id="fresher">
+													<label class="custom-control-label" for="fresher"> Fresher can apply</label>
+												</div>
+											</div>
+
+											{{-- area of experience --}}
+											<div class="form-group row">
+												<label for="experience_area" class="col-sm-2 col-form-label">Area of Experience:</label>
+												<div class="col-sm-10">
+													<input type="text" class="form-control" autocomplete="off" placeholder="Area of experience" name="experience_area">
+													<div class="invalid-feedback">
+														Please provide a valid university.
+													</div>
+												</div>
+											</div>
+
+											{{-- area of business --}}
+											<div class="form-group row">
+												<label for="business_area" class="col-sm-2 col-form-label">Area of Business:</label>
+												<div class="col-sm-10">
+													<input type="text" class="form-control" autocomplete="off" placeholder="Area of Business" name="business_area">
+													<div class="invalid-feedback">
+														Please provide a valid university.
+													</div>
+												</div>
+											</div>
+
 										</div>
+
+
+										{{-- Personal Info --}}
 										<div id="step-5" class="">
-											Step Content
+
+											{{-- gender --}}
+											<div class="form-group row">
+												<label for="gender" class="col-sm-2 col-form-label">Gender:</label>
+												<div class="col-sm-10">
+													<select class="form-control" id="" required name="gender">
+														<option>Select</option>
+														<option value="0">All</option>
+														<option value="1">Male</option>
+														<option value="2">Female</option>
+														<option value="3">Others</option>
+													</select>
+												</div>
+											</div>
+
+											{{-- min age --}}
+											<div class="form-group row">
+												<label for="age_min" class="col-sm-2 col-form-label">Min Age:</label>
+												<div class="col-sm-10">
+													<input  type=number step=any class="form-control" placeholder="Min. Age" name="age_min">
+													<div class="invalid-feedback">
+														Please provide a valid input.
+													</div>
+												</div>
+											</div>
+
+											{{-- max age --}}
+											<div class="form-group row">
+												<label for="age_max" class="col-sm-2 col-form-label">Max Age:</label>
+												<div class="col-sm-10">
+													<input  type=number step=any class="form-control" placeholder="Max. Age" name="age_max">
+													<div class="invalid-feedback">
+														Please provide a valid input.
+													</div>
+												</div>
+											</div>
+
 										</div>
 
 									</div>
@@ -520,7 +701,6 @@
 <script src="https://cdnjs.cloudflare.com/ajax/libs/1000hz-bootstrap-validator/0.11.5/validator.min.js"></script>
 <script type="text/javascript" src="{{ asset('js/smartwizard4/jquery.smartWizard.min.js')}}"></script>
 
-
 <script>
 	$(document).ready(function() {
 		$('.req-skill').select2({
@@ -649,6 +829,10 @@
 
  </script>
 
+
+
+
+
 {{-- custom --}}
  <script>
 
@@ -662,10 +846,11 @@ $(document).ready(function(){
 		}
 	});
 });
-
-
-
  </script>
+
+
+
+
 
  <script>
 	 // $("#datepicker input").datepicker({
@@ -676,6 +861,10 @@ $(document).ready(function(){
 	});
  </script>
 
+
+
+
+
 <script type="text/javascript">
 $(document).ready(function(){
 	$('.js-example-basic-single').select2({
@@ -684,14 +873,15 @@ $(document).ready(function(){
 
 });
 
-$(document).ready(function(){    
+$(document).ready(function(){
         // Smart Wizard
         $('#smartwizard').smartWizard({
-                theme: 'arrows',
-                transitionEffect:'fade',
-                transitionEffect: 'fade',
-                transitionSpeed: '400'
-             });
+			theme: 'arrows',
+			transitionEffect:'fade',
+			transitionEffect: 'fade',
+			transitionSpeed: '400'
+		});
+
         $("#smartwizard").on("leaveStep", function(e, anchorObject, stepNumber, stepDirection) {
             var elmForm = $("#form-step-" + stepNumber);
             // stepDirection === 'forward' :- this condition allows to do the form validation
@@ -716,6 +906,10 @@ $(document).ready(function(){
         // });
     });
 </script>
+
+
+
+
 
 <script>
 // Example starter JavaScript for disabling form submissions if there are invalid fields
