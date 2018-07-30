@@ -14370,11 +14370,12 @@ footer .block {
 .m50 {
     margin: 50px 0 !important;
 }
-.mr-left-30{
+
+.mr-left-30 {
     margin-left: 30px !important;
 }
 
-.mr-left-10{
+.mr-left-10 {
     margin-left: 10px !important;
     margin: 50px 0;
 }
@@ -14396,11 +14397,16 @@ footer .block {
 }
 
 .sw-container label {
-    padding: 0 0 5px;
+    padding: 5px 0 5px;
+    font-size: 14px;
 }
 
 .sw-container label::before {
     border: none !important;
+}
+
+.sw-container input[type="checkbox"]+label::after {
+    content: '';
 }
 
 .sw-container .input-group {
