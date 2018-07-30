@@ -14448,3 +14448,12 @@ input[type="radio"] {
 .form-text {
     font-size: 11px;
 }
+
+.pt2 {
+    padding-top: 2px !important;
+}
+
+.justify-content-right {
+    -webkit-justify-content: flex-end;
+    justify-content: flex-end;
+}

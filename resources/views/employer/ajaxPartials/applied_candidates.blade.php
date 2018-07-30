@@ -4,10 +4,10 @@
     <div class="emply-resume-thumb">
         <img src="{{ asset('storage/uploads/'. (($job->candidate->dp) ? $job->candidate->dp : 'default_user.png')) }}" alt="Photo" />
     </div>
-    
+
     <div class="emply-resume-info">
         <h3>
-            <a href="{{ route('employer.public.candidate.resume', $job->candidate->id) }}" target="_blank" title="">{{ $job->candidate->fname }} {{ $job->candidate->lname }} <span class="text-blue">(Age: {{ date_diff(date_create(date('Y-m-d', strtotime($job->candidate->date_of_birth))), date_create(date('Y-m-d')))->format("%y years") }})</span></a>
+            <a href="{{ route('employer.public.candidate.resume', ['job_id' => $job->id, 'id' => $job->candidate->id ]) }}" target="_blank" title="">{{ $job->candidate->fname }} {{ $job->candidate->lname }} <span class="text-blue">(Age: {{ date_diff(date_create(date('Y-m-d', strtotime($job->candidate->date_of_birth))), date_create(date('Y-m-d')))->format("%y years") }})</span></a>
         </h3>
         <span>
             {{-- <i>{{ sizeof($job->candidate->candidateEducation) ? $job->candidate->candidateEducation->first()->institution_name : '-' }}</i> --}}
@@ -27,7 +27,7 @@
             </span>
             <ul>
                 <li>
-                    <a href="{{ route('employer.public.candidate.resume', $job->candidate->id) }}" target="_blank" title="">View CV</a>
+                    <a href="{{ route('employer.public.candidate.resume', ['job_id' => $job->id, 'id' => $job->candidate->id ]) }}" target="_blank" title="">View CV</a>
                 </li>
                 <li>
                     <a href="{{ route('public.candidate.profile', $job->candidate->id) }}" target="_blank" title="">View Profile</a>

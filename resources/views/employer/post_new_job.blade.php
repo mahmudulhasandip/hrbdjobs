@@ -60,158 +60,168 @@
 										{{-- besic info --}}
 										<div id="step-1" class="" >
 
-											<div id="form-step-0" >
+											<div id="form-step-0" role="form" data-toggle="validator">
 												<div class="form-group row">
 													<label for="title" class="col-sm-2 col-form-label">Title:</label>
 													<div class="col-sm-10">
-														<input type="text" class="form-control" id="title" placeholder="Title" name="title" required>
+														<input type="text" class="form-control" id="title" placeholder="Title" name="title" value="@if (old("title")){{ old('title') }}@elseif ( $draft ){{ $draft->title }}@endif" required>
 														<div class="invalid-feedback">
 															Please provide a valid Title.
 														</div>
 													</div>
 												</div>
-											</div>
 
-											<div class="form-group row">
-												<div class="input-group mb-3">
-													<label for="title" class="col-sm-2 col-form-label">Vacancy:</label>
 
-													<div class="input-group-prepend">
-														<div class="input-group-text">
-															<div class="custom-control custom-checkbox">
-																<input type="checkbox" class="custom-control-input" id="vacancy">
-																<label class="custom-control-label" for="vacancy">N/A</label>
+
+												<div class="form-group row">
+													<div class="input-group mb-3">
+														<label for="vacancy_input" class="col-sm-2 col-form-label">Vacancy:</label>
+
+														<div class="input-group-prepend">
+															<div class="input-group-text">
+																<div class="custom-control custom-checkbox vacancy">
+																	<input type="checkbox" class="custom-control-input" id="vacancy" value="1" required>
+																	<label class="custom-control-label pt2 " for="vacancy">N/A</label>
+																</div>
 															</div>
 														</div>
-													</div>
-													<input type="number" class="form-control" placeholder="">
-												</div>
-											</div>
-
-											<div class="form-group row">
-												<label for="title" class="col-sm-2 col-form-label"></label>
-												<div class="custom-control custom-checkbox" style="margin-left: 15px;">
-													<input type="checkbox" class="custom-control-input" id="specialjob">
-													<label class="custom-control-label" for="specialjob">Special Job</label>
-												</div>
-											</div>
-
-											<div class="form-group row">
-												<label for="title" class="col-sm-2 col-form-label">Job Category:</label>
-												<div class="col-sm-10">
-													<select class="js-example-basic-single" name="state">
-														<option value="AL">Alabama</option>
-														<option value="WY">Wyoming</option>
-													</select>
-												</div>
-											</div>
-
-											<div class="form-group row">
-												<label for="title" class="col-sm-2 col-form-label">Job Designation:</label>
-												<div class="col-sm-10">
-													<select class="js-example-basic-single" name="state">
-														<option value="AL">Alabama</option>
-														<option value="WY">Wyoming</option>
-													</select>
-												</div>
-											</div>
-
-											<div class="form-group row">
-												<label for="title" class="col-sm-2 col-form-label">Job status:</label>
-												<div class="col-sm-10">
-													<select class="js-example-basic-single" name="state">
-														<option value="AL">Alabama</option>
-														<option value="WY">Wyoming</option>
-													</select>
-												</div>
-											</div>
-
-											<div class="form-group row">
-												<label for="title" class="col-sm-2 col-form-label">Job Level:</label>
-												<div class="col-sm-10">
-													<select class="js-example-basic-single" name="state">
-														<option value="AL">Alabama</option>
-														<option value="WY">Wyoming</option>
-													</select>
-												</div>
-											</div>
-
-											<div class="form-group row">
-												<label for="title" class="col-sm-2 col-form-label">Deadline:</label>
-												<div class="col-sm-10">
-													<input type="text" class="form-control" id="datepicker" autocomplete="off" placeholder="Deadline" name="title">
-													<div class="invalid-feedback">
-														Please provide a valid date.
+														<input type="number" class="form-control" placeholder="" name="vacancy" id="vacancy_input" value="@if (old("vacancy")){{ old('vacancy') }}@elseif ( $draft ){{ $draft->vacancy }}@endif" required>
 													</div>
 												</div>
-											</div>
 
-											<div class="form-group row">
-												<label for="title" class="col-sm-2 col-form-label">Qualification:</label>
-												<div class="col-sm-10">
-													<input type="text" class="form-control" placeholder="Qualification" name="title">
-													<div class="invalid-feedback">
-														Please provide a valid qualification.
+												<div class="form-group row">
+													<label for="" class="col-sm-2 col-form-label"></label>
+													<div class="custom-control custom-checkbox" style="margin-left: 15px;">
+														<input type="checkbox" class="custom-control-input" name="is_special" id="special_job"  value="@if (old("is_special")){{ old('is_special') }}@elseif ( $draft ){{ $draft->is_special }}@endif" @if (old("is_special")){{ 'checked' }}@elseif ( $draft['is_special'] ){{ 'checked' }} @endif>
+														<label class="custom-control-label" for="special_job">Special Job</label>
 													</div>
 												</div>
-											</div>
 
-											<div class="form-group row">
-												<label for="title" class="col-sm-2 col-form-label">Description:</label>
-												<div class="col-sm-10">
-													<textarea class="form-control" placeholder="Description" rows="3" name="title"></textarea>
-													<div class="invalid-feedback">
-														Please provide a valid description.
+												<div class="form-group row">
+													<label for="" class="col-sm-2 col-form-label">Job Category:</label>
+													<div class="col-sm-10">
+														<select class="js-example-basic-single" id="job_category_id" name="job_category_id" >
+															<option >Select</option>
+															@foreach($job_categories as $job_category)
+															<option value="{{ $job_category->id }}" @if(old('job_category_id')){{ old('job_category_id') == $job_category->id ? 'selected' : '' }}@elseif( $draft && $draft->job_category_id == $job_category->id ){{ 'selected' }}@endif >{{ $job_category->name }}</option>
+															@endforeach
+														</select>
 													</div>
 												</div>
-											</div>
 
-											<div class="form-group row">
-												<label for="exampleFormControlSelect1" class="col-sm-2 col-form-label">Location Type:</label>
-												<div class="col-sm-10">
-													<select class="form-control" id="loc_type">
-														<option>Select</option>
-														<option value="0">Inside Bangladesh</option>
-														<option value="1">Outside Bangladesh</option>
-													</select>
-												</div>
-											</div>
-
-											<div class="form-group row">
-												<label for="location" class="col-sm-2 col-form-label">Location:</label>
-												<div class="col-sm-10">
-													<textarea class="form-control" id="loc" placeholder="Location" name="title"></textarea>
-													<small class="form-text text-muted"><i class="la la-info-circle 2x"></i> Insert job location</small>
-													<div class="invalid-feedback">
-														Incorrect
+												<div class="form-group row">
+													<label for="" class="col-sm-2 col-form-label">Job Designation:</label>
+													<div class="col-sm-10">
+														<select class="js-example-basic-single" id="job_designation_id" name="job_designation_id">
+															<option >Select</option>
+															@foreach($job_designations as $job_designation)
+															<option value="{{ $job_designation->id }}"  @if(old('job_designation_id')){{ old('job_designation_id') == $job_category->id ? 'selected' : '' }}@elseif( $draft &&  $draft->job_designation_id == $job_designation->id ){{ 'selected' }}@endif>{{ $job_designation->name }}</option>
+															@endforeach
+														</select>
 													</div>
 												</div>
-											</div>
 
-											<div class="form-group row">
-												<label for="photo" class="col-sm-2 col-form-label"></label>
-												<div class="custom-control custom-checkbox" style="margin-left: 15px;">
-													<input type="checkbox" class="custom-control-input" id="photo">
-													<label class="custom-control-label" for="photo">Photograph Enclosed</label>
+												<div class="form-group row">
+													<label for="" class="col-sm-2 col-form-label">Job status:</label>
+													<div class="col-sm-10">
+														<select class="js-example-basic-single" name="job_status_id">
+															<option>Select</option>
+															@foreach($job_statuses as $job_status)
+															<option value="{{ $job_status->id }}" @if(old('job_status_id')){{ old('job_status_id') == $job_status->id ? 'selected' : '' }}@elseif( $draft &&  $draft->job_status_id == $job_status->id ){{ 'selected' }}@endif>{{ $job_status->name }}</option>
+															@endforeach
+														</select>
+													</div>
 												</div>
-											</div>
 
-											<div class="form-group row">
-												<label for="title" class="col-sm-2 col-form-label">Other Benefit:</label>
-												<div class="col-sm-10">
-													<select class="js-example-basic-single" multiple="multiple" name="state" >
-														<option value="AL">Alabama</option>
-														<option value="WY">Wyoming</option>
-													</select>
+												<div class="form-group row">
+													<label for="" class="col-sm-2 col-form-label">Job Level:</label>
+													<div class="col-sm-10">
+														<select class="js-example-basic-single" name="job_level_id">
+															<option>Select</option>
+															@foreach($job_levels as $job_level)
+															<option value="{{ $job_level->id }}" @if(old('job_level_id')){{ old('job_level_id') == $job_level->id ? 'selected' : '' }}@elseif( $draft &&  $draft->job_level_id == $job_level->id ){{ 'selected' }}@endif>{{ $job_level->name }}</option>
+															@endforeach
+														</select>
+													</div>
 												</div>
-											</div>
 
-											<div class="form-group row">
-												<label for="hide_company_info" class="col-sm-2 col-form-label"></label>
-												<div class="custom-control custom-checkbox" style="margin-left: 15px;">
-													<input type="checkbox" class="custom-control-input" id="hide_company_info">
-													<label class="custom-control-label" for="hide_company_info">Hide Company Info</label>
-													<small class="form-text text-muted"><i class="la la-info-circle 2x"></i> Hide your company info from candidates.</small>
+												<div class="form-group row">
+													<label for="" class="col-sm-2 col-form-label">Deadline:</label>
+													<div class="col-sm-10">
+														<input type="text" class="form-control" id="datepicker" autocomplete="off" placeholder="Deadline" name="deadline"  value="@if (old("deadline")){{ old('deadline') }}@elseif ( $draft ){{ $draft->deadline }}@endif">
+														<div class="invalid-feedback">
+															Please provide a valid date.
+														</div>
+													</div>
+												</div>
+
+												<div class="form-group row">
+													<label for="" class="col-sm-2 col-form-label">Qualification:</label>
+													<div class="col-sm-10">
+														<input type="text" class="form-control" placeholder="Qualification" name="qualification" value="@if (old("qualification")){{ old('qualification') }}@elseif ( $draft ){{ $draft->qualification }}@endif">
+														<div class="invalid-feedback">
+															Please provide a valid qualification.
+														</div>
+													</div>
+												</div>
+
+												<div class="form-group row">
+													<label for="title" class="col-sm-2 col-form-label">Description:</label>
+													<div class="col-sm-10">
+														<textarea class="form-control" placeholder="Description" rows="6" id="tinymce" name="description">@if (old("description")){{ old('description') }}@elseif ( $draft ){{ $draft->description }}@endif</textarea>
+														<div class="invalid-feedback">
+															Please provide a valid description.
+														</div>
+													</div>
+												</div>
+
+												<div class="form-group row">
+													<label for="exampleFormControlSelect1" class="col-sm-2 col-form-label">Location Type:</label>
+													<div class="col-sm-10">
+														<select class="form-control" id="loc_type" name="location_type" required>
+															<option>Select</option>
+															<option value="0">Inside Bangladesh</option>
+															<option value="1">Outside Bangladesh</option>
+														</select>
+													</div>
+												</div>
+
+												<div class="form-group row">
+													<label for="location" class="col-sm-2 col-form-label">Location:</label>
+													<div class="col-sm-10">
+														<textarea class="form-control" id="loc" placeholder="Location" name="location" required>@if (old("location")){{ old('location') }}@elseif ( $draft ){{ $draft->location }}@endif</textarea>
+														<small class="form-text text-muted"><i class="la la-info-circle 2x"></i> Insert job location</small>
+														<div class="invalid-feedback">
+															Incorrect
+														</div>
+													</div>
+												</div>
+
+												<div class="form-group row">
+													<label for="photo" class="col-sm-2 col-form-label"></label>
+													<div class="custom-control custom-checkbox" style="margin-left: 15px;">
+														<input type="checkbox" class="custom-control-input" id="photo" name='is_photograph_enclosed'>
+														<label class="custom-control-label" for="photo">Photograph Enclosed</label>
+													</div>
+												</div>
+
+												<div class="form-group row">
+													<label for="title" class="col-sm-2 col-form-label">Other Benefit:</label>
+													<div class="col-sm-10">
+														<select class="js-example-basic-single" multiple="multiple" name="state" >
+															<option>Alabama</option>
+															<option value="WY"></option>
+														</select>
+													</div>
+												</div>
+
+												<div class="form-group row">
+													<label for="hide_company_info" class="col-sm-2 col-form-label"></label>
+													<div class="custom-control custom-checkbox" style="margin-left: 15px;">
+														<input type="checkbox" class="custom-control-input" id="hide_company_info" name="hide_company_info">
+														<label class="custom-control-label" for="hide_company_info">Hide Company Info</label>
+														<small class="form-text text-muted"><i class="la la-info-circle 2x"></i> Hide your company info from candidates.</small>
+													</div>
 												</div>
 											</div>
 
@@ -226,7 +236,7 @@
 											<div class="form-group row">
 												<label for="salary_min" class="col-sm-2 col-form-label">Min Salay:</label>
 												<div class="col-sm-10">
-													<input  type=number step=any class="form-control" placeholder="Min. Salary" name="salary_min">
+													<input  type=number step=any class="form-control salary" placeholder="Min. Salary" name="salary_min" value="@if (old("salary_min")){{ old('salary_min') }}@elseif ( $draft ){{ $draft->salary_min }}@endif">
 													<div class="invalid-feedback">
 														Please provide a valid input.
 													</div>
@@ -237,7 +247,7 @@
 											<div class="form-group row">
 												<label for="salary_max" class="col-sm-2 col-form-label">Max Salay:</label>
 												<div class="col-sm-10">
-													<input  type=number step=any class="form-control" placeholder="Max. Salary" name="salary_max">
+													<input  type=number step=any class="form-control salary" placeholder="Max. Salary" name="salary_max" value="@if (old("salary_max")){{ old('salary_max') }}@elseif ( $draft ){{ $draft->salary_max }}@endif">
 													<div class="invalid-feedback">
 														Please provide a valid input.
 													</div>
@@ -248,10 +258,10 @@
 											<div class="form-group row">
 												<label for="salary type" class="col-sm-2 col-form-label">Salary Type:</label>
 												<div class="col-sm-10">
-													<select class="form-control" id="" required>
+													<select class="form-control" id="" name="salary_type" required>
 														<option>Select</option>
 														<option value="Weekly">Weekly</option>
-														<option value="Monthly">Monthly</option>
+														<option value="Monthly" selected>Monthly</option>
 														<option value="Yearly">Yearly</option>
 													</select>
 												</div>
@@ -259,10 +269,10 @@
 
 											{{-- is negotialbe --}}
 											<div class="form-group row">
-												<label for="negotialbe" class="col-sm-2 col-form-label"></label>
+												<label for="negotiable" class="col-sm-2 col-form-label"></label>
 												<div class="custom-control custom-checkbox" style="margin-left: 15px;">
-													<input type="checkbox" class="custom-control-input" id="negotialbe">
-													<label class="custom-control-label" for="negotialbe"> Negotiable</label>
+													<input type="checkbox" class="custom-control-input" name="is_negotiable" id="negotiable" value="@if (old("is_negotiable")){{ old('is_negotiable') }}@elseif ( $draft ){{ $draft['is_negotiable'] }}@endif" @if (old("is_negotiable")){{ 'checked' }}@elseif ( $draft['is_negotiable'] ){{ 'checked' }} @endif>
+													<label class="custom-control-label" for="negotiable"> Negotiable</label>
 												</div>
 											</div>
 
@@ -270,7 +280,7 @@
 											<div class="form-group row">
 												<label for="hide_salary" class="col-sm-2 col-form-label"></label>
 												<div class="custom-control custom-checkbox" style="margin-left: 15px;">
-													<input type="checkbox" class="custom-control-input" id="hide_salary">
+													<input type="checkbox" class="custom-control-input" id="hide_salary" name="is_salary_visible">
 													<label class="custom-control-label" for="hide_salary"> Hide Salary</label>
 													<small class="form-text text-muted">Salary range helps to match candidate properly but you can hide form candidate.</small>
 												</div>
@@ -286,7 +296,7 @@
 											<div class="form-group row">
 												<label for="preferred_uni" class="col-sm-2 col-form-label">Preferred University:</label>
 												<div class="col-sm-10">
-													<input type="text" class="form-control" id="datepicker" autocomplete="off" placeholder="Preferred University" name="preferred_uni">
+													<input type="text" class="form-control" autocomplete="off" placeholder="Preferred University" name="preferred_university">
 													<div class="invalid-feedback">
 														Please provide a valid university.
 													</div>
@@ -297,7 +307,7 @@
 											<div class="form-group row">
 												<label for="other_uni" class="col-sm-2 col-form-label">Others:</label>
 												<div class="col-sm-10">
-													<input type="text" class="form-control" id="datepicker" autocomplete="off" placeholder="Others" name="other_uni">
+													<input type="text" class="form-control"  autocomplete="off" placeholder="Others" name="others_edu">
 													<div class="invalid-feedback">
 														Please provide a valid input.
 													</div>
@@ -314,7 +324,7 @@
 											<div class="form-group row">
 												<label for="experience_min" class="col-sm-2 col-form-label">Min Experience:</label>
 												<div class="col-sm-10">
-													<input  type=number step=any class="form-control" placeholder="Min. Salary" name="experience_min">
+													<input  type=number step=any class="form-control" placeholder="" name="min_experience">
 													<div class="invalid-feedback">
 														Please provide a valid input.
 													</div>
@@ -325,7 +335,7 @@
 											<div class="form-group row">
 												<label for="experience_max" class="col-sm-2 col-form-label">Max Experience:</label>
 												<div class="col-sm-10">
-													<input  type=number step=any class="form-control" placeholder="Max. Salary" name="experience_max">
+													<input  type=number step=any class="form-control" placeholder="" name="max_experience">
 													<div class="invalid-feedback">
 														Please provide a valid input.
 													</div>
@@ -336,7 +346,7 @@
 											<div class="form-group row">
 												<label for="fresher" class="col-sm-2 col-form-label"></label>
 												<div class="custom-control custom-checkbox" style="margin-left: 15px;">
-													<input type="checkbox" class="custom-control-input" id="fresher">
+													<input type="checkbox" class="custom-control-input" id="fresher" name="is_fresher_apply">
 													<label class="custom-control-label" for="fresher"> Fresher can apply</label>
 												</div>
 											</div>
@@ -345,7 +355,7 @@
 											<div class="form-group row">
 												<label for="experience_area" class="col-sm-2 col-form-label">Area of Experience:</label>
 												<div class="col-sm-10">
-													<input type="text" class="form-control" autocomplete="off" placeholder="Area of experience" name="experience_area">
+													<input type="text" class="form-control" autocomplete="off" placeholder="" name="area_of_experience">
 													<div class="invalid-feedback">
 														Please provide a valid university.
 													</div>
@@ -356,7 +366,7 @@
 											<div class="form-group row">
 												<label for="business_area" class="col-sm-2 col-form-label">Area of Business:</label>
 												<div class="col-sm-10">
-													<input type="text" class="form-control" autocomplete="off" placeholder="Area of Business" name="business_area">
+													<input type="text" class="form-control" autocomplete="off" placeholder="" name="area_of_business">
 													<div class="invalid-feedback">
 														Please provide a valid university.
 													</div>
@@ -375,10 +385,10 @@
 												<div class="col-sm-10">
 													<select class="form-control" id="" required name="gender">
 														<option>Select</option>
-														<option value="0">All</option>
-														<option value="1">Male</option>
-														<option value="2">Female</option>
-														<option value="3">Others</option>
+														<option value="0" @if(old('gender')){{ old('gender') == 0 ? 'selected' : '' }}@elseif( $draft &&  $draft->gender == 0 ){{ 'selected' }}@endif>All</option>
+														<option value="1" @if(old('gender')){{ old('gender') == 1 ? 'selected' : '' }}@elseif( $draft &&  $draft->gender == 1 ){{ 'selected' }}@endif>Male</option>
+														<option value="2" @if(old('gender')){{ old('gender') == 2 ? 'selected' : '' }}@elseif( $draft &&  $draft->gender == 2 ){{ 'selected' }}@endif>Female</option>
+														<option value="3" @if(old('gender')){{ old('gender') == 3 ? 'selected' : '' }}@elseif( $draft &&  $draft->gender == 3 ){{ 'selected' }}@endif>Others</option>
 													</select>
 												</div>
 											</div>
@@ -688,15 +698,15 @@
 
 
 @push('js-version')
-<script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.1/jquery.min.js"></script>
+{{-- <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.1/jquery.min.js"></script> --}}
 @endpush
 
 @push('js')
 <script src="https://cdnjs.cloudflare.com/ajax/libs/select2/4.0.6-rc.0/js/select2.min.js"></script>
 <script src="{{ asset('js/tinymce/tinymce.min.js') }}"></script>
 
-<script src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-datepicker/1.8.0/js/bootstrap-datepicker.min.js"></script>
-{{-- <script src="https://code.jquery.com/ui/1.12.1/jquery-ui.js"></script> --}}
+{{-- <script src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-datepicker/1.8.0/js/bootstrap-datepicker.min.js"></script> --}}
+<script src="https://code.jquery.com/ui/1.12.1/jquery-ui.js"></script>
 
 <script src="https://cdnjs.cloudflare.com/ajax/libs/1000hz-bootstrap-validator/0.11.5/validator.min.js"></script>
 <script type="text/javascript" src="{{ asset('js/smartwizard4/jquery.smartWizard.min.js')}}"></script>
@@ -726,8 +736,8 @@
             'insertdatetime media nonbreaking save table contextmenu directionality',
             'emoticons template paste textcolor colorpicker textpattern imagetools'
         ],
-        toolbar1: 'insertfile undo redo | styleselect | bold italic | alignleft aligncenter alignright alignjustify | bullist numlist outdent indent | link image',
-        toolbar2: 'print preview media | forecolor backcolor emoticons',
+        toolbar1: 'insertfile undo redo | styleselect | bold italic | alignleft aligncenter alignright alignjustify | bullist numlist outdent indent | link | forecolor backcolor emoticons',
+        // toolbar2: 'forecolor backcolor emoticons',
         image_advtab: true
     });
     tinymce.suffix = ".min";
@@ -761,7 +771,19 @@
 			}
 		});
 
-
+		$('#vacancy').on('click', () => {
+			if($('#vacancy').val() == 1){
+				$('#vacancy').attr('checked', true);
+				$('#vacancy_input').attr('required', false);
+				$('#vacancy_input').attr('disabled', true);;
+				$('#vacancy').val(0);
+			}else{
+				$('#vacancy').attr('checked', false);
+				$('#vacancy_input').attr('required', true);
+				$('#vacancy_input').attr('disabled', false);;
+				$('#vacancy').val(1);
+			}
+		})
 
 		var base_url = "{{ url('/employer/') }}";
 		$('input[type="checkbox"][name="is_special"]').on('click', function() {
@@ -874,12 +896,53 @@ $(document).ready(function(){
 });
 
 $(document).ready(function(){
+
+		// Toolbar extra buttons
+            var btnFinish = $('<button></button>').text('Finish')
+                                             .addClass('btn btn-info')
+                                             .on('click', function(){
+                                                    if( !$(this).hasClass('disabled')){
+                                                        var elmForm = $("#newjob");
+                                                        if(elmForm){
+                                                            elmForm.validator('validate');
+                                                            var elmErr = elmForm.find('.has-error');
+                                                            if(elmErr && elmErr.length > 0){
+                                                                alert('Oops we still have error in the form');
+                                                                return false;
+                                                            }else{
+                                                                alert('Great! we are ready to submit form');
+                                                                elmForm.submit();
+                                                                return false;
+                                                            }
+                                                        }
+                                                    }
+                                                });
+            var btnCancel = $('<button></button>').text('Cancel')
+                                             .addClass('btn btn-danger')
+                                             .on('click', function(){
+                                                    $('#smartwizard').smartWizard("reset");
+                                                    $('#newjob').find("input, textarea").val("");
+                                                });
+
         // Smart Wizard
         $('#smartwizard').smartWizard({
+
 			theme: 'arrows',
-			transitionEffect:'fade',
+			transitionEffect:'slideleft',
 			transitionEffect: 'fade',
-			transitionSpeed: '400'
+			transitionSpeed: '400',
+			onFinish:onFinishCallback,
+			// enableFinishButton:true,
+			toolbarSettings: {toolbarPosition: 'bottom',
+			 					toolbarButtonPosition: 'right',
+                                      toolbarExtraButtons: [btnFinish]
+                                    },
+                    anchorSettings: {
+                                markDoneStep: true, // add done css
+                                markAllPreviousStepsAsDone: true, // When a step selected by url hash, all previous steps are marked done
+                                removeDoneStepOnNavigateBack: true, // While navigate back done step after active step will be cleared
+                                enableAnchorOnDoneStep: true // Enable/Disable the done steps navigation
+                            }
 		});
 
         $("#smartwizard").on("leaveStep", function(e, anchorObject, stepNumber, stepDirection) {
@@ -894,16 +957,25 @@ $(document).ready(function(){
                     return false;
                 }
             }
+
             return true;
         });
-        // $("#smartwizard").on("showStep", function(e, anchorObject, stepNumber, stepDirection) {
-        //     // Enable finish button only on last step
-        //     if(stepNumber == 3){
-        //         $('.btn-finish').removeClass('disabled');
-        //     }else{
-        //         $('.btn-finish').addClass('disabled');
-        //     }
-        // });
+
+		function onFinishCallback(){
+			alert(ok);
+		}
+		$('.sw-btn-group-extra').addClass('d-none');
+        $("#smartwizard").on("showStep", function(e, anchorObject, stepNumber, stepDirection) {
+            // Enable finish button only on last step
+            if(stepNumber == 4){
+                // $('.btn-finish').removeClass('disabled');
+                $('.sw-btn-group-extra').removeClass('d-none');
+            }else{
+                // $('.btn-finish').addClass('disabled');
+				$('.sw-btn-group-extra').addClass('d-none');
+            }
+
+        });
     });
 </script>
 

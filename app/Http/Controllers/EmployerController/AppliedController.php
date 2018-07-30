@@ -65,10 +65,10 @@ class AppliedController extends Controller
                                                     });
                                                 })
                                                 ->paginate(10);
-                                            
+
             return view('employer.ajaxPartials.applied_candidates', $data);
         }
-        
+
         return view('employer.applied_candidates_list', $data);
     }
 
@@ -99,24 +99,29 @@ class AppliedController extends Controller
                                                 });
                                             })
                                             ->paginate(10);
-        
-                                            
+
+
         return view('employer.ajaxPartials.applied_candidates', $data);
     }
 
-    public function getCandidateResume($id){
+    public function getCandidateResume($job_id, $id){
         $data['left_active'] = 'manage_job';
         $data['employer_info'] = Employer::find(Auth::guard('employer')->user()->id);
         $data['candidate'] = Candidate::find($id);
-    	if(!$data['candidate'])
-    		return redirect()->route('users.home')->with('error', 'Candidate not found');
+        $applied_job = Applied_job::find($job_id);
+        $applied_job->is_viewed_resume = 1;
+
+    	if(!$data['candidate']){
+            return redirect()->route('users.home')->with('error', 'Candidate not found');
+        }
+        $applied_job->save();
     	return view('employer.candidate_resume')->with($data);
     }
 
     public function shortListCandidate(Request $request) {
-       
+
         $shortlist = Applied_job::where('candidate_id', $request->input('candidate_id'))->where('job_id', $request->input('job_id'))->first();
-        
+
         $message = "";
         if($shortlist->is_short_listed){
 
@@ -128,7 +133,7 @@ class AppliedController extends Controller
             $message = "Candidate has been Shortlisted";
         }
         $shortlist->save();
-        
+
         return $message;
     }
 

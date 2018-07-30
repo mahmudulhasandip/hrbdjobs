@@ -30,6 +30,7 @@ use App\Employer_package;
 use App\Payment_history;
 use App\Employer;
 use App\Short_listed_resume;
+use App\Job_status;
 
 
 
@@ -131,6 +132,7 @@ class HomeController extends Controller
         $data['left_active'] = 'job';
         $data['employer_info'] = Employer::find(Auth::guard('employer')->user()->id);
         $data['job_levels'] = Job_level::all();
+        $data['job_statuses'] = Job_status::all();
         $data['job_categories'] = Job_category::all();
         $data['job_designations'] = Job_designation::all();
         $data['job_experiences'] = Job_experience::all();

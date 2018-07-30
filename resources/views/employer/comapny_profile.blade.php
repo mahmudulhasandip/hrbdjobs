@@ -86,7 +86,7 @@
 															<div class="job-lctn"><i class="la la-map-marker"></i>{{ $job['location'] }}</div>
 														</div>
 														<div class="job-style-bx">
-															<span class="job-is ft">{{ $job->jobLevel->name }}</span>
+															<span class="job-is ft">{{ $job->jobStatus->name }}</span>
 															<i>{{ $job->created_at->diffForHumans() }}</i>
 														</div>
 													</div>

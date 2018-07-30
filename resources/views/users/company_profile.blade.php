@@ -50,19 +50,19 @@
 											<a class="followus" href="{{ route('candidate.follow.company', $company_info->id) }}" title=""><i class="la la-paper-plane"></i> Follow us</a>
 								 		</div>
 								 		@endif
-				 					</div>  
+				 					</div>
 				 				</div>
 				 			</div>
 				 			<div class="job-wide-devider">
 							 	<div class="row">
-							 		<div class="col-lg-8 column">	
+							 		<div class="col-lg-8 column">
 										 	{{-- company about details  --}}
 							 			<div class="job-details">
 											 <h3>About Company</h3>
 											 {{-- company about details  --}}
 							 				{!! $company_info->description !!}
 										 </div>
-										 
+
 										 {{-- recent job posts --}}
 								 		<div class="recent-jobs">
 							 				<h3>Open Jobs</h3>
@@ -86,7 +86,7 @@
 											 </div>
 							 			</div>
 									 </div>
-									 
+
 									 {{-- right information table --}}
 							 		<div class="col-lg-4 column">
 							 			<div class="job-overview">
@@ -114,7 +114,7 @@
 								 				<li class=""><i class="la la-user"></i><h3>Followers</h3><span>{{ $company_info->employer->followEmployer->count() }}</span></li>
 								 			</ul>
 								 		</div><!-- Job Overview -->
-								 		
+
 							 		</div>
 							 	</div>
 							 </div>
