@@ -44,7 +44,7 @@
 									<select class="left filter institution">
 										<option value="">Institution</option>
 										@foreach($institutes as $institute)
-										<option value="{{ $institute->institution_name }}">{{ $institute->institution_name }}</>
+										<option value="{{ $institute->name }}">{{ $institute->name }}</>
 										@endforeach
 									</select>
 									<select class="left filter experience">

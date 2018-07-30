@@ -22,6 +22,7 @@ use App\Company_industry;
 use App\Job;
 use App\Job_experience_requirement;
 use App\Job_status;
+use App\Applied_job;
 
 
 class DataRetrieveController extends Controller
@@ -270,6 +271,7 @@ class DataRetrieveController extends Controller
     		$check_employer = Employer::where('id', $posted_job['employer_ID'])->first();
     		if($check_employer){
     			$job = new Job();
+    			$job->id = $posted_job['ID'];
 	    		$job->employer_id = $posted_job['employer_ID'];
 	    		$job->title = $posted_job['job_title'];
 	    		$job->description = $posted_job['job_description'];
@@ -316,6 +318,24 @@ class DataRetrieveController extends Controller
 	    		$exper->save();
     		}
     		
+    	}
+    }
+
+    public function storeAppliedJobs(){
+    	$url = 'https://hrbdjobs.com/api/applied_jobs/all/';
+    	$jobs = json_decode(file_get_contents($url), 1);
+
+    	// dd($jobs);
+    	foreach($jobs as $job){
+    		$check_applied_job = Applied_job::where('candidate_id', $job['seeker_ID'])->where('job_id', $job['job_ID'])->first();
+    		$check_job = Job::find($job['job_ID']);
+    		$check_candidate = Candidate::find($job['seeker_ID']);
+    		if(!$check_applied_job && $check_job && $check_candidate){
+    			$applied_job = new Applied_job();
+    			$applied_job->candidate_id = $job['seeker_ID'];
+    			$applied_job->job_id = $job['job_ID'];
+    			$applied_job->save();
+    		}
     	}
     }
 }

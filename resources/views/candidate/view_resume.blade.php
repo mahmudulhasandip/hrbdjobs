@@ -582,7 +582,7 @@
                                                                             <td width="22%" align="left" style="padding-left:5px;">Date  of Birth</td>
                                                                             <td width="2%" align="center">:</td>
                                                                             <td width="76%" align="left">
-                                                                                {{ date('d M, Y', strtotime($candidate->father_name)) }}	 
+                                                                                {{ date('d M, Y', strtotime($candidate->date_of_birth)) }}	 
                                                                             </td>
                                                                             </tr>
                                                                             <!--Gender:-->

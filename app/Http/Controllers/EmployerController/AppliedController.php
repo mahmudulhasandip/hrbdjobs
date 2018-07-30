@@ -18,7 +18,7 @@ class AppliedController extends Controller
     public function getAppliedCandidatesList(Request $request, $id) {
         $data['left_active'] = 'manage_job';
         $data['employer_info'] = Employer::find(Auth::guard('employer')->user()->id);
-        $data['applied_jobs'] = Applied_job::where('job_id', $id)->where('is_withdraw', 0)->paginate(1);
+        $data['applied_jobs'] = Applied_job::where('job_id', $id)->where('is_withdraw', 0)->paginate(10);
         $data['locations'] = DB::table('candidates')
                             ->join('applied_jobs', 'applied_jobs.candidate_id', '=', 'candidates.id')
                             ->select('candidates.city')
@@ -27,8 +27,9 @@ class AppliedController extends Controller
 
         $data['institutes'] = DB::table('candidate_educations')
                             ->join('applied_jobs', 'applied_jobs.candidate_id', '=', 'candidate_educations.candidate_id')
-                            ->select('candidate_educations.institution_name')
-                            ->groupBy('institution_name')
+                            ->join('institute_names', 'institute_names.id', '=', 'candidate_educations.institute_name_id')
+                            ->select('institute_names.name')
+                            ->groupBy('institute_names.name')
                             ->get();
 
         $data['experiences'] = Job_experience::all();
@@ -63,7 +64,7 @@ class AppliedController extends Controller
                                                         });
                                                     });
                                                 })
-                                                ->paginate(1);
+                                                ->paginate(10);
                                             
             return view('employer.ajaxPartials.applied_candidates', $data);
         }
@@ -97,7 +98,7 @@ class AppliedController extends Controller
                                                     });
                                                 });
                                             })
-                                            ->paginate(1);
+                                            ->paginate(10);
         
                                             
         return view('employer.ajaxPartials.applied_candidates', $data);

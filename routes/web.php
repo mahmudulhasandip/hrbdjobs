@@ -127,6 +127,11 @@ Route::get('/store/jobs/{per_page}/{page?}', [
   'uses'  => 'AdminController\DataRetrieveController@storeJobs'
 ]);
 
+Route::get('/store/applied/jobs/', [
+  'as'    => 'applied.jobs.store.api',
+  'uses'  => 'AdminController\DataRetrieveController@storeAppliedJobs'
+]);
+
 ################### Get Country From API ###################### 
 // Route::get('/country', [
 //   'as'  => 'country',

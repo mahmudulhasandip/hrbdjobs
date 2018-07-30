@@ -11,7 +11,7 @@
         </h3>
         <span>
             {{-- <i>{{ sizeof($job->candidate->candidateEducation) ? $job->candidate->candidateEducation->first()->institution_name : '-' }}</i> --}}
-            <i>{{ $job->candidate->candidateEducation->first()['institution_name'] }}</i>
+            <i>{{ sizeof($job->candidate->candidateEducation) ?  $job->candidate->candidateEducation->first()->candidateInstitute->name: '' }}</i>
         </span>
         <p>
             <i class="la la-phone"></i>{{ $job->candidate->phone }}
