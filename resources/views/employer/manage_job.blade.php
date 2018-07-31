@@ -65,7 +65,7 @@
 												<img src="{{ asset('/images/featured_ribbon.png') }}" alt="photo" class="feature_icon">
 												@endif
 						 						<div class="table-list-title">
-												 <h3><a href="/employer/job_details/{{ $job->id }}" target="blank" title="">{{ $job->title }}</a></h3>
+												 <h3><a href="/employer/job_details/{{ $job->id }}" target="_blank" title="">{{ $job->title }}</a></h3>
 						 						</div>
 						 					</td>
 						 					<td>

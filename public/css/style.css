@@ -14457,3 +14457,49 @@ input[type="radio"] {
     -webkit-justify-content: flex-end;
     justify-content: flex-end;
 }
+
+.help-block.with-errors ul {
+    margin: 0;
+}
+
+.help-block.with-errors ul li {
+    margin: 0;
+    color: #dc3545;
+}
+
+.profile-form-edit #smartwizard .btn-secondary.disabled,
+.profile-form-edit #smartwizard .btn-secondary:disabled {
+    color: #6c757d;
+    background-color: transparent;
+    border-color: #6c757d;
+}
+
+.sw-theme-arrows>ul.step-anchor>li.done>a {
+    border-color: #81C784 !important;
+    color: #fff !important;
+    background: #81C784 !important;
+}
+
+.sw-theme-arrows>ul.step-anchor>li.done>a:after {
+    border-left: 30px solid #81C784;
+}
+
+.sw-theme-arrows>ul.step-anchor>li.active>a {
+    border-color: #8b91dd !important;
+    color: #fff !important;
+    background: #8b91dd !important;
+}
+
+.sw-theme-arrows>ul.step-anchor>li.active>a:after {
+    border-left: 30px solid #8b91dd !important;
+}
+
+.custom-control-input.is-valid~.custom-control-label,
+.was-validated .custom-control-input:valid~.custom-control-label {
+    color: #495057;
+}
+
+.custom-control-input.is-valid~.custom-control-label::before,
+.was-validated .custom-control-input:valid~.custom-control-label::before {
+    background-color: #dee2e6;
+}

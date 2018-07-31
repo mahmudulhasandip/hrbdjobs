@@ -18,7 +18,7 @@ class CreateJobExperienceRequirementsTable extends Migration
             $table->integer('job_id')->unsigned();
             $table->double('min_experience')->nullable();
             $table->double('max_experience')->nullable();
-            $table->integer('is_fresher_apply')->default(0);
+            $table->integer('is_fresher_apply')->default(0)->nullable();
             $table->string('area_of_experience')->nullable();
             $table->string('area_of_business')->nullable();
             $table->foreign('job_id')->references('id')->on('jobs')->onDelete('cascade');

@@ -31,6 +31,8 @@ use App\Payment_history;
 use App\Employer;
 use App\Short_listed_resume;
 use App\Job_status;
+use App\Job_educational_requirement;
+use App\Job_experience_requirement;
 
 
 
@@ -152,8 +154,8 @@ class HomeController extends Controller
                 'job_category_id'       => 'required',
                 'job_designation_id'    => 'required',
                 'job_level_id'          => 'required',
-                'experience'            => 'required',
-                'vacancy'               => 'required',
+                'job_status_id'         => 'required',
+                // 'experience'            => 'required',
                 'gender'                => 'required',
                 'qualification'         => 'required',
                 'deadline'              => 'required',
@@ -164,7 +166,6 @@ class HomeController extends Controller
                 return redirect()->route('employer.new.job')->withErrors($validator)->withInput();
             }
         }
-
 
         if($request['job_id']){
             $postJob = Job::where('employer_id', Auth::guard('employer')->user()->id)->where('id', $request['job_id'])->first();
@@ -178,11 +179,21 @@ class HomeController extends Controller
             $postJob->is_special = 0;
         }
         $postJob->employer_id = Auth::guard('employer')->user()->id;
-        $postJob->description = $request->input('description');
+        $postJob->vacancy = $request->input('vacancy');
         $postJob->job_category_id = $request->input('job_category_id');
         $postJob->job_designation_id = $request->input('job_designation_id');
         $postJob->job_level_id = $request->input('job_level_id');
-        $postJob->experience = $request->input('experience');
+        $postJob->job_status_id = $request->input('job_status_id');
+        $postJob->deadline = date("Y-m-d", strtotime($request->input('deadline')));
+        $postJob->qualification = $request->input('qualification');
+        $postJob->description = $request->input('description');
+        $postJob->location_type = $request->input('location_type');
+        $postJob->location = $request->input('location');
+        $postJob->is_photograph_enclosed = $request->input('is_photograph_enclosed');
+        $postJob->hide_company_info = $request->input('hide_company_info');
+        dd($postJob);
+
+
         if($request->input('is_negotiable')) {
             $postJob->is_negotiable = $request->input('is_negotiable');
             $postJob->salary_min = null;
@@ -192,19 +203,55 @@ class HomeController extends Controller
             $postJob->salary_min = $request->input('salary_min');
             $postJob->salary_max = $request->input('salary_max');
         }
-        $postJob->vacancy = $request->input('vacancy');
+        $postJob->salary_type = $request->input('salary_type');
+        $postJob->is_salary_visible = $request->input('is_salary_visible');
+
+        // $postJob->experience = $request->input('experience');
         $postJob->gender = $request->input('gender');
-        $postJob->qualification = $request->input('qualification');
-        $postJob->deadline = date("Y-m-d", strtotime($request->input('deadline')));
-        $postJob->location = $request->input('location');
+        $postJob->age_min = $request->input('age_min');
+        $postJob->age_max = $request->input('age_max');
+
         if($request['draft']){
             $postJob->is_drafted = 1;
             $postJob->save();
+            // dd($postJob);
         }
         if($request['post']){
             $postJob->is_drafted = 0;
             $postJob->save();
+            // dd($postJob);
         }
+
+
+
+        // experience
+        if($request['job_id']){
+            $experience = Job_experience_requirement::where('job_id', $request['job_id'])->first();
+        }else{
+            $experience = new Job_experience_requirement();
+        }
+
+        $experience->job_id = $postJob->id;
+        $experience->min_experience = $request->input('min_experience');
+        $experience->max_experience = $request->input('max_experience');
+        $experience->is_fresher_apply = $request->input('is_fresher_apply');
+        $experience->area_of_experience = $request->input('area_of_experience');
+        $experience->area_of_business = $request->input('area_of_business');
+        $experience->save();
+        // dd($experience);
+
+        // education
+        if($request['job_id']){
+            $education = Job_educational_requirement::where('job_id', $request['job_id'])->first();
+        }else{
+            $education = new Job_educational_requirement();
+        }
+        $education->job_id = $postJob->id;
+        $education->preferred_university = $request->input('preferred_university');
+        $education->others = $request->input('others_edu');
+        $education->save();
+        // dd($education);
+
 
 
         if($request->input('skill')){
@@ -217,8 +264,11 @@ class HomeController extends Controller
                 $jobSkill->job_id = $postJob->id;
                 $jobSkill->skill_id = $request->input('skill')[$i];
                 $jobSkill->save();
+
             }
+
         }
+        // dd($jobSkill);
 
         if($request['draft']){
             return redirect()->route('employer.draft.job');
@@ -278,6 +328,7 @@ class HomeController extends Controller
         }
         $data['job_experiences'] = Job_experience::all();
         $data['skills'] = Skill::all();
+        $data['job_statuses'] = Job_status::all();
         return view('employer.post_new_job', $data);
 
     }

@@ -43,8 +43,10 @@
 					 		<div class="profile-title">
 					 			<h3>Post a New Job</h3>
 							 </div>
+							 <div class="profile-form-edit">
 							 <form method="POST" role="form" id="newjob" data-toggle="validator" action="{{ route('employer.new.post.job') }}" class="needs-validation" novalidate>
 								 @csrf
+								 <input type="hidden" name="job_id" value="{{ ($draft) ? $draft->id : '' }}">
 								<div id="smartwizard">
 									<ul>
 										<li><a href="#step-1">Besic </a></li>
@@ -60,11 +62,13 @@
 										{{-- besic info --}}
 										<div id="step-1" class="" >
 
-											<div id="form-step-0" role="form" data-toggle="validator">
+											{{-- title --}}
+											<div id="form-step-0" data-toggle="validator">
 												<div class="form-group row">
 													<label for="title" class="col-sm-2 col-form-label">Title:</label>
 													<div class="col-sm-10">
 														<input type="text" class="form-control" id="title" placeholder="Title" name="title" value="@if (old("title")){{ old('title') }}@elseif ( $draft ){{ $draft->title }}@endif" required>
+														<div class="vaild-feedback"></div>
 														<div class="invalid-feedback">
 															Please provide a valid Title.
 														</div>
@@ -72,7 +76,7 @@
 												</div>
 
 
-
+												{{-- vacancy --}}
 												<div class="form-group row">
 													<div class="input-group mb-3">
 														<label for="vacancy_input" class="col-sm-2 col-form-label">Vacancy:</label>
@@ -80,7 +84,8 @@
 														<div class="input-group-prepend">
 															<div class="input-group-text">
 																<div class="custom-control custom-checkbox vacancy">
-																	<input type="checkbox" class="custom-control-input" id="vacancy" value="1" required>
+																	<input type="checkbox" class="custom-control-input" id="vacancy" value="1" >
+																	<div class="invalid-feedback"></div>
 																	<label class="custom-control-label pt2 " for="vacancy">N/A</label>
 																</div>
 															</div>
@@ -89,26 +94,32 @@
 													</div>
 												</div>
 
+												{{-- special job --}}
 												<div class="form-group row">
 													<label for="" class="col-sm-2 col-form-label"></label>
 													<div class="custom-control custom-checkbox" style="margin-left: 15px;">
-														<input type="checkbox" class="custom-control-input" name="is_special" id="special_job"  value="@if (old("is_special")){{ old('is_special') }}@elseif ( $draft ){{ $draft->is_special }}@endif" @if (old("is_special")){{ 'checked' }}@elseif ( $draft['is_special'] ){{ 'checked' }} @endif>
+														<input type="checkbox" class="custom-control-input" name="is_special" id="special_job"  value="@if (old("is_special")){{ old('is_special') }}@elseif ( $draft ){{ $draft->is_special }}@endif" @if (old("is_special")){{ 'checked' }}@elseif ( $draft['is_special']==1 ){{ 'checked' }} @endif>
 														<label class="custom-control-label" for="special_job">Special Job</label>
 													</div>
 												</div>
 
+												{{-- job category --}}
 												<div class="form-group row">
 													<label for="" class="col-sm-2 col-form-label">Job Category:</label>
 													<div class="col-sm-10">
-														<select class="js-example-basic-single" id="job_category_id" name="job_category_id" >
+														<select class="js-example-basic-single" id="job_category_id" name="job_category_id" required>
 															<option >Select</option>
 															@foreach($job_categories as $job_category)
 															<option value="{{ $job_category->id }}" @if(old('job_category_id')){{ old('job_category_id') == $job_category->id ? 'selected' : '' }}@elseif( $draft && $draft->job_category_id == $job_category->id ){{ 'selected' }}@endif >{{ $job_category->name }}</option>
 															@endforeach
 														</select>
+														<div class="invalid-feedback">
+															Please provide a valid input.
+														</div>
 													</div>
 												</div>
 
+												{{-- job designation --}}
 												<div class="form-group row">
 													<label for="" class="col-sm-2 col-form-label">Job Designation:</label>
 													<div class="col-sm-10">
@@ -118,9 +129,13 @@
 															<option value="{{ $job_designation->id }}"  @if(old('job_designation_id')){{ old('job_designation_id') == $job_category->id ? 'selected' : '' }}@elseif( $draft &&  $draft->job_designation_id == $job_designation->id ){{ 'selected' }}@endif>{{ $job_designation->name }}</option>
 															@endforeach
 														</select>
+														<div class="invalid-feedback">
+															Please provide a valid input.
+														</div>
 													</div>
 												</div>
 
+												{{-- job status --}}
 												<div class="form-group row">
 													<label for="" class="col-sm-2 col-form-label">Job status:</label>
 													<div class="col-sm-10">
@@ -130,9 +145,13 @@
 															<option value="{{ $job_status->id }}" @if(old('job_status_id')){{ old('job_status_id') == $job_status->id ? 'selected' : '' }}@elseif( $draft &&  $draft->job_status_id == $job_status->id ){{ 'selected' }}@endif>{{ $job_status->name }}</option>
 															@endforeach
 														</select>
+														<div class="invalid-feedback">
+															Please provide a valid input.
+														</div>
 													</div>
 												</div>
 
+												{{-- job level --}}
 												<div class="form-group row">
 													<label for="" class="col-sm-2 col-form-label">Job Level:</label>
 													<div class="col-sm-10">
@@ -142,9 +161,13 @@
 															<option value="{{ $job_level->id }}" @if(old('job_level_id')){{ old('job_level_id') == $job_level->id ? 'selected' : '' }}@elseif( $draft &&  $draft->job_level_id == $job_level->id ){{ 'selected' }}@endif>{{ $job_level->name }}</option>
 															@endforeach
 														</select>
+														<div class="invalid-feedback">
+															Please provide a valid input.
+														</div>
 													</div>
 												</div>
 
+												{{-- deadline --}}
 												<div class="form-group row">
 													<label for="" class="col-sm-2 col-form-label">Deadline:</label>
 													<div class="col-sm-10">
@@ -155,6 +178,7 @@
 													</div>
 												</div>
 
+												{{-- qualification --}}
 												<div class="form-group row">
 													<label for="" class="col-sm-2 col-form-label">Qualification:</label>
 													<div class="col-sm-10">
@@ -165,6 +189,7 @@
 													</div>
 												</div>
 
+												{{-- description --}}
 												<div class="form-group row">
 													<label for="title" class="col-sm-2 col-form-label">Description:</label>
 													<div class="col-sm-10">
@@ -175,50 +200,90 @@
 													</div>
 												</div>
 
+
+												{{-- skills --}}
+												@php
+													$draftSkills = array();
+													if($draft){
+
+														foreach ($draft->jobSkill as $draftSkill) {
+
+															$draftSkills[] = $draftSkill->skill['id'];
+
+														}
+
+													}
+												@endphp
+												<div class="form-group row">
+													<label for="" class="col-sm-2 col-form-label">Skills:</label>
+													<div class="col-sm-10">
+														<select class="js-example-basic-single" multiple="multiple" name="skill[]">
+															<option>Select</option>
+															@foreach($skills as $skill)
+															<option value="{{ $skill->id }}" @if(old("skill") && (in_array($skill->id, old("skill")))){{ "selected" }}@elseif( $draft && in_array($skill->id, $draftSkills )){{ 'selected' }}@endif >{{ $skill->name }}</option>
+															@endforeach
+														</select>
+														<div class="invalid-feedback">
+															Please provide a valid input.
+														</div>
+													</div>
+												</div>
+
+												{{-- location type --}}
 												<div class="form-group row">
 													<label for="exampleFormControlSelect1" class="col-sm-2 col-form-label">Location Type:</label>
 													<div class="col-sm-10">
 														<select class="form-control" id="loc_type" name="location_type" required>
 															<option>Select</option>
-															<option value="0">Inside Bangladesh</option>
-															<option value="1">Outside Bangladesh</option>
+															<option value="0" @if(old('location_type')){{ old('location_type') == 0 ? 'selected' : '' }}@elseif( $draft &&  $draft->location_type == 0 ){{ 'selected' }}@endif>Inside Bangladesh</option>
+															<option value="1" @if(old('location_type')){{ old('location_type') == 1 ? 'selected' : '' }}@elseif( $draft &&  $draft->location_type == 1 ){{ 'selected' }}@endif>Outside Bangladesh</option>
 														</select>
+														<div class="invalid-feedback">
+															Please provide a valid input.
+														</div>
 													</div>
 												</div>
 
+												{{-- location --}}
 												<div class="form-group row">
 													<label for="location" class="col-sm-2 col-form-label">Location:</label>
 													<div class="col-sm-10">
 														<textarea class="form-control" id="loc" placeholder="Location" name="location" required>@if (old("location")){{ old('location') }}@elseif ( $draft ){{ $draft->location }}@endif</textarea>
 														<small class="form-text text-muted"><i class="la la-info-circle 2x"></i> Insert job location</small>
 														<div class="invalid-feedback">
-															Incorrect
+															Please provide a valid input.
 														</div>
 													</div>
 												</div>
 
+												{{-- photo enclosed --}}
 												<div class="form-group row">
 													<label for="photo" class="col-sm-2 col-form-label"></label>
-													<div class="custom-control custom-checkbox" style="margin-left: 15px;">
-														<input type="checkbox" class="custom-control-input" id="photo" name='is_photograph_enclosed'>
+													<div class="custom-control custom-checkbox photo_enclose" style="margin-left: 15px;">
+														<input type="checkbox" class="custom-control-input" id="photo" name='is_photograph_enclosed' value="@if (old("is_photograph_enclosed")){{ old('is_photograph_enclosed') }}@elseif ( $draft ){{ $draft->is_photograph_enclosed }}@endif" @if (old("is_photograph_enclosed")){{ 'checked' }}@elseif ( $draft['is_photograph_enclosed']){{ 'checked' }} @endif>
 														<label class="custom-control-label" for="photo">Photograph Enclosed</label>
 													</div>
 												</div>
 
+												{{-- others benefit --}}
 												<div class="form-group row">
-													<label for="title" class="col-sm-2 col-form-label">Other Benefit:</label>
+													<label for="other_benefit" class="col-sm-2 col-form-label">Other Benefit:</label>
 													<div class="col-sm-10">
 														<select class="js-example-basic-single" multiple="multiple" name="state" >
 															<option>Alabama</option>
 															<option value="WY"></option>
 														</select>
+														<div class="invalid-feedback">
+															Please provide a valid input.
+														</div>
 													</div>
 												</div>
 
+												{{-- hide company --}}
 												<div class="form-group row">
 													<label for="hide_company_info" class="col-sm-2 col-form-label"></label>
-													<div class="custom-control custom-checkbox" style="margin-left: 15px;">
-														<input type="checkbox" class="custom-control-input" id="hide_company_info" name="hide_company_info">
+													<div class="custom-control custom-checkbox hide_company_info" style="margin-left: 15px;">
+														<input type="checkbox" class="custom-control-input" id="hide_company_info" name="hide_company_info" value="@if (old("hide_company_info")){{ old('hide_company_info') }}@elseif ( $draft ){{ $draft->hide_company_info }}@endif" @if (old("hide_company_info")){{ 'checked' }}@elseif ( $draft['is_photograph_enclosed']){{ 'checked' }} @endif>
 														<label class="custom-control-label" for="hide_company_info">Hide Company Info</label>
 														<small class="form-text text-muted"><i class="la la-info-circle 2x"></i> Hide your company info from candidates.</small>
 													</div>
@@ -232,84 +297,91 @@
 										{{-- salary Info --}}
 										<div id="step-2" class="">
 
-											{{-- min salary --}}
-											<div class="form-group row">
-												<label for="salary_min" class="col-sm-2 col-form-label">Min Salay:</label>
-												<div class="col-sm-10">
-													<input  type=number step=any class="form-control salary" placeholder="Min. Salary" name="salary_min" value="@if (old("salary_min")){{ old('salary_min') }}@elseif ( $draft ){{ $draft->salary_min }}@endif">
-													<div class="invalid-feedback">
-														Please provide a valid input.
+											<div id="form-step-1" data-toggle="validator">
+												{{-- min salary --}}
+												<div class="form-group row">
+													<label for="salary_min" class="col-sm-2 col-form-label">Min Salay:</label>
+													<div class="col-sm-10">
+														<input  type=number step=any class="form-control salary" placeholder="Min. Salary" name="salary_min" value="@if (old("salary_min")){{ old('salary_min') }}@elseif ( $draft ){{ $draft->salary_min }}@endif" required>
+														<div class="invalid-feedback">
+															Please provide a valid input.
+														</div>
+														<div class="help-block with-errors"></div>
+													</div>
+												</div>
+
+												{{-- max salary --}}
+												<div class="form-group row">
+													<label for="salary_max" class="col-sm-2 col-form-label">Max Salay:</label>
+													<div class="col-sm-10">
+														<input  type=number step=any class="form-control salary" placeholder="Max. Salary" name="salary_max" value="@if (old("salary_max")){{ old('salary_max') }}@elseif ( $draft ){{ $draft->salary_max }}@endif" required>
+														<div class="invalid-feedback">
+															Please provide a valid input.
+														</div>
+													</div>
+												</div>
+
+												{{-- salary type --}}
+												<div class="form-group row">
+													<label for="salary_type" class="col-sm-2 col-form-label">Salary Type:</label>
+													<div class="col-sm-10">
+														<select class="form-control" id="salary_type" name="salary_type" required>
+															<option>Select</option>
+															<option value="Weekly"  @if(old('salary_type')){{ old('salary_type') == 'Weekly' ? 'selected' : '' }}@elseif( $draft &&  $draft->salary_type == 'Weekly' ){{ 'selected' }}@endif>Weekly</option>
+															<option value="Monthly" selected  @if(old('salary_type')){{ old('salary_type') == 'Monthly' ? 'selected' : '' }}@elseif( $draft &&  $draft->salary_type == 'Monthly' ){{ 'selected' }}@endif>Monthly</option>
+															<option value="Yearly" @if(old('salary_type')){{ old('salary_type') == 'Yearly' ? 'selected' : '' }}@elseif( $draft &&  $draft->salary_type == 'Yearly' ){{ 'selected' }}@endif>Yearly</option>
+														</select>
+														<div class="invalid-feedback">
+															Please provide a valid input.
+														</div>
+													</div>
+												</div>
+
+												{{-- is negotialbe --}}
+												<div class="form-group row">
+													<label for="negotiable" class="col-sm-2 col-form-label"></label>
+													<div class="custom-control custom-checkbox" style="margin-left: 15px;">
+														<input type="checkbox" class="custom-control-input" name="is_negotiable" id="negotiable" value="@if (old("is_negotiable")){{ old('is_negotiable') }}@elseif ( $draft ){{ $draft['is_negotiable'] }}@endif" @if (old("is_negotiable")){{ 'checked' }}@elseif ( $draft['is_negotiable'] ){{ 'checked' }} @endif>
+														<label class="custom-control-label" for="negotiable"> Negotiable</label>
+													</div>
+												</div>
+
+												{{-- hide salary --}}
+												<div class="form-group row">
+													<label for="hide_salary" class="col-sm-2 col-form-label"></label>
+													<div class="custom-control custom-checkbox hide_salary" style="margin-left: 15px;">
+														<input type="checkbox" class="custom-control-input" id="hide_salary" name="is_salary_visible" value="@if (old("is_salary_visible")){{ old('is_salary_visible') }}@elseif ( $draft ){{ $draft->is_salary_visible }}@endif" @if (old("is_salary_visible")){{ 'checked' }}@elseif ( $draft['is_salary_visible']){{ 'checked' }} @endif>
+														<label class="custom-control-label" for="hide_salary"> Hide Salary</label>
+														<small class="form-text text-muted">Salary range helps to match candidate properly but you can hide form candidate.</small>
 													</div>
 												</div>
 											</div>
-
-											{{-- max salary --}}
-											<div class="form-group row">
-												<label for="salary_max" class="col-sm-2 col-form-label">Max Salay:</label>
-												<div class="col-sm-10">
-													<input  type=number step=any class="form-control salary" placeholder="Max. Salary" name="salary_max" value="@if (old("salary_max")){{ old('salary_max') }}@elseif ( $draft ){{ $draft->salary_max }}@endif">
-													<div class="invalid-feedback">
-														Please provide a valid input.
-													</div>
-												</div>
-											</div>
-
-											{{-- salary type --}}
-											<div class="form-group row">
-												<label for="salary type" class="col-sm-2 col-form-label">Salary Type:</label>
-												<div class="col-sm-10">
-													<select class="form-control" id="" name="salary_type" required>
-														<option>Select</option>
-														<option value="Weekly">Weekly</option>
-														<option value="Monthly" selected>Monthly</option>
-														<option value="Yearly">Yearly</option>
-													</select>
-												</div>
-											</div>
-
-											{{-- is negotialbe --}}
-											<div class="form-group row">
-												<label for="negotiable" class="col-sm-2 col-form-label"></label>
-												<div class="custom-control custom-checkbox" style="margin-left: 15px;">
-													<input type="checkbox" class="custom-control-input" name="is_negotiable" id="negotiable" value="@if (old("is_negotiable")){{ old('is_negotiable') }}@elseif ( $draft ){{ $draft['is_negotiable'] }}@endif" @if (old("is_negotiable")){{ 'checked' }}@elseif ( $draft['is_negotiable'] ){{ 'checked' }} @endif>
-													<label class="custom-control-label" for="negotiable"> Negotiable</label>
-												</div>
-											</div>
-
-											{{-- hide salary --}}
-											<div class="form-group row">
-												<label for="hide_salary" class="col-sm-2 col-form-label"></label>
-												<div class="custom-control custom-checkbox" style="margin-left: 15px;">
-													<input type="checkbox" class="custom-control-input" id="hide_salary" name="is_salary_visible">
-													<label class="custom-control-label" for="hide_salary"> Hide Salary</label>
-													<small class="form-text text-muted">Salary range helps to match candidate properly but you can hide form candidate.</small>
-												</div>
-											</div>
-
 										</div>
 
 
 										{{-- Educational Info --}}
 										<div id="step-3" class="">
 
-											{{-- preferred university --}}
-											<div class="form-group row">
-												<label for="preferred_uni" class="col-sm-2 col-form-label">Preferred University:</label>
-												<div class="col-sm-10">
-													<input type="text" class="form-control" autocomplete="off" placeholder="Preferred University" name="preferred_university">
-													<div class="invalid-feedback">
-														Please provide a valid university.
+											<div id="form-step-2" data-toggle="validator">
+												{{-- preferred university --}}
+												<div class="form-group row">
+													<label for="preferred_uni" class="col-sm-2 col-form-label">Preferred University:</label>
+													<div class="col-sm-10">
+														<input type="text" class="form-control" autocomplete="off" placeholder="Preferred University" value="@if (old("preferred_university")){{ old('preferred_university') }}@elseif ( $draft ){{ $draft->educationalRequirement['preferred_university'] }}@endif" name="preferred_university">
+														<div class="invalid-feedback">
+															Please provide a valid university.
+														</div>
 													</div>
 												</div>
-											</div>
 
-											{{-- others --}}
-											<div class="form-group row">
-												<label for="other_uni" class="col-sm-2 col-form-label">Others:</label>
-												<div class="col-sm-10">
-													<input type="text" class="form-control"  autocomplete="off" placeholder="Others" name="others_edu">
-													<div class="invalid-feedback">
-														Please provide a valid input.
+												{{-- others --}}
+												<div class="form-group row">
+													<label for="other_uni" class="col-sm-2 col-form-label">Others:</label>
+													<div class="col-sm-10">
+														<input type="text" class="form-control"  autocomplete="off" placeholder="Others" name="others_edu" value="@if (old("others_edu")){{ old('others_edu') }}@elseif ( $draft ){{ $draft->educationalRequirement['others'] }}@endif">
+														<div class="invalid-feedback">
+															Please provide a valid input.
+														</div>
 													</div>
 												</div>
 											</div>
@@ -320,373 +392,112 @@
 										{{-- Experience Info --}}
 										<div id="step-4" class="">
 
-											{{-- min experience --}}
-											<div class="form-group row">
-												<label for="experience_min" class="col-sm-2 col-form-label">Min Experience:</label>
-												<div class="col-sm-10">
-													<input  type=number step=any class="form-control" placeholder="" name="min_experience">
-													<div class="invalid-feedback">
-														Please provide a valid input.
+											<div id="form-step-3" data-toggle="validator">
+												{{-- min experience --}}
+												<div class="form-group row">
+													<label for="experience_min" class="col-sm-2 col-form-label">Min Experience:</label>
+													<div class="col-sm-10">
+														<input  type=number step=any class="form-control" placeholder="" name="min_experience" value="@if (old("min_experience")){{ old('min_experience') }}@elseif ( $draft ){{ $draft->experiencelRequirement['min_experience'] }}@endif">
+														<div class="invalid-feedback">
+															Please provide a valid input.
+														</div>
+													</div>
+												</div>
+
+												{{-- max experience --}}
+												<div class="form-group row">
+													<label for="experience_max" class="col-sm-2 col-form-label">Max Experience:</label>
+													<div class="col-sm-10">
+														<input  type=number step=any class="form-control" placeholder="" name="max_experience" value="@if (old("max_experience")){{ old('max_experience') }}@elseif ( $draft ){{ $draft->experiencelRequirement['max_experience'] }}@endif">
+														<div class="invalid-feedback">
+															Please provide a valid input.
+														</div>
+													</div>
+												</div>
+
+												{{-- fresher apply --}}
+												<div class="form-group row">
+													<label for="fresher" class="col-sm-2 col-form-label"></label>
+													<div class="custom-control custom-checkbox fresher_apply" style="margin-left: 15px;">
+														<input type="checkbox" class="custom-control-input" id="fresher" name="is_fresher_apply" value="@if (old("is_fresher_apply")){{ old('is_fresher_apply') }}@elseif ( $draft ){{ $draft->is_fresher_apply }}@endif" @if (old("is_fresher_apply")){{ 'checked' }}@elseif ( $draft['is_fresher_apply']){{ 'checked' }} @endif>
+														<label class="custom-control-label" for="fresher"> Fresher can apply</label>
+													</div>
+												</div>
+
+												{{-- area of experience --}}
+												<div class="form-group row">
+													<label for="experience_area" class="col-sm-2 col-form-label">Area of Experience:</label>
+													<div class="col-sm-10">
+														<input type="text" class="form-control" autocomplete="off" placeholder="" name="area_of_experience" value="@if (old("area_of_experience")){{ old('area_of_experience') }}@elseif ( $draft ){{ $draft->experiencelRequirement['area_of_experience'] }}@endif">
+														<div class="invalid-feedback">
+															Please provide a valid university.
+														</div>
+													</div>
+												</div>
+
+												{{-- area of business --}}
+												<div class="form-group row">
+													<label for="business_area" class="col-sm-2 col-form-label">Area of Business:</label>
+													<div class="col-sm-10">
+														<input type="text" class="form-control" autocomplete="off" placeholder="" name="area_of_business" value="@if (old("area_of_business")){{ old('area_of_business') }}@elseif ( $draft ){{ $draft->experiencelRequirement['area_of_business'] }}@endif">
+														<div class="invalid-feedback">
+															Please provide a valid university.
+														</div>
 													</div>
 												</div>
 											</div>
-
-											{{-- max experience --}}
-											<div class="form-group row">
-												<label for="experience_max" class="col-sm-2 col-form-label">Max Experience:</label>
-												<div class="col-sm-10">
-													<input  type=number step=any class="form-control" placeholder="" name="max_experience">
-													<div class="invalid-feedback">
-														Please provide a valid input.
-													</div>
-												</div>
-											</div>
-
-											{{-- fresher apply --}}
-											<div class="form-group row">
-												<label for="fresher" class="col-sm-2 col-form-label"></label>
-												<div class="custom-control custom-checkbox" style="margin-left: 15px;">
-													<input type="checkbox" class="custom-control-input" id="fresher" name="is_fresher_apply">
-													<label class="custom-control-label" for="fresher"> Fresher can apply</label>
-												</div>
-											</div>
-
-											{{-- area of experience --}}
-											<div class="form-group row">
-												<label for="experience_area" class="col-sm-2 col-form-label">Area of Experience:</label>
-												<div class="col-sm-10">
-													<input type="text" class="form-control" autocomplete="off" placeholder="" name="area_of_experience">
-													<div class="invalid-feedback">
-														Please provide a valid university.
-													</div>
-												</div>
-											</div>
-
-											{{-- area of business --}}
-											<div class="form-group row">
-												<label for="business_area" class="col-sm-2 col-form-label">Area of Business:</label>
-												<div class="col-sm-10">
-													<input type="text" class="form-control" autocomplete="off" placeholder="" name="area_of_business">
-													<div class="invalid-feedback">
-														Please provide a valid university.
-													</div>
-												</div>
-											</div>
-
 										</div>
 
 
 										{{-- Personal Info --}}
 										<div id="step-5" class="">
 
-											{{-- gender --}}
-											<div class="form-group row">
-												<label for="gender" class="col-sm-2 col-form-label">Gender:</label>
-												<div class="col-sm-10">
-													<select class="form-control" id="" required name="gender">
-														<option>Select</option>
-														<option value="0" @if(old('gender')){{ old('gender') == 0 ? 'selected' : '' }}@elseif( $draft &&  $draft->gender == 0 ){{ 'selected' }}@endif>All</option>
-														<option value="1" @if(old('gender')){{ old('gender') == 1 ? 'selected' : '' }}@elseif( $draft &&  $draft->gender == 1 ){{ 'selected' }}@endif>Male</option>
-														<option value="2" @if(old('gender')){{ old('gender') == 2 ? 'selected' : '' }}@elseif( $draft &&  $draft->gender == 2 ){{ 'selected' }}@endif>Female</option>
-														<option value="3" @if(old('gender')){{ old('gender') == 3 ? 'selected' : '' }}@elseif( $draft &&  $draft->gender == 3 ){{ 'selected' }}@endif>Others</option>
-													</select>
+											<div id="form-step-4" data-toggle="validator">
+												{{-- gender --}}
+												<div class="form-group row">
+													<label for="gender" class="col-sm-2 col-form-label">Gender:</label>
+													<div class="col-sm-10">
+														<select class="form-control" id="" required name="gender">
+															<option>Select</option>
+															<option value="0" @if(old('gender')){{ old('gender') == 0 ? 'selected' : '' }}@elseif( $draft &&  $draft->gender == 0 ){{ 'selected' }}@endif>All</option>
+															<option value="1" @if(old('gender')){{ old('gender') == 1 ? 'selected' : '' }}@elseif( $draft &&  $draft->gender == 1 ){{ 'selected' }}@endif>Male</option>
+															<option value="2" @if(old('gender')){{ old('gender') == 2 ? 'selected' : '' }}@elseif( $draft &&  $draft->gender == 2 ){{ 'selected' }}@endif>Female</option>
+															<option value="3" @if(old('gender')){{ old('gender') == 3 ? 'selected' : '' }}@elseif( $draft &&  $draft->gender == 3 ){{ 'selected' }}@endif>Others</option>
+														</select>
+														<div class="invalid-feedback">
+															Please provide a valid input.
+														</div>
+													</div>
 												</div>
-											</div>
 
-											{{-- min age --}}
-											<div class="form-group row">
-												<label for="age_min" class="col-sm-2 col-form-label">Min Age:</label>
-												<div class="col-sm-10">
-													<input  type=number step=any class="form-control" placeholder="Min. Age" name="age_min">
-													<div class="invalid-feedback">
-														Please provide a valid input.
+												{{-- min age --}}
+												<div class="form-group row">
+													<label for="age_min" class="col-sm-2 col-form-label">Min Age:</label>
+													<div class="col-sm-10">
+														<input  type=number step=any class="form-control" placeholder="Min. Age" name="age_min" value="@if (old("age_min")){{ old('age_min') }}@elseif ( $draft ){{ $draft->age_min }}@endif">
+														<div class="invalid-feedback">
+															Please provide a valid input.
+														</div>
+													</div>
+												</div>
+
+												{{-- max age --}}
+												<div class="form-group row">
+													<label for="age_max" class="col-sm-2 col-form-label">Max Age:</label>
+													<div class="col-sm-10">
+														<input  type=number step=any class="form-control" placeholder="Max. Age" name="age_max" value="@if (old("age_max")){{ old('age_max') }}@elseif ( $draft ){{ $draft->age_max }}@endif">
+														<div class="invalid-feedback">
+															Please provide a valid input.
+														</div>
 													</div>
 												</div>
 											</div>
-
-											{{-- max age --}}
-											<div class="form-group row">
-												<label for="age_max" class="col-sm-2 col-form-label">Max Age:</label>
-												<div class="col-sm-10">
-													<input  type=number step=any class="form-control" placeholder="Max. Age" name="age_max">
-													<div class="invalid-feedback">
-														Please provide a valid input.
-													</div>
-												</div>
-											</div>
-
 										</div>
 
 									</div>
 								</div>
 							</form>
-					 		<div class="profile-form-edit">
-								 <form method="POST" action="{{ route('employer.new.post.job') }}">
-									@csrf
-								 	<input type="hidden" name="job_id" value="{{ ($draft) ? $draft->id : '' }}">
-					 				<div class="row">
-										{{-- Job Title --}}
-					 					<div class="col-lg-12">
-					 						<span class="pf-title">Job Title</span>
-					 						<div class="pf-field">
-												<input type="text" placeholder="Title" name="title" value="@if (old("title")){{ old('title') }}@elseif ( $draft ){{ $draft->title }}@endif"/>
-												@if ($errors->has('title'))
-													<span class="help-block">
-														{{ $errors->first('title') }}
-													</span>
-												@endif
-					 						</div>
-										 </div>
-
-										 {{-- is_special job --}}
-										<div class="col-sm-3">
-											<div class="pf-field">
-												<div class="simple-checkbox">
-													<p><input type="checkbox" name="is_special" id="special_job"  value="@if (old("is_special")){{ old('is_special') }}@elseif ( $draft ){{ $draft->is_special }}@endif" @if (old("is_special")){{ 'checked' }}@elseif ( $draft['is_special'] ){{ 'checked' }} @endif><label for="special_job"><strong>Special Job</strong></label></p>
-													@if ($errors->has('is_special'))
-														<span class="help-block">
-															{{ $errors->first('is_special') }}
-														</span>
-													@endif
-												</div>
-											</div>
-										</div>
-
-										{{-- description --}}
-					 					<div class="col-lg-12">
-					 						<span class="pf-title">Description</span>
-					 						<div class="pf-field">
-												<textarea id="tinymce" name="description" >@if (old("description")){{ old('description') }}@elseif ( $draft ){{ $draft->description }}@endif</textarea>
-												@if ($errors->has('description'))
-													<span class="help-block">
-														{{ $errors->first('description') }}
-													</span>
-												@endif
-					 						</div>
-										 </div>
-
-										 {{-- job categories --}}
-					 					<div class="col-lg-6">
-					 						<span class="pf-title">Job Categories</span>
-					 						<div class="pf-field">
-					 							<select id="job_category_id" data-placeholder="Please Select Specialism" class="chosen" name="job_category_id" >
-													<option value="">Job Category</option>
-													@foreach($job_categories as $job_category)
-													<option value="{{ $job_category->id }}" @if(old('job_category_id')){{ old('job_category_id') == $job_category->id ? 'selected' : '' }}@elseif( $draft && $draft->job_category_id == $job_category->id ){{ 'selected' }}@endif >{{ $job_category->name }}</option>
-													@endforeach
-												</select>
-												@if ($errors->has('job_category_id'))
-													<span class="help-block">
-														{{ $errors->first('job_category_id') }}
-													</span>
-												@endif
-					 						</div>
-										 </div>
-
-										 {{-- job designation --}}
-					 					<div class="col-lg-6">
-					 						<span class="pf-title">Job Designation</span>
-					 						<div class="pf-field">
-					 							<select id="job_designation_id" data-placeholder="Please Select Specialism" class="chosen" name="job_designation_id">
-													<option value="">Job Designation</option>
-													@foreach($job_designations as $job_designation)
-													<option value="{{ $job_designation->id }}"  @if(old('job_designation_id')){{ old('job_designation_id') == $job_category->id ? 'selected' : '' }}@elseif( $draft &&  $draft->job_designation_id == $job_designation->id ){{ 'selected' }}@endif>{{ $job_designation->name }}</option>
-													@endforeach
-												</select>
-												@if ($errors->has('job_designation_id'))
-													<span class="help-block">
-														{{ $errors->first('job_designation_id') }}
-													</span>
-												@endif
-					 						</div>
-										 </div>
-
-										 {{-- job level --}}
-					 					<div class="col-lg-6">
-					 						<span class="pf-title">Job Level</span>
-					 						<div class="pf-field">
-					 							<select data-placeholder="Please Select Specialism" class="chosen" name="job_level_id">
-													<option value="">Job Level</option>
-													@foreach($job_levels as $job_level)
-													<option value="{{ $job_level->id }}" @if(old('job_level_id')){{ old('job_level_id') == $job_level->id ? 'selected' : '' }}@elseif( $draft &&  $draft->job_level_id == $job_level->id ){{ 'selected' }}@endif>{{ $job_level->name }}</option>
-													@endforeach
-												</select>
-												@if ($errors->has('job_level_id'))
-													<span class="help-block">
-														{{ $errors->first('job_level_id') }}
-													</span>
-												@endif
-					 						</div>
-										 </div>
-
-										 {{-- experience --}}
-					 					<div class="col-lg-6">
-					 						<span class="pf-title">Experience</span>
-					 						<div class="pf-field">
-					 							<select data-placeholder="Please Select Specialism" class="chosen" name="experience">
-													<option value="">Experience</option>
-													@foreach($job_experiences as $job_experience)
-													<option value="{{ $job_experience->name }}" @if(old('experience')){{ old('experience') == $job_experience->name ? 'selected' : '' }}@elseif( $draft &&  $draft->experience == $job_experience->name ){{ 'selected' }}@endif>{{ $job_experience->name }}</option>
-													@endforeach
-												</select>
-												@if ($errors->has('experience'))
-													<span class="help-block">
-														{{ $errors->first('experience') }}
-													</span>
-												@endif
-					 						</div>
-										 </div>
-
-										 {{-- minimum salary --}}
-					 					<div class="col-lg-3">
-											<span class="pf-title">Min Salary</span>
-											<div class="pf-field">
-												<input type="number" placeholder="Min. Salary" name="salary_min" class="salary" value="@if (old("salary_min")){{ old('salary_min') }}@elseif ( $draft ){{ $draft->salary_min }}@endif"/>
-												@if ($errors->has('salary_min'))
-													<span class="help-block">
-														{{ $errors->first('salary_min') }}
-													</span>
-												@endif
-											</div>
-										</div>
-
-										{{-- maximum salary --}}
-										<div class="col-lg-3">
-											<span class="pf-title">Max Salary</span>
-											<div class="pf-field">
-												<input type="number" placeholder="Max. Salary" name="salary_max" class="salary" value="@if (old("salary_max")){{ old('salary_max') }}@elseif ( $draft ){{ $draft->salary_max }}@endif"/>
-												@if ($errors->has('salary_max'))
-													<span class="help-block">
-														{{ $errors->first('salary_max') }}
-													</span>
-												@endif
-											</div>
-										</div>
-
-										{{-- is_negotiable --}}
-										<div class="col-sm-3">
-											<span class="pf-title"></span>
-											<div class="pf-field">
-												<div class="simple-checkbox">
-													<p><input type="checkbox" name="is_negotiable" id="negotiable"  value="@if (old("is_negotiable")){{ old('is_negotiable') }}@elseif ( $draft ){{ $draft['is_negotiable'] }}@endif" @if (old("is_negotiable")){{ 'checked' }}@elseif ( $draft['is_negotiable'] ){{ 'checked' }} @endif><label for="negotiable">Negotiable</label></p>
-													@if ($errors->has('is_negotiable'))
-														<span class="help-block">
-															{{ $errors->first('is_negotiable') }}
-														</span>
-													@endif
-												</div>
-											</div>
-										</div>
-
-										{{-- vacancy --}}
-										<div class="col-lg-3">
-											<span class="pf-title">Vacancy</span>
-											<div class="pf-field">
-												<input type="number" placeholder="Vacancy" name="vacancy"  value="@if (old("vacancy")){{ old('vacancy') }}@elseif ( $draft ){{ $draft->vacancy }}@endif"/>
-												@if ($errors->has('vacancy'))
-													<span class="help-block">
-														{{ $errors->first('vacancy') }}
-													</span>
-												@endif
-											</div>
-										</div>
-
-										{{-- gender --}}
-					 					<div class="col-lg-3">
-					 						<span class="pf-title">Gender</span>
-					 						<div class="pf-field">
-					 							<select  class="chosen" name="gender">
-													<option value="0" @if(old('gender')){{ old('gender') == 0 ? 'selected' : '' }}@elseif( $draft &&  $draft->gender == 0 ){{ 'selected' }}@endif>All</option>
-													<option value="1" @if(old('gender')){{ old('gender') == 1 ? 'selected' : '' }}@elseif( $draft &&  $draft->gender == 1 ){{ 'selected' }}@endif>Male</option>
-													<option value="2" @if(old('gender')){{ old('gender') == 2 ? 'selected' : '' }}@elseif( $draft &&  $draft->gender == 2 ){{ 'selected' }}@endif>Female</option>
-													<option value="3" @if(old('gender')){{ old('gender') == 3 ? 'selected' : '' }}@elseif( $draft &&  $draft->gender == 3 ){{ 'selected' }}@endif>Others</option>
-												</select>
-												@if ($errors->has('gender'))
-													<span class="help-block">
-														{{ $errors->first('gender') }}
-													</span>
-												@endif
-					 						</div>
-										 </div>
-
-										 {{-- Qualification --}}
-					 					<div class="col-lg-6">
-					 						<span class="pf-title">Qualification</span>
-					 						<div class="pf-field">
-												<input type="text" placeholder="Qualification" name="qualification" value="@if (old("qualification")){{ old('qualification') }}@elseif ( $draft ){{ $draft->qualification }}@endif"/>
-												@if ($errors->has('qualification'))
-													<span class="help-block">
-														{{ $errors->first('qualification') }}
-													</span>
-												@endif
-					 						</div>
-										 </div>
-
-										 {{-- deadline --}}
-					 					<div class="col-lg-3">
-					 						<span class="pf-title">Application Deadline Date</span>
-					 						<div class="pf-field" >
-												<input type="text" id="datepicker" class="form-control"  placeholder="2018-05-17" name="deadline"  value="@if (old("deadline")){{ old('deadline') }}@elseif ( $draft ){{ $draft->deadline }}@endif"/>
-												@if ($errors->has('deadline'))
-													<span class="help-block">
-														{{ $errors->first('deadline') }}
-													</span>
-												@endif
-					 						</div>
-										 </div>
-
-										 {{-- Skills --}}
-					 					<div class="col-lg-12">
-					 						<span class="pf-title">Skill Requirments</span>
-					 						<div class="pf-field">
-												@php
-
-
-													$draftSkills = array();
-													if($draft){
-														foreach ($draft->jobSkill as $draftSkill) {
-															$draftSkills[] = $draftSkill->skill;
-														}
-													}
-
-
-												@endphp
-												<select multiple="multiple" class="req-skill"  name="skill[]">
-													<option value="">Skill Requirments</option>
-													@foreach($skills as $skill)
-													<option value="{{ $skill->id }}"  @if(old("skill") && (in_array($skill->id, old("skill")))){{ "selected" }}@elseif( $draft && in_array($skill->id, $draftSkills )){{ 'selected' }}@endif>{{ $skill->name }}</option>
-													@endforeach
-												</select>
-
-												@if ($errors->has('skill'))
-													<span class="help-block">
-														{{ $errors->first('skill') }}
-													</span>
-												@endif
-											</div>
-										 </div>
-
-										 {{-- location --}}
-					 					<div class="col-lg-12">
-					 						<span class="pf-title">Location</span>
-					 						<div class="pf-field">
-												<textarea name="location">@if (old("location")){{ old('location') }}@elseif ( $draft ){{ $draft->location }}@endif</textarea>
-												@if ($errors->has('location'))
-													<span class="help-block">
-														{{ $errors->first('location') }}
-													</span>
-												@endif
-					 						</div>
-										 </div>
-
-										 {{-- buttons --}}
-										 <div class="col-lg-12">
-											<button type="submit" name="draft" value="draft" class="draft">Draft</button>
-											<button type="submit" name="post" value="post">Post</button>
-										</div>
-					 				</div>
-					 			</form>
-					 		</div>
+				 		</div>
 
 					 	</div>
 					</div>
@@ -708,7 +519,7 @@
 {{-- <script src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-datepicker/1.8.0/js/bootstrap-datepicker.min.js"></script> --}}
 <script src="https://code.jquery.com/ui/1.12.1/jquery-ui.js"></script>
 
-<script src="https://cdnjs.cloudflare.com/ajax/libs/1000hz-bootstrap-validator/0.11.5/validator.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/1000hz-bootstrap-validator/0.11.9/validator.min.js"></script>
 <script type="text/javascript" src="{{ asset('js/smartwizard4/jquery.smartWizard.min.js')}}"></script>
 
 <script>
@@ -750,10 +561,12 @@
 
 		if($('input[type="checkbox"][name="is_negotiable"]').val() == 1 ){
 			$('.salary').attr('disabled', true);
+			$('.salary').attr('required', false);
 			$('#negotiable').val(1);
 			$('#negotiable').attr('checked', true);
 		}else{
 			$('.salary').attr('disabled', false);
+			$('.salary').attr('required', true);
 			$('#negotiable').val(0);
 			$('#negotiable').attr('checked', false);
 		}
@@ -763,27 +576,78 @@
 				$('.salary').attr('disabled', true);
 				$('#negotiable').attr('checked', true);
 				$('#negotiable').val(1);
+				$('#negotiable').attr('checked', true);
 
 			}else{
 				$('.salary').attr('disabled', false);
 				$('#negotiable').attr('checked', false);
 				$('#negotiable').val(0);
+				$('#negotiable').attr('checked', false);
 			}
 		});
+
+
 
 		$('#vacancy').on('click', () => {
 			if($('#vacancy').val() == 1){
 				$('#vacancy').attr('checked', true);
 				$('#vacancy_input').attr('required', false);
-				$('#vacancy_input').attr('disabled', true);;
+				$('#vacancy_input').attr('disabled', true);
 				$('#vacancy').val(0);
+				$('#vacancy').attr('checked', false);
 			}else{
 				$('#vacancy').attr('checked', false);
 				$('#vacancy_input').attr('required', true);
-				$('#vacancy_input').attr('disabled', false);;
+				$('#vacancy_input').attr('disabled', false);
 				$('#vacancy').val(1);
+				$('#vacancy').attr('checked', true);
 			}
-		})
+		});
+
+
+		// photo enclosed
+
+
+		$('.photo_enclose label').on('click', () => {
+			if($('#photo').val() == 1){
+				$('#photo').val(0);
+				// $('#photo').attr('checked', false);
+			}else{
+				$('#photo').val(1);
+				// $('#photo').attr('checked', true);
+			}
+		});
+
+		// hide company info
+
+		$('.hide_company_info label').on('click', () => {
+			if($('#hide_company_info').val() == 1){
+
+				$('#hide_company_info').val(0);
+				$('#hide_company_info').attr('checked', false);
+
+			}else{
+
+				$('#hide_company_info').attr('checked', true);
+				$('#hide_company_info').val(1);
+			}
+		});
+
+		$('.hide_salary label').on('click', () => {
+			if($('#hide_salary').val() == 1){
+				$('#hide_salary').val(0);
+			}else{
+				$('#hide_salary').val(1);
+			}
+		});
+
+		$('.fresher_apply label').on('click', () => {
+			if($('#fresher').val() == 1){
+				$('#fresher').val(0);
+			}else{
+				$('#fresher').val(1);
+			}
+		});
 
 		var base_url = "{{ url('/employer/') }}";
 		$('input[type="checkbox"][name="is_special"]').on('click', function() {
@@ -898,10 +762,14 @@ $(document).ready(function(){
 $(document).ready(function(){
 
 		// Toolbar extra buttons
-            var btnFinish = $('<button></button>').text('Finish')
-                                             .addClass('btn btn-info')
-                                             .on('click', function(){
-                                                    if( !$(this).hasClass('disabled')){
+            var btnPublish = $('<button></button>').text('Publish')
+												  .attr('type', 'submit')
+												  .attr('name', 'post')
+												  .attr('value', 'post')
+												  .attr('id', 'submit')
+                                                  .addClass('btn ')
+                                                  .on('click', function(){
+													if( !$(this).hasClass('disabled')){
                                                         var elmForm = $("#newjob");
                                                         if(elmForm){
                                                             elmForm.validator('validate');
@@ -910,12 +778,27 @@ $(document).ready(function(){
                                                                 alert('Oops we still have error in the form');
                                                                 return false;
                                                             }else{
-                                                                alert('Great! we are ready to submit form');
-                                                                elmForm.submit();
-                                                                return false;
+                                                                // alert('Great! we are ready to submit form');
+                                                                // elmForm.submit();
+																// $(this).click();
+                                                                return true;
                                                             }
                                                         }
                                                     }
+                                                });
+
+			var btnDraft = $('<button></button>').text('Draft')
+												  .attr('type', 'submit')
+												  .attr('name', 'draft')
+												  .attr('value', 'draft')
+												  .attr('id', 'draft')
+												  .attr('formnovalidate', '')
+                                                  .addClass('btn ')
+                                                  .on('click', function(){
+													// if( !$(this).hasClass('disabled')){
+                                                    //     return true;
+                                                    // }
+													return true;
                                                 });
             var btnCancel = $('<button></button>').text('Cancel')
                                              .addClass('btn btn-danger')
@@ -931,11 +814,11 @@ $(document).ready(function(){
 			transitionEffect:'slideleft',
 			transitionEffect: 'fade',
 			transitionSpeed: '400',
-			onFinish:onFinishCallback,
+			// onFinish:onFinishCallback,
 			// enableFinishButton:true,
 			toolbarSettings: {toolbarPosition: 'bottom',
 			 					toolbarButtonPosition: 'right',
-                                      toolbarExtraButtons: [btnFinish]
+                                      toolbarExtraButtons: [btnPublish, btnDraft]
                                     },
                     anchorSettings: {
                                 markDoneStep: true, // add done css
@@ -961,18 +844,16 @@ $(document).ready(function(){
             return true;
         });
 
-		function onFinishCallback(){
-			alert(ok);
-		}
-		$('.sw-btn-group-extra').addClass('d-none');
+
+		$('#submit').addClass('d-none');
         $("#smartwizard").on("showStep", function(e, anchorObject, stepNumber, stepDirection) {
             // Enable finish button only on last step
             if(stepNumber == 4){
                 // $('.btn-finish').removeClass('disabled');
-                $('.sw-btn-group-extra').removeClass('d-none');
+                $('#submit').removeClass('d-none');
             }else{
                 // $('.btn-finish').addClass('disabled');
-				$('.sw-btn-group-extra').addClass('d-none');
+				$('#submit').addClass('d-none');
             }
 
         });

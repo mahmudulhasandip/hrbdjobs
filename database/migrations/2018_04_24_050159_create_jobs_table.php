@@ -36,13 +36,13 @@ class CreateJobsTable extends Migration
             $table->date('deadline')->nullable();
             $table->integer('location_type')->default(0); // 0 == in Bangladesh 1== Outside Bangladesh
             $table->text('location')->nullable();
-            $table->integer('hide_company_info')->default(0);
+            $table->integer('hide_company_info')->default(0)->nullable();
             $table->integer('is_featured')->default(0);
             $table->integer('is_drafted')->default(0);
             $table->integer('is_verified')->default(0);
             $table->integer('is_paused')->default(0);
             $table->integer('is_special')->default(0);
-            
+
             $table->foreign('employer_id')->references('id')->on('employers')->onDelete('cascade');
             $table->foreign('job_category_id')->references('id')->on('job_categories')->onDelete('cascade');
             $table->foreign('job_designation_id')->references('id')->on('job_designations')->onDelete('cascade');
