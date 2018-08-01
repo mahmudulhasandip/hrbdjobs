@@ -92,6 +92,7 @@
 														</div>
 														<input type="number" class="form-control" placeholder="" name="vacancy" id="vacancy_input" value="@if (old("vacancy")){{ old('vacancy') }}@elseif ( $editJob ){{ $editJob->vacancy }}@endif" required>
 													</div>
+													<div class="help-block with-errors"></div>
 												</div>
 
 												{{-- special job --}}
@@ -116,6 +117,7 @@
 														<div class="invalid-feedback">
 															Please provide a valid input.
 														</div>
+														<div class="help-block with-errors"></div>
 													</div>
 												</div>
 
@@ -132,6 +134,7 @@
 														<div class="invalid-feedback">
 															Please provide a valid input.
 														</div>
+														<div class="help-block with-errors"></div>
 													</div>
 												</div>
 
@@ -148,6 +151,7 @@
 														<div class="invalid-feedback">
 															Please provide a valid input.
 														</div>
+														<div class="help-block with-errors"></div>
 													</div>
 												</div>
 
@@ -164,6 +168,7 @@
 														<div class="invalid-feedback">
 															Please provide a valid input.
 														</div>
+														<div class="help-block with-errors"></div>
 													</div>
 												</div>
 
@@ -175,6 +180,7 @@
 														<div class="invalid-feedback">
 															Please provide a valid date.
 														</div>
+														<div class="help-block with-errors"></div>
 													</div>
 												</div>
 
@@ -186,6 +192,7 @@
 														<div class="invalid-feedback">
 															Please provide a valid qualification.
 														</div>
+														<div class="help-block with-errors"></div>
 													</div>
 												</div>
 
@@ -197,6 +204,7 @@
 														<div class="invalid-feedback">
 															Please provide a valid description.
 														</div>
+														<div class="help-block with-errors"></div>
 													</div>
 												</div>
 
@@ -223,6 +231,7 @@
 															<option value="{{ $skill->id }}" @if(old("skill") && (in_array($skill->id, old("skill")))){{ "selected" }}@elseif( $editJob && in_array($skill->id, $editJobSkills )){{ 'selected' }}@endif >{{ $skill->name }}</option>
 															@endforeach
 														</select>
+														<div class="help-block with-errors"></div>
 														<div class="invalid-feedback">
 															Please provide a valid input.
 														</div>
@@ -238,6 +247,7 @@
 															<option value="0" @if(old('location_type')){{ old('location_type') == 0 ? 'selected' : '' }}@elseif( $editJob &&  $editJob->location_type == 0 ){{ 'selected' }}@endif>Inside Bangladesh</option>
 															<option value="1" @if(old('location_type')){{ old('location_type') == 1 ? 'selected' : '' }}@elseif( $editJob &&  $editJob->location_type == 1 ){{ 'selected' }}@endif>Outside Bangladesh</option>
 														</select>
+														<div class="help-block with-errors"></div>
 														<div class="invalid-feedback">
 															Please provide a valid input.
 														</div>
@@ -253,6 +263,7 @@
 														<div class="invalid-feedback">
 															Please provide a valid input.
 														</div>
+														<div class="help-block with-errors"></div>
 													</div>
 												</div>
 
@@ -265,7 +276,7 @@
 													</div>
 												</div>
 
-												@php 
+												@php
 													$benifits = array();
 													if($editJob){
 
@@ -286,7 +297,7 @@
 															<optgroup label="Basic Benifits">
 																<option @if(old("other_benifits") && (in_array("T/A(Transport Allowance)", old("other_benifits")))){{ "selected" }}@elseif( $editJob && in_array("T/A(Transport Allowance)", $benifits )){{ 'selected' }}@endif value="T/A(Transport Allowance)">T/A(Transport Allowance)</option>
 																<option @if(old("other_benifits") && (in_array("Mobile Bill", old("other_benifits")))){{ "selected" }}@elseif( $editJob && in_array("Mobile Bill", $benifits )){{ 'selected' }}@endif value="Mobile Bill">Mobile Bill</option>
-																
+
 																<option @if(old("other_benifits") && (in_array("Pension Policy", old("other_benifits")))){{ "selected" }}@elseif( $editJob && in_array("Pension Policy", $benifits )){{ 'selected' }}@endif value="Pension Policy">Pension Policy</option>
 
 																<option @if(old("other_benifits") && (in_array("Tour Allowance", old("other_benifits")))){{ "selected" }}@elseif( $editJob && in_array("Tour Allowance", $benifits )){{ 'selected' }}@endif value="Tour Allowance">Tour Allowance</option>
@@ -300,9 +311,9 @@
 																<option @if(old("other_benifits") && (in_array("Provident Fund", old("other_benifits")))){{ "selected" }}@elseif( $editJob && in_array("Provident Fund", $benifits )){{ 'selected' }}@endif value="Provident Fund">Provident Fund</option>
 
 																<option @if(old("other_benifits") && (in_array("Insurance", old("other_benifits")))){{ "selected" }}@elseif( $editJob && in_array("Insurance", $benifits )){{ 'selected' }}@endif value="Insurance">Insurance</option>
-																
+
 																<option @if(old("other_benifits") && (in_array("Gratuity", old("other_benifits")))){{ "selected" }}@elseif( $editJob && in_array("Gratuity", $benifits )){{ 'selected' }}@endif value="Gratuity">Gratuity</option>
-																
+
 																<option @if(old("other_benifits") && (in_array("Overtime Allowance", old("other_benifits")))){{ "selected" }}@elseif( $editJob && in_array("Overtime Allowance", $benifits )){{ 'selected' }}@endif value="Overtime Allowance">Overtime Allowance</option>
 															</optgroup>
 															<optgroup label="Lunch Facilities">
@@ -318,19 +329,20 @@
 
 															<optgroup label="Festival Bonus">
 																<option @if(old("other_benifits") && (in_array("1 Festival Bonus", old("other_benifits")))){{ "selected" }}@elseif( $editJob && in_array("1 Festival Bonus", $benifits )){{ 'selected' }}@endif value="1 Festival Bonus">1</option>
-																
+
 																<option @if(old("other_benifits") && (in_array("2 Festival Bonus", old("other_benifits")))){{ "selected" }}@elseif( $editJob && in_array("2 Festival Bonus", $benifits )){{ 'selected' }}@endif value="2 Festival Bonus">2</option>
-																
+
 																<option @if(old("other_benifits") && (in_array("3 Festival Bonus", old("other_benifits")))){{ "selected" }}@elseif( $editJob && in_array("3 Festival Bonus", $benifits )){{ 'selected' }}@endif value="3 Festival Bonus">3</option>
-																
+
 																<option @if(old("other_benifits") && (in_array("4 Festival Bonus", old("other_benifits")))){{ "selected" }}@elseif( $editJob && in_array("4 Festival Bonus", $benifits )){{ 'selected' }}@endif value="4 Festival Bonus">4</option>
-																
+
 																<option @if(old("other_benifits") && (in_array("5 Festival Bonus", old("other_benifits")))){{ "selected" }}@elseif( $editJob && in_array("5 Festival Bonus", $benifits )){{ 'selected' }}@endif value="5 Festival Bonus">5</option>
-																
+
 																<option @if(old("other_benifits") && (in_array("6 Festival Bonus", old("other_benifits")))){{ "selected" }}@elseif( $editJob && in_array("6 Festival Bonus", $benifits )){{ 'selected' }}@endif value="6 Festival Bonus">6</option>
 															</optgroup>
-															
+
 														</select>
+														<div class="help-block with-errors"></div>
 														<div class="invalid-feedback">
 															Please provide a valid input.
 														</div>
@@ -344,6 +356,7 @@
 													<input type="checkbox" class="custom-control-input" id="hide_company_info" name="hide_company_info" value="@if (old("hide_company_info")){{ old('hide_company_info') }}@elseif ( $editJob ){{ $editJob->hide_company_info }}@else{{ trim('0') }}@endif" @if (old("hide_company_info")){{ 'checked' }}@elseif ( $editJob['hide_company_info']){{ 'checked' }} @endif>
 														<label class="custom-control-label" for="hide_company_info">Hide Company Info</label>
 														<small class="form-text text-muted"><i class="la la-info-circle 2x"></i> Hide your company info from candidates.</small>
+														<div class="help-block with-errors"></div>
 													</div>
 												</div>
 											</div>
@@ -376,6 +389,7 @@
 														<div class="invalid-feedback">
 															Please provide a valid input.
 														</div>
+														<div class="help-block with-errors"></div>
 													</div>
 												</div>
 
@@ -391,6 +405,7 @@
 														<div class="invalid-feedback">
 															Please provide a valid input.
 														</div>
+														<div class="help-block with-errors"></div>
 													</div>
 												</div>
 
@@ -400,6 +415,7 @@
 													<div class="custom-control custom-checkbox" style="margin-left: 15px;">
 														<input type="checkbox" class="custom-control-input" name="is_negotiable" id="negotiable" value="@if (old("is_negotiable")){{ old('is_negotiable') }}@elseif ( $editJob ){{ $editJob['is_negotiable'] }}@endif" @if (old("is_negotiable")){{ 'checked' }}@elseif ( $editJob['is_negotiable'] ){{ 'checked' }} @endif>
 														<label class="custom-control-label" for="negotiable"> Negotiable</label>
+														<div class="help-block with-errors"></div>
 													</div>
 												</div>
 
@@ -410,6 +426,7 @@
 														<input type="checkbox" class="custom-control-input" id="hide_salary" name="hide_salary" value="@if (old("hide_salary")){{ old('hide_salary') }}@elseif ( $editJob ){{ $editJob->hide_salary }}@endif" @if (old("hide_salary")){{ 'checked' }}@elseif ( $editJob['hide_salary']){{ 'checked' }} @endif>
 														<label class="custom-control-label" for="hide_salary"> Hide Salary</label>
 														<small class="form-text text-muted">Salary range helps to match candidate properly but you can hide form candidate.</small>
+														<div class="help-block with-errors"></div>
 													</div>
 												</div>
 											</div>
@@ -428,6 +445,7 @@
 														<div class="invalid-feedback">
 															Please provide a valid university.
 														</div>
+														<div class="help-block with-errors"></div>
 													</div>
 												</div>
 
@@ -439,6 +457,7 @@
 														<div class="invalid-feedback">
 															Please provide a valid input.
 														</div>
+														<div class="help-block with-errors"></div>
 													</div>
 												</div>
 											</div>
@@ -458,6 +477,7 @@
 														<div class="invalid-feedback">
 															Please provide a valid input.
 														</div>
+														<div class="help-block with-errors"></div>
 													</div>
 												</div>
 
@@ -469,6 +489,7 @@
 														<div class="invalid-feedback">
 															Please provide a valid input.
 														</div>
+														<div class="help-block with-errors"></div>
 													</div>
 												</div>
 
@@ -478,6 +499,7 @@
 													<div class="custom-control custom-checkbox fresher_apply" style="margin-left: 15px;">
 														<input type="checkbox" class="custom-control-input" id="fresher" name="is_fresher_apply" value="@if (old("is_fresher_apply")){{ old('is_fresher_apply') }}@elseif ( $editJob ){{ $editJob->is_fresher_apply }}@endif" @if (old("is_fresher_apply")){{ 'checked' }}@elseif ( $editJob['is_fresher_apply']){{ 'checked' }} @endif>
 														<label class="custom-control-label" for="fresher"> Fresher can apply</label>
+														<div class="help-block with-errors"></div>
 													</div>
 												</div>
 
@@ -489,6 +511,7 @@
 														<div class="invalid-feedback">
 															Please provide a valid university.
 														</div>
+														<div class="help-block with-errors"></div>
 													</div>
 												</div>
 
@@ -500,6 +523,7 @@
 														<div class="invalid-feedback">
 															Please provide a valid university.
 														</div>
+														<div class="help-block with-errors"></div>
 													</div>
 												</div>
 											</div>
@@ -524,6 +548,7 @@
 														<div class="invalid-feedback">
 															Please provide a valid input.
 														</div>
+														<div class="help-block with-errors"></div>
 													</div>
 												</div>
 
@@ -535,6 +560,7 @@
 														<div class="invalid-feedback">
 															Please provide a valid input.
 														</div>
+														<div class="help-block with-errors"></div>
 													</div>
 												</div>
 
@@ -546,6 +572,7 @@
 														<div class="invalid-feedback">
 															Please provide a valid input.
 														</div>
+														<div class="help-block with-errors"></div>
 													</div>
 												</div>
 											</div>
@@ -612,11 +639,11 @@
             'insertdatetime media nonbreaking save table contextmenu directionality',
             'emoticons template paste textcolor colorpicker textpattern imagetools'
         ],
-        
+
     //     templateOptions: {
 		  //   showPreview: true,
 		  //   required: true,
-		  
+
 		  // },
         toolbar1: 'insertfile undo redo | styleselect | bold italic | alignleft aligncenter alignright alignjustify | bullist numlist outdent indent | link | forecolor backcolor emoticons',
         // toolbar2: 'forecolor backcolor emoticons',
