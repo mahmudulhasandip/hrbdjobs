@@ -302,6 +302,7 @@ class HomeController extends Controller
         $data['editJob'] = Job::findOrFail($id);
         $data['employer_info'] = Employer::find(Auth::guard('employer')->user()->id);
         $data['job_levels'] = Job_level::all();
+         $data['job_statuses'] = Job_status::all();
         if($data['editJob']['is_special']){
             $data['job_categories'] = Job_category::where('is_special', 1)->get();
             $data['job_designations'] = Job_designation::where('is_special', 1)->get();

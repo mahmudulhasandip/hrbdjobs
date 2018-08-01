@@ -68,6 +68,7 @@
 													<label for="title" class="col-sm-2 col-form-label">Title:</label>
 													<div class="col-sm-10">
 														<input type="text" class="form-control" id="title" placeholder="Title" name="title" value="@if (old("title")){{ old('title') }}@elseif ( $draft ){{ $draft->title }}@endif" required>
+														<div class="help-block with-errors"></div>
 														<div class="vaild-feedback"></div>
 														<div class="invalid-feedback">
 															Please provide a valid Title.
@@ -91,6 +92,7 @@
 															</div>
 														</div>
 														<input type="number" class="form-control" placeholder="" name="vacancy" id="vacancy_input" value="@if (old("vacancy")){{ old('vacancy') }}@elseif ( $draft ){{ $draft->vacancy }}@endif" required>
+														<div class="help-block with-errors"></div>
 													</div>
 												</div>
 
@@ -100,6 +102,8 @@
 													<div class="custom-control custom-checkbox" style="margin-left: 15px;">
 														<input type="checkbox" class="custom-control-input" name="is_special" id="special_job"  value="@if (old("is_special")){{ old('is_special') }}@elseif ( $draft ){{ $draft->is_special }}@endif" @if (old("is_special")){{ 'checked' }}@elseif ( $draft['is_special']==1 ){{ 'checked' }} @endif>
 														<label class="custom-control-label" for="special_job">Special Job</label>
+
+														<div class="help-block with-errors"></div>
 													</div>
 												</div>
 
@@ -116,6 +120,7 @@
 														<div class="invalid-feedback">
 															Please provide a valid input.
 														</div>
+														<div class="help-block with-errors"></div>
 													</div>
 												</div>
 
@@ -132,6 +137,7 @@
 														<div class="invalid-feedback">
 															Please provide a valid input.
 														</div>
+														<div class="help-block with-errors"></div>
 													</div>
 												</div>
 
@@ -148,6 +154,7 @@
 														<div class="invalid-feedback">
 															Please provide a valid input.
 														</div>
+														<div class="help-block with-errors"></div>
 													</div>
 												</div>
 
@@ -164,6 +171,7 @@
 														<div class="invalid-feedback">
 															Please provide a valid input.
 														</div>
+														<div class="help-block with-errors"></div>
 													</div>
 												</div>
 
@@ -175,6 +183,7 @@
 														<div class="invalid-feedback">
 															Please provide a valid date.
 														</div>
+														<div class="help-block with-errors"></div>
 													</div>
 												</div>
 
@@ -186,6 +195,7 @@
 														<div class="invalid-feedback">
 															Please provide a valid qualification.
 														</div>
+														<div class="help-block with-errors"></div>
 													</div>
 												</div>
 
@@ -197,6 +207,7 @@
 														<div class="invalid-feedback">
 															Please provide a valid description.
 														</div>
+														<div class="help-block with-errors"></div>
 													</div>
 												</div>
 
@@ -226,6 +237,7 @@
 														<div class="invalid-feedback">
 															Please provide a valid input.
 														</div>
+														<div class="help-block with-errors"></div>
 													</div>
 												</div>
 
@@ -241,6 +253,7 @@
 														<div class="invalid-feedback">
 															Please provide a valid input.
 														</div>
+														<div class="help-block with-errors"></div>
 													</div>
 												</div>
 
@@ -253,6 +266,7 @@
 														<div class="invalid-feedback">
 															Please provide a valid input.
 														</div>
+														<div class="help-block with-errors"></div>
 													</div>
 												</div>
 
@@ -262,6 +276,7 @@
 													<div class="custom-control custom-checkbox photo_enclose" style="margin-left: 15px;">
 														<input type="checkbox" class="custom-control-input" id="photo" name='is_photograph_enclosed' value="@if (old("is_photograph_enclosed")){{ old('is_photograph_enclosed') }}@elseif ( $draft ){{ $draft->is_photograph_enclosed }}@endif" @if (old("is_photograph_enclosed")){{ 'checked' }}@elseif ( $draft['is_photograph_enclosed']){{ 'checked' }} @endif>
 														<label class="custom-control-label" for="photo">Photograph Enclosed</label>
+														<div class="help-block with-errors"></div>
 													</div>
 												</div>
 
@@ -334,6 +349,7 @@
 														<div class="invalid-feedback">
 															Please provide a valid input.
 														</div>
+														<div class="help-block with-errors"></div>
 													</div>
 												</div>
 
@@ -344,6 +360,7 @@
 													<input type="checkbox" class="custom-control-input" id="hide_company_info" name="hide_company_info" value="@if (old("hide_company_info")){{ old('hide_company_info') }}@elseif ( $draft ){{ $draft->hide_company_info }}@else{{ trim('0') }}@endif" @if (old("hide_company_info")){{ 'checked' }}@elseif ( $draft['hide_company_info']){{ 'checked' }} @endif>
 														<label class="custom-control-label" for="hide_company_info">Hide Company Info</label>
 														<small class="form-text text-muted"><i class="la la-info-circle 2x"></i> Hide your company info from candidates.</small>
+														<div class="help-block with-errors"></div>
 													</div>
 												</div>
 											</div>
@@ -376,6 +393,7 @@
 														<div class="invalid-feedback">
 															Please provide a valid input.
 														</div>
+														<div class="help-block with-errors"></div>
 													</div>
 												</div>
 
@@ -391,6 +409,7 @@
 														<div class="invalid-feedback">
 															Please provide a valid input.
 														</div>
+														<div class="help-block with-errors"></div>
 													</div>
 												</div>
 
@@ -400,6 +419,7 @@
 													<div class="custom-control custom-checkbox" style="margin-left: 15px;">
 														<input type="checkbox" class="custom-control-input" name="is_negotiable" id="negotiable" value="@if (old("is_negotiable")){{ old('is_negotiable') }}@elseif ( $draft ){{ $draft['is_negotiable'] }}@endif" @if (old("is_negotiable")){{ 'checked' }}@elseif ( $draft['is_negotiable'] ){{ 'checked' }} @endif>
 														<label class="custom-control-label" for="negotiable"> Negotiable</label>
+														<div class="help-block with-errors"></div>
 													</div>
 												</div>
 
@@ -410,6 +430,7 @@
 														<input type="checkbox" class="custom-control-input" id="hide_salary" name="hide_salary" value="@if (old("hide_salary")){{ old('hide_salary') }}@elseif ( $draft ){{ $draft->hide_salary }}@endif" @if (old("hide_salary")){{ 'checked' }}@elseif ( $draft['hide_salary']){{ 'checked' }} @endif>
 														<label class="custom-control-label" for="hide_salary"> Hide Salary</label>
 														<small class="form-text text-muted">Salary range helps to match candidate properly but you can hide form candidate.</small>
+														<div class="help-block with-errors"></div>
 													</div>
 												</div>
 											</div>
@@ -428,6 +449,7 @@
 														<div class="invalid-feedback">
 															Please provide a valid university.
 														</div>
+														<div class="help-block with-errors"></div>
 													</div>
 												</div>
 
@@ -439,6 +461,7 @@
 														<div class="invalid-feedback">
 															Please provide a valid input.
 														</div>
+														<div class="help-block with-errors"></div>
 													</div>
 												</div>
 											</div>
@@ -458,6 +481,7 @@
 														<div class="invalid-feedback">
 															Please provide a valid input.
 														</div>
+														<div class="help-block with-errors"></div>
 													</div>
 												</div>
 
@@ -469,6 +493,7 @@
 														<div class="invalid-feedback">
 															Please provide a valid input.
 														</div>
+														<div class="help-block with-errors"></div>
 													</div>
 												</div>
 
@@ -478,6 +503,7 @@
 													<div class="custom-control custom-checkbox fresher_apply" style="margin-left: 15px;">
 														<input type="checkbox" class="custom-control-input" id="fresher" name="is_fresher_apply" value="@if (old("is_fresher_apply")){{ old('is_fresher_apply') }}@elseif ( $draft ){{ $draft->is_fresher_apply }}@endif" @if (old("is_fresher_apply")){{ 'checked' }}@elseif ( $draft['is_fresher_apply']){{ 'checked' }} @endif>
 														<label class="custom-control-label" for="fresher"> Fresher can apply</label>
+														<div class="help-block with-errors"></div>
 													</div>
 												</div>
 
@@ -489,6 +515,7 @@
 														<div class="invalid-feedback">
 															Please provide a valid university.
 														</div>
+														<div class="help-block with-errors"></div>
 													</div>
 												</div>
 
@@ -500,6 +527,7 @@
 														<div class="invalid-feedback">
 															Please provide a valid university.
 														</div>
+														<div class="help-block with-errors"></div>
 													</div>
 												</div>
 											</div>
@@ -524,6 +552,7 @@
 														<div class="invalid-feedback">
 															Please provide a valid input.
 														</div>
+														<div class="help-block with-errors"></div>
 													</div>
 												</div>
 
@@ -535,6 +564,7 @@
 														<div class="invalid-feedback">
 															Please provide a valid input.
 														</div>
+														<div class="help-block with-errors"></div>
 													</div>
 												</div>
 
@@ -546,6 +576,7 @@
 														<div class="invalid-feedback">
 															Please provide a valid input.
 														</div>
+														<div class="help-block with-errors"></div>
 													</div>
 												</div>
 											</div>
@@ -598,6 +629,14 @@
         selector: "textarea#tinymce",
         theme: "modern",
 		branding: false,
+		setup: function(editor) {
+            editor.on("change keyup", function(e){
+                console.log('saving');
+                // tinyMCE.triggerSave(); // updates all instances
+                editor.save(); // updates this instance's textarea
+                $(editor.getElement()).trigger('change'); // for garlic to detect change
+            });
+        },
         plugins: [
             'advlist autolink lists link image charmap print preview hr anchor pagebreak',
             'searchreplace wordcount visualblocks visualchars code fullscreen',

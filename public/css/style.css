@@ -14464,6 +14464,7 @@ input[type="radio"] {
 .help-block.with-errors ul li {
     margin: 0;
     color: #dc3545;
+    position: static;
 }
 
 .profile-form-edit #smartwizard .btn-secondary.disabled,
@@ -14509,4 +14510,16 @@ input[type="radio"] {
     max-height: 250px;
     overflow-y: scroll;
     overflow-x: hidden;
+}
+
+.select2-container--bootstrap4 .select2-selection--multiple .select2-selection__choice{
+    margin-top: .5em;
+}
+
+.select2-container--bootstrap4 .select2-selection--multiple .select2-selection__rendered li{
+    margin-bottom: 0;
+}
+
+.select2-container--bootstrap4 .select2-selection--multiple{
+    height: auto !important;
 }

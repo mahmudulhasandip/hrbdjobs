@@ -79,6 +79,15 @@
                                         @endif
                                     @endif
 
+                                     @if(sizeof($job->otherBenifits))
+                                        <h5 class="mt-50">Other Benifits</h5>
+                                        <ul>
+                                            @foreach($job->otherBenifits as $otherBenifit)
+                                            <li>{{ $otherBenifit->benifit }}</li>
+                                            @endforeach
+                                        </ul>
+                                    @endif
+
                                     @if($job->is_photograph_enclosed)
                                     <p class="m50 text-center"><strong><span class="text-danger">*Photograph</span> must be enclosed with the resume.</strong></p>
                                     @endif
