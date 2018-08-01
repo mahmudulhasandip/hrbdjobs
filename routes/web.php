@@ -11,6 +11,25 @@
 |
 */
 
+####################### comment out this code after uploading this project to server ####################
+// Route::get('storage/uploads/{filename}', function ($filename)
+// {
+//     $path = storage_path('app/public/uploads/' . $filename);
+//     // dd($path);
+//     if (!File::exists($path)) {
+//         abort(404);
+//     }
+
+//     $file = File::get($path);
+//     $type = File::mimeType($path);
+
+//     $response = Response::make($file, 200);
+//     $response->header("Content-Type", $type);
+
+//     return $response;
+// });
+####################### /comment out this code after uploading this project to server ####################
+
 Route::get('/', [							
 	'as'	  => 'users.home',
 	'uses'	=> 'UserController@index'
