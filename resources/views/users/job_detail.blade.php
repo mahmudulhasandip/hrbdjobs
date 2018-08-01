@@ -90,7 +90,7 @@
                                     <h3>Similar Jobs</h3>
                                     <div class="job-list-modern">
                                         <div id="similar-jobs" class="job-listings-sec no-border">
-                                        
+
                                         </div>
                                     </div>
                                 </div>
@@ -125,14 +125,14 @@
                                 @else
                                     <a href="{{ route('candidate.shortlisted.job') }}" class="mr-left-10"><i class="la la-bookmark la-2x"></i>Make it Shortlisted</a>
                                 @endif
-                                
+
                             </div>
                             <div class="job-overview mt-100">
                                 <h3 class="bold">Job Overview</h3>
                                 <ul>
                                     <li><i class="la la-calendar-o"></i><h3>Deadline</h3><span>{{ $job->deadline }}</span></li>
 
-                                    @if($job->is_salary_visible)
+                                    @if(!$job->hide_salary)
                                     <li><i class="la la-money"></i><h3>Offerd Salary</h3>
                                         <span>
                                             @if($job->is_negotiable)
@@ -140,7 +140,7 @@
                                             @else
                                                 &#2547;{{ $job->salary_min }} - &#2547;{{ $job->salary_max }}
                                             @endif
-                                            
+
                                         </span>
                                     </li>
                                     @endif
@@ -201,7 +201,7 @@
             </div>
         </div>
     </section>
-    
+
 @endsection
 
 @push('js')
@@ -250,11 +250,11 @@
                     position: 'topRight',
                 });
 
-                
-                
+
+
             }
         });
-        
+
     });
 </script>
 @endpush

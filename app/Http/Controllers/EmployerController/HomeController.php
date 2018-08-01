@@ -196,7 +196,7 @@ class HomeController extends Controller
         $postJob->location = $request->input('location');
         $postJob->is_photograph_enclosed = $request->input('is_photograph_enclosed');
         $postJob->hide_company_info = $request->input('hide_company_info');
-        dd($postJob);
+
 
 
         if($request->input('is_negotiable')) {
@@ -209,7 +209,7 @@ class HomeController extends Controller
             $postJob->salary_max = $request->input('salary_max');
         }
         $postJob->salary_type = $request->input('salary_type');
-        $postJob->is_salary_visible = $request->input('is_salary_visible');
+        $postJob->hide_salary = $request->input('hide_salary');
 
         // $postJob->experience = $request->input('experience');
         $postJob->gender = $request->input('gender');

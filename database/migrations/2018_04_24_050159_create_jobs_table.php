@@ -25,16 +25,16 @@ class CreateJobsTable extends Migration
             $table->integer('job_status_id')->unsigned()->nullable();
             $table->double('salary_min')->nullable();
             $table->double('salary_max')->nullable();
-            $table->string('salary_type')->default('Monthly');
-            $table->integer('is_salary_visible')->default(1);
-            $table->integer('is_negotiable')->default(0);
-            $table->integer('gender')->default(0); // 0 == all, 1 == male, 2 == female, 3 == other
-            $table->integer('age_min')->default(0);
-            $table->integer('age_max')->default(0);
+            $table->string('salary_type')->default('Monthly')->nullable();
+            $table->integer('hide_salary')->default(1)->nullable();
+            $table->integer('is_negotiable')->default(0)->nullable();
+            $table->integer('gender')->default(0)->nullable(); // 0 == all, 1 == male, 2 == female, 3 == other
+            $table->integer('age_min')->default(0)->nullable();
+            $table->integer('age_max')->default(0)->nullable();
             $table->text('qualification')->nullable();
-            $table->integer('is_photograph_enclosed')->default(0);
+            $table->integer('is_photograph_enclosed')->default(0)->nullable();
             $table->date('deadline')->nullable();
-            $table->integer('location_type')->default(0); // 0 == in Bangladesh 1== Outside Bangladesh
+            $table->integer('location_type')->default(0)->nullable(); // 0 == in Bangladesh 1== Outside Bangladesh
             $table->text('location')->nullable();
             $table->integer('hide_company_info')->default(0)->nullable();
             $table->integer('is_featured')->default(0);

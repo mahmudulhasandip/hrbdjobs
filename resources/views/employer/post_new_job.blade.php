@@ -107,8 +107,8 @@
 												<div class="form-group row">
 													<label for="" class="col-sm-2 col-form-label">Job Category:</label>
 													<div class="col-sm-10">
-														<select class="js-example-basic-single" id="job_category_id" name="job_category_id" required>
-															<option >Select</option>
+														<select data-validate="true" class="js-example-basic-single" id="job_category_id" name="job_category_id" required>
+															<option value="">Select</option>
 															@foreach($job_categories as $job_category)
 															<option value="{{ $job_category->id }}" @if(old('job_category_id')){{ old('job_category_id') == $job_category->id ? 'selected' : '' }}@elseif( $draft && $draft->job_category_id == $job_category->id ){{ 'selected' }}@endif >{{ $job_category->name }}</option>
 															@endforeach
@@ -123,8 +123,8 @@
 												<div class="form-group row">
 													<label for="" class="col-sm-2 col-form-label">Job Designation:</label>
 													<div class="col-sm-10">
-														<select class="js-example-basic-single" id="job_designation_id" name="job_designation_id">
-															<option >Select</option>
+														<select class="js-example-basic-single" id="job_designation_id" name="job_designation_id" required>
+															<option value="">Select</option>
 															@foreach($job_designations as $job_designation)
 															<option value="{{ $job_designation->id }}"  @if(old('job_designation_id')){{ old('job_designation_id') == $job_category->id ? 'selected' : '' }}@elseif( $draft &&  $draft->job_designation_id == $job_designation->id ){{ 'selected' }}@endif>{{ $job_designation->name }}</option>
 															@endforeach
@@ -139,8 +139,8 @@
 												<div class="form-group row">
 													<label for="" class="col-sm-2 col-form-label">Job status:</label>
 													<div class="col-sm-10">
-														<select class="js-example-basic-single" name="job_status_id">
-															<option>Select</option>
+														<select class="js-example-basic-single" name="job_status_id" required>
+															<option value="">Select</option>
 															@foreach($job_statuses as $job_status)
 															<option value="{{ $job_status->id }}" @if(old('job_status_id')){{ old('job_status_id') == $job_status->id ? 'selected' : '' }}@elseif( $draft &&  $draft->job_status_id == $job_status->id ){{ 'selected' }}@endif>{{ $job_status->name }}</option>
 															@endforeach
@@ -155,8 +155,8 @@
 												<div class="form-group row">
 													<label for="" class="col-sm-2 col-form-label">Job Level:</label>
 													<div class="col-sm-10">
-														<select class="js-example-basic-single" name="job_level_id">
-															<option>Select</option>
+														<select class="js-example-basic-single" name="job_level_id" required>
+															<option value="">Select</option>
 															@foreach($job_levels as $job_level)
 															<option value="{{ $job_level->id }}" @if(old('job_level_id')){{ old('job_level_id') == $job_level->id ? 'selected' : '' }}@elseif( $draft &&  $draft->job_level_id == $job_level->id ){{ 'selected' }}@endif>{{ $job_level->name }}</option>
 															@endforeach
@@ -171,7 +171,7 @@
 												<div class="form-group row">
 													<label for="" class="col-sm-2 col-form-label">Deadline:</label>
 													<div class="col-sm-10">
-														<input type="text" class="form-control" id="datepicker" autocomplete="off" placeholder="Deadline" name="deadline"  value="@if (old("deadline")){{ old('deadline') }}@elseif ( $draft ){{ $draft->deadline }}@endif">
+														<input type="text" class="form-control" id="datepicker" autocomplete="off" placeholder="Deadline" name="deadline"  value="@if (old("deadline")){{ old('deadline') }}@elseif ( $draft ){{ $draft->deadline }}@endif" required>
 														<div class="invalid-feedback">
 															Please provide a valid date.
 														</div>
@@ -193,7 +193,7 @@
 												<div class="form-group row">
 													<label for="title" class="col-sm-2 col-form-label">Description:</label>
 													<div class="col-sm-10">
-														<textarea class="form-control" placeholder="Description" rows="6" id="tinymce" name="description">@if (old("description")){{ old('description') }}@elseif ( $draft ){{ $draft->description }}@endif</textarea>
+														<textarea class="form-control" placeholder="Description" rows="6" id="tinymce" name="description" required>@if (old("description")){{ old('description') }}@elseif ( $draft ){{ $draft->description }}@endif</textarea>
 														<div class="invalid-feedback">
 															Please provide a valid description.
 														</div>
@@ -217,8 +217,8 @@
 												<div class="form-group row">
 													<label for="" class="col-sm-2 col-form-label">Skills:</label>
 													<div class="col-sm-10">
-														<select class="js-example-basic-single" multiple="multiple" name="skill[]">
-															<option>Select</option>
+														<select class="js-example-basic-single" multiple="multiple" name="skill[]" required>
+															<option value="">Select</option>
 															@foreach($skills as $skill)
 															<option value="{{ $skill->id }}" @if(old("skill") && (in_array($skill->id, old("skill")))){{ "selected" }}@elseif( $draft && in_array($skill->id, $draftSkills )){{ 'selected' }}@endif >{{ $skill->name }}</option>
 															@endforeach
@@ -234,7 +234,7 @@
 													<label for="exampleFormControlSelect1" class="col-sm-2 col-form-label">Location Type:</label>
 													<div class="col-sm-10">
 														<select class="form-control" id="loc_type" name="location_type" required>
-															<option>Select</option>
+															<option value="">Select</option>
 															<option value="0" @if(old('location_type')){{ old('location_type') == 0 ? 'selected' : '' }}@elseif( $draft &&  $draft->location_type == 0 ){{ 'selected' }}@endif>Inside Bangladesh</option>
 															<option value="1" @if(old('location_type')){{ old('location_type') == 1 ? 'selected' : '' }}@elseif( $draft &&  $draft->location_type == 1 ){{ 'selected' }}@endif>Outside Bangladesh</option>
 														</select>
@@ -341,7 +341,7 @@
 												<div class="form-group row">
 													<label for="hide_company_info" class="col-sm-2 col-form-label"></label>
 													<div class="custom-control custom-checkbox hide_company_info" style="margin-left: 15px;">
-														<input type="checkbox" class="custom-control-input" id="hide_company_info" name="hide_company_info" value="@if (old("hide_company_info")){{ old('hide_company_info') }}@elseif ( $draft ){{ $draft->hide_company_info }}@endif" @if (old("hide_company_info")){{ 'checked' }}@elseif ( $draft['is_photograph_enclosed']){{ 'checked' }} @endif>
+													<input type="checkbox" class="custom-control-input" id="hide_company_info" name="hide_company_info" value="@if (old("hide_company_info")){{ old('hide_company_info') }}@elseif ( $draft ){{ $draft->hide_company_info }}@else{{ trim('0') }}@endif" @if (old("hide_company_info")){{ 'checked' }}@elseif ( $draft['hide_company_info']){{ 'checked' }} @endif>
 														<label class="custom-control-label" for="hide_company_info">Hide Company Info</label>
 														<small class="form-text text-muted"><i class="la la-info-circle 2x"></i> Hide your company info from candidates.</small>
 													</div>
@@ -384,7 +384,6 @@
 													<label for="salary_type" class="col-sm-2 col-form-label">Salary Type:</label>
 													<div class="col-sm-10">
 														<select class="form-control" id="salary_type" name="salary_type" required>
-															<option>Select</option>
 															<option value="Weekly"  @if(old('salary_type')){{ old('salary_type') == 'Weekly' ? 'selected' : '' }}@elseif( $draft &&  $draft->salary_type == 'Weekly' ){{ 'selected' }}@endif>Weekly</option>
 															<option value="Monthly" selected  @if(old('salary_type')){{ old('salary_type') == 'Monthly' ? 'selected' : '' }}@elseif( $draft &&  $draft->salary_type == 'Monthly' ){{ 'selected' }}@endif>Monthly</option>
 															<option value="Yearly" @if(old('salary_type')){{ old('salary_type') == 'Yearly' ? 'selected' : '' }}@elseif( $draft &&  $draft->salary_type == 'Yearly' ){{ 'selected' }}@endif>Yearly</option>
@@ -408,7 +407,7 @@
 												<div class="form-group row">
 													<label for="hide_salary" class="col-sm-2 col-form-label"></label>
 													<div class="custom-control custom-checkbox hide_salary" style="margin-left: 15px;">
-														<input type="checkbox" class="custom-control-input" id="hide_salary" name="is_salary_visible" value="@if (old("is_salary_visible")){{ old('is_salary_visible') }}@elseif ( $draft ){{ $draft->is_salary_visible }}@endif" @if (old("is_salary_visible")){{ 'checked' }}@elseif ( $draft['is_salary_visible']){{ 'checked' }} @endif>
+														<input type="checkbox" class="custom-control-input" id="hide_salary" name="hide_salary" value="@if (old("hide_salary")){{ old('hide_salary') }}@elseif ( $draft ){{ $draft->hide_salary }}@endif" @if (old("hide_salary")){{ 'checked' }}@elseif ( $draft['hide_salary']){{ 'checked' }} @endif>
 														<label class="custom-control-label" for="hide_salary"> Hide Salary</label>
 														<small class="form-text text-muted">Salary range helps to match candidate properly but you can hide form candidate.</small>
 													</div>
@@ -455,7 +454,7 @@
 												<div class="form-group row">
 													<label for="experience_min" class="col-sm-2 col-form-label">Min Experience:</label>
 													<div class="col-sm-10">
-														<input  type=number step=any class="form-control" placeholder="" name="min_experience" value="@if (old("min_experience")){{ old('min_experience') }}@elseif ( $draft ){{ $draft->experiencelRequirement['min_experience'] }}@endif">
+														<input  type=number step=any class="form-control" placeholder="" name="min_experience" value="@if (old("min_experience")){{ old('min_experience') }}@elseif ( $draft ){{ $draft->experiencelRequirement['min_experience'] }}@endif" required>
 														<div class="invalid-feedback">
 															Please provide a valid input.
 														</div>
@@ -466,7 +465,7 @@
 												<div class="form-group row">
 													<label for="experience_max" class="col-sm-2 col-form-label">Max Experience:</label>
 													<div class="col-sm-10">
-														<input  type=number step=any class="form-control" placeholder="" name="max_experience" value="@if (old("max_experience")){{ old('max_experience') }}@elseif ( $draft ){{ $draft->experiencelRequirement['max_experience'] }}@endif">
+														<input  type=number step=any class="form-control" placeholder="" name="max_experience" value="@if (old("max_experience")){{ old('max_experience') }}@elseif ( $draft ){{ $draft->experiencelRequirement['max_experience'] }}@endif" required>
 														<div class="invalid-feedback">
 															Please provide a valid input.
 														</div>
@@ -583,8 +582,8 @@
 <script>
 	$(document).ready(function() {
 		$('.req-skill').select2({
-			placeholder: 'Maximum 5 skills',
-			maximumSelectionLength: 5,
+			// placeholder: 'Maximum 5 skills',
+			// maximumSelectionLength: 5,
 			tags: true,
 			tokenSeparators: [',', ' '],
   			allowClear: true
@@ -634,13 +633,11 @@
 				$('.salary').attr('disabled', true);
 				$('#negotiable').attr('checked', true);
 				$('#negotiable').val(1);
-				$('#negotiable').attr('checked', true);
 
 			}else{
 				$('.salary').attr('disabled', false);
 				$('#negotiable').attr('checked', false);
 				$('#negotiable').val(0);
-				$('#negotiable').attr('checked', false);
 			}
 		});
 
@@ -652,13 +649,12 @@
 				$('#vacancy_input').attr('required', false);
 				$('#vacancy_input').attr('disabled', true);
 				$('#vacancy').val(0);
-				$('#vacancy').attr('checked', false);
+				$('#vacancy_input').val(null);
 			}else{
 				$('#vacancy').attr('checked', false);
 				$('#vacancy_input').attr('required', true);
 				$('#vacancy_input').attr('disabled', false);
 				$('#vacancy').val(1);
-				$('#vacancy').attr('checked', true);
 			}
 		});
 
@@ -680,13 +676,11 @@
 
 		$('.hide_company_info label').on('click', () => {
 			if($('#hide_company_info').val() == 1){
-
 				$('#hide_company_info').val(0);
-				$('#hide_company_info').attr('checked', false);
+				// $('#hide_company_info').attr('checked', false);
 
 			}else{
-
-				$('#hide_company_info').attr('checked', true);
+				// $('#hide_company_info').attr('checked', true);
 				$('#hide_company_info').val(1);
 			}
 		});
@@ -853,6 +847,10 @@ $(document).ready(function(){
 												  .attr('formnovalidate', '')
                                                   .addClass('btn ')
                                                   .on('click', function(){
+													$('input').removeAttr("required");
+													$('textarea').removeAttr("required");
+													$('select').removeAttr("required");
+													$('input[type="text"][name="title"]').attr("required");
 													// if( !$(this).hasClass('disabled')){
                                                     //     return true;
                                                     // }
@@ -915,6 +913,7 @@ $(document).ready(function(){
             }
 
         });
+
     });
 </script>
 

@@ -14502,3 +14502,11 @@ input[type="radio"] {
 .was-validated .custom-control-input:valid~.custom-control-label::before {
     background-color: #dee2e6;
 }
+
+
+.select2-results {
+    display: block;
+    max-height: 250px;
+    overflow-y: scroll;
+    overflow-x: hidden;
+}
