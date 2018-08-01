@@ -72,4 +72,8 @@ class Job extends Model
     public function experiencelRequirement(){
         return $this->hasOne('App\Job_experience_requirement', 'job_id', 'id');
     }
+
+    public function otherBenifits(){
+        return $this->hasMany('App\Other_benifit', 'job_id', 'id');
+    }
 }

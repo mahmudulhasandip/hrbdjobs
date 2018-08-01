@@ -33,6 +33,7 @@ use App\Short_listed_resume;
 use App\Job_status;
 use App\Job_educational_requirement;
 use App\Job_experience_requirement;
+use App\Other_benifit;
 
 
 
@@ -140,6 +141,7 @@ class HomeController extends Controller
         $data['job_experiences'] = Job_experience::all();
         $data['skills'] = Skill::all();
         $data['draft'] = false;
+        // $data['other_benifits'] = false;
         return view('employer.post_new_job', $data);
     }
 
@@ -169,9 +171,12 @@ class HomeController extends Controller
 
         if($request['job_id']){
             $postJob = Job::where('employer_id', Auth::guard('employer')->user()->id)->where('id', $request['job_id'])->first();
+            // $otherBenifits = Other_benifit::where('job_id', $postJob->id)->get();
         }else{
             $postJob = new Job();
             $postJob->title = $request->input('title');
+
+            $otherBenifits = new Other_benifit();
         }
         if($request->input('is_special')) {
             $postJob->is_special = $request->input('is_special');
@@ -268,6 +273,20 @@ class HomeController extends Controller
             }
 
         }
+
+        if($request->input('other_benifits')){
+            // if already exists job skills
+            if($request['job_id']){
+                Other_benifit::where('job_id', $postJob->id)->delete();
+            }
+            for($i=0; $i < sizeof($request->input('other_benifits')); $i++){
+                $otherBenifit = new Other_benifit();
+                $otherBenifit->job_id = $postJob->id;
+                $otherBenifit->benifit = $request->input('other_benifits')[$i];
+                $otherBenifit->save();
+            }
+
+        }
         // dd($jobSkill);
 
         if($request['draft']){
@@ -293,6 +312,7 @@ class HomeController extends Controller
         }
         $data['job_experiences'] = Job_experience::all();
         $data['skills'] = Skill::all();
+        // $data['other_benifits'] = Other_benifit::where('job_id', $id)->get();
         return view('employer.edit_job', $data);
     }
 
@@ -329,6 +349,7 @@ class HomeController extends Controller
         $data['job_experiences'] = Job_experience::all();
         $data['skills'] = Skill::all();
         $data['job_statuses'] = Job_status::all();
+        // $data['other_benifits'] = Other_benifit::where('job_id', $id)->get();
         return view('employer.post_new_job', $data);
 
     }
