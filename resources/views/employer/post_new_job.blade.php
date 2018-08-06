@@ -49,7 +49,7 @@
 								 <input type="hidden" name="job_id" value="{{ ($draft) ? $draft->id : '' }}">
 								<div id="smartwizard">
 									<ul>
-										<li><a href="#step-1">Besic </a></li>
+										<li><a href="#step-1">Basic </a></li>
 										<li><a href="#step-2">Salary </a></li>
 										<li><a href="#step-3">Educational </a></li>
 										<li><a href="#step-4">Experience</a></li>
@@ -280,89 +280,6 @@
 													</div>
 												</div>
 
-												@php 
-													$benifits = array();
-													if($draft){
-
-														foreach ($draft->otherBenifits as $other_benifit) {
-
-															$benifits[] = $other_benifit->benifit;
-
-														}
-
-													}
-												@endphp
-
-												{{-- others benefit --}}
-												<div class="form-group row">
-													<label for="other_benefit" class="col-sm-2 col-form-label">Other Benefit:</label>
-													<div class="col-sm-10">
-														<select class="js-example-basic-single" multiple="multiple" name="other_benifits[]" >
-															<optgroup label="Basic Benifits">
-																<option @if(old("other_benifits") && (in_array("T/A(Transport Allowance)", old("other_benifits")))){{ "selected" }}@elseif( $draft && in_array("T/A(Transport Allowance)", $benifits )){{ 'selected' }}@endif value="T/A(Transport Allowance)">T/A(Transport Allowance)</option>
-																<option @if(old("other_benifits") && (in_array("Mobile Bill", old("other_benifits")))){{ "selected" }}@elseif( $draft && in_array("Mobile Bill", $benifits )){{ 'selected' }}@endif value="Mobile Bill">Mobile Bill</option>
-																
-																<option @if(old("other_benifits") && (in_array("Pension Policy", old("other_benifits")))){{ "selected" }}@elseif( $draft && in_array("Pension Policy", $benifits )){{ 'selected' }}@endif value="Pension Policy">Pension Policy</option>
-
-																<option @if(old("other_benifits") && (in_array("Tour Allowance", old("other_benifits")))){{ "selected" }}@elseif( $draft && in_array("Tour Allowance", $benifits )){{ 'selected' }}@endif value="Tour Allowance">Tour Allowance</option>
-
-																<option @if(old("other_benifits") && (in_array("Medical Allowance", old("other_benifits")))){{ "selected" }}@elseif( $draft && in_array("Medical Allowance", $benifits )){{ 'selected' }}@endif value="Medical Allowance">Medical Allowance</option>
-
-																<option @if(old("other_benifits") && (in_array("Performance Bonus", old("other_benifits")))){{ "selected" }}@elseif( $draft && in_array("Performance Bonus", $benifits )){{ 'selected' }}@endif value="Performance Bonus">Performance Bonus</option>
-
-																<option @if(old("other_benifits") && (in_array("Profit Share", old("other_benifits")))){{ "selected" }}@elseif( $draft && in_array("Profit Share", $benifits )){{ 'selected' }}@endif value="Profit Share">Profit Share</option>
-
-																<option @if(old("other_benifits") && (in_array("Provident Fund", old("other_benifits")))){{ "selected" }}@elseif( $draft && in_array("Provident Fund", $benifits )){{ 'selected' }}@endif value="Provident Fund">Provident Fund</option>
-
-																<option @if(old("other_benifits") && (in_array("Insurance", old("other_benifits")))){{ "selected" }}@elseif( $draft && in_array("Insurance", $benifits )){{ 'selected' }}@endif value="Insurance">Insurance</option>
-																
-																<option @if(old("other_benifits") && (in_array("Gratuity", old("other_benifits")))){{ "selected" }}@elseif( $draft && in_array("Gratuity", $benifits )){{ 'selected' }}@endif value="Gratuity">Gratuity</option>
-																
-																<option @if(old("other_benifits") && (in_array("Overtime Allowance", old("other_benifits")))){{ "selected" }}@elseif( $draft && in_array("Overtime Allowance", $benifits )){{ 'selected' }}@endif value="Overtime Allowance">Overtime Allowance</option>
-															</optgroup>
-															<optgroup label="Lunch Facilities">
-																<option @if(old("other_benifits") && (in_array("Lunch Partially Subsidize", old("other_benifits")))){{ "selected" }}@elseif( $draft && in_array("Lunch Partially Subsidize", $benifits )){{ 'selected' }}@endif value="Lunch Partially Subsidize">Partially Subsidize</option>
-
-																<option @if(old("other_benifits") && (in_array("Lunch Full Subsidize", old("other_benifits")))){{ "selected" }}@elseif( $draft && in_array("Lunch Full Subsidize", $benifits )){{ 'selected' }}@endif value="Lunch Full Subsidize">Full Subsidize</option>
-															</optgroup>
-
-															<optgroup label="Salary Review">
-																<option @if(old("other_benifits") && (in_array("Salary Review Half Yearly", old("other_benifits")))){{ "selected" }}@elseif( $draft && in_array("T/A(Transport Allowance)", $benifits )){{ 'selected' }}@endif value="Salary Review Half Yearly">Half Yearly</option>
-																<option @if(old("other_benifits") && (in_array("Salary Review Yearly", old("other_benifits")))){{ "selected" }}@elseif( $draft && in_array("Salary Review Yearly", $benifits )){{ 'selected' }}@endif value="Salary Review Yearly">Yearly</option>
-															</optgroup>
-
-															<optgroup label="Festival Bonus">
-																<option @if(old("other_benifits") && (in_array("1 Festival Bonus", old("other_benifits")))){{ "selected" }}@elseif( $draft && in_array("1 Festival Bonus", $benifits )){{ 'selected' }}@endif value="1 Festival Bonus">1</option>
-																
-																<option @if(old("other_benifits") && (in_array("2 Festival Bonus", old("other_benifits")))){{ "selected" }}@elseif( $draft && in_array("2 Festival Bonus", $benifits )){{ 'selected' }}@endif value="2 Festival Bonus">2</option>
-																
-																<option @if(old("other_benifits") && (in_array("3 Festival Bonus", old("other_benifits")))){{ "selected" }}@elseif( $draft && in_array("3 Festival Bonus", $benifits )){{ 'selected' }}@endif value="3 Festival Bonus">3</option>
-																
-																<option @if(old("other_benifits") && (in_array("4 Festival Bonus", old("other_benifits")))){{ "selected" }}@elseif( $draft && in_array("4 Festival Bonus", $benifits )){{ 'selected' }}@endif value="4 Festival Bonus">4</option>
-																
-																<option @if(old("other_benifits") && (in_array("5 Festival Bonus", old("other_benifits")))){{ "selected" }}@elseif( $draft && in_array("5 Festival Bonus", $benifits )){{ 'selected' }}@endif value="5 Festival Bonus">5</option>
-																
-																<option @if(old("other_benifits") && (in_array("6 Festival Bonus", old("other_benifits")))){{ "selected" }}@elseif( $draft && in_array("6 Festival Bonus", $benifits )){{ 'selected' }}@endif value="6 Festival Bonus">6</option>
-															</optgroup>
-															
-														</select>
-														<div class="invalid-feedback">
-															Please provide a valid input.
-														</div>
-														<div class="help-block with-errors"></div>
-													</div>
-												</div>
-
-												{{-- hide company --}}
-												<div class="form-group row">
-													<label for="hide_company_info" class="col-sm-2 col-form-label"></label>
-													<div class="custom-control custom-checkbox hide_company_info" style="margin-left: 15px;">
-													<input type="checkbox" class="custom-control-input" id="hide_company_info" name="hide_company_info" value="@if (old("hide_company_info")){{ old('hide_company_info') }}@elseif ( $draft ){{ $draft->hide_company_info }}@else{{ trim('0') }}@endif" @if (old("hide_company_info")){{ 'checked' }}@elseif ( $draft['hide_company_info']){{ 'checked' }} @endif>
-														<label class="custom-control-label" for="hide_company_info">Hide Company Info</label>
-														<small class="form-text text-muted"><i class="la la-info-circle 2x"></i> Hide your company info from candidates.</small>
-														<div class="help-block with-errors"></div>
-													</div>
-												</div>
 											</div>
 
 										</div>
@@ -419,6 +336,79 @@
 													<div class="custom-control custom-checkbox" style="margin-left: 15px;">
 														<input type="checkbox" class="custom-control-input" name="is_negotiable" id="negotiable" value="@if (old("is_negotiable")){{ old('is_negotiable') }}@elseif ( $draft ){{ $draft['is_negotiable'] }}@endif" @if (old("is_negotiable")){{ 'checked' }}@elseif ( $draft['is_negotiable'] ){{ 'checked' }} @endif>
 														<label class="custom-control-label" for="negotiable"> Negotiable</label>
+														<div class="help-block with-errors"></div>
+													</div>
+												</div>
+
+												{{-- others benefit --}}
+
+												@php
+													$benifits = array();
+													if($draft){
+
+														foreach ($draft->otherBenifits as $other_benifit) {
+
+															$benifits[] = $other_benifit->benifit;
+
+														}
+
+													}
+												@endphp
+												<div class="form-group row">
+													<label for="other_benefit" class="col-sm-2 col-form-label">Other Benefit:</label>
+													<div class="col-sm-10">
+														<select class="js-example-basic-single" multiple="multiple" name="other_benifits[]" >
+															<optgroup label="Basic Benifits">
+																<option @if(old("other_benifits") && (in_array("T/A(Transport Allowance)", old("other_benifits")))){{ "selected" }}@elseif( $draft && in_array("T/A(Transport Allowance)", $benifits )){{ 'selected' }}@endif value="T/A(Transport Allowance)">T/A(Transport Allowance)</option>
+																<option @if(old("other_benifits") && (in_array("Mobile Bill", old("other_benifits")))){{ "selected" }}@elseif( $draft && in_array("Mobile Bill", $benifits )){{ 'selected' }}@endif value="Mobile Bill">Mobile Bill</option>
+
+																<option @if(old("other_benifits") && (in_array("Pension Policy", old("other_benifits")))){{ "selected" }}@elseif( $draft && in_array("Pension Policy", $benifits )){{ 'selected' }}@endif value="Pension Policy">Pension Policy</option>
+
+																<option @if(old("other_benifits") && (in_array("Tour Allowance", old("other_benifits")))){{ "selected" }}@elseif( $draft && in_array("Tour Allowance", $benifits )){{ 'selected' }}@endif value="Tour Allowance">Tour Allowance</option>
+
+																<option @if(old("other_benifits") && (in_array("Medical Allowance", old("other_benifits")))){{ "selected" }}@elseif( $draft && in_array("Medical Allowance", $benifits )){{ 'selected' }}@endif value="Medical Allowance">Medical Allowance</option>
+
+																<option @if(old("other_benifits") && (in_array("Performance Bonus", old("other_benifits")))){{ "selected" }}@elseif( $draft && in_array("Performance Bonus", $benifits )){{ 'selected' }}@endif value="Performance Bonus">Performance Bonus</option>
+
+																<option @if(old("other_benifits") && (in_array("Profit Share", old("other_benifits")))){{ "selected" }}@elseif( $draft && in_array("Profit Share", $benifits )){{ 'selected' }}@endif value="Profit Share">Profit Share</option>
+
+																<option @if(old("other_benifits") && (in_array("Provident Fund", old("other_benifits")))){{ "selected" }}@elseif( $draft && in_array("Provident Fund", $benifits )){{ 'selected' }}@endif value="Provident Fund">Provident Fund</option>
+
+																<option @if(old("other_benifits") && (in_array("Insurance", old("other_benifits")))){{ "selected" }}@elseif( $draft && in_array("Insurance", $benifits )){{ 'selected' }}@endif value="Insurance">Insurance</option>
+
+																<option @if(old("other_benifits") && (in_array("Gratuity", old("other_benifits")))){{ "selected" }}@elseif( $draft && in_array("Gratuity", $benifits )){{ 'selected' }}@endif value="Gratuity">Gratuity</option>
+
+																<option @if(old("other_benifits") && (in_array("Overtime Allowance", old("other_benifits")))){{ "selected" }}@elseif( $draft && in_array("Overtime Allowance", $benifits )){{ 'selected' }}@endif value="Overtime Allowance">Overtime Allowance</option>
+															</optgroup>
+															<optgroup label="Lunch Facilities">
+																<option @if(old("other_benifits") && (in_array("Lunch Partially Subsidize", old("other_benifits")))){{ "selected" }}@elseif( $draft && in_array("Lunch Partially Subsidize", $benifits )){{ 'selected' }}@endif value="Lunch Partially Subsidize">Partially Subsidize</option>
+
+																<option @if(old("other_benifits") && (in_array("Lunch Full Subsidize", old("other_benifits")))){{ "selected" }}@elseif( $draft && in_array("Lunch Full Subsidize", $benifits )){{ 'selected' }}@endif value="Lunch Full Subsidize">Full Subsidize</option>
+															</optgroup>
+
+															<optgroup label="Salary Review">
+																<option @if(old("other_benifits") && (in_array("Salary Review Half Yearly", old("other_benifits")))){{ "selected" }}@elseif( $draft && in_array("T/A(Transport Allowance)", $benifits )){{ 'selected' }}@endif value="Salary Review Half Yearly">Half Yearly</option>
+																<option @if(old("other_benifits") && (in_array("Salary Review Yearly", old("other_benifits")))){{ "selected" }}@elseif( $draft && in_array("Salary Review Yearly", $benifits )){{ 'selected' }}@endif value="Salary Review Yearly">Yearly</option>
+															</optgroup>
+
+															<optgroup label="Festival Bonus">
+																<option @if(old("other_benifits") && (in_array("1 Festival Bonus", old("other_benifits")))){{ "selected" }}@elseif( $draft && in_array("1 Festival Bonus", $benifits )){{ 'selected' }}@endif value="1 Festival Bonus">1</option>
+
+																<option @if(old("other_benifits") && (in_array("2 Festival Bonus", old("other_benifits")))){{ "selected" }}@elseif( $draft && in_array("2 Festival Bonus", $benifits )){{ 'selected' }}@endif value="2 Festival Bonus">2</option>
+
+																<option @if(old("other_benifits") && (in_array("3 Festival Bonus", old("other_benifits")))){{ "selected" }}@elseif( $draft && in_array("3 Festival Bonus", $benifits )){{ 'selected' }}@endif value="3 Festival Bonus">3</option>
+
+																<option @if(old("other_benifits") && (in_array("4 Festival Bonus", old("other_benifits")))){{ "selected" }}@elseif( $draft && in_array("4 Festival Bonus", $benifits )){{ 'selected' }}@endif value="4 Festival Bonus">4</option>
+
+																<option @if(old("other_benifits") && (in_array("5 Festival Bonus", old("other_benifits")))){{ "selected" }}@elseif( $draft && in_array("5 Festival Bonus", $benifits )){{ 'selected' }}@endif value="5 Festival Bonus">5</option>
+
+																<option @if(old("other_benifits") && (in_array("6 Festival Bonus", old("other_benifits")))){{ "selected" }}@elseif( $draft && in_array("6 Festival Bonus", $benifits )){{ 'selected' }}@endif value="6 Festival Bonus">6</option>
+															</optgroup>
+
+														</select>
+														<div class="invalid-feedback">
+															Please provide a valid input.
+														</div>
 														<div class="help-block with-errors"></div>
 													</div>
 												</div>
@@ -576,6 +566,18 @@
 														<div class="invalid-feedback">
 															Please provide a valid input.
 														</div>
+														<div class="help-block with-errors"></div>
+													</div>
+												</div>
+
+
+												{{-- hide company --}}
+												<div class="form-group row">
+													<label for="hide_company_info" class="col-sm-2 col-form-label"></label>
+													<div class="custom-control custom-checkbox hide_company_info" style="margin-left: 15px;">
+													<input type="checkbox" class="custom-control-input" id="hide_company_info" name="hide_company_info" value="@if (old("hide_company_info")){{ old('hide_company_info') }}@elseif ( $draft ){{ $draft->hide_company_info }}@else{{ trim('0') }}@endif" @if (old("hide_company_info")){{ 'checked' }}@elseif ( $draft['hide_company_info']){{ 'checked' }} @endif>
+														<label class="custom-control-label" for="hide_company_info">Hide Company Info</label>
+														<small class="form-text text-muted"><i class="la la-info-circle 2x"></i> Hide your company info from candidates.</small>
 														<div class="help-block with-errors"></div>
 													</div>
 												</div>
