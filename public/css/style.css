@@ -7207,7 +7207,7 @@ aside .widget.border:first-child {
     width: 100%;
     font-family: Open Sans;
     font-size: 14px;
-    color: #888888;
+    color: #2f2f2f;
     line-height: 41px;
 }
 
@@ -7304,7 +7304,7 @@ aside .widget.border:first-child {
 
 .profile-title>h3 {
     float: left;
-    width: 100%;
+    /* width: 100%; */
     margin-top: 40px;
     border-bottom: 1px solid #edeff7;
     font-size: 20px;
@@ -7585,7 +7585,7 @@ aside .widget.border:first-child {
 
 .manage-jobs-sec>h3 {
     float: left;
-    width: 100%;
+    /* width: 100%; */
     margin-top: 40px;
     border-bottom: 1px solid #edeff7;
     font-size: 20px;
@@ -9504,7 +9504,7 @@ header.gradient {
 }
 
 .manage-jobs-sec .cat-sec {
-    margin-top: 40px;
+    margin-top: 25px;
 }
 
 .manage-jobs-sec .cat-sec:last-child {
@@ -14504,7 +14504,6 @@ input[type="radio"] {
     background-color: #dee2e6;
 }
 
-
 .select2-results {
     display: block;
     max-height: 250px;
@@ -14512,14 +14511,72 @@ input[type="radio"] {
     overflow-x: hidden;
 }
 
-.select2-container--bootstrap4 .select2-selection--multiple .select2-selection__choice{
+.select2-container--bootstrap4 .select2-selection--multiple .select2-selection__choice {
     margin-top: .5em;
 }
 
-.select2-container--bootstrap4 .select2-selection--multiple .select2-selection__rendered li{
+.select2-container--bootstrap4 .select2-selection--multiple .select2-selection__rendered li {
     margin-bottom: 0;
 }
 
-.select2-container--bootstrap4 .select2-selection--multiple{
+.select2-container--bootstrap4 .select2-selection--multiple {
     height: auto !important;
+}
+
+.forsticky.fixed {
+    background: #ffffff;
+    -webkit-box-shadow: 0px 0px 30px rgba(0, 0, 0, 0.1);
+    -moz-box-shadow: 0px 0px 30px rgba(0, 0, 0, 0.1);
+    -ms-box-shadow: 0px 0px 30px rgba(0, 0, 0, 0.1);
+    -o-box-shadow: 0px 0px 30px rgba(0, 0, 0, 0.1);
+    box-shadow: 0px 0px 30px rgba(0, 0, 0, 0.1);
+}
+
+.forsticky.fixed .menu-sec {
+    margin-top: 23px;
+    margin-bottom: 17px;
+}
+
+.stick-top.forsticky.fixed .btns-profiles-sec>span {
+    color: #222;
+}
+
+.forsticky.fixed .menu-sec nav>ul>li>a {
+    color: #232323;
+    line-height: 10px;
+}
+
+.manage-jobs-sec>h3,
+.profile-title>h3 {
+    float: right;
+    display: block;
+    border: none;
+    font-size: 24px;
+    color: transparent;
+    text-shadow: 0 0 #333, .08em 0 0 #fff, 0 0, -.08em 0 0 #fff;
+    /*  gradient background allows us to use css only & re-position it  */
+    background: -webkit-linear-gradient(#ca1712, #ca1712) right 1.09em no-repeat;
+    background: linear-gradient(#ca1712, #ca1712) right 1.09em no-repeat;
+    /*  can precisely control size in relation to the text  */
+    background-size: 85% 3px;
+    /*  now the underline supports transitions  */
+    -webkit-transition: .2s ease;
+    transition: .2s ease;
+}
+
+.manage-jobs-sec>h3:hover {
+    /*  backgrounds won't size larger than 100%  */
+    background-size: 90% 3px;
+}
+
+.profile-title>h3:hove {
+    /*  backgrounds won't size larger than 100%  */
+    background-size: 90% 3px;
+}
+
+.border-line {
+    width: 100%;
+    height: 1px;
+    padding-bottom: 25px;
+    border-top: 1px solid #edeff7;
 }

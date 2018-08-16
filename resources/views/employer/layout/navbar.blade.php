@@ -50,7 +50,7 @@
 </div>
 
 {{-- @if (Auth::guest()) --}}
-<header class="stick-top forsticky ">
+<header class="stick-top forsticky fixed">
 {{-- @else
 <header class="stick-top forsticky">
 @endif --}}

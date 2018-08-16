@@ -3,18 +3,10 @@
 @section('title', 'HRBDJobs | Employer Dashboard')
 
 @section('content')
+<div id="nav_height"></div>
 	<section class="overlape">
 		<div class="block no-padding">
-			<div data-velocity="-.1" style="background: url(/images/top-bg.jpg) repeat scroll 50% 422.28px transparent;" class="parallax scrolly-invisible no-parallax"></div><!-- PARALLAX BACKGROUND IMAGE -->
-			<div class="container fluid">
-				<div class="row">
-					<div class="col-lg-12">
-						<div class="inner-header">
-							<h3>Employee Profile</h3>
-						</div>
-					</div>
-				</div>
-			</div>
+			<img src="{{ asset('images/top_add.jpg') }}" alt="Advertisement banner">
 		</div>
 	</section>
 
@@ -53,7 +45,7 @@
 				 			</div>
 				 			<div class="job-wide-devider">
 							 	<div class="row">
-							 		<div class="col-lg-8 column">		
+							 		<div class="col-lg-8 column">
 							 			<div class="job-details">
 							 				<h3>About Business Network</h3>
 							 				<p>Far much that one rank beheld bluebird after outside ignobly allegedly more when oh arrogantly vehement irresistibly fussy penguin insect additionally wow absolutely crud meretriciously hastily dalmatian a glowered inset one echidna cassowary some parrot and much as goodness some froze the sullen much connected bat wonderfully on instantaneously eel valiantly petted this along across highhandedly much. </p>
