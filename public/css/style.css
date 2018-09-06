@@ -49,17 +49,14 @@
 48. Menu Action
 49. Cross Browser Compatibility
 -------------------------------------------------------------------*/
-
 /*=============== Fonts ===================*/
-
 @import url('https://fonts.googleapis.com/css?family=Open+Sans:300i,400,400i,600,600i,700,700i,800,800i|Quicksand:300,400,500,700');
-/*=============== General Styling ===================*/
 
+/*=============== General Styling ===================*/
 /* http://meyerweb.com/eric/tools/css/reset/
    v2.0 | 20110126
    License:none (public domain)
 */
-
 html,
 body,
 div,
@@ -144,7 +141,6 @@ video {
 }
 
 /* HTML5 display-role reset for older browsers */
-
 article,
 aside,
 details,
@@ -272,7 +268,6 @@ header {
 }
 
 /* Theme Layout */
-
 .theme-layout {
     float: left;
     overflow: hidden;
@@ -494,9 +489,7 @@ button {
 }
 
 /* Icons */
-
 /* Arrows */
-
 .slick-dotted .slick-dots {
     float: left;
     margin: 20px 0 0;
@@ -731,7 +724,6 @@ button {
 }
 
 /* Page Loading */
-
 .page-loading {
     background-color: #ffffff;
     content: "";
@@ -766,7 +758,6 @@ button {
 }
 
 /* Basic styles */
-
 input[type="checkbox"],
 input[type="radio"] {
     position: absolute;
@@ -805,7 +796,6 @@ label::before {
 }
 
 /* Checkbox */
-
 input[type="checkbox"]+label::after {
     content: "\2714";
     color: #2c3e50;
@@ -814,7 +804,6 @@ input[type="checkbox"]+label::after {
 }
 
 /* Radio */
-
 input[type="radio"]+label::before {
     -webkit-border-radius: 50%;
     -moz-border-radius: 50%;
@@ -839,7 +828,6 @@ input[type=radio]+label::after {
 }
 
 /* :checked */
-
 input[type="checkbox"]:checked+label::before,
 input[type="radio"]:checked+label::before {
     background: #ffffff;
@@ -865,7 +853,6 @@ input[type=radio]:checked+label::after {
 }
 
 /* Transition */
-
 label::before,
 label::after {
     -webkit-transition: .25s all ease;
@@ -876,7 +863,6 @@ label::after {
 }
 
 /* Main Slider Sec */
-
 .main-slider-sec {
     float: left;
     width: 100%;
@@ -907,7 +893,7 @@ label::after {
     background: -o-linear-gradient(45deg, rgba(139, 145, 221, 1) 0%, rgba(16, 25, 93, 1) 71%, rgba(16, 25, 93, 1) 100%);
     background: -ms-linear-gradient(45deg, rgba(139, 145, 221, 1) 0%, rgba(16, 25, 93, 1) 71%, rgba(16, 25, 93, 1) 100%);
     background: linear-gradient(45deg, rgba(139, 145, 221, 1) 0%, rgba(16, 25, 93, 1) 71%, rgba(16, 25, 93, 1) 100%);
-    filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#8b91dd', endColorstr='#10195d', GradientType=1);
+    filter: progid:DXImageTransform.Microsoft.gradient(startColorstr='#8b91dd', endColorstr='#10195d', GradientType=1);
     opacity: 0.8;
 }
 
@@ -928,7 +914,6 @@ label::after {
 }
 
 /* Header */
-
 .stick-top {
     position: absolute;
     left: 0;
@@ -1143,7 +1128,6 @@ label::after {
 }
 
 /* Account Popup Area */
-
 .account-popup-area {
     position: fixed;
     left: 0;
@@ -1257,7 +1241,7 @@ label::after {
 .account-popup>form .cfield i {
     position: absolute;
     right: 0;
-    top: 15px;
+    top: 10px;
     right: 20px;
     font-size: 19px;
 }
@@ -1664,7 +1648,6 @@ label::after {
 }
 
 /* Heading */
-
 .heading {
     float: left;
     width: 100%;
@@ -1792,7 +1775,6 @@ label::after {
 }
 
 /* Simple text Block */
-
 .simple-text-block {
     float: left;
     width: 100%;
@@ -1835,7 +1817,6 @@ label::after {
 }
 
 /* Job Listing */
-
 .job-listings-sec {
     float: left;
     width: 100%;
@@ -2114,7 +2095,6 @@ label::after {
 }
 
 /* Blog Sec */
-
 .blog-sec {
     float: left;
     width: 100%;
@@ -2520,7 +2500,6 @@ footer {
 }
 
 /* Header Style 2 */
-
 header.style2 {
     padding: 0 50px;
 }
@@ -2666,7 +2645,6 @@ header.style2 nav {
 }
 
 /* Job Grid Sec */
-
 .job-grid-sec {
     float: left;
     width: 100%;
@@ -2772,7 +2750,6 @@ header.style2 nav {
 }
 
 /* How to Sec */
-
 .how-to-sec {
     float: left;
     width: 100%;
@@ -2852,7 +2829,6 @@ header.style2 nav {
 }
 
 /* Top Company Sec */
-
 .top-company-sec {
     float: left;
     width: 100%;
@@ -2950,7 +2926,6 @@ header.style2 nav {
 }
 
 /* Stats Sec */
-
 .stats-sec {
     float: left;
     width: 100%;
@@ -2987,7 +2962,6 @@ header.style2 nav {
 }
 
 /* Reviews Style2 */
-
 .reviews.style2 {
     text-align: center;
     padding: 0 240px;
@@ -3085,7 +3059,6 @@ header.style2 nav {
 }
 
 /* Plans Sec */
-
 .plans-sec {
     float: left;
     width: 100%;
@@ -3214,7 +3187,6 @@ header.style2 nav {
 }
 
 /* Subscription Sec */
-
 .subscription-sec {
     float: left;
     width: 100%;
@@ -3384,7 +3356,6 @@ header.style3 nav>ul>li>a {
 }
 
 /* Find Canditate Sec */
-
 .find-cand-sec {
     float: left;
     width: 100%;
@@ -3593,7 +3564,6 @@ header.style3 .menu-sec nav {
 }
 
 /* Download Sec */
-
 .download-sec {
     float: left;
     width: 100%;
@@ -3708,7 +3678,6 @@ header.style3 .menu-sec nav {
 }
 
 /* Team Sec */
-
 .team-sec {
     float: left;
     width: 100%;
@@ -4144,11 +4113,10 @@ header.style4 .menu-sec nav>ul>li.menu-item-has-children>a::before {
 }
 
 /* Tabs sec */
-
 .tab-sec {
     float: left;
     width: 100%;
-    text-align: center;
+    /* text-align: center; */
 }
 
 .nav.nav-tabs {
@@ -4404,7 +4372,6 @@ footer.style2 {
 }
 
 /* Header5 */
-
 header.style5 {
     background: #26ae61;
     float: left;
@@ -4448,7 +4415,6 @@ header.style5 .logo {
 }
 
 /* Location */
-
 .form-location-sec {
     float: left;
     width: 100%;
@@ -4714,7 +4680,6 @@ header.style5 .logo {
 }
 
 /* Who am */
-
 .who-am {
     float: left;
     width: 100%;
@@ -4793,7 +4758,6 @@ header.style5 .logo {
 }
 
 /* Toggle Widget */
-
 #toggle-widget {
     float: left;
     width: 100%;
@@ -4950,7 +4914,7 @@ footer.style3 a {
     background: -o-linear-gradient(45deg, rgba(139, 145, 221, 1) 0%, rgba(16, 25, 93, 1) 71%, rgba(16, 25, 93, 1) 100%);
     background: -ms-linear-gradient(45deg, rgba(139, 145, 221, 1) 0%, rgba(16, 25, 93, 1) 71%, rgba(16, 25, 93, 1) 100%);
     background: linear-gradient(45deg, rgba(139, 145, 221, 1) 0%, rgba(16, 25, 93, 1) 71%, rgba(16, 25, 93, 1) 100%);
-    filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#8b91dd', endColorstr='#10195d', GradientType=1);
+    filter: progid:DXImageTransform.Microsoft.gradient(startColorstr='#8b91dd', endColorstr='#10195d', GradientType=1);
     opacity: 0.8;
 }
 
@@ -5089,7 +5053,6 @@ section.overlape {
 }
 
 /* pagination */
-
 /*.pagination {
     float: left;
     margin: 60px 0 0;
@@ -5170,7 +5133,6 @@ section.overlape {
     font-size: 15px;
     color: #e54545;
 }*/
-
 .inner-header>h3 {
     float: left;
     width: 100%;
@@ -5605,7 +5567,6 @@ aside .subscribe_widget form button {
 /*.simple-checkbox.scrollbar.specialism{
     max-height: 232px !important;
 }*/
-
 .simple-checkbox.scrollbar {
     height: 232px;
 }
@@ -5753,7 +5714,6 @@ aside .widget.border:first-child {
 }
 
 /* Job Single Sec */
-
 .job-single-sec {
     float: left;
     width: 100%;
@@ -6061,7 +6021,6 @@ aside .widget.border:first-child {
 }
 
 /* Job Overview */
-
 .job-overview {
     float: left;
     width: 100%;
@@ -6564,7 +6523,6 @@ aside .widget.border:first-child {
 }
 
 /* Quick Form JOb */
-
 .quick-form-job {
     float: left;
     width: 100%;
@@ -6654,7 +6612,6 @@ aside .widget.border:first-child {
 }
 
 /* Employe Lists */
-
 .emply-list-sec {
     float: left;
     width: 100%;
@@ -7185,7 +7142,6 @@ aside .widget.border:first-child {
 }
 
 /* Tree Widget */
-
 .widget .tree_widget-sec {
     margin: 0;
 }
@@ -7774,7 +7730,6 @@ aside .widget.border:first-child {
 }
 
 /* Profiles Dropdown */
-
 .btns-profiles-sec {
     float: right;
     position: relative;
@@ -8483,7 +8438,7 @@ header.gradient {
     background: -o-linear-gradient(45deg, rgba(139, 145, 221, 1) 0%, rgba(16, 25, 93, 1) 71%, rgba(16, 25, 93, 1) 100%);
     background: -ms-linear-gradient(45deg, rgba(139, 145, 221, 1) 0%, rgba(16, 25, 93, 1) 71%, rgba(16, 25, 93, 1) 100%);
     background: linear-gradient(45deg, rgba(139, 145, 221, 1) 0%, rgba(16, 25, 93, 1) 71%, rgba(16, 25, 93, 1) 100%);
-    filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#8b91dd', endColorstr='#10195d', GradientType=1);
+    filter: progid:DXImageTransform.Microsoft.gradient(startColorstr='#8b91dd', endColorstr='#10195d', GradientType=1);
     position: relative;
     z-index: 2;
     float: left;
@@ -8497,7 +8452,6 @@ header.gradient {
 }
 
 /* Custom Tooltip */
-
 .custom-tooltip>div:nth-child(4) {
     border: medium none !important;
     -webkit-box-shadow: none !important;
@@ -8742,7 +8696,6 @@ header.gradient {
 }
 
 /* Canditate Single User */
-
 .cand-single-user {
     float: left;
     width: 100%;
@@ -9116,7 +9069,7 @@ header.gradient {
     background: -o-linear-gradient(45deg, rgba(139, 145, 221, 1) 0%, rgba(16, 25, 93, 1) 71%, rgba(16, 25, 93, 1) 100%);
     background: -ms-linear-gradient(45deg, rgba(139, 145, 221, 1) 0%, rgba(16, 25, 93, 1) 71%, rgba(16, 25, 93, 1) 100%);
     background: linear-gradient(45deg, rgba(139, 145, 221, 1) 0%, rgba(16, 25, 93, 1) 71%, rgba(16, 25, 93, 1) 100%);
-    filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#8b91dd', endColorstr='#10195d', GradientType=1);
+    filter: progid:DXImageTransform.Microsoft.gradient(startColorstr='#8b91dd', endColorstr='#10195d', GradientType=1);
     -webkit-border-radius: 8px;
     -moz-border-radius: 8px;
     -ms-border-radius: 8px;
@@ -11282,7 +11235,6 @@ header.white {
 }
 
 /* FAQS */
-
 .faqs {
     float: left;
     width: 100%;
@@ -11413,7 +11365,7 @@ terms {
     background: -o-linear-gradient(45deg, rgba(251, 35, 106, 1) 0%, rgba(251, 35, 106, 1) 44%, rgba(20, 31, 114, 1) 100%);
     background: -ms-linear-gradient(45deg, rgba(251, 35, 106, 1) 0%, rgba(251, 35, 106, 1) 44%, rgba(20, 31, 114, 1) 100%);
     background: linear-gradient(45deg, rgba(251, 35, 106, 1) 0%, rgba(251, 35, 106, 1) 44%, rgba(20, 31, 114, 1) 100%);
-    filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#e54545', endColorstr='#141f72', GradientType=1);
+    filter: progid:DXImageTransform.Microsoft.gradient(startColorstr='#e54545', endColorstr='#141f72', GradientType=1);
     content: "";
     position: absolute;
     left: 0;
@@ -12675,7 +12627,6 @@ footer.ft .scrollup {
 }
 
 /* Cross Browser Compatibility */
-
 header,
 .res-openmenu,
 .res-closemenu,
@@ -13089,7 +13040,6 @@ header.style4 .account-btns>li a,
 }
 
 /*** Table Styles **/
-
 .job-listings-tabs .table-fill {
     background: white;
     border-radius: 3px;
@@ -13250,7 +13200,6 @@ header.style4 .account-btns>li a,
 }
 
 /*  */
-
 .account-popup-area.static .account-popup.signup {
     width: 100%;
     left: 0;
@@ -13279,7 +13228,6 @@ header.style4 .account-btns>li a,
 }
 
 /* singup */
-
 .account-popup>h3 {
     line-height: 28px;
     float: none;
@@ -13350,7 +13298,6 @@ header.style4 .account-btns>li a,
 }
 
 /*  */
-
 .menu-sec .btn-extars>ul>li>ul {
     opacity: 0;
     visibility: hidden;
@@ -13517,7 +13464,6 @@ header.style4 .account-btns>li a,
 }
 
 /* file Upload */
-
 .uploader {
     display: block;
     clear: both;
@@ -13790,7 +13736,6 @@ textarea {
 }
 
 /* candidate profile edit tabs css */
-
 .tab-wrapper {
     min-width: 600px;
     max-width: 100%;
@@ -13928,7 +13873,6 @@ hr {
 }
 
 /* pagination */
-
 .pagination-laravel {
     float: left;
     margin: 60px 0 0;
@@ -14050,7 +13994,6 @@ hr {
 }
 
 /*cv upload*/
-
 form.cv-upload {
     width: 80%;
     height: 100%;
@@ -14149,7 +14092,6 @@ form.cv-upload {
 }
 
 /* view resume */
-
 #resume table {
     max-width: 100%;
     background-color: transparent;
@@ -14579,4 +14521,8 @@ input[type="radio"] {
     height: 1px;
     padding-bottom: 25px;
     border-top: 1px solid #edeff7;
+}
+
+.tab-sec.emp-signin .nav.nav-tabs>li a.current {
+    background-color: #755da3;
 }

@@ -11,6 +11,7 @@ use App\Employer;
 use App\Applied_job;
 use App\Candidate;
 use App\Job_experience;
+use App\Job;
 
 class AppliedController extends Controller
 {
@@ -35,6 +36,9 @@ class AppliedController extends Controller
         $data['experiences'] = Job_experience::all();
 
         $data['job_id'] = $id;
+        $data['job'] = Job::findOrFail($id);
+        $data['company_info'] = DB::table('employer_company_infos')->where('employer_id', Auth::guard('employer')->user()->id)->first();
+        // dd($data['job']);
 
         // dd($data['institutes']);
 

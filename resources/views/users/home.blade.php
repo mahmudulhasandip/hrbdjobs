@@ -190,7 +190,7 @@
             <div class="container">
                 <div class="row">
                     <div class="col-lg-12">
-                        <div class="tab-sec">
+                        <div class="tab-sec text-center">
                             <ul class="nav nav-tabs">
                                 <li><a class="current" data-tab="fjobs">Featured Jobs</a></li>
                                 <li><a data-tab="rjobs">Recent Jobs</a></li>
@@ -199,9 +199,9 @@
                                 <div class="job-listings-tabs">
                                     <div class="row">
                                         <div id="featured-jobs" class="col-lg-12">
-                                            
+
                                         </div>
-                                        
+
                                     </div>
                                 </div>
                             </div>
@@ -209,8 +209,8 @@
                                 <div class="job-listings-tabs">
                                     <div class="row">
                                         <div id="recent-jobs" class="col-lg-12">
-                                            
-                                        </div>   
+
+                                        </div>
                                     </div>
                                 </div>
                             </div>
@@ -347,7 +347,7 @@
                         <!-- Heading -->
                         <div class="job-grid-sec">
                             <div class="row" id="special-jobs">
-                               
+
                             </div>
                         </div>
                     </div>
