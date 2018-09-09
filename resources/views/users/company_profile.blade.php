@@ -44,12 +44,14 @@
 											<a href="{{ ($social_links && $social_links->fb_link) ? $social_links->fb_link : '#' }} " title="" target="blank" class="share-fb {{ ($social_links && $social_links->fb_link) ? '' : 'd-none' }}"><i class="fa fa-facebook"></i></a>
 											<a href="{{ ($social_links && $social_links->twitter_link) ? $social_links->twitter_link : '#' }}" title="" target="blank" class="share-twitter {{ ($social_links && $social_links->twitter_link) ? '' : 'd-none' }}"><i class="fa fa-twitter"></i></a>
 											<a href="{{ ($social_links && $social_links->linkedin_link) ? $social_links->linkedin_link : '#' }}" title="" target="blank" class="share-linkedin {{ ($social_links && $social_links->linkedin_link) ? '' : 'd-none' }}"><i class="fa fa-linkedin"></i></a>
-							 			</div>
-							 			@if($company_info->id != Auth::guard('employer')->user()->employerCompanyInfo->id)
-								 		<div class="emply-btns">
-											<a class="followus" href="{{ route('candidate.follow.company', $company_info->id) }}" title=""><i class="la la-paper-plane"></i> Follow us</a>
-								 		</div>
-								 		@endif
+										 </div>
+										@if(Auth::guard('employer')->check())
+											@if($company_info->id != Auth::guard('employer')->user()->employerCompanyInfo->id)
+											<div class="emply-btns">
+												<a class="followus" href="{{ route('candidate.follow.company', $company_info->id) }}" title=""><i class="la la-paper-plane"></i> Follow us</a>
+											</div>
+											@endif
+										@endif
 				 					</div>
 				 				</div>
 				 			</div>

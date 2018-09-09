@@ -4,29 +4,7 @@
 
 @section('content')
 <div id="nav_height"></div>
-<section>
-    <div class="block no-padding  gray">
-        <div class="container">
-            <div class="row">
-                <div class="col-lg-12">
-                    <div class="inner2">
-                        <div class="inner-title2">
-                            <h3>Login</h3>
-                            <span>Keep up to date with the latest news</span>
-                        </div>
-                        <div class="page-breacrumbs">
-                            <ul class="breadcrumbs">
-                                <li><a href="#" title="">Home</a></li>
-                                <li><a href="#" title="">Pages</a></li>
-                                <li><a href="#" title="">Login</a></li>
-                            </ul>
-                        </div>
-                    </div>
-                </div>
-            </div>
-        </div>
-    </div>
-</section>
+
 
 
 <section>
@@ -49,7 +27,33 @@
                 {{-- sign in --}}
                 <div id='sign_in' class="filterbar mt-50 tab-content current">
                     <div class="row">
-                        <div class="col-lg-12">
+                        {{-- employee sign info --}}
+                        <div class="col-lg-6">
+                            <div class="info-container">
+                                <div class="info-list">
+                                    <i class="fa fa-arrow-up red"></i>
+                                    <p>Lorem, ipsum dolor sit amet consectetur adipisicing elit. Labore corporis dicta debitis sit sequi quo.</p>
+                                </div>
+
+                                <div class="info-list">
+                                    <i class="fa fa-arrow-left blue"></i>
+                                    <p>Lorem, ipsum dolor sit amet consectetur adipisicing elit. Labore corporis dicta debitis sit sequi quo.</p>
+                                </div>
+
+                                <div class="info-list">
+                                    <i class="fa fa-arrow-right orange"></i>
+                                    <p>Lorem, ipsum dolor sit amet consectetur adipisicing elit. Labore corporis dicta debitis sit sequi quo.</p>
+                                </div>
+
+                                <div class="info-list">
+                                    <i class="fa fa-arrow-down green"></i>
+                                    <p>Lorem, ipsum dolor sit amet consectetur adipisicing elit. Labore corporis dicta debitis sit sequi quo.</p>
+                                </div>
+                            </div>
+                        </div>
+
+                        {{-- employee sign in form --}}
+                        <div class="col-lg-6">
                             <div class="account-popup-area signin-popup-box static">
                                 <div class="account-popup">
                                     @if (session('status'))
@@ -62,6 +66,7 @@
                                             {{ session('warning') }}
                                         </div>
                                     @endif
+                                    <h3 class="text-underline">EMPLOYEE SIGN IN</h3>
                                     <form role="form" method="POST" action="{{ url('/employer/login') }}">
                                         {{ csrf_field() }}
                                         <div class="cfield {{ $errors->has('username') ? ' has-error' : '' }}" >
@@ -107,4 +112,63 @@
 </section>
 
 
+<section>
+    <div class="block no-padding  gray">
+        <div class="container">
+            <div class="row">
+                <div class="col-sm-3">
+                    <div class="inner2">
+                        <div class="inner-title2">
+                            <div class="stat text-center">
+                                <span class="counter">500</span>
+                                <span>Jobs Posted</span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-sm-3">
+                    <div class="inner2">
+                        <div class="inner-title2">
+                            <div class="stat text-center">
+                                <span class="counter">223</span>
+                                <span>Jobs Filled</span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-sm-3">
+                    <div class="inner2">
+                        <div class="inner-title2">
+                            <div class="stat text-center">
+                                <span class="counter">67</span>
+                                <span>Companies</span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-sm-3">
+                    <div class="inner2">
+                        <div class="inner-title2">
+                            <div class="stat text-center">
+                                <span class="counter">92</span>
+                                <span>Members</span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+
 @endsection
+
+@push('js')
+<script src="{{ asset('/js/counter.js')}}"></script>
+<script>
+$('.counter').counterUp({
+    delay: 05,
+    time: 2500
+});
+</script>
+@endpush
