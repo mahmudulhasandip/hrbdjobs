@@ -14619,3 +14619,60 @@ h3.text-underline {
 .stat span:last-child {
     font-weight: bold;
 }
+
+.clearfix {
+    overflow: auto;
+}
+
+.clearfix:after {
+    content: "";
+    visibility: hidden;
+    display: block;
+    height: 0;
+    clear: both;
+}
+
+.job-list-modern .job-listing.wtabs.featured {
+    /* Permalink - use to edit and share this gradient: http://colorzilla.com/gradient-editor/#ffffff+1,ffffff+31,73f3e8+100 */
+    background: #ffffff;
+    /* Old browsers */
+    background: -moz-linear-gradient(left, #ffffff 1%, #ffffff 31%, rgba(115, 243, 232, .5) 100%);
+    /* FF3.6-15 */
+    background: -webkit-linear-gradient(left, #ffffff 1%, #ffffff 31%, rgba(115, 243, 232, .5) 100%);
+    /* Chrome10-25,Safari5.1-6 */
+    background: linear-gradient(to right, #ffffff 1%, #ffffff 31%, rgba(115, 243, 232, .5) 100%);
+    /* W3C, IE10+, FF16+, Chrome26+, Opera12+, Safari7+ */
+    filter: progid:DXImageTransform.Microsoft.gradient(startColorstr='#ffffff', endColorstr='rgba(115, 243, 232, .5)', GradientType=1);
+    /* IE6-9 */
+    outline: 2px solid #fff;
+    outline-offset: -10px;
+}
+
+.featured .job-is.ft,
+.featured .job-list-modern .job-is.ft {
+    color: #fff;
+    background: #2f3e75;
+    border-radius: 20px;
+    display: block;
+
+}
+
+ .vacancy{
+    float: right;
+    margin-right: 5px;
+    color: #49a400;
+    font-weight: bold;
+}
+
+.job-style-bx {
+    float: left;
+    width: 25%;
+    position: absolute;
+    right: 0px;
+    bottom: 23px;
+    padding: 15px;
+}
+
+.featured .job-style-bx>i{
+    color: #222;
+}
