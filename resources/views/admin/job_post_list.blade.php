@@ -101,7 +101,7 @@
                             Job Designation
                         </th>
                         <th title="Field #6">
-                            Job Level
+                            Job Status
                         </th>
                         <th title="Field #7">
                             Experience
@@ -151,7 +151,7 @@
                             @endif
                         </td>
                         <td>
-                            {{ $job->jobLevel->name }}
+                            {{ $job->jobStatus->name }}
                         </td>
                         <td>
                             {{ $job->experience }}

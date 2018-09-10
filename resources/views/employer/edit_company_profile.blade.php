@@ -1,25 +1,16 @@
 <?php header('Access-Control-Allow-Origin: *'); ?>
-@extends('employer.layout.app') 
-@section('title', 'HRBDJobs | Employer Company Profile') 
+@extends('employer.layout.app')
+@section('title', 'HRBDJobs | Employer Company Profile')
 
 @push('css')
 <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/Trumbowyg/2.10.0/ui/trumbowyg.min.css" />
 @endpush
 
 @section('content')
+<div id="nav_height"></div>
 <section class="overlape">
 	<div class="block no-padding">
-		<div data-velocity="-.1" style="background: url(/images/top-bg.jpg) repeat scroll 50% 422.28px transparent;" class="parallax scrolly-invisible no-parallax"></div>
-		<!-- PARALLAX BACKGROUND IMAGE -->
-		<div class="container fluid">
-			<div class="row">
-				<div class="col-lg-12">
-					<div class="inner-header">
-						<h3>Welcome {{ Auth::user()->fname.' '. Auth::user()->lname}}</h3>
-					</div>
-				</div>
-			</div>
-		</div>
+		<img src="{{ asset('images/top_add.jpg') }}" alt="Advertisement banner">
 	</div>
 </section>
 
@@ -39,7 +30,9 @@
 							<h3>Company Profile</h3>
 
 						</div>
+
 						<div class="profile-form-edit">
+							<div class="border-line"></div>
 							<form role="form" method="POST" action="{{ route('employer.update.profile') }}" enctype="multipart/form-data">
 								@csrf
 								<div class="row">
@@ -54,7 +47,7 @@
 
 									<div id="file-upload-form" class="uploader">
 										<input id="file-upload" type="file" name="logo" accept="image/*" />
-		
+
 										<label for="file-upload" id="file-drag">
 											<img id="file-image" src="{{ asset('storage/uploads/'.(($company_info->logo) ? $company_info->logo : 'company-avatar.png'))}}" alt="Preview" class="">
 											<div id="start">
@@ -71,7 +64,7 @@
 											</div>
 										</label>
 									</div>
-									
+
 									<div class="col-lg-6">
 										<span class="pf-title">Company Name</span>
 										<div class="pf-field">
@@ -90,7 +83,7 @@
 											@if ($errors->has('industry_type'))
 												<span class="help-block">
 													<strong>{{ $errors->first('industry_type') }}</strong>
-												</span> 
+												</span>
 											@endif
 										</div>
 									</div>
@@ -112,7 +105,7 @@
 											</select>
 										</div>
 									</div>
-									
+
 									<div class="col-lg-12">
 										<span class="pf-title desc">Description</span>
 										{{-- <div id="description" >{!! $company_info->description !!}</div> --}}
@@ -202,7 +195,7 @@
 											@if ($errors->has('country'))
 											<span class="help-block">
 												<strong>{{ $errors->first('country') }}</strong>
-											</span> 
+											</span>
 											@endif
 										</div>
 									</div>
@@ -221,7 +214,7 @@
 							</form>
 						</div>
 
-						
+
 					</div>
 				</div>
 			</div>
@@ -290,7 +283,7 @@ function ekUpload(){
     output(
       '<strong>' + encodeURI(file.name) + '</strong>'
     );
-    
+
     // var fileType = file.type;
     // console.log(fileType);
     var imageName = file.name;
@@ -363,7 +356,7 @@ ekUpload();
 		});
 		tinymce.suffix = ".min";
 		tinyMCE.baseURL = "{{ asset('js/tinymce/') }}";
-	
+
 	 </script>
 
 @endpush

@@ -190,7 +190,7 @@
             <div class="container">
                 <div class="row">
                     <div class="col-lg-12">
-                        <div class="tab-sec">
+                        <div class="tab-sec text-center">
                             <ul class="nav nav-tabs">
                                 <li><a class="current" data-tab="fjobs">Featured Jobs</a></li>
                                 <li><a data-tab="rjobs">Recent Jobs</a></li>

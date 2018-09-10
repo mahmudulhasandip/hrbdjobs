@@ -22,7 +22,7 @@ class CompaniesController extends Controller
             $data['social_links'] = new Company_social_media();
         }
         $data['company_industries'] = Company_industry::where('employer_company_info_id', $data['company_info']->id)->get();
-        
+
         return view('users.company_profile', $data);
     }
 }

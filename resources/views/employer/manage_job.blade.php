@@ -3,18 +3,10 @@
 @section('title', 'HRBDJobs | Manage Job')
 
 @section('content')
+<div id="nav_height"></div>
 <section class="overlape">
 		<div class="block no-padding">
-			<div data-velocity="-.1" style="background: url({{ asset('/images/top-bg.jpg') }}) repeat scroll 50% 422.28px transparent;" class="parallax scrolly-invisible no-parallax"></div><!-- PARALLAX BACKGROUND IMAGE -->
-			<div class="container fluid">
-				<div class="row">
-					<div class="col-lg-12">
-						<div class="inner-header">
-							<h3>Welcome {{ Auth::user()->fname.' '. Auth::user()->lname}}</h3>
-						</div>
-					</div>
-				</div>
-			</div>
+			<img src="{{ asset('images/top_add.jpg') }}" alt="Advertisement banner">
 		</div>
 	</section>
 

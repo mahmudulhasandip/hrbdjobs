@@ -3,18 +3,10 @@
 @section('title', 'HRBDJobs | Employer Dashboard')
 
 @section('content')
+<div id="nav_height"></div>
 	<section class="overlape">
 		<div class="block no-padding">
-			<div data-velocity="-.1" style="background: url({{ asset('/images/top-bg.jpg') }}) repeat scroll 50% 422.28px transparent;" class="parallax scrolly-invisible no-parallax"></div><!-- PARALLAX BACKGROUND IMAGE -->
-			<div class="container fluid">
-				<div class="row">
-					<div class="col-lg-12">
-						<div class="inner-header">
-							<h3>Welcome {{ Auth::user()->fname.' '. Auth::user()->lname}}</h3>
-						</div>
-					</div>
-				</div>
-			</div>
+			<img src="{{ asset('images/top_add.jpg') }}" alt="Advertisement banner">
 		</div>
 	</section>
 
@@ -26,13 +18,13 @@
 				 		<div class="widget">
 				 			@include('employer.layout.sidebar')
 				 		</div>
-				 		
+
 				 	</aside>
 				 	<div class="col-lg-9 column">
 				 		<div class="padding-left">
 					 		<div class="manage-jobs-sec mb50">
 					 			<h3>Packages</h3>
-						 		
+
 
                                  <div class="col-sm-8 col-sm-offset-1">
                                     <div class="package_details mb50">
@@ -49,7 +41,7 @@
                                                     <span style="font-size: 20px;
                                                     font-weight: bold;">Package Name: </span> {{ $packages->name }}</h3>
                                             </li>
-                                            
+
                                             <li class="{{ !($packages->job_post) ? 'd-none' : '' }}" >
                                                 <h3 class="text">
                                                     <span>Job Post(s): </span> {{ $packages->job_post }}</h3>
@@ -100,20 +92,20 @@
                                                             <option selected value="bkash">Bkash</option>
                                                     </select>
                                                 </div>
-                                                
-                                            
+
+
                                                 <span class="pf-title">Tranxaction ID:</span>
                                                 <div class="pf-field">
-                                                    <input type="text" placeholder="ex: TXD15623454" name="txdID" autocomplete="off"> 
+                                                    <input type="text" placeholder="ex: TXD15623454" name="txdID" autocomplete="off">
                                                 </div>
-                                                
-                                            
+
+
                                                 <button type="submit" class="post-job-btn pull-right">Submit</button>
                                             </div>
-                                            
+
                                         </form>
-                                        
-                                        
+
+
                                     </div>
                                 </div>
 					 		</div>

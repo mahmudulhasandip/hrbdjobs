@@ -3,19 +3,10 @@
 @section('title', 'HRBDJobs | Employer Profile')
 
 @section('content')
-
+<div id="nav_height"></div>
 <section class="overlape">
 		<div class="block no-padding">
-			<div data-velocity="-.1" style="background: url(/images/top-bg.jpg) repeat scroll 50% 422.28px transparent;" class="parallax scrolly-invisible no-parallax"></div><!-- PARALLAX BACKGROUND IMAGE -->
-			<div class="container fluid">
-				<div class="row">
-					<div class="col-lg-12">
-						<div class="inner-header">
-							<h3>Welcome {{ Auth::user()->fname.' '. Auth::user()->lname}}</h3>
-						</div>
-					</div>
-				</div>
-			</div>
+			<img src="{{ asset('images/top_add.jpg') }}" alt="Advertisement banner">
 		</div>
 	</section>
 
@@ -28,20 +19,21 @@
 				 		<div class="widget">
 							@include('employer.layout.sidebar')
 				 		</div>
-				 		
+
 				 	</aside>
 				 	<div class="col-lg-9 column">
 				 		<div class="padding-left">
 					 		<div class="profile-title">
 					 			<h3>Employee Profile</h3>
-					 		</div>
+							 </div>
+
 					 		<div class="profile-form-edit">
 					 			<form method="post" action="{{ route('employer.update.employer.profile') }}" enctype="multipart/form-data">
 									@csrf
 					 				<div class="row">
 										<div id="file-upload-form" class="uploader">
 											<input id="file-upload" type="file" name="logo" accept="image/*" />
-			
+
 											<label for="file-upload" id="file-drag">
 												<img id="file-image" src="{{ asset('storage/uploads/'.(($employer_info->logo) ? $employer_info->logo : 'default_user.png'))}}" alt="Preview" class="">
 												<div id="start">
@@ -61,14 +53,14 @@
 					 							<input type="text" placeholder="First Name" name="fname"  value="{{ old('fname') ? old('fname') : $employer_info->fname }}"/>
 					 						</div>
 										 </div>
-										 
+
 					 					<div class="col-lg-6">
 					 						<span class="pf-title">Last Name</span>
 					 						<div class="pf-field">
 					 							<input type="text" placeholder="Last Name" name="lname"  value="{{ 	old('lname') ? old('lname') : $employer_info->lname }}"/>
 					 						</div>
 										 </div>
-										 
+
 					 					<div class="col-lg-6">
 					 						<span class="pf-title">Designation</span>
 					 						<div class="pf-field">
@@ -105,7 +97,7 @@
 					 				</div>
 					 			</form>
 					 		</div>
-					 		
+
 					 		<div class="contact-edit">
 					 			<h3>Change Password</h3>
 								 <form method="POST" action="{{ route('employer.update.employer.password') }}">
@@ -205,7 +197,7 @@ function ekUpload(){
     output(
       '<strong>' + encodeURI(file.name) + '</strong>'
     );
-    
+
     // var fileType = file.type;
     // console.log(fileType);
     var imageName = file.name;
