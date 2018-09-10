@@ -10,7 +10,6 @@
 | contains the "web" middleware group. Now create something great!
 |
 */
-
 ####################### comment out this code after uploading this project to server ####################
 // Route::get('storage/uploads/{filename}', function ($filename)
 // {

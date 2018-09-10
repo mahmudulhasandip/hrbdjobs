@@ -17,9 +17,12 @@ class CreateAppliedJobsTable extends Migration
             $table->increments('id')->unsigned()->unique();
             $table->integer('candidate_id')->unsigned();
             $table->integer('job_id')->unsigned();
+            $table->string('expected_salary')->nullable();
+            $table->text('cover_letter')->nullable();
             $table->integer('is_short_listed')->default(0);
             $table->integer('is_viewed_resume')->default(0);
             $table->integer('is_withdraw')->default(0);
+            $table->integer('is_email_sent')->default(0);
             $table->foreign('candidate_id')->references('id')->on('candidates')->onDelete('cascade');
             $table->foreign('job_id')->references('id')->on('jobs')->onDelete('cascade');
             $table->timestamps();

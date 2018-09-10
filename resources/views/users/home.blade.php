@@ -141,7 +141,7 @@
                         <div class="simple-text-block style2">
                             <h3>Make a Difference with Your Online Resume!</h3>
                             <span>Your resume in minutes with JobHunt resume assistant is ready!</span>
-                            <a href="{{ route('candidate.register') }}" title="">Create an Account</a>
+                            <a href="{{ route('candidate.register') }}" target="_blank" title="">Create an Account</a>
                         </div>
                     </div>
                 </div>
@@ -199,9 +199,9 @@
                                 <div class="job-listings-tabs">
                                     <div class="row">
                                         <div id="featured-jobs" class="col-lg-12">
-                                            
+
                                         </div>
-                                        
+
                                     </div>
                                 </div>
                             </div>
@@ -209,8 +209,8 @@
                                 <div class="job-listings-tabs">
                                     <div class="row">
                                         <div id="recent-jobs" class="col-lg-12">
-                                            
-                                        </div>   
+
+                                        </div>
                                     </div>
                                 </div>
                             </div>
@@ -347,7 +347,7 @@
                         <!-- Heading -->
                         <div class="job-grid-sec">
                             <div class="row" id="special-jobs">
-                               
+
                             </div>
                         </div>
                     </div>

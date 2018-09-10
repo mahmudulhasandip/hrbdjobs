@@ -22,6 +22,7 @@ class CreateCandidateExperiencesTable extends Migration
             $table->string('company_designation')->nullable();
             $table->date('start_date')->nullable();
             $table->date('end_date')->nullable();
+            $table->string('area_of_experience')->nullable();
             $table->foreign('candidate_id')->references('id')->on('candidates')->onDelete('cascade');
             $table->foreign('candidate_designation')->references('id')->on('job_designations')->onDelete('cascade');
         
