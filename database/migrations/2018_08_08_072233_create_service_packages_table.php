@@ -14,7 +14,7 @@ class CreateServicePackagesTable extends Migration
     public function up()
     {
         Schema::create('service_packages', function (Blueprint $table) {
-            $table->increments('id')->unsigned()->unique();;
+            $table->increments('id')->unsigned()->unique();
             $table->string('name')->nullable();
             $table->timestamps();
         });

@@ -12,6 +12,7 @@ use App\Applied_job;
 use App\Candidate;
 use App\Job_experience;
 use App\Job;
+use App\Short_listed_resume;
 
 class AppliedController extends Controller
 {
@@ -123,22 +124,28 @@ class AppliedController extends Controller
     }
 
     public function shortListCandidate(Request $request) {
-
         $shortlist = Applied_job::where('candidate_id', $request->input('candidate_id'))->where('job_id', $request->input('job_id'))->first();
+        $shortlistResume = Short_listed_resume::where('candidate_id', $request->input('candidate_id'))->where('job_id', $request->input('job_id'))->where('employer_id', Auth::guard('employer')->user()->id)->first();
 
-        $message = "";
-        if($shortlist->is_short_listed){
+        if($shortlist->is_short_listed && $shortlistResume){
 
             $shortlist->is_short_listed = 0;
-            $message = "Candidate has been removed from Shortlisted";
+            $shortlistResume->delete();
+            $msg = "Candidate has been removed from Shortlisted";
         }
         else{
             $shortlist->is_short_listed = 1;
-            $message = "Candidate has been Shortlisted";
+
+            $shortlistResume->employer_id = Auth::guard('employer')->user()->id;
+            $shortlistResume->job_id = $request->input('job_id');
+            $shortlistResume->candidate_id = $request->input('candidate_id');
+            $shortlistResume->save();
+            $msg= "Candidate has been Shortlisted";
         }
         $shortlist->save();
 
-        return $message;
+        // return $msg;
+        return redirect()->route('employer.applied.candidates.list')->with('status', $msg);
     }
 
     public function rejectCandidate(Request $request) {

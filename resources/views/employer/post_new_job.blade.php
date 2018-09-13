@@ -32,10 +32,14 @@
 				 	</aside>
 				 	<div class="col-lg-9 column">
 				 		<div class="padding-left">
+							 {{-- page title --}}
 					 		<div class="profile-title">
 					 			<h3>Post a New Job</h3>
 							 </div>
 							 <div class="profile-form-edit">
+							 {{-- top border line --}}
+							 <div class="border-line"></div>
+							 {{-- post new job form start --}}
 							 <form method="POST" role="form" id="newjob" data-toggle="validator" action="{{ route('employer.new.post.job') }}" class="needs-validation" novalidate>
 								 @csrf
 								 <input type="hidden" name="job_id" value="{{ ($draft) ? $draft->id : '' }}">

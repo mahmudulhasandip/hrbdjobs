@@ -28,6 +28,9 @@
 							 </div>
 
 					 		<div class="profile-form-edit">
+								{{-- top border line --}}
+								<div class="border-line"></div>
+
 					 			<form method="post" action="{{ route('employer.update.employer.profile') }}" enctype="multipart/form-data">
 									@csrf
 					 				<div class="row">

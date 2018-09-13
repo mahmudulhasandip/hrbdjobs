@@ -22,8 +22,15 @@
 				 	</aside>
 				 	<div class="col-lg-9 column">
 				 		<div class="padding-left">
+							 {{-- page title --}}
+					 		<div class="profile-title">
+					 			<h3>Drafted Jobs</h3>
+							 </div>
+
 					 		<div class="manage-jobs-sec">
-					 			<h3>Manage Jobs</h3>
+
+								{{-- top border line --}}
+							 	<div class="border-line"></div>
 					 			<div class="extra-job-info">
 									 <span><i class="la la-clock-o"></i> <strong>
 											{{ ($totalJobs) > 0 ? $totalJobs : 0 }}

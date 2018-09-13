@@ -1842,7 +1842,7 @@ label::after {
 .c-logo {
     float: left;
     width: 150px;
-    min-height: 65px;
+    min-height: 75px;
     padding: 0 10px;
     text-align: center;
 }
@@ -14657,7 +14657,7 @@ h3.text-underline {
 
 }
 
- .vacancy{
+.vacancy {
     float: right;
     margin-right: 5px;
     color: #49a400;
@@ -14673,6 +14673,6 @@ h3.text-underline {
     padding: 15px;
 }
 
-.featured .job-style-bx>i{
+.featured .job-style-bx>i {
     color: #222;
 }

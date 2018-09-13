@@ -39,7 +39,7 @@ use App\Other_benifit;
 
 class HomeController extends Controller
 {
-    //
+    //employer home dashboard
     public function dashboard(){
         $data['left_active'] = 'dashboard';
         $data['employer_info'] = Employer::find(Auth::guard('employer')->user()->id);
@@ -48,6 +48,7 @@ class HomeController extends Controller
         return view('employer.dashboard', $data);
     }
 
+    // package view
     public function getPackages(){
         $data['left_active'] = 'packages';
         $data['employer_info'] = Employer::find(Auth::guard('employer')->user()->id);
@@ -56,6 +57,7 @@ class HomeController extends Controller
         return view('employer.packages', $data);
     }
 
+    // purchage package
     public function purchasePackages($id){
         $data['left_active'] = 'packages';
         $data['employer_info'] = Employer::find(Auth::guard('employer')->user()->id);
@@ -64,6 +66,7 @@ class HomeController extends Controller
         return view('employer.package_details' , $data);
     }
 
+    // purchase featured package
     public function purchaseFeaturedPackages($id) {
         $data['left_active'] = 'packages';
         $data['employer_info'] = Employer::find(Auth::guard('employer')->user()->id);
@@ -72,6 +75,7 @@ class HomeController extends Controller
         return view('employer.package_details' , $data);
     }
 
+    // confirm package purchase
     public function confirmPackage(Request $request) {
         $data['left_active'] = 'packages';
         $data['employer_info'] = Employer::find(Auth::guard('employer')->user()->id);
@@ -123,6 +127,7 @@ class HomeController extends Controller
 
     }
 
+    // package history view
     public function getPackagesHistory() {
         $data['left_active'] = 'packages';
         $data['employer_info'] = Employer::find(Auth::guard('employer')->user()->id);
@@ -131,6 +136,7 @@ class HomeController extends Controller
         return view('employer.package_history', $data);
     }
 
+    // post new job view
     public function getNewJob(){
         $data['left_active'] = 'job';
         $data['employer_info'] = Employer::find(Auth::guard('employer')->user()->id);
@@ -145,6 +151,7 @@ class HomeController extends Controller
         return view('employer.post_new_job', $data);
     }
 
+    // post a new job
     public function postJob(Request $request) {
         $data['left_active'] = 'job';
 
@@ -297,6 +304,7 @@ class HomeController extends Controller
 
     }
 
+    // edit job form
     public function editJobForm($id) {
         $data['left_active'] = 'manage_job';
         $data['editJob'] = Job::findOrFail($id);
@@ -317,6 +325,7 @@ class HomeController extends Controller
         return view('employer.edit_job', $data);
     }
 
+    // delete job
     public function deleteJob($id) {
         $postedJob = Job::where('employer_id', Auth::guard('employer')->user()->id)->where('id', $id)->first();
         $postedJob->delete();
@@ -334,6 +343,7 @@ class HomeController extends Controller
         return view('employer.draft_job', $data);
     }
 
+    // get drafted job form
     public function draftedJobForm($id){
         $data['left_active'] = 'job';
         $data['employer_info'] = Employer::find(Auth::guard('employer')->user()->id);
@@ -355,6 +365,7 @@ class HomeController extends Controller
 
     }
 
+    // get categories
     function getCategories(Request $request){
         $id = $request->id;
         $is_special = $request->is_special;
@@ -374,6 +385,7 @@ class HomeController extends Controller
 
     }
 
+    // get designation
     function getDesignations(Request $request){
         $id = $request->id;
         $is_special = $request->is_special;
@@ -415,6 +427,7 @@ class HomeController extends Controller
     }
 
 
+    // job details view
     public function jobDetails($id) {
         $data['left_active'] = 'manage_job';
         $data['employer_info'] = Employer::find(Auth::guard('employer')->user()->id);
@@ -460,7 +473,7 @@ class HomeController extends Controller
     // employer Profile Edit
     public function getEditProfile(){
         $data['left_active'] = 'profile';
-        $data['employer_info'] = Employer::find(Auth::guard('employer')->user()->id)->first();
+        $data['employer_info'] = Employer::find(Auth::guard('employer')->user()->id);
         return view('employer.edit_profile', $data);
     }
 
@@ -530,6 +543,7 @@ class HomeController extends Controller
         return redirect()->back()->with('error', 'Old password is empty')->withInput();
     }
 
+    // get company profile
     public function getCompanyProfile(){
         $data['left_active'] = 'company';
         $data['employer_info'] = Employer::find(Auth::guard('employer')->user()->id);
@@ -569,6 +583,7 @@ class HomeController extends Controller
         return redirect()->route('employer.company.profile')->with('status', 'Your company featured successfully');
     }
 
+    // edit company profile
     public function getEditCompanyProfile(){
         $data['left_active'] = 'company';
         $data['employer_info'] = Employer::find(Auth::guard('employer')->user()->id);
@@ -656,6 +671,7 @@ class HomeController extends Controller
 
 
 
+    // browse resume view
     public function getBrowseResume(){
         $data['left_active'] = 'browse_resume';
         $data['employer_info'] = Employer::find(Auth::guard('employer')->user()->id);

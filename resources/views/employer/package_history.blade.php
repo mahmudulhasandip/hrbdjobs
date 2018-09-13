@@ -22,9 +22,13 @@
 				 	</aside>
 				 	<div class="col-lg-9 column">
 				 		<div class="padding-left">
+                             <div class="profile-title">
+					 			<h3>My Packages</h3>
+							 </div>
 					 		<div class="manage-jobs-sec mb50">
-					 			<h3>Packages</h3>
 
+                                {{-- top border line --}}
+							    <div class="border-line"></div>
 
                                 <div class="col-lg-12">
                                     <div class="tab-sec">

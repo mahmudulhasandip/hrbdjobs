@@ -21,7 +21,15 @@
 
 				 	</aside>
 				 	<div class="col-lg-9 column mb-50">
+						<div class="profile-title">
+							<h3>Shortlisted Candidates</h3>
+						</div>
 				 		<div class="padding-left">
+
+
+							{{-- top border line --}}
+							<div class="border-line"></div>
+
 
 							@foreach($jobs as $job)
                             <div class="widget shortlist">
@@ -62,6 +70,7 @@
 	$('.shortListCandidate').click(function() {
         var candidateId = $(this).data('candidateid');
 		var jobId = $(this).data('jobid');
+		alert(candidateId);
         $.ajax({
             url: base_url+"/job/candidates/applied/shortListed/",
             type: "post",

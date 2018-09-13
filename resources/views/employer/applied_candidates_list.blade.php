@@ -26,7 +26,7 @@
 							<div class="tab-sec ">
 								<div class="text-center">
 									<ul class="nav nav-tabs">
-										<li><a class="current" data-tab="applied_candidates">Applied Candidates</a></li>
+										<li><a class="current applied-candidate" data-tab="applied_candidates">Applied Candidates</a></li>
 										<li><a data-tab="job_post">Job Post</a></li>
 									</ul>
 								</div>
@@ -254,16 +254,19 @@
 			$(this).removeClass().addClass('unshortlisted');
 			$(this).html('Add To Shortlist');
         }
+
+
         $.ajax({
-            url: base_url+"/job/candidates/applied/shortListed/",
+            url: base_url+"/job/applied/candidates/shortListed/",
             type: "post",
             headers: {'X-CSRF-TOKEN': Laravel.csrfToken},
             data:{candidate_id: candidateId, job_id: jobId},
-            success: function(message){
+            success: function(msg){
+				$('.applied-candidate').addClass('current');
                 iziToast.success({
-                    title: message,
+                    title: msg,
                     timeout: 2000,
-                    overlay: true,
+                    overlay: false,
                     position: 'topRight',
                 });
 

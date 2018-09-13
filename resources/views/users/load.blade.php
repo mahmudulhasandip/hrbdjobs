@@ -7,11 +7,16 @@
 
 		<div class="job-listing wtabs {{ ($job->is_featured) ? 'featured' : '' }}">
 			<div class="job-title-sec pointer newtab" onclick="viewJob('{{ $single_job}}')">
-				<div class="c-logo"> <img src="{{ asset('storage/uploads/'.(($job->employer->employerCompanyInfo['logo']) ? $job->employer->employerCompanyInfo['logo'] : 'default_user.png'))}}" alt="" /> </div>
+				<div class="c-logo">
+					<img src="{{ asset('storage/uploads/'.(($job->employer->employerCompanyInfo['logo']) ? $job->employer->employerCompanyInfo['logo'] : 'default_user.png'))}}" alt="" />
+				</div>
 				<h3><a href="#" title="">{{ $job->title }}</a></h3>
 				<span>{{ $job->employer->employerCompanyInfo['name'] }}</span>
 				<div class="job-lctn"><i class="la la-map-marker"></i>{{ $job->employer->employerCompanyInfo['city'] }} / {{ $job->employer->employerCompanyInfo['country'] }}</div>
 
+				@if($job->is_featured)
+				<span style="color: #235784;"><i class="fa fa-mortar-board"></i> {{ $job->qualification }}</span>
+				@endif
 			</div>
 			<div class="job-style-bx">
 				<span class="job-is ft">Full time</span>
