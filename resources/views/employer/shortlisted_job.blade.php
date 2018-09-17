@@ -31,26 +31,38 @@
 							<div class="border-line"></div>
 
 
-							@foreach($jobs as $job)
-                            <div class="widget shortlist">
-								<h3 class="sb-title open active close">{{ $job->title }}</h3>
-                                <div class="tree_widget-sec" >
-                                    <ul>
+								@forelse ($jobs as $job)
+								@php
+									$candidate_count = \App\Short_listed_resume::where('job_id', $job->id)->count();
+								@endphp
+								<div class="widget shortlist">
+									<h3 class="sb-title open active close">{{ $job->title }} <span class="badge badge-pill badge-success"> {{ $candidate_count }}</span></h3>
+									<div class="tree_widget-sec" >
+										<ul>
 
-										@foreach($job->appliedJob as $app_job)
-										@if($app_job->is_short_listed)
-                                        <li class="inner-child">
-                                            <a class="title" href="{{ route('employer.public.candidate.resume', $app_job->candidate->id) }}" target="_blank">{{ $app_job->candidate->fname }} {{ $app_job->candidate->lname }}</a>
-											<span style="display:block;">{{ $app_job->candidate->candidateSkill->first()['experience'] }} {{( $app_job->candidate->candidateSkill->first()['experience'])?'year':''}}{{( $app_job->candidate->candidateSkill->first()['experience']>1)?'s':''}}</span>
+											@foreach($job->appliedJob as $app_job)
+											@if($app_job->is_short_listed)
+											<li class="inner-child">
+												<a class="title" href="{{ route('employer.public.candidate.resume', ['job_id'=>$app_job->job_id, 'id'=>$app_job->candidate->id]) }}" target="_blank">{{ $app_job->candidate->fname }} {{ $app_job->candidate->lname }}</a>
+												<span style="display:block;">{{ $app_job->candidate->candidateSkill->first()['experience'] }} {{( $app_job->candidate->candidateSkill->first()['experience'])?'year':''}}{{( $app_job->candidate->candidateSkill->first()['experience']>1)?'s':''}}</span>
 
-											<a href="javascript:;" class="shortListCandidate del-resume" data-jobId="{{ $app_job->job_id }}" data-candidateId="{{ $app_job->candidate_id }}"><i class="la la-trash-o"></i></a>
-										</li>
-										@endif
-										@endforeach
-                                    </ul>
+												<a href="javascript:;" class="shortListCandidate del-resume" data-jobId="{{ $app_job->job_id }}" data-candidateId="{{ $app_job->candidate_id }}"><i class="la la-trash-o"></i></a>
+											</li>
+											@endif
+											@endforeach
+										</ul>
+									</div>
 								</div>
-							</div>
-							@endforeach
+								@empty
+								<div class="alert alert-dark alert-dismissible fade show" role="alert">
+									You have not <strong>shortlisted</strong> any candidate yet!
+									<button type="button" class="close" data-dismiss="alert" aria-label="Close">
+										<span aria-hidden="true">&times;</span>
+									</button>
+								</div>
+								@endforelse
+
+
 
 							<div class="pagination-laravel">
 							{{ $jobs->links() }}
@@ -68,11 +80,12 @@
 <script>
 	var base_url = "{{ url('/employer/') }}";
 	$('.shortListCandidate').click(function() {
+
         var candidateId = $(this).data('candidateid');
 		var jobId = $(this).data('jobid');
-		alert(candidateId);
+		alert('Are you sure?');
         $.ajax({
-            url: base_url+"/job/candidates/applied/shortListed/",
+            url: base_url+"/job/applied/candidates/shortListed/",
             type: "post",
             headers: {'X-CSRF-TOKEN': Laravel.csrfToken},
             data:{candidate_id: candidateId, job_id: jobId},

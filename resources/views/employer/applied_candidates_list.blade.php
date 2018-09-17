@@ -262,7 +262,7 @@
             headers: {'X-CSRF-TOKEN': Laravel.csrfToken},
             data:{candidate_id: candidateId, job_id: jobId},
             success: function(msg){
-				$('.applied-candidate').addClass('current');
+				//
                 iziToast.success({
                     title: msg,
                     timeout: 2000,
@@ -273,6 +273,7 @@
 
             }
         });
+		$('.applied-candidate').addClass('current');
 
     });
 

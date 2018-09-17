@@ -34,9 +34,9 @@
                 </li>
                 <li>
                 @if($job->is_short_listed)
-                <a href="javascript: ;" class="shortListCandidate shortlisted" data-jobId="{{ $job->job_id }}" data-candidateId="{{ $job->candidate_id }}" title="">Remove from Shortlist</a>
+                <a href="javascript: void(0);" class="shortListCandidate shortlisted" data-jobId="{{ $job->job_id }}" data-candidateId="{{ $job->candidate_id }}" title="">Remove from Shortlist</a>
                 @else
-                <a href="javascript: ;" class="shortListCandidate unshortlisted" data-jobId="{{ $job->job_id }}" data-candidateId="{{ $job->candidate_id }}" title="">Add To Shortlist</a>
+                <a href="javascript: void(0);" class="shortListCandidate unshortlisted" data-jobId="{{ $job->job_id }}" data-candidateId="{{ $job->candidate_id }}" title="">Add To Shortlist</a>
                 @endif
                 </li>
             </ul>

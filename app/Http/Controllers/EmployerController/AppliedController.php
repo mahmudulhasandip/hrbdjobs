@@ -134,18 +134,21 @@ class AppliedController extends Controller
             $msg = "Candidate has been removed from Shortlisted";
         }
         else{
+
+            $shortlistResume = new Short_listed_resume();
             $shortlist->is_short_listed = 1;
 
             $shortlistResume->employer_id = Auth::guard('employer')->user()->id;
             $shortlistResume->job_id = $request->input('job_id');
             $shortlistResume->candidate_id = $request->input('candidate_id');
+
             $shortlistResume->save();
             $msg= "Candidate has been Shortlisted";
         }
         $shortlist->save();
 
-        // return $msg;
-        return redirect()->route('employer.applied.candidates.list')->with('status', $msg);
+        return $msg;
+        // return redirect()->route('employer.applied.candidates.list')->with('status', $msg);
     }
 
     public function rejectCandidate(Request $request) {
