@@ -3,7 +3,7 @@
 @section('title', 'HRBDJobs | Candidate Dashboard')
 
 @section('content')
-    <section class="overlape">
+    {{-- <section class="overlape">
         <div class="block no-padding">
             <div data-velocity="-.1" style="background: url(/images/top-bg.jpg) repeat scroll 50% 422.28px transparent;" class="parallax scrolly-invisible no-parallax"></div><!-- PARALLAX BACKGROUND IMAGE -->
             <div class="container fluid">
@@ -16,7 +16,15 @@
                 </div>
             </div>
         </div>
+    </section> --}}
+
+    <div id="nav_height"></div>
+    <section class="overlape">
+        <div class="block no-padding">
+            <img src="{{ asset('images/top_add.jpg') }}" alt="Advertisement banner">
+        </div>
     </section>
+
 
     <section>
         <div class="block no-padding">
@@ -26,7 +34,7 @@
                         <div class="widget" id="sidebar">
                             @include('candidate.layout.sidebar')
                         </div>
-                        
+
                     </aside>
                     <div id="wall" class="col-lg-9 column">
                         <div class="padding-left">
@@ -43,7 +51,7 @@
                                                 </a>
                                             </div>
                                         </div>
-                                        
+
                                         <div class="col-lg-4 col-md-4 col-sm-12">
                                             <div class="p-category">
                                                 <a href="post_a_new_job.html" title="">
@@ -93,7 +101,7 @@
                                                 </a>
                                             </div>
                                         </div>
-                                        
+
                                     </div>
                                 </div>
                             </div>

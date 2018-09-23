@@ -3,7 +3,7 @@
 @section('title', 'HRBDJobs | Candidate Dashboard')
 
 @section('content')
-    <section class="overlape">
+    {{-- <section class="overlape">
         <div class="block no-padding">
             <div data-velocity="-.1" style="background: url(/images/top-bg.jpg) repeat scroll 50% 422.28px transparent;" class="parallax scrolly-invisible no-parallax"></div><!-- PARALLAX BACKGROUND IMAGE -->
             <div class="container fluid">
@@ -16,7 +16,16 @@
                 </div>
             </div>
         </div>
+    </section> --}}
+
+
+    <div id="nav_height"></div>
+    <section class="overlape">
+        <div class="block no-padding">
+            <img src="{{ asset('images/top_add.jpg') }}" alt="Advertisement banner">
+        </div>
     </section>
+
 
     <section>
         <div class="block no-padding">
@@ -26,7 +35,7 @@
                         <div class="widget" id="sidebar">
                             @include('candidate.layout.sidebar')
                         </div>
-                        
+
                     </aside>
                     <div class="col-lg-9 column">
                         <div class="modrn-joblist">
@@ -50,7 +59,7 @@
                                         <i title="Remove from Shortlist" class="text-danger remove_shortlist pointer" data-jobId="{{ $ap_job->job_id }}"><i class="la la-times-circle-o"></i> Remove</i>
                                     </div>
                                 </div>
-                                
+
                                 @endforeach
 
                                 <div class="pagination-laravel">
@@ -58,7 +67,7 @@
                                 </div><!-- Pagination -->
 
                                 {{-- <div class="">
-                                    
+
                                 </div> --}}
                             </div>
                         </div>
@@ -81,7 +90,7 @@
     });
     $('.remove_shortlist').click(function() {
         var jobId = $(this).data('jobid');
-       
+
         $.ajax({
             url: base_url+"/shortlisted/job/create",
             type: "post",
@@ -93,12 +102,12 @@
                     timeout: 2000,
                     overlay: true,
                     position: 'topRight',
-                }); 
+                });
 
-                $('#job-tab-'+jobId).remove(); 
+                $('#job-tab-'+jobId).remove();
             }
         });
-        
+
     });
 </script>
 @endpush

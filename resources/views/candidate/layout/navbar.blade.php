@@ -73,7 +73,7 @@
 {{-- @if (Auth::guest())
 <header class="stick-top forsticky white">
 @else --}}
-<header class="stick-top forsticky">
+<header class="stick-top forsticky fixed">
 {{-- @endif --}}
 {{--  --}}
     <div class="menu-sec">

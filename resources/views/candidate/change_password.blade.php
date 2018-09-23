@@ -3,7 +3,7 @@
 
 
 @section('content')
-<section class="overlape">
+{{-- <section class="overlape">
 	<div class="block no-padding">
 		<div data-velocity="-.1" style="background: url(/images/top-bg.jpg) repeat scroll 50% 422.28px transparent;" class="parallax scrolly-invisible no-parallax"></div>
 		<!-- PARALLAX BACKGROUND IMAGE -->
@@ -16,6 +16,13 @@
 				</div>
 			</div>
 		</div>
+	</div>
+</section> --}}
+
+<div id="nav_height"></div>
+<section class="overlape">
+	<div class="block no-padding">
+		<img src="{{ asset('images/top_add.jpg') }}" alt="Advertisement banner">
 	</div>
 </section>
 

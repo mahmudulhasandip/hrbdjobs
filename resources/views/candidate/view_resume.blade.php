@@ -3,7 +3,7 @@
 @section('title', 'HRHRBDobs | Candidate Dashboard')
 
 @section('content')
-    <section class="overlape">
+    {{-- <section class="overlape">
         <div class="block no-padding">
             <div data-velocity="-.1" style="background: url(/images/top-bg.jpg) repeat scroll 50% 422.28px transparent;" class="parallax scrolly-invisible no-parallax"></div><!-- PARALLAX BACKGROUND IMAGE -->
             <div class="container fluid">
@@ -16,6 +16,13 @@
                 </div>
             </div>
         </div>
+    </section> --}}
+
+    <div id="nav_height"></div>
+    <section class="overlape">
+        <div class="block no-padding">
+            <img src="{{ asset('images/top_add.jpg') }}" alt="Advertisement banner">
+        </div>
     </section>
 
     <section>
@@ -26,7 +33,7 @@
                         <div class="widget" id="sidebar">
                             @include('candidate.layout.sidebar')
                         </div>
-                        
+
                     </aside>
                     <div class="col-lg-9 column">
                         <div class="padding-left">
@@ -44,8 +51,8 @@
                                                               <li><a data-tab="viewcv">View CV</a></li>
                                                             </ul>
                                                             <div id="upcv" class="tab-content current">
-                                                                
-                                                                
+
+
                                                             </div> --}}
                                                             <div class="download-cv mb-65">
                                                                 @if($candidate->candidateResume)
@@ -53,11 +60,11 @@
                                                                 @endif
                                                                 <a href="{{ route('candidate.download.resume', $candidate->id) }}" id="download-resume"  title="">Generate Resume <i class="la la-download"></i></a>
                                                             </div>
-                                                            <div id="resume">	
-        	
+                                                            <div id="resume">
+
                                                                 <table border="0" cellpadding="0" cellspacing="0" align="center" width="700">
-                                                                
-                                                            
+
+
                                                                         <tbody><tr>
                                                                         <td colspan="6">
                                                                         <table border="0" align="center" cellpadding="0" cellspacing="0" width="100%">
@@ -74,19 +81,19 @@
                                                                                             <br>
                                                                                             <span>
                                                                                                <i class="la la-map-marker"></i> Address: {{ $candidate->current_address }}
-                                                                                            </span>       
+                                                                                            </span>
                                                                                             @endif
 
                                                                                             @if($candidate->phone)
                                                                                             <!--Home Phone:-->
                                                                                             <br>
                                                                                             <span>
-                                                                                                <i class="la la-phone"></i> Phone: {{ $candidate->phone }}    
+                                                                                                <i class="la la-phone"></i> Phone: {{ $candidate->phone }}
                                                                                                 <!--Office Phone:-->
                                                                                                 <!--Mobile:-->
                                                                                             </span>
                                                                                             @endif
-                                                                                            <br>       
+                                                                                            <br>
                                                                                             <span>
                                                                                                <i class="la la-envelope-o"></i> e-mail: <a href="mailto:{{ $candidate->email}}">{{ $candidate->email }}</a>
                                                                                             </span>
@@ -94,7 +101,7 @@
                                                                                             <!--Home Phone:-->
                                                                                             <br>
                                                                                             <span>
-                                                                                                <i class="la la-linkedin"></i> Linkedin: <a href="{{ substr( $candidate->linkedin, 0, 4)  === 'http' ? $candidate->linkedin : 'http://'.$candidate->linkedin }}" target="_blank">{{ $candidate->linkedin }}</a>   
+                                                                                                <i class="la la-linkedin"></i> Linkedin: <a href="{{ substr( $candidate->linkedin, 0, 4)  === 'http' ? $candidate->linkedin : 'http://'.$candidate->linkedin }}" target="_blank">{{ $candidate->linkedin }}</a>
                                                                                                 <!--Office Phone:-->
                                                                                                 <!--Mobile:-->
                                                                                             </span>
@@ -103,58 +110,58 @@
                                                                             </tr>
                                                                                 </tbody>
                                                                             </table>
-                                                                            
+
                                                                             </td>
-                                                                            
+
                                                                             <td width="27%" rowspan="2" align="right" valign="bottom">
                                                                             <!--Photograph:-->
-                                                                            
+
                                                                                 <table width="140" height="140" border="0" align="center" cellpadding="0" cellspacing="7" bgcolor="#dadce1">
-                                                                                    <tbody><tr> 
-                                                                                    <td width="126" height="135" align="center" bgcolor="#e2e4e5" valign="middle"> 
+                                                                                    <tbody><tr>
+                                                                                    <td width="126" height="135" align="center" bgcolor="#e2e4e5" valign="middle">
                                                                                     <img src="{{ asset('storage/uploads/'.(($candidate->dp) ? $candidate->dp : 'default_user.png'))}}" width="124" height="135">
                                                                                     </td>
                                                                                     </tr>
                                                                                 </tbody></table>
-                                                                            
+
                                                                             </td>
                                                                             </tr>
                                                                         </tbody></table>
                                                                         </td>
                                                                         </tr>
                                                                     </tbody></table>
-                                                                    
+
                                                                 <!---------------
                                                                 CAREER OBJECTIVE:
                                                                 ----------------->
                                                                 @if($candidate->about_me)
-                                                                    <table border="0" cellpadding="0" cellspacing="0" align="center" width="700">	
+                                                                    <table border="0" cellpadding="0" cellspacing="0" align="center" width="700">
                                                                         <tbody><tr>
                                                                              <td colspan="6" style="border-bottom:1px solid #000000;">&nbsp;</td>
                                                                              </tr>
-                                                                              
-                                                                             <tr><td colspan="6">&nbsp;</td></tr>		 
-                                                                             
+
+                                                                             <tr><td colspan="6">&nbsp;</td></tr>
+
                                                                              <tr>
                                                                              <td colspan="6" class="HRBDHeadline01"><u>Career Objective:</u></td>
                                                                              </tr>
-                                                                             
+
                                                                              <tr>
                                                                              <td colspan="6" align="left" style="padding-left:5px;" class="HRBDNormalText01">
-                                                                             {{ $candidate->about_me }}	
+                                                                             {{ $candidate->about_me }}
                                                                              </td>
-                                                                             </tr>		
+                                                                             </tr>
                                                                         </tbody>
                                                                     </table>
                                                                 @endif
                                                                 <!--------------
                                                                 CAREER SUMMARY :
                                                                 ---------------->
-                                                                
+
                                                                 <!---------------------
                                                                 SPECIAL QUALIFICATION :
                                                                 ----------------------->
-                                                                         
+
                                                                 <!-------------------------------------------
                                                                 EMPLOYMENT HISTORY, TOTAL YEAR OF EXPERIENCE:
                                                                 --------------------------------------------->
@@ -167,7 +174,7 @@
                                                                           <td colspan="6" class="HRBDHeadline01"><u>Employment History:</u></td>
                                                                           </tr>
                                                                           <!--Total Year of Experience:-->
-                                                                          
+
                                                                                <tr>
                                                                                     @if(sizeof($candidate->candidateSkill))
                                                                                         <td colspan="6" align="left" style="padding-left:5px;" class="HRBDNormalText01">
@@ -189,10 +196,10 @@
                                                                                                     $days += $interval->format('%a');
                                                                                                 }
                                                                                             }
-                                                                                            
+
                                                                                         @endphp
                                                                                         <td colspan="6" align="left" style="padding-left:5px;" class="HRBDNormalText01">
-                                                                                            @php 
+                                                                                            @php
                                                                                                 $months = round($days / 30);
                                                                                                 $years = 0;
                                                                                                 if($months >= 12){
@@ -221,17 +228,17 @@
                                                                                     @endif
                                                                                </tr>
                                                                             @if(sizeof($candidate->candidateExperience))
-                                                                                @php 
+                                                                                @php
                                                                                     $id = 1;
                                                                                 @endphp
                                                                                 @foreach($candidate->candidateExperience as $experience)
                                                                                     <tr>
                                                                                          <td width="22" align="center" style="padding-left:5px;" class="HRBDNormalText01">{{ $id++ }}.</td>
                                                                                          <td width="700" colspan="5" align="left" class="HRBDBoldText01">
-                                                                                         <!--Position, DateFrom, DateTo:-->					 
+                                                                                         <!--Position, DateFrom, DateTo:-->
                                                                                          <u>{{ $experience->jobDesignation->name }} ( {{ date('d M, Y', strtotime($experience->start_date)) }} - {{ ($experience->end_date) ?  date('d M, Y', strtotime($experience->end_date)) : 'Continuing' }})</u></td>
-                                                                                    </tr>	
-                                                                
+                                                                                    </tr>
+
                                                                                     <tr>
                                                                                         <td align="center" class="HRBDHeadline02">&nbsp;</td>
                                                                                         <td colspan="5" align="left" class="HRBDNormalText01">
@@ -243,19 +250,19 @@
                                                                                             <br>
                                                                                             <!--Area of Experience :-->
                                                                                             <!--IMPLEMENT LATER<br />-->
-                                                                                         
+
                                                                                             <!--Duties/Responsibilities:-->
-                                                                                         
+
                                                                                             <strong><i><u>Duties/Responsibilities:</u></i></strong>
                                                                                             <br>
-                                                                                            {{ $experience->responsibility }}	  
+                                                                                            {{ $experience->responsibility }}
                                                                                          </td>
                                                                                     </tr>
                                                                                 @endforeach
                                                                             @endif
                                                                     </tbody>
                                                                 </table>
-                                                                @endif        
+                                                                @endif
                                                                 <!----------------------
                                                                 'ACADEMIC QUALIFICATION:
                                                                 ------------------------>
@@ -264,7 +271,7 @@
                                                                           <tbody><tr>
                                                                          <td colspan="6" class="HRBDHeadline01"><u>Academic Qualification:</u></td>
                                                                          </tr>
-                                                                    
+
                                                                          <tr>
                                                                          <td colspan="6" align="left" style="padding-left:5px;" class="HRBDNormalText01">
                                                                          <table border="0" cellpadding="0" cellspacing="0" align="center" width="100%" style="border:1px solid #666666">
@@ -275,7 +282,7 @@
                                                                                         <td width="25%" class="border-right-ash"><strong>Institute</strong></td>
                                                                                         <td width="12.5%" class="border-right-ash"><strong>Result</strong></td>
                                                                                         <td width="12.5%"><strong>Pas.Year</strong></td>
-                                                                                    </tr>			 
+                                                                                    </tr>
                                                                                     @foreach($candidate->candidateEducation as $education)
                                                                                     <tr class="HRBDNormalText02">
                                                                                     <!--Exam Title:-->
@@ -300,19 +307,19 @@
                                                                                     </tr>
                                                                                     @endforeach
                                                                                     </tbody>
-                                                                                </table> 
+                                                                                </table>
                                                                          </td>
                                                                          </tr>
                                                                      </tbody></table>
                                                                 @endif
-                                                                
+
                                                                 @if(sizeof($candidate->candidateTraining))
                                                                 <table border="0" cellpadding="0" style="margin-top:3px;" cellspacing="0" align="center" width="700">
                                                                     <tbody>
                                                                         <tr>
                                                                             <td colspan="6" class="HRBDHeadline01"><u>Training:</u></td>
                                                                         </tr>
-                                                                    
+
                                                                         <tr>
                                                                             <td colspan="6" align="left" style="padding-left:5px;" class="HRBDNormalText01">
                                                                                 <table border="0" cellpadding="0" cellspacing="0" align="center" width="100%" style="border:1px solid #666666">
@@ -324,7 +331,7 @@
                                                                                             <td width="12.5%" class="border-right-ash"><strong>Location</strong></td>
                                                                                             <td width="12.5%" class="border-right-ash"><strong>Year</strong></td>
                                                                                             <td width="12.5%"><strong>Duration</strong></td>
-                                                                                        </tr>            
+                                                                                        </tr>
                                                                                         @foreach($candidate->candidateTraining as $training)
                                                                                         <tr class="HRBDNormalText02">
                                                                                         <!--Exam Title:-->
@@ -344,18 +351,18 @@
                                                                                                 {{ $training->location }}, {{ $training->country }}
                                                                                             </td>
                                                                                             <!--Passing Year:-->
-                                                                                            <td width="12.5%" class="border-right-ash border-top-ash">  
+                                                                                            <td width="12.5%" class="border-right-ash border-top-ash">
                                                                                                 {{ $training->training_year }}
                                                                                             </td>
 
                                                                                             <!--Duration:-->
-                                                                                            <td width="12.5%" class="border-top-ash">  
+                                                                                            <td width="12.5%" class="border-top-ash">
                                                                                                 {{ $training->duration }}
                                                                                             </td>
                                                                                         </tr>
                                                                                         @endforeach
                                                                                     </tbody>
-                                                                                </table> 
+                                                                                </table>
                                                                             </td>
                                                                         </tr>
                                                                     </tbody>
@@ -370,7 +377,7 @@
                                                                         <tr>
                                                                             <td colspan="6" class="HRBDHeadline01"><u>Professional Certificate:</u></td>
                                                                         </tr>
-                                                                    
+
                                                                         <tr>
                                                                             <td colspan="6" align="left" style="padding-left:5px;" class="HRBDNormalText01">
                                                                                 <table border="0" cellpadding="0" cellspacing="0" align="center" width="100%" style="border:1px solid #666666">
@@ -381,7 +388,7 @@
                                                                                             <td width="25%" class="border-right-ash"><strong>Location</strong></td>
                                                                                             <td width="12.5%" class="border-right-ash"><strong>Start Date</strong></td>
                                                                                             <td width="12.5%"><strong>End Date</strong></td>
-                                                                                        </tr>            
+                                                                                        </tr>
                                                                                         @foreach($candidate->candidateProfessionalCertificate as $certificate)
                                                                                         <tr class="HRBDNormalText02">
                                                                                         <!--Exam Title:-->
@@ -397,24 +404,24 @@
                                                                                                 {{ $certificate->location }}
                                                                                             </td>
                                                                                             <!--Passing Year:-->
-                                                                                            <td width="12.5%" class="border-right-ash border-top-ash">  
+                                                                                            <td width="12.5%" class="border-right-ash border-top-ash">
                                                                                                 {{ date('d M, Y', strtotime($certificate->start_date)) }}
                                                                                             </td>
 
                                                                                             <!--Duration:-->
-                                                                                            <td width="12.5%" class="border-top-ash">  
+                                                                                            <td width="12.5%" class="border-top-ash">
                                                                                                 {{ date('d M, Y', strtotime($certificate->end_date)) }}
                                                                                             </td>
                                                                                         </tr>
                                                                                         @endforeach
                                                                                     </tbody>
-                                                                                </table> 
+                                                                                </table>
                                                                             </td>
                                                                         </tr>
                                                                     </tbody>
                                                                 </table>
                                                                 @endif
-                                                                    
+
                                                                 <!---------------------------------
                                                                 CAREER AND APPLICATION INFORMATION:
                                                                 ----------------------------------->
@@ -425,12 +432,12 @@
                                                                         <tbody><tr>
                                                                         <td colspan="6" class="HRBDHeadline01"><u>Career and Application Information:</u></td>
                                                                         </tr>
-                                                                    
+
                                                                         <tr>
                                                                         <td colspan="6" align="left" class="HRBDNormalText01">
                                                                         <table border="0" cellpadding="0" cellspacing="0" align="center" width="100%">
                                                                             <!--Looking For:-->
-                                                                            
+
                                                                                 <tbody>
                                                                                     @if(sizeof($candidate->candidateSkill))
                                                                                     <tr class="HRBDNormalText03">
@@ -446,7 +453,7 @@
                                                                                             @endif
                                                                                         </td>
                                                                                     </tr>
-                                                                            
+
                                                                                     <!--Available For:-->
                                                                                     <tr class="HRBDNormalText03">
                                                                                         <td width="35%" align="left" style="padding-left:5px;">Available  For</td>
@@ -476,57 +483,57 @@
                                                                                     </td>
                                                                                 </tr>
                                                                             @endif
-                                                                            
+
                                                                             <!--Preferred District:-->
-                                                                            
+
                                                                             <tr class="HRBDNormalText03">
                                                                             <td width="35%" align="left" style="padding-left:5px;">Preferred  District </td>
                                                                             <td width="2%" align="center">:</td>
                                                                             <td width="63%" align="left">
-                                                                                {{ ($candidate->city) ? $candidate->city : 'Anywhere' }}        
+                                                                                {{ ($candidate->city) ? $candidate->city : 'Anywhere' }}
                                                                             </td>
                                                                             </tr>
-                                                                             
+
                                                                             <!--Preferred Country:-->
-                                                                                    
+
                                                                             <tr class="HRBDNormalText03">
                                                                             <td width="35%" align="left" style="padding-left:5px;">Preferred  Country </td>
                                                                             <td width="2%" align="center">:</td>
                                                                             <td width="63%" align="left">
-                                                                                {{ ($candidate->country) ? $candidate->country : 'Anywhere' }}        
+                                                                                {{ ($candidate->country) ? $candidate->country : 'Anywhere' }}
                                                                             </td>
                                                                             </tr>
-                                                                            
+
                                                                         </tbody></table>
                                                                         </td>
                                                                         </tr>
                                                                     </tbody></table>
-                                                                
-                                                                
+
+
                                                                 <!--
                                                                 Specialization:
                                                                 -->
-                                                                
-                                                                
+
+
                                                                      <table border="0" cellpadding="0" cellspacing="0" align="center" width="700" style="margin-top:3px;">
                                                                          <tbody><tr>
                                                                         <td colspan="6" class="HRBDHeadline01"><u>Specialization:</u></td>
                                                                         </tr>
-                                                                                 
+
                                                                                <tr>
                                                                              <td colspan="6" align="left" style="padding-left:5px;" class="HRBDNormalText01">
                                                                              <table border="0" cellpadding="0" cellspacing="0" align="center" width="700" style="border:1px solid #666666">
                                                                                 <tbody><tr>
-                                                                                
+
                                                                                      <td width="40%" class="HRBDNormalText02" style="border-right:1px solid #666666;border-bottom:1px solid #666666;">
                                                                                      <strong>Fields of Specialization</strong>
                                                                                      </td>
-                                                                                    
+
                                                                                   </td>
                                                                                </tr>
-                                                                                
+
                                                                                 <tr>
-                                                                                
+
                                                                                     <td align="left" class="HRBDNormalText03" style="border-right:1px solid #666666;">
 
                                                                                         <div class="skill">
@@ -535,17 +542,17 @@
                                                                                             @endforeach
                                                                                         </ul>
                                                                                     </td>
-                                                                                </tr>		
-                                                                             </tbody></table>	
+                                                                                </tr>
+                                                                             </tbody></table>
                                                                              </td>
                                                                              </tr>
-                                                                        
+
                                                                 </tbody></table>
-                                                                
+
                                                                 <!--
                                                                 PERSONAL DETAILS:
                                                                 -->
-                                                                
+
                                                                      <table border="0" cellpadding="0" cellspacing="0" align="center" width="700" style="margin-top:3px;">
                                                                         <!--
                                                                         Personal Details
@@ -553,12 +560,12 @@
                                                                         <tbody><tr>
                                                                         <td colspan="6" class="HRBDHeadline01"><u>Personal Details :</u></td>
                                                                         </tr>
-                                                                    
+
                                                                         <tr>
                                                                         <td colspan="6" align="left" class="HRBDNormalText01">
                                                                         <table border="0" cellpadding="0" cellspacing="0" align="center" width="100%">
                                                                             <!--Fathers Name:-->
-                                                                            
+
                                                                                  <tbody><tr class="HRBDNormalText03">
                                                                                  <td width="22%" align="left" style="padding-left:5px;">Father's Name </td>
                                                                                  <td width="2%" align="center">:</td>
@@ -566,9 +573,9 @@
                                                                                     {{ $candidate->father_name }}
                                                                                  </td>
                                                                                  </tr>
-                                                                            
+
                                                                             <!--Mothers Name:-->
-                                                                            
+
                                                                                  <tr class="HRBDNormalText03">
                                                                                  <td width="22%" align="left" style="padding-left:5px;">Mother's Name </td>
                                                                                  <td width="2%" align="center">:</td>
@@ -576,13 +583,13 @@
                                                                                  {{ $candidate->mother_name }}
                                                                                  </td>
                                                                                  </tr>
-                                                                            
+
                                                                             <!--Date of Birth:-->
                                                                             <tr class="HRBDNormalText03">
                                                                             <td width="22%" align="left" style="padding-left:5px;">Date  of Birth</td>
                                                                             <td width="2%" align="center">:</td>
                                                                             <td width="76%" align="left">
-                                                                                {{ date('d M, Y', strtotime($candidate->date_of_birth)) }}	 
+                                                                                {{ date('d M, Y', strtotime($candidate->date_of_birth)) }}
                                                                             </td>
                                                                             </tr>
                                                                             <!--Gender:-->
@@ -609,7 +616,7 @@
                                                                             {{ $candidate->nationality }}
                                                                             </td>
                                                                             </tr>
-                                                                            
+
                                                                             <tr class="HRBDNormalText03">
                                                                             <td align="left" style="padding-left:5px;">National Id No.</td>
                                                                             <td align="center">:</td>
@@ -617,10 +624,10 @@
                                                                             {{ $candidate->nid_passport }}
                                                                             </td>
                                                                             </tr>
-                                                                            
-                                                                            
+
+
                                                                             <!--Permanent Address:-->
-                                                                            
+
                                                                                  <tr class="HRBDNormalText03">
                                                                                  <td align="left" style="padding-left:5px;">Permanent  Address</td>
                                                                                  <td align="center">:</td>
@@ -628,12 +635,12 @@
                                                                                     {{ $candidate->permanent_address }}
                                                                                  </td>
                                                                                  </tr>
-                                                                            
+
                                                                             <!--Current Location:-->
                                                                             <tr class="HRBDNormalText03">
                                                                             <td align="left" style="padding-left:5px;">Current  Location</td>
                                                                             <td align="center">:</td>
-                                                                            <td align="left">			
+                                                                            <td align="left">
                                                                             {{ $candidate->current_address }}
                                                                             </td>
                                                                             </tr>
@@ -642,11 +649,11 @@
                                                                         </tr>
                                                                     </tbody></table>
                                                             </div>
-                                                            
+
                                                         </div>
                                                     </div>
                                                 </div>
-                                            </div>  
+                                            </div>
                                         </div>
                                     </section>
                                 </div>
@@ -662,10 +669,10 @@
 @push('js')
 
     <script>
-       
-        
+
+
     </script>
-    
+
 @endpush
 
 

@@ -1,4 +1,4 @@
-<div class="tree_widget-sec">
+<div class="tree_widget-sec widget border">
 
     <ul>
         <li class="inner-child  {{ ($left_active == 'dashboard')? 'active':'' }}">

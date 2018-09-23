@@ -3,6 +3,7 @@
 @section('title', 'HRBDJobs | Candidate Dashboard')
 
 @section('content')
+    <div id="nav_height"></div>
     <section class="overlape">
         <div class="block no-padding">
             <div data-velocity="-.1" style="background: url(/images/slider-3.jpg) repeat scroll 50% 422.28px transparent;" class="parallax scrolly-invisible no-parallax"></div><!-- PARALLAX BACKGROUND IMAGE -->
@@ -12,7 +13,7 @@
                         <div class="inner-header">
                             <div class="container">
                                 <div class="row">
-                                    
+
                                 </div>
                             </div>
                         </div>
@@ -21,6 +22,14 @@
             </div>
         </div>
     </section>
+
+
+    {{-- <div id="nav_height"></div>
+    <section class="overlape">
+        <div class="block no-padding">
+            <img src="{{ asset('images/top_add.jpg') }}" alt="Advertisement banner">
+        </div>
+    </section> --}}
 
     <section class="overlape">
         <div class="block remove-top">
@@ -38,7 +47,7 @@
                                 @if(sizeof($candidate->candidateExperience))
                                     <span><i>{{ $candidate->candidateExperience()->first()->jobDesignation->name }}</i> at {{$candidate->candidateExperience()->first()->company_name}}</span>
                                 @endif
-                                
+
                                 <p>{{ $candidate->email }}</p>
                                 @if($candidate->phone)
                                 <p>{{ $candidate->phone }}</p>
@@ -82,7 +91,7 @@
                                                 <i class="la la-graduation-cap"></i>
                                                 <div class="edu-hisinfo">
                                                     <h3>{{ $education->level_of_education }} - {{ $education->passing_year }}</h3>
-                                                    <i>{{ $education->degree_title }} - {{ $education->gpa.' out of '.$education->out_of }}</i> 
+                                                    <i>{{ $education->degree_title }} - {{ $education->gpa.' out of '.$education->out_of }}</i>
                                                     <span>{{ $education->candidateInstitute->name }} <i>{{ $education->group_majar }}</i></span>
                                                     <p>{{ $education->achievement }}</p>
                                                 </div>
@@ -113,13 +122,13 @@
                                             @endif
 
                                         </div>
-                                        
+
                                         @if(sizeof($candidate->candidateTraining))
                                         <div class="edu-history-sec" id="training">
                                             <h2>Training</h2>
 
                                             @foreach($candidate->candidateTraining as $training)
-                                            @php 
+                                            @php
                                                 $years = '';
                                                 if($training->duration/12) {
                                                     $years = floor($training->duration / 12).' Year';
@@ -155,7 +164,7 @@
                                             <h2>Professional Certificate</h2>
 
                                             @foreach($candidate->candidateProfessionalCertificate as $certificate)
-                                            
+
                                             <div class="edu-history style2">
                                                 <i></i>
                                                 <div class="edu-hisinfo">
@@ -181,7 +190,7 @@
                                                     @endforeach
                                                 </div>
                                             </div>
-                                        </div> 
+                                        </div>
                                         @endif
                                     </div>
                                 </div>

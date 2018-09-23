@@ -3,9 +3,11 @@
 @section('title', 'HRBDJobs | Candidate Dashboard')
 
 @section('content')
+    <div id="nav_height"></div>
     <section class="overlape">
         <div class="block no-padding">
-            <div data-velocity="-.1" style="background: url(/images/top-bg.jpg) repeat scroll 50% 422.28px transparent;" class="parallax scrolly-invisible no-parallax"></div><!-- PARALLAX BACKGROUND IMAGE -->
+            <img src="{{ asset('images/top_add.jpg') }}" alt="Advertisement banner">
+            {{-- <div data-velocity="-.1" style="background: url(/images/top-bg.jpg) repeat scroll 50% 422.28px transparent;" class="parallax scrolly-invisible no-parallax"></div><!-- PARALLAX BACKGROUND IMAGE -->
             <div class="container fluid">
                 <div class="row">
                     <div class="col-lg-12">
@@ -14,7 +16,7 @@
                         </div>
                     </div>
                 </div>
-            </div>
+            </div> --}}
         </div>
     </section>
 
@@ -26,7 +28,7 @@
                         <div class="widget" id="sidebar">
                             @include('candidate.layout.sidebar')
                         </div>
-                        
+
                     </aside>
                     <div id="wall" class="col-lg-9 column">
                         <div class="padding-left">
@@ -91,7 +93,7 @@
     });
     $('.withdraw-job').click(function() {
         var jobId = $(this).data('jobid');
-       
+
         $.ajax({
             url: base_url+"/applied/job/withdraw",
             type: "post",
@@ -103,12 +105,12 @@
                     timeout: 2000,
                     overlay: true,
                     position: 'topRight',
-                }); 
+                });
 
-                $('#job-tab-'+jobId).remove(); 
+                $('#job-tab-'+jobId).remove();
             }
         });
-        
+
     });
 </script>
 @endpush

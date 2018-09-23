@@ -3,7 +3,7 @@
 @section('title', 'HRBDJobs | Candidate Dashboard')
 
 @section('content')
-    <section class="overlape">
+    {{-- <section class="overlape">
         <div class="block no-padding">
             <div data-velocity="-.1" style="background: url(/images/top-bg.jpg) repeat scroll 50% 422.28px transparent;" class="parallax scrolly-invisible no-parallax"></div><!-- PARALLAX BACKGROUND IMAGE -->
             <div class="container fluid">
@@ -16,6 +16,12 @@
                 </div>
             </div>
         </div>
+    </section> --}}
+    <div id="nav_height"></div>
+    <section class="overlape">
+        <div class="block no-padding">
+            <img src="{{ asset('images/top_add.jpg') }}" alt="Advertisement banner">
+        </div>
     </section>
 
     <section>
@@ -26,14 +32,14 @@
                         <div class="widget" id="sidebar">
                             @include('candidate.layout.sidebar')
                         </div>
-                        
+
                     </aside>
                     <div class="col-lg-9 column">
                         <div class="padding-left">
                             <div class="manage-jobs-sec">
                                 <div class="border-title"><h3>Appropriate jobs</h3></div>
                                 @foreach($jobs as $ap_job)
-                                @php 
+                                @php
                                     $job = App\Job::where('id', $ap_job->id)->first();
                                     $favJob = App\Favourite_job::where('job_id', $ap_job->id)->where('candidate_id', Auth::guard('candidate')->user()->id)->where('status', 1)->first();
                                 @endphp
@@ -65,7 +71,7 @@
                                 </div><!-- Pagination -->
 
                                 {{-- <div class="">
-                                    
+
                                 </div> --}}
                             </div>
                         </div>
@@ -101,7 +107,7 @@
                 });
             }
         });
-        
+
     });
 </script>
 @endpush
