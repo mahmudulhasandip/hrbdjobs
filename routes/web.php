@@ -29,7 +29,7 @@
 // });
 ####################### /comment out this code after uploading this project to server ####################
 
-Route::get('/', [							
+Route::get('/', [
 	'as'	  => 'users.home',
 	'uses'	=> 'UserController@index'
 ]);
@@ -68,13 +68,13 @@ Route::post('/session/per_page', [
 Route::resource('browse/jobs', 'BrowseJobController');
 
 // single job view
-Route::get('/job/{id}', [            
+Route::get('/job/{id}', [
   'as'    => 'single.job',
   'uses'  => 'JobController@getSingleJob'
 ]);
 
 // Company Info
-Route::get('/company/{id}', [            
+Route::get('/company/{id}/{candidate_id?}', [
   'as'    => 'company.profile',
   'uses'  => 'CompaniesController@getCompanyProfile'
 ]);
@@ -150,7 +150,7 @@ Route::get('/store/applied/jobs/', [
   'uses'  => 'AdminController\DataRetrieveController@storeAppliedJobs'
 ]);
 
-################### Get Country From API ###################### 
+################### Get Country From API ######################
 // Route::get('/country', [
 //   'as'  => 'country',
 //   'uses'  => 'AdminController\CountryController@storeCountryFromAPI'
@@ -180,11 +180,11 @@ Route::middleware(['admin'])->group(function () {
     Route::post('industry', 'AdminController\IndustryController@store')->name('industry.store');
   });
 });
- 
+
 
 
 Route::group(['prefix' => 'employer'], function () {
-  
+
   Route::get('/login', 'EmployerAuth\LoginController@showLoginForm')->name('employer.login');
   Route::post('/login', 'EmployerAuth\LoginController@login');
   Route::post('/logout', 'EmployerAuth\LoginController@logout')->name('employer.logout');
@@ -226,4 +226,3 @@ Route::group(['prefix' => 'candidate'], function () {
 });
 
 // validation check
-

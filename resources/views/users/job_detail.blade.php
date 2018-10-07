@@ -120,7 +120,7 @@
                             @endif
 
                             <div class="apply-alternative">
-                                <a target="_blank" href="{{ route('company.profile', $company_info->id) }}"><i class="la la-building-o"></i>View Company</a>
+                                <a target="_blank" href="{{ route('company.profile', ['id'=>$company_info->id, 'candidate_id'=>Auth::guard('candidate')->user()->id]) }}"><i class="la la-building-o"></i>View Company</a>
 
                                 @if (Auth::guard('candidate')->user())
                                     @php

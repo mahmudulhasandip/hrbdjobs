@@ -43,7 +43,7 @@
 						 		<div id="follow-tab-{{ $follow->employer_id }}" class="job-listing wtabs">
 									<div class="job-title-sec newtab pointer" data-url="{{ route('company.profile', $follow->employer->employerCompanyInfo->id) }}">
 										<div class="c-logo"> <img src="{{ ( $follow->employer->employerCompanyInfo->logo ) ? asset('storage/uploads/'.$follow->employer->employerCompanyInfo->logo) : asset('storage/uploads/company-avatar.png') }}" alt="" /> </div>
-										<h3><a href="javascript:void(0)" title="">{{ $follow->employer->employerCompanyInfo->name }}</a></h3>
+										<h3><a target="_blank" href="{{ route('company.profile', ['id'=>$follow->employer->employerCompanyInfo->id, 'candidate_id'=>Auth::guard('candidate')->user()->id]) }}" title="">{{ $follow->employer->employerCompanyInfo->name }}</a></h3>
                                         @php
                                             $openingJob = App\Job::where('deadline', '>=', date('Y-m-d'))
                                                         ->where('is_paused', '=', 0)
@@ -74,12 +74,12 @@
 
 <script>
     var base_url = "{{ url('/candidate/') }}";
-    $('.newtab').click(function() {
-        window.open(
-            $(this).data('url'),
-            '_blank'
-        );
-    });
+    // $('.newtab').click(function() {
+    //     window.open(
+    //         $(this).data('url'),
+    //         '_blank'
+    //     );
+    // });
     $('.unfollow').click(function() {
         var employerId = $(this).data('employerid');
 

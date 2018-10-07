@@ -31,7 +31,7 @@
     <div class="block remove-bottom">
         <div class="container">
             <div class="row">
-                <div class="col-lg-12">
+                <div class="col-lg-6">
                     <div class="account-popup-area signin-popup-box static">
                         <div class="account-popup">
                             @if (session('status'))
@@ -76,9 +76,96 @@
                         </div>
                     </div><!-- LOGIN POPUP -->
                 </div>
+
+                {{-- candidate login info --}}
+                <div class="col-lg-6">
+                    <div class="info-container">
+                        <div class="info-list">
+                            <i class="fa fa-arrow-up red"></i>
+                            <p>Lorem, ipsum dolor sit amet consectetur adipisicing elit. Labore corporis dicta debitis sit sequi quo.</p>
+                        </div>
+
+                        <div class="info-list">
+                            <i class="fa fa-arrow-left blue"></i>
+                            <p>Lorem, ipsum dolor sit amet consectetur adipisicing elit. Labore corporis dicta debitis sit sequi quo.</p>
+                        </div>
+
+                        <div class="info-list">
+                            <i class="fa fa-arrow-right orange"></i>
+                            <p>Lorem, ipsum dolor sit amet consectetur adipisicing elit. Labore corporis dicta debitis sit sequi quo.</p>
+                        </div>
+
+                        <div class="info-list">
+                            <i class="fa fa-arrow-down green"></i>
+                            <p>Lorem, ipsum dolor sit amet consectetur adipisicing elit. Labore corporis dicta debitis sit sequi quo.</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+
+
+{{-- stat counter --}}
+
+<section>
+    <div class="block no-padding  gray">
+        <div class="container">
+            <div class="row">
+                <div class="col-sm-3">
+                    <div class="inner2">
+                        <div class="inner-title2">
+                            <div class="stat text-center">
+                                <span class="counter">500</span>
+                                <span>Jobs Posted</span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-sm-3">
+                    <div class="inner2">
+                        <div class="inner-title2">
+                            <div class="stat text-center">
+                                <span class="counter">223</span>
+                                <span>Jobs Filled</span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-sm-3">
+                    <div class="inner2">
+                        <div class="inner-title2">
+                            <div class="stat text-center">
+                                <span class="counter">67</span>
+                                <span>Companies</span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-sm-3">
+                    <div class="inner2">
+                        <div class="inner-title2">
+                            <div class="stat text-center">
+                                <span class="counter">92</span>
+                                <span>Members</span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
             </div>
         </div>
     </div>
 </section>
 
 @endsection
+
+@push('js')
+<script src="{{ asset('/js/counter.js')}}"></script>
+<script>
+$('.counter').counterUp({
+    delay: 05,
+    time: 2500
+});
+</script>
+@endpush

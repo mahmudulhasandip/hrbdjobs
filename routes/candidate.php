@@ -42,10 +42,10 @@ Route::get('/appropriate/job', 'CandidateController\AppropriateJobController@get
 
 //
 Route::get('/follow/company/{company_id}', 'CandidateController\FollowCompanyController@followCompany')->name('follow.company');
+Route::get('/unfollow/company/{company_id}', 'CandidateController\FollowCompanyController@unfollowCompany')->name('unfollow.company');
 Route::get('/follow/companies', 'CandidateController\FollowCompanyController@getFollowCompanies')->name('follow.companies');
 Route::post('/follow/company/status/change', 'CandidateController\FollowCompanyController@postFollowCompanyStatus')->name('follow.company.status');
 
 // shortlisted
 Route::get('/shortlisted/job', 'CandidateController\ShortlistedController@getShortlistedJob')->name('shortlisted.job');
 Route::post('/shortlisted/job/create', 'CandidateController\ShortlistedController@postShortlistedJob')->name('create.shortlisted.job');
-
