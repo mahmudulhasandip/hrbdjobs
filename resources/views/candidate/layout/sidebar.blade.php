@@ -36,3 +36,42 @@
         </li>
     </ul>
 </div>
+
+<div class="widget">
+    <div class="skill-perc">
+        <h3>Profile Completed</h3>
+        <p></p>
+        <div class="skills-bar">
+            <span>85%</span>
+            <div
+                class="second circle"
+                data-size="155"
+                data-thickness="60">
+            </div>
+        </div>
+    </div>
+</div>
+
+@push('js')
+<script src="{{ asset('/js/circle-progress.min.js') }}"></script>
+<script>
+(function($) {
+
+  /*
+   * Example 2:
+   *
+   * - default gradient
+   * - listening to `circle-animation-progress` event and display the animation progress: from 0 to 100%
+   */
+  $('.second.circle').circleProgress({
+  	startAngle: -Math.PI / 8 * 0,
+    value: 0.85,
+    emptyFill: 'rgba(0, 0, 0, 0)',
+    fill: {gradient: ['#fa3979', '#e22d68']}
+  }).on('circle-animation-progress', function(event, progress) {
+    $(this).find('strong').html(Math.round(100 * progress) + '<i>%</i>');
+  });
+
+})(jQuery);
+</script>
+@endpush

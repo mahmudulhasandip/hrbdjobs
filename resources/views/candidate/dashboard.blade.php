@@ -44,29 +44,27 @@
                                     <div class="row no-gape">
                                         <div class="col-lg-4 col-md-4 col-sm-12">
                                             <div class="p-category">
-                                                <a href="company_profile.html" title="">
-                                                    <i class="la la-briefcase"></i>
-                                                    <span>Company Details</span>
-                                                    <p>Show Details</p>
+                                                <a href="{{ route('candidate.profile') }}" target="_blank" title="">
+                                                    <i class="la la-user"></i>
+                                                    <span>My Profile</span>
+                                                    {{-- <p>Show Details</p> --}}
                                                 </a>
                                             </div>
                                         </div>
 
                                         <div class="col-lg-4 col-md-4 col-sm-12">
                                             <div class="p-category">
-                                                <a href="post_a_new_job.html" title="">
+                                                <a href="{{ route('candidate.resume.view') }}" target="_blank" title="">
                                                     <i class="la la-file-text "></i>
-                                                    <span>Post A Job</span>
-                                                    <p>Create New Job</p>
+                                                    <span>My Resume</span>
                                                 </a>
                                             </div>
                                         </div>
                                         <div class="col-lg-4 col-md-4 col-sm-12">
                                             <div class="p-category">
-                                                <a href="employer_manage_jobs.html" title="">
+                                                <a href="{{ route('candidate.applied.jobs') }}" target="_blank" title="">
                                                     <i class="la la-check"></i>
-                                                    <span>Manage Jobs</span>
-                                                    <p>(05 Jobs)</p>
+                                                    <span>Applied Jobs</span>
                                                 </a>
                                             </div>
                                         </div>
@@ -76,28 +74,25 @@
                                     <div class="row no-gape">
                                         <div class="col-lg-4 col-md-4 col-sm-12">
                                             <div class="p-category">
-                                                <a href="packages.html" title="">
-                                                    <i class="la la-file-o"></i>
-                                                    <span>Packages</span>
-                                                    <p>View Packages</p>
+                                                <a href="{{ url('browse/jobs') }}" target="_blank" title="">
+                                                    <i class="la la-code-fork"></i>
+                                                    <span>Browse Jobs</span>
                                                 </a>
                                             </div>
                                         </div>
                                         <div class="col-lg-4 col-md-4 col-sm-12">
-                                            <div class="p-category follow-companies-popup">
-                                                <a href="candidates_shortlisted.html" title="">
-                                                    <i class="la la-heart-o"></i>
-                                                    <span>Shorlisted Candidates</span>
-                                                    <p>56 Candidates</p>
+                                            <div class="p-category ">
+                                                <a href="{{ route('candidate.follow.companies') }}" target="_blank" title="">
+                                                    <i class="la la-building-o"></i>
+                                                    <span>Followed Companies</span>
                                                 </a>
                                             </div>
                                         </div>
                                         <div class="col-lg-4 col-md-4 col-sm-12">
-                                            <div class="p-category view-resume-list">
-                                                <a href="resume_database.html" title="">
-                                                    <i class="la la-eye"></i>
-                                                    <span>Browse Resume Database</span>
-                                                    <p>View</p>
+                                            <div class="p-category ">
+                                                <a href="{{ route('candidate.shortlisted.job') }}" target="_blank" title="">
+                                                    <i class="la la-black-tie"></i>
+                                                    <span>Shortlisted Jobs</span>
                                                 </a>
                                             </div>
                                         </div>
