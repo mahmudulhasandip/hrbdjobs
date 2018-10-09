@@ -408,7 +408,7 @@ class HomeController extends Controller
     public function getManageJob(){
         $data['left_active'] = 'manage_job';
         $data['employer_info'] = Employer::find(Auth::guard('employer')->user()->id);
-        $data['allJobs'] = Job::where('employer_id', Auth::guard('employer')->user()->id)->where('is_drafted', 0)->paginate(10);
+        $data['allJobs'] = Job::where('employer_id', Auth::guard('employer')->user()->id)->where('is_drafted', 0)->orderBy('created_at', 'desc')->paginate(10);
         $data['totalJobs'] = Job::where('employer_id', Auth::guard('employer')->user()->id)->count();
         $data['activeJobs'] = Job::where('is_verified', 1)->count();
         $data['featured_job']= DB::table('employer_packages')
