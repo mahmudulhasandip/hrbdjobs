@@ -29,6 +29,7 @@ class VerifyCandidateMail extends Mailable
      */
     public function build()
     {
-        return $this->view('emails.verifyCandidate');
+        $pathToImage = asset('/images/logo-2.png');
+        return $this->view('emails.verifyCandidate')->subject('HRBDJOBS - Verify Mail');
     }
 }

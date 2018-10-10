@@ -86,7 +86,8 @@ class RegisterController extends Controller
         ]);
 
         Mail::to($candidate->email)->send(new VerifyCandidateMail($candidate));
-        
+        // $candidate->save();
+
         return $candidate;
     }
 
@@ -108,7 +109,7 @@ class RegisterController extends Controller
         }else{
             return redirect('/candidate/login')->with('warning', "Sorry your email cannot be identified.");
         }
- 
+
         return redirect('/candidate/login')->with('status', $status);
     }
 
