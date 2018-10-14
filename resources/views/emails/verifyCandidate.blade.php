@@ -173,7 +173,7 @@ Your registered email-id is {{$user['email']}} , Please click on the below link 
 						<table border="0" cellpadding="0" cellspacing="0" id="templatePreheader" pardot-removable=""  width="100%" style="-ms-text-size-adjust:100%;-webkit-text-size-adjust:100%;background-color:#FFFFFF;border-top-color:#e54545;border-top-style:solid;border-top-width:5px;border-collapse:collapse !important;mso-table-lspace:0pt;mso-table-rspace:0pt;" >
 							<tbody>
 								<tr>
-									<td align="left"  valign="top" style="text-align:left;max-width:600px;width:100%;border-collapse:collapse;" ><a href="{{url('/')}}" target="_blank" title="Hrbdjobs" border="0" height="auto" src="" width="250px" data-auto-embed="attachment"><img alt="logo" border="0" height="auto" src="http://new.hrbdjobs.com/images/logo-2.png" width="250px"></a></td>
+									<td align="left"  valign="top" style="text-align:left;max-width:600px;width:100%;border-collapse:collapse;" ><a href="{{url('/')}}" target="_blank" title="Hrbdjobs" border="0" height="auto" src="" width="250px" data-auto-embed="attachment"><img alt="logo" border="0" height="auto" src="{{ url('/images/logo-2.png')}}" width="250px"></a></td>
 									<td align="right"  width="200" style="width:200px;border-collapse:collapse;" >&nbsp;</td>
 								</tr>
 							</tbody>

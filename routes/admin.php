@@ -71,7 +71,12 @@ Route::get('candidate/datatable', 'AdminController\CvbankController@candidateDat
 
 
 // Institute
-Route::get('institute/list', 'AdminController\InstituteController@index')->Name('institute.list');
-Route::post('institute/store', 'AdminController\InstituteController@store')->Name('institution.store');
-Route::get('institute/delete/{id}', 'AdminController\InstituteController@delete')->Name('institution.delete');
-Route::post('institute/update/', 'AdminController\InstituteController@update')->Name('institution.update');
+Route::get('institute/list', 'AdminController\InstituteController@index')->name('institute.list');
+Route::post('institute/store', 'AdminController\InstituteController@store')->name('institution.store');
+Route::get('institute/delete/{id}', 'AdminController\InstituteController@delete')->name('institution.delete');
+Route::post('institute/update/', 'AdminController\InstituteController@update')->name('institution.update');
+
+// services
+Route::get('servece/type/list', 'AdminController\ServicesController@index')->name('services_type.list');
+Route::post('servece/type/add', 'AdminController\ServicesController@store')->name('services_type.add');
+Route::get('/service/type/delete/{id}', 'AdminController\ServicesController@delete')->name('services_type.delete');

@@ -185,7 +185,8 @@
                 </div>
             </li>
 
-            <li class="m-menu__item   m-menu__item--submenu {{ ($menu_active == 'cvbank') ? 'm-menu__item--active' : '' }}" aria-haspopup="true" m-menu-submenu-toggle="hover">
+            <li class="m-menu__item   m-menu__item--submenu {{ ($menu_active == 'cvbank') ? 'm-menu__item--active' : '' }}" aria-haspopup="true"
+                m-menu-submenu-toggle="hover">
                 <a href="javascript:;" class="m-menu__link m-menu__toggle">
                     <i class="m-menu__link-icon la la-users"></i>
                     <span class="m-menu__link-text">
@@ -225,9 +226,47 @@
                 </a>
             </li>
 
+            {{-- add service to employee login panel --}} {{-- menu headline --}}
+            <li class="m-menu__item   m-menu__item--submenu {{ ($menu_active == 'add_service') ? 'm-menu__item--active' : '' }}" aria-haspopup="true"
+                m-menu-submenu-toggle="hover">
+                <a href="javascript:;" class="m-menu__link m-menu__toggle">
+                                <i class="m-menu__link-icon la la-users"></i>
+                                <span class="m-menu__link-text">
+                                    Add Serveices
+                                </span>
+                                <i class="m-menu__ver-arrow la la-angle-right"></i>
+                            </a>
+                <div class="m-menu__submenu ">
+                    <span class="m-menu__arrow"></span>
+                    <ul class="m-menu__subnav">
+                        <li class="m-menu__item {{ ($menu_active == 'add_service') ? 'm-menu__item--active' : '' }}" aria-haspopup="true">
+                            <a href="{{ route('admin.services_type.list') }}" class="m-menu__link ">
+                                            <i class="m-menu__link-bullet m-menu__link-bullet--dot">
+                                                <span></span>
+                                            </i>
+                                            <span class="m-menu__link-text">
+                                                Service type
+                                            </span>
+                                        </a>
+                        </li>
+
+                        <li class="m-menu__item {{ ($menu_active == 'add_service') ? 'm-menu__item--active' : '' }}" aria-haspopup="true">
+                            <a href="" class="m-menu__link ">
+                                            <i class="m-menu__link-bullet m-menu__link-bullet--dot">
+                                                <span></span>
+                                            </i>
+                                            <span class="m-menu__link-text">
+                                                Add services
+                                            </span>
+                                        </a>
+                        </li>
 
 
-            {{-- menu headline --}} {{--
+                    </ul>
+                </div>
+            </li>
+
+            {{--
             <li class="m-menu__section">
                 <h4 class="m-menu__section-text">
                     Components
