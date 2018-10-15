@@ -9,6 +9,8 @@ use Hesto\MultiAuth\Traits\LogsoutGuard;
 use Illuminate\Http\Request;
 use Illuminate\Validation\ValidationException;
 
+use App\Service_package;
+
 class LoginController extends Controller
 {
     /*
@@ -56,7 +58,8 @@ class LoginController extends Controller
         // if(Auth::guard('candidate')){
         //     return redirect('/candidate/home')->withErrors(['status' => "You are already loggen in as Candidate"]);
         // }
-        return view('employer.auth.login');
+        $data['services'] = Service_package::get();
+        return view('employer.auth.login', $data);
     }
 
     public function username()

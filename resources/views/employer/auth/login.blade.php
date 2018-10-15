@@ -1,5 +1,5 @@
-@extends('employer.layout.app') 
-@section('title', 'HRBD Jobs | Employer Login') 
+@extends('employer.layout.app')
+@section('title', 'HRBD Jobs | Employer Login')
 @section('content')
 <div id="nav_height"></div>
 
@@ -19,17 +19,21 @@
 
                 {{-- All Services --}}
                 <div id='all_services' class="filterbar mt-50 tab-content">
-                    <div class="card">
-                        <div class="card-body">
-                            <h5 class="card-title">Card title</h5>
-                            <div class="card">
+                    @foreach ($services as $service)
+                        <div class="card">
+                            <div class="card-body">
+                            <h4 class="card-title">{{ $service->name }}</h5>
+                            @foreach ($service->servicePackageItem as $item)
+                                <div class="card">
                                 <div class="card-body">
-                                    <h5 class="card-title">Card title</h5>
-                                    <p class="card-text">With supporting text below as a natural lead-in to additional content.</p>
+                                    <h5 class="card-title">{{ $item->title }}</h5>
+                                    <p class="card-text">{{ $item->details }}</p>
                                 </div>
                             </div>
+                            @endforeach
                         </div>
                     </div>
+                    @endforeach
                 </div>
 
                 {{-- sign in --}}

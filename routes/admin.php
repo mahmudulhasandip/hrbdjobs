@@ -79,4 +79,9 @@ Route::post('institute/update/', 'AdminController\InstituteController@update')->
 // services
 Route::get('servece/type/list', 'AdminController\ServicesController@index')->name('services_type.list');
 Route::post('servece/type/add', 'AdminController\ServicesController@store')->name('services_type.add');
-Route::get('/service/type/delete/{id}', 'AdminController\ServicesController@delete')->name('services_type.delete');
+Route::get('service/type/delete/{id}', 'AdminController\ServicesController@delete')->name('services_type.delete');
+
+Route::get('service/item/list/', 'AdminController\ServicesController@addItemView')->name('services_item.list');
+Route::post('service/item/store/', 'AdminController\ServicesController@addItemStore')->name('services_item.store');
+Route::post('service/item/update/', 'AdminController\ServicesController@addItemUpdate')->name('services_item.update');
+Route::get('service/item/delete/{id}', 'AdminController\ServicesController@serviceItemDelete')->name('services_item.delete');

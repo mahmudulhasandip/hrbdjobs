@@ -227,7 +227,7 @@
             </li>
 
             {{-- add service to employee login panel --}} {{-- menu headline --}}
-            <li class="m-menu__item   m-menu__item--submenu {{ ($menu_active == 'add_service') ? 'm-menu__item--active' : '' }}" aria-haspopup="true"
+            <li class="m-menu__item   m-menu__item--submenu {{ ($menu_active == 'add_service' || 'add_service_item') ? 'm-menu__item--active' : '' }}" aria-haspopup="true"
                 m-menu-submenu-toggle="hover">
                 <a href="javascript:;" class="m-menu__link m-menu__toggle">
                                 <i class="m-menu__link-icon la la-users"></i>
@@ -250,8 +250,8 @@
                                         </a>
                         </li>
 
-                        <li class="m-menu__item {{ ($menu_active == 'add_service') ? 'm-menu__item--active' : '' }}" aria-haspopup="true">
-                            <a href="" class="m-menu__link ">
+                        <li class="m-menu__item {{ ($menu_active == 'add_service_item') ? 'm-menu__item--active' : '' }}" aria-haspopup="true">
+                            <a href="{{ route('admin.services_item.list') }}" class="m-menu__link ">
                                             <i class="m-menu__link-bullet m-menu__link-bullet--dot">
                                                 <span></span>
                                             </i>

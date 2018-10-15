@@ -7,7 +7,7 @@
     <div class="d-flex align-items-center">
         <div class="mr-auto">
             <h3 class="m-subheader__title m-subheader__title--separator">
-                Add Services Type
+                Add Service Items
             </h3>
         </div>
 
@@ -20,7 +20,7 @@
             <div class="m-portlet__head-caption">
                 <div class="m-portlet__head-title">
                     <h3 class="m-portlet__head-text">
-                        Services Type Table
+                        Service Items Table
                     </h3>
                 </div>
             </div>
@@ -32,72 +32,87 @@
             <div class="m-form m-form--label-align-right  m--margin-bottom-30">
                 <div class="row align-items-center">
                     <div class="col-xl-12 order-2 order-xl-1">
-                        <form class="m-form m-form--fit m-form--label-align-right" method='post' action="{{ route('admin.services_type.add') }}">
+                        <form class="m-form m-form--fit m-form--label-align-right" method='post' action="{{ route('admin.services_item.store') }}">
                             @csrf
-                            <div class="form-group m-form__group">
-                                <label>
-                                    Add New Service Type
-                                </label>
-                                <div class="input-group">
-                                    <input type="text" class="form-control" placeholder="Add New Service Type" name="name">
-                                    <div class="input-group-append">
-                                        <button class="btn btn-secondary" type="submit">
-                                            ADD
-                                        </button>
-                                    </div>
+                            <div class="m-portlet__body">
+                                <div class="form-group m-form__group">
+                                    <select class="form-control m-input" id="exampleSelect1" name="service_package_id">
+                                        <option>Select Service Type First</option>
+                                        @foreach ($services as $service)
+                                        <option value="{{ $service->id }}">{{ $service->name }}</option>
+                                        @endforeach
+                                    </select>
+                                    <span class="m-form__help text-danger">
+                                        Select a service type first.
+                                    </span>
+                                </div>
+                                <div class="form-group m-form__group">
+                                    <input type="text" class="form-control m-input" id="" aria-describedby="title" placeholder="Add services items title" name="title">
+                                    {{-- <span class="m-form__help">
+                                        Add Service Item Title
+                                    </span> --}}
+                                </div>
+                                <div class="form-group m-form__group">
+                                    <textarea class="form-control m-input" id="" rows="3" placeholder="Add services item details" name="details"></textarea>
+                                </div>
+                                <div class="form-group m-form__actions">
+                                    <button type="submit" class="btn btn-primary">
+                                        ADD
+                                    </button>
                                 </div>
                             </div>
                         </form>
                     </div>
                 </div>
             </div>
-            <table class="mdl-data-table table table-striped table-bordered" style="width:100%" id="html_table">
-                <thead>
 
-                    <tr>
+            <div class="m-portlet__head">
+                <div class="m-portlet__head-caption">
+                    <div class="m-portlet__head-title">
+                        <h3 class="m-portlet__head-text">
+                            Service Items List
+                        </h3>
+                    </div>
+                </div>
+            </div>
+            <br>
 
-                        <th title="Field #1">
-                            ID
-                        </th>
-                        <th title="Field #2">
-                            Service Type
-                        </th>
-                        <th title="Field #3">
-                            Actions
-                        </th>
-                    </tr>
-                </thead>
-                <tbody>
-
-                    @php
-                        $id= 1;
-                    @endphp
-
-                    {{-- services type list --}}
-
-                    @foreach( $services as $service )
-                    <tr>
-                        <td>
-                            {{ $id++ }}
-                        </td>
-                        <td>
+            @foreach ($services as $service)
+            <!--begin::Section-->
+            <div class="m-accordion m-accordion--default" id="m_accordion_1" role="tablist">
+                <!--begin::Item-->
+                <div class="m-accordion__item">
+                    <div class="m-accordion__item-head collapsed"  role="tab" id="m_accordion_1_item_1_head-{{ $service->id }}" data-toggle="collapse" href="#m_accordion_1_item_1_body-{{ $service->id }}" aria-expanded="    false">
+                        <span class="m-accordion__item-icon">
+                            <i class="fa flaticon-user-ok"></i>
+                        </span>
+                        <span class="m-accordion__item-title">
                             {{ $service->name }}
-                        </td>
-                        <td>
-                            <span style="overflow: visible; position: relative; width: 110px;">
-                                <a href="javascript: void(0);" class="m-portlet__nav-link btn m-btn m-btn--hover-accent m-btn--icon m-btn--icon-only m-btn--pill" title="Edit details" data-toggle="modal" data-target="#m_modal_4" data-institute='{{ $service }}'>
-                                    <i class="la la-edit"></i>
-                                </a>
-                                <a href="javascript: void(0);" data-id='{{ $service->id }}' class="m-portlet__nav-link btn m-btn m-btn--hover-danger m-btn--icon m-btn--icon-only m-btn--pill delete" title="Delete">
-                                    <i class="la la-trash"></i>
-                                </a>
-                            </span>
-                        </td>
-                    </tr>
-                    @endforeach
-                </tbody>
-            </table>
-            <!--end: Datatable -->
+                        </span>
+                        <span class="m-accordion__item-mode"></span>
+                    </div>
+                    <div class="m-accordion__item-body collapse" id="m_accordion_1_item_1_body-{{ $service->id }}" class=" " role="tabpanel" aria-labelledby="m_accordion_1_item_1_head-{{ $service->id }}" data-parent="#m_accordion_1">
+                        <div class="m-accordion__item-content">
+
+                            @foreach ($service->servicePackageItem as $item)
+                                @if ($item)
+                                    <div class="card">
+                                        <div class="card-body">
+                                            <h5 class="card-title">{{ $item->title }}</h5>
+                                            <p class="card-text">{{ $item->details }}</p>
+                                            <a href="#" class="card-link" data-toggle="modal" data-target="#m_modal_4" data-service_item='{{ $item }}'>Edit</a>
+                                            <a href="javascript: void(0);" class="card-link delete" data-id='{{ $item->id }}'>Delete</a>
+                                        </div>
+                                    </div>
+                                @endif
+                            @endforeach
+
+                        </div>
+                    </div>
+                </div>
+                <!--end::Item-->
+            </div>
+            @endforeach
         </div>
 
         <!--begin::Modal-->
@@ -115,14 +130,20 @@
                         </button>
                     </div>
                     <div class="modal-body">
-                        <form method="POST" action="{{ route('admin.institution.update') }}">
+                        <form method="POST" action="{{ route('admin.services_item.update') }}">
                             @csrf
-                            <input type="hidden" name="institute_id" id="institute_id">
+                            <input type="hidden" name="service_item_id" id="service_item_id">
                             <div class="form-group">
                                 <label for="name" class="form-control-label">
-                                    Institution name:
+                                    Service Title:
                                 </label>
-                                <input type="text" class="form-control" id="name" name="name">
+                                <input type="text" class="form-control" id="title" name="title">
+                            </div>
+                            <div class="form-group m-form__group">
+                                <label for="details" class="form-control-label">
+                                    Service Details:
+                                </label>
+                                <textarea class="form-control m-input" id="details" rows="3" name="details"></textarea>
                             </div>
                             <div class="modal-footer">
                                 <button type="button" class="btn btn-secondary" data-dismiss="modal">
@@ -155,28 +176,7 @@
 {{--
 <script src="https://cdn.datatables.net/1.10.19/js/dataTables.material.min.js"></script> --}}
 
-<script>
-    var box = $('.m-portlet__body');
-    $('#add_industry').on('click', function (e) {
-        e.preventDefault();
-        box.toggleClass('d-none');
 
-    });
-
-</script>
-
-<script>
-    $('#html_table').DataTable( {
-    columnDefs: [
-        {
-            targets: [ 0, 1, 2 ],
-            className: 'mdl-data-table__cell--non-numeric'
-        }
-    ],
-    responsive: true
-});
-
-</script>
 
 {{-- edit institute name --}}
 <script>
@@ -184,9 +184,10 @@
         $('#m_modal_4').on('show.bs.modal', (event) => {
             var modal = $(this);
             var button = $(event.relatedTarget); // Button that triggered the modal
-            var institute = button.data('institute'); // Extract info from data-* attributes
-            modal.find('#name').val(institute.name);
-            modal.find('#institute_id').val(institute.id);
+            var service_item = button.data('service_item'); // Extract info from data-* attributes
+            modal.find('#service_item_id').val(service_item.id);
+            modal.find('#title').val(service_item.title);
+            modal.find('#details').val(service_item.details);
         })
     });
 
@@ -212,7 +213,7 @@
                 if(result.value){
                     // delete institute
                     $.ajax({
-                        url: base_url+'/service/type/delete/'+id,
+                        url: base_url+'/service/item/delete/'+id,
                         headers: {'X-CSRF-TOKEN' : Laravel.csrfToken},
                         type: "GET",
                     }).done((data) => {
@@ -223,10 +224,10 @@
                             title: data,
                             showConfirmButton: false,
                             timer: 1500
-                        })
+                        });
 
-                        $(this).closest('tr').delay(1500).fadeOut(1000, () => {
-                            $(this).closest('tr').remove();
+                        $(this).closest('.card').delay(1500).fadeOut(1000, () => {
+                            $(this).closest('.card').remove();
                         });
 
                     }).fail((jqXHR, ajaxOptions, thrownError, textStatus) => {
