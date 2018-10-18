@@ -1,15 +1,5 @@
 <?php
 
-/*
-|--------------------------------------------------------------------------
-| Web Routes
-|--------------------------------------------------------------------------
-|
-| Here is where you can register web routes for your application. These
-| routes are loaded by the RouteServiceProvider within a group which
-| contains the "web" middleware group. Now create something great!
-|
-*/
 ####################### comment out this code after uploading this project to server ####################
 // Route::get('storage/uploads/{filename}', function ($filename)
 // {
@@ -98,10 +88,13 @@ Route::get('about-us', [
   'uses'  => 'UserController@getAboutUs'
 ]);
 
+// contact us page
 Route::get('contact-us', [
   'as'    => 'contact.us',
   'uses'  => 'UserController@getContactUs'
 ]);
+
+Route::post('/contact/mail/send', 'ContactController@contactMail')->name('contact.mail.send');
 
 #################################### Data Retrieve Through API
 Route::get('/store/candidate/{per_page}/{page?}', [

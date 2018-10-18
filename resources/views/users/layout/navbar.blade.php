@@ -58,11 +58,11 @@
     </div>
 </div>
 
-{{-- @if ($page == 'home') --}}
+@if ($page == 'home')
 <header class="stick-top forsticky">
-{{-- @else
-<header class="stick-top forsticky white sticky">
-@endif --}}
+@else
+<header class="stick-top forsticky fixed">
+@endif
     <div class="menu-sec">
         <div class="container">
             <div class="logo">

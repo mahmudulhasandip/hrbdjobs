@@ -1,4 +1,7 @@
-@extends('employer.layout.app') @section('title', 'HRBDJobs | Employer Dashboard') @section('content')
+@extends('employer.layout.app')
+@section('title', 'HRBDJobs | Employer Dashboard')
+
+@section('content')
 <div id="nav_height"></div>
 <section class="overlape">
 	<div class="block no-padding">

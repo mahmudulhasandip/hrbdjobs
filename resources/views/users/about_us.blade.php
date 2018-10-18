@@ -3,6 +3,7 @@
 @section('title', "HRBD Jobs | About Us")
 
 @section('content')
+<div id="nav_height"></div>
     <section>
         <div class="block no-padding  gray">
             <div class="container">
@@ -100,7 +101,7 @@
                                     </div>
                                 </div>
                             </div>
-                            
+
 
                         </div>
                     </div>
@@ -151,7 +152,7 @@
                         </div>
                     </div>
                 </div>
-            </div>  
+            </div>
         </div>
     </section>
 

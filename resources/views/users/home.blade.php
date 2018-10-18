@@ -461,4 +461,18 @@
             );
         }
     </script>
+
+    <script>
+        /*** FIXED Menu APPEARS ON SCROLL DOWN ***/
+        $(window).on('scroll', function () {
+            var scroll = $(window).scrollTop();
+
+            if (scroll > 0) {
+                $(".stick-top.forsticky").addClass("sticky");
+            } else {
+                $(".stick-top.forsticky").removeClass("sticky");
+                // $(".forsticky").addClass("");
+            }
+        });
+    </script>
 @endpush

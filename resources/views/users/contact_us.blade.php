@@ -1,8 +1,9 @@
 @extends('users.layout.app')
 
-@section('title', "HRBD Jobs | About Us")
+@section('title', "HRBD Jobs | Contact Us")
 
 @section('content')
+<div id="nav_height"></div>
     <section>
         <div class="block no-padding  gray">
             <div class="container">
@@ -34,30 +35,31 @@
                     <div class="col-lg-6 column">
                         <div class="contact-form">
                             <h3>Keep In Touch</h3>
-                            <form>
+                            <form action="{{ route('contact.mail.send') }}">
+                                @csrf
                                 <div class="row">
                                     <div class="col-lg-12">
                                         <span class="pf-title">Full Name</span>
                                         <div class="pf-field">
-                                            <input type="text" placeholder="ALi TUFAN" />
+                                            <input type="text" placeholder="" name="name"/>
                                         </div>
                                     </div>
                                     <div class="col-lg-12">
                                         <span class="pf-title">Email</span>
                                         <div class="pf-field">
-                                            <input type="text" placeholder="ALi TUFAN" />
+                                            <input type="text" placeholder="" name="email"/>
                                         </div>
                                     </div>
                                     <div class="col-lg-12">
                                         <span class="pf-title">Subject</span>
                                         <div class="pf-field">
-                                            <input type="text" placeholder="ALi TUFAN" />
+                                            <input type="text" placeholder="" name="subject"/>
                                         </div>
                                     </div>
                                     <div class="col-lg-12">
                                         <span class="pf-title">Message</span>
                                         <div class="pf-field">
-                                            <textarea></textarea>
+                                            <textarea name="message"></textarea>
                                         </div>
                                     </div>
                                     <div class="col-lg-12">

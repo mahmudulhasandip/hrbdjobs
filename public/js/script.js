@@ -12,11 +12,11 @@ $(document).on('ready', function () {
                 .after('<img src="images/ajax-loader.gif" class="loader" />')
                 .attr('disabled', 'disabled');
             $.post(action, {
-                    name: $('#name').val(),
-                    email: $('#email').val(),
-                    comments: $('#comments').val(),
-                    verify: $('#verify').val()
-                },
+                name: $('#name').val(),
+                email: $('#email').val(),
+                comments: $('#comments').val(),
+                verify: $('#verify').val()
+            },
                 function (data) {
                     document.getElementById('message').innerHTML = data;
                     $('#message').slideDown('slow');
@@ -33,15 +33,15 @@ $(document).on('ready', function () {
     });
 
     /*** FIXED Menu APPEARS ON SCROLL DOWN ***/
-    $(window).on('scroll', function () {
-        var scroll = $(window).scrollTop();
-        if (scroll >= 0) {
-            $(".forsticky").addClass("sticky");
-        } else {
-            $(".forsticky").removeClass("sticky");
-            $(".forsticky").addClass("");
-        }
-    });
+    // $(window).on('scroll', function () {
+    //     var scroll = $(window).scrollTop();
+    //     if (scroll >= 0) {
+    //         $(".forsticky").addClass("sticky");
+    //     } else {
+    //         $(".forsticky").removeClass("sticky");
+    //         $(".forsticky").addClass("");
+    //     }
+    // });
 
 
     /* Skip Loading */
