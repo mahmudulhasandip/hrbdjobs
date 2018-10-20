@@ -37,12 +37,6 @@
       border-spacing: 0;
     }
 
-    /**
-    * @tab Page
-    * @section heading 1
-    * @tip Set the styling for all first-level headings in your emails. These should be the largest of your headings.
-    * @style heading 1
-    */
     h1{
       color:#2e2e2e;
       display:block;
@@ -59,12 +53,7 @@
       text-align:left;
     }
 
-    /**
-    * @tab Page
-    * @section heading 2
-    * @tip Set the styling for all second-level headings in your emails.
-    * @style heading 2
-    */
+
     h2{
       color:#2e2e2e;
       display:block;
@@ -81,12 +70,7 @@
       text-align:left;
     }
 
-    /**
-    * @tab Page
-    * @section heading 3
-    * @tip Set the styling for all third-level headings in your emails.
-    * @style heading 3
-    */
+
     h3{
       color:#545454;
       display:block;
@@ -103,12 +87,7 @@
       text-align:left;
     }
 
-    /**
-    * @tab Page
-    * @section heading 4
-    * @tip Set the styling for all fourth-level headings in your emails. These should be the smallest of your headings.
-    * @style heading 4
-    */
+
     h4{
       color:#545454;
       display:block;
@@ -200,11 +179,7 @@
       text-align:left;
     }
 
-    /**
-    * @tab Body
-    * @section body link
-    * @tip Set the styling for your email's main content links. Choose a color that helps them stand out from your text.
-    */
+
     a:visited { color: #3386e4; text-decoration:none;}
     a:focus   { color: #3386e4; text-decoration:none;}
     a:hover   { color: #3386e4; text-decoration:none;}
@@ -216,11 +191,7 @@
       max-width:498px;
     }
 
-    /**
-    * @tab Footer
-    * @section footer link
-    * @tip Set the styling for your email's footer links. Choose a color that helps them stand out from your text.
-    */
+
     a.blue-btn {
       background: #5098ea;
       display: inline-block;
@@ -300,17 +271,21 @@
 						<table border="0" cellpadding="0" cellspacing="0" width="100%" id="templateContainer">
 							<tr>
 								<td valign="top" class="bodyContent" mc:edit="body_content">
-                  <p>Hi --First Name=there--,</p>
-									<p>I noticed you were interested in learning more about growing --Company=your business--. I would like to invite you to our free 30 day business growth course.</p>
-                  <p>The course covers all of the basics you'll need to get up and running.  So, what are you waiting for?</p>
-                  <a class="blue-btn" href="http://blog.autopilothq.com/lead-nurturing-secrets/"><strong>Register</strong></a>
+                  <p><b>Name:</b> {{ $name }}</p>
+                  <p><b>Email:</b> {{ $email }}</p>
+                  <p><b>Suject:</b> {{ $subject }}</p>
+                  <p><b>Message:</b> <br>{{ $msg }}</p>
+
+
+
 								</td>
 							</tr>
 						</table>
 						<!-- // END BODY -->
 					</td>
-			</tr>
-			<tr>
+      </tr>
+
+			{{-- <tr>
 				<td align="center" valign="top" id="bodyCellFooter" class="unSubContent">
 					<table width="100%" border="0" cellpadding="0" cellspacing="0" id="templateContainerFooter">
 						<tr>
@@ -323,7 +298,7 @@
 						</tr>
 					</table>
 				</td>
-			</tr>
+			</tr> --}}
 
     </table>
     <!--[if (gte mso 9)|(IE)]>
@@ -334,12 +309,12 @@
     </td>
   </tr>
 </table>
-<table cellpadding="0" cellspacing="0" border="0" class="hide" width="600">
+{{-- <table cellpadding="0" cellspacing="0" border="0" class="hide" width="600">
   <tr>
     <td height="1" class="hide" style="min-width:600px; font-size:0px;line-height:0px;">
       <img height="1" width="600" src="http://c0185784a2b233b0db9b-d0e5e4adc266f8aacd2ff78abb166d77.r51.cf2.rackcdn.com/blank.jpg" style="min-width: 600px; width: 600px; max-height: 1px; min-height: 1px; text-decoration: none; border: none; -ms-interpolation-mode: bicubic;" />
     </td>
   </tr>
-</table>
+</table> --}}
 </body>
 </html>

@@ -91,7 +91,7 @@ Route::get('about-us', [
 // contact us page
 Route::get('contact-us', [
   'as'    => 'contact.us',
-  'uses'  => 'UserController@getContactUs'
+  'uses'  => 'ContactController@getContactUs'
 ]);
 
 Route::post('/contact/mail/send', 'ContactController@contactMail')->name('contact.mail.send');

@@ -37,7 +37,7 @@ class UserController extends Controller
                             ->where('is_special', '=', 0)
                             ->where('updated_at', 'like', date('Y-m-d').'%')
                             ->count();
-        
+
         $data['special_job_categories'] = DB::table('job_categories')
                                 ->leftJoin('jobs', 'jobs.job_category_id', '=', 'job_categories.id')
                                 ->select('job_categories.id')
@@ -59,7 +59,7 @@ class UserController extends Controller
                             ->where('is_special', '=', 1)
                             ->where('updated_at', 'like', date('Y-m-d').'%')
                             ->count();
-        
+
         $data['companies'] = DB::table('employer_company_infos')
                             ->leftJoin('employer_packages', 'employer_packages.employer_id', '=', 'employer_company_infos.employer_id')
                             ->leftJoin('featured_packages', 'featured_packages.id', '=', 'employer_packages.featured_package_id')
@@ -97,7 +97,7 @@ class UserController extends Controller
         $data['page'] = 'pdf';
         $data['candidate'] = Candidate::find($id);
         $pdf = PDF::loadView('users.candidate_resume_pdf', $data);
-        return $pdf->download('resume.pdf');   
+        return $pdf->download('resume.pdf');
     }
 
     public function getAboutUs(){
@@ -105,9 +105,9 @@ class UserController extends Controller
         return view('users.about_us')->with($data);
     }
 
-     public function getContactUs(){
-        $data['page'] = 'contact_us';
-        return view('users.contact_us')->with($data);
-    }
+    // public function getContactUs(){
+    //     $data['page'] = 'contact_us';
+    //     return view('users.contact_us')->with($data);
+    // }
 
 }

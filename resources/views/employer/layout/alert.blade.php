@@ -11,6 +11,7 @@
             message: '{{ session('status') }}',
             timeout: 1500,
             overlay: true,
+            overlayClose: true,
             position: 'topRight',
         });
     </script>
@@ -28,6 +29,7 @@
             message: '{{ session('error') }}',
             timeout: 1500,
             overlay: true,
+            overlayClose: true,
             position: 'topRight',
         });
     </script>
@@ -48,8 +50,9 @@
             iziToast.error({
                 title: 'Error',
                 message: '{{ $message }}',
-                timeout: 5000,
-                overlay: false,
+                timeout: 3000,
+                overlay: true,
+                overlayClose: true,
                 position: 'topRight',
             });
         </script>

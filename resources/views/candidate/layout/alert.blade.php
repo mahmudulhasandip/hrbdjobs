@@ -11,6 +11,7 @@
             message: '{{ session('status') }}',
             timeout: 2500,
             overlay: true,
+            overlayClose: true,
             position: 'topRight',
         });
     </script>
@@ -28,6 +29,7 @@
             message: '{{ session('error') }}',
             timeout: 3000,
             overlay: true,
+            overlayClose: true,
             position: 'topRight',
         });
     </script>
@@ -38,7 +40,7 @@
 {{-- validation --}}
 @if (session('errors'))
 
-    @foreach ($errors->all() as $message) 
+    @foreach ($errors->all() as $message)
         @push('js')
 
         <script>
@@ -48,14 +50,15 @@
             iziToast.error({
                 title: 'Error',
                 message: '{{ $message }}',
-                timeout: 5000,
+                timeout: 3000,
                 overlay: true,
+                overlayClose: true,
                 position: 'topRight',
             });
         </script>
 
         @endpush
     @endforeach
-    
-    
+
+
 @endif

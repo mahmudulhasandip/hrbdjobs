@@ -35,31 +35,35 @@
                     <div class="col-lg-6 column">
                         <div class="contact-form">
                             <h3>Keep In Touch</h3>
-                            <form action="{{ route('contact.mail.send') }}">
+                            <form action="{{ route('contact.mail.send') }}" method="POST">
                                 @csrf
                                 <div class="row">
                                     <div class="col-lg-12">
-                                        <span class="pf-title">Full Name</span>
+                                        <span class="pf-title"></span>
                                         <div class="pf-field">
-                                            <input type="text" placeholder="" name="name"/>
+                                            <input type="text" placeholder="Full Name" name="name"/>
+                                            <small class="from-text invalid-feedback text-danger">{{ $errors->first('name') }}</small>
                                         </div>
                                     </div>
                                     <div class="col-lg-12">
-                                        <span class="pf-title">Email</span>
+                                        <span class="pf-title"></span>
                                         <div class="pf-field">
-                                            <input type="text" placeholder="" name="email"/>
+                                            <input type="text" placeholder="Email" name="email"/>
+                                            <small class="from-text invalid-feedback text-danger">{{ $errors->first('email') }}</small>
                                         </div>
                                     </div>
                                     <div class="col-lg-12">
-                                        <span class="pf-title">Subject</span>
+                                        <span class="pf-title"></span>
                                         <div class="pf-field">
-                                            <input type="text" placeholder="" name="subject"/>
+                                            <input type="text" placeholder="Subject" name="subject"/>
+                                            <small class="from-text invalid-feedback text-danger">{{ $errors->first('subject') }}</small>
                                         </div>
                                     </div>
                                     <div class="col-lg-12">
-                                        <span class="pf-title">Message</span>
+                                        <span class="pf-title"></span>
                                         <div class="pf-field">
-                                            <textarea name="message"></textarea>
+                                            <textarea name="message" placeholder="Message"></textarea>
+                                            <small class="from-text invalid-feedback text-danger">{{ $errors->first('message') }}</small>
                                         </div>
                                     </div>
                                     <div class="col-lg-12">
