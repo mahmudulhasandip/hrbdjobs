@@ -529,8 +529,8 @@
 													<label for="gender" class="col-sm-2 col-form-label">Gender:</label>
 													<div class="col-sm-10">
 														<select class="form-control" id="" required name="gender">
-															<option>Select</option>
-															<option value="0" @if(old('gender')){{ old('gender') == 0 ? 'selected' : '' }}@elseif( $draft &&  $draft->gender == 0 ){{ 'selected' }}@endif>All</option>
+															{{-- <option>Select</option> --}}
+															<option selected value="0" @if(old('gender')){{ old('gender') == 0 ? 'selected' : '' }}@elseif( $draft &&  $draft->gender == 0 ){{ 'selected' }}@endif>All</option>
 															<option value="1" @if(old('gender')){{ old('gender') == 1 ? 'selected' : '' }}@elseif( $draft &&  $draft->gender == 1 ){{ 'selected' }}@endif>Male</option>
 															<option value="2" @if(old('gender')){{ old('gender') == 2 ? 'selected' : '' }}@elseif( $draft &&  $draft->gender == 2 ){{ 'selected' }}@endif>Female</option>
 															<option value="3" @if(old('gender')){{ old('gender') == 3 ? 'selected' : '' }}@elseif( $draft &&  $draft->gender == 3 ){{ 'selected' }}@endif>Others</option>
@@ -546,7 +546,7 @@
 												<div class="form-group row">
 													<label for="age_min" class="col-sm-2 col-form-label">Min Age:</label>
 													<div class="col-sm-10">
-														<input  type=number step=any class="form-control" placeholder="Min. Age" name="age_min" value="@if (old("age_min")){{ old('age_min') }}@elseif ( $draft ){{ $draft->age_min }}@endif">
+														<input  type=number step=any class="form-control" placeholder="Min. Age" name="age_min" value="@if (old("age_min")){{ old('age_min') }}@elseif ( $draft ){{ $draft->age_min }}@endif" required>
 														<div class="invalid-feedback">
 															Please provide a valid input.
 														</div>
@@ -558,7 +558,7 @@
 												<div class="form-group row">
 													<label for="age_max" class="col-sm-2 col-form-label">Max Age:</label>
 													<div class="col-sm-10">
-														<input  type=number step=any class="form-control" placeholder="Max. Age" name="age_max" value="@if (old("age_max")){{ old('age_max') }}@elseif ( $draft ){{ $draft->age_max }}@endif">
+														<input  type=number step=any class="form-control" placeholder="Max. Age" name="age_max" value="@if (old("age_max")){{ old('age_max') }}@elseif ( $draft ){{ $draft->age_max }}@endif" required>
 														<div class="invalid-feedback">
 															Please provide a valid input.
 														</div>
@@ -629,7 +629,7 @@
 		branding: false,
 		setup: function(editor) {
             editor.on("change keyup", function(e){
-                console.log('saving');
+                // console.log('saving');
                 // tinyMCE.triggerSave(); // updates all instances
                 editor.save(); // updates this instance's textarea
                 $(editor.getElement()).trigger('change'); // for garlic to detect change
@@ -653,17 +653,22 @@
  <script>
 	$(document).ready(function(){
 
-		if($('input[type="checkbox"][name="is_negotiable"]').val() == 1 ){
-			$('.salary').attr('disabled', true);
-			$('.salary').attr('required', false);
-			$('#negotiable').val(1);
-			$('#negotiable').attr('checked', true);
-		}else{
-			$('.salary').attr('disabled', false);
-			$('.salary').attr('required', true);
-			$('#negotiable').val(0);
-			$('#negotiable').attr('checked', false);
-		}
+		$('.custom-checkbox').on('click', () => {
+			if($('input[type="checkbox"][name="is_negotiable"]').val() == 1 ){
+
+				$('.salary').attr('required', false);
+				$('.salary').attr('disabled', true);
+				$('#negotiable').val(1);
+				$('#negotiable').attr('checked', true);
+			}else{
+				$('.salary').attr('disabled', false);
+				$('.salary').attr('required', true);
+				$('#negotiable').val(0);
+				$('#negotiable').attr('checked', false);
+			}
+		});
+
+
 
 		$('input[type="checkbox"][name="is_negotiable"]').on('click', function() {
 			if(this.checked) {
@@ -864,7 +869,7 @@ $(document).ready(function(){
                                                             elmForm.validator('validate');
                                                             var elmErr = elmForm.find('.has-error');
                                                             if(elmErr && elmErr.length > 0){
-                                                                alert('Oops we still have error in the form');
+                                                                alert('Oops!! Fillup the input fields.');
                                                                 return false;
                                                             }else{
                                                                 // alert('Great! we are ready to submit form');
@@ -940,12 +945,15 @@ $(document).ready(function(){
 
 		$('#submit').addClass('d-none');
         $("#smartwizard").on("showStep", function(e, anchorObject, stepNumber, stepDirection) {
-            // Enable finish button only on last step
-            if(stepNumber == 4){
+			// Enable finish button only on last step
+			alert(stepNumber);
+            if(stepNumber == 5){
                 // $('.btn-finish').removeClass('disabled');
+                $('#submit').removeClass('disabled');
                 $('#submit').removeClass('d-none');
             }else{
                 // $('.btn-finish').addClass('disabled');
+                $('#submit').addClass('disabled');
 				$('#submit').addClass('d-none');
             }
 
