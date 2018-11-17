@@ -120,8 +120,11 @@
                             @endif
 
                             <div class="apply-alternative">
+                                @if(Auth::check())
                                 <a target="_blank" href="{{ route('company.profile', ['id'=>$company_info->id, 'candidate_id'=>Auth::guard('candidate')->user()->id]) }}"><i class="la la-building-o"></i>View Company</a>
-
+                                @else
+                                <a target="_blank" href="{{ route('company.profile', ['id'=>$company_info->id]) }}"><i class="la la-building-o"></i>View Company</a>
+                                @endif
                                 @if (Auth::guard('candidate')->user())
                                     @php
                                         $favJob = App\Favourite_job::where('job_id', $job->id)->where('candidate_id', Auth::guard('candidate')->user()->id)->where('status', 1)->first();
